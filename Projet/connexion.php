@@ -11,20 +11,25 @@
     </head>
 
     <body>
-		<form action="Home.php" method="post">
+	 <?php 
+	   if (isset($_POST['nom']) and isset($_POST['mdp'])  and trim($_POST['nom']!='') and trim($_POST['mdp']))
+	   {
+		   if($_POST['nom']=='jean' and $_POST['mdp']=='sel')
+		   {
+			   header('Location: Home.php');
+			   
+		   }
+		   else
+			   echo "<p>Votre nom d'utilisateur/mot de passe est invalide</p>"; 
+	   }
+	   
+		?>
+		<form action="connexion.php" method="post">
 		<input type="text" name="nom"/>
 		<input type="password" name="mdp"/>
 		<input type="submit" />
 		</form>
-       <?php 
-	   if (isset($_GET['conn']) and (trim($_GET['conn'])!=''))
-	   {
-		   if ($_GET['conn']=="f")
-			echo "<p>Connexion refusée</p>";   
-		   
-		   
-	   }
-		?>
+      
     </body>
 
 </html>
