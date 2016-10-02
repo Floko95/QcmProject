@@ -22,7 +22,7 @@
 			}
 			else
 			{
-				echo"<p>Votre mot de passe/nom d'utilisateur est incorrect.</p>";
+				echo"<p>Votre mot de passe/nom d'utilisateur est incorrect.Veuillez réessayer <a href='connexion.php?conn=f'>Ici</a></p>";
 				
 				exit();
 			}
