@@ -1,0 +1,26 @@
+﻿En tant que questionneur je souhaite choisir le thème de QCM afin de le classer parmi d'autres.
+En tant que questionneur je souhaite choisir le sous-thème du QCM afin de le classer parmi d'autres du même thème.
+En tant que questionneur je souhaite ajouter autant de questions que je veux.
+En tant que questionneur je souhaite choisir les questions parmi une liste de questions déjà créées sur le même thème.
+En tant que questionneur je souhaite ajouter autant de réponses que je veux.
+En tant que questionneur je souhaite valider chaque question créée.
+En tant que questionneur je souhaite valider chaque QCM afin de l'inclure sur le site.
+En tant que questionneur je souhaite avoir accès aux scores des répondeurs afin de suivre leur parcours.
+En tant que questionneur je souhaite me connecter afin de créer un QCM.
+
+
+En tant que répondeur je souhaite sélectionner un QCM selon un thème et un sous thème.
+En tant que répondeur je souhaite cocher les réponses choisies afin de répondre à la question.
+En tant que répondeur je souhaite valider ma réponse quand j'ai coché les réponses voulues.
+En tant que répondeur je souhaite avoir accès à mon score.
+En tant que répondeur je souhaite avoir accès à mes statistiques.
+En tant que répondeur je souhaite avoir accès à mes mauvaises réponses.
+En tant que répondeur je souhaite me connecter afin de faire un QCM.
+
+
+
+Facultatif :
+
+En tant que répondeur je souhaite personnaliser mon profil.
+En tant que handicapé je souhaite avoir une option pour malvoyantss.
+
