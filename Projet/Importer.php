@@ -21,8 +21,9 @@
 <input type="submit"/>
 </form>
 <?php
+
 $bdd=[
-'Informatique'=>['BDD'=>['Q1bdd','Q2bdd','Q3bdd'],'PHP'=>['Q1php','Q2php','Q3php'],'JAVA'=>['Q1java','Q2java','Q3java'],'C'['Q1c','Q2c','Q3c'],'HTML'=>['Q1html','Q2html','Q3html']],
+'Informatique'=>['BDD'=>['Q1bdd','Q2bdd','Q3bdd'],'PHP'=>['Q1php','Q2php','Q3php'],'JAVA'=>['Q1java','Q2java','Q3java'],'C'=>['Q1c','Q2c','Q3c'],'HTML'=>['Q1html','Q2html','Q3html']],
 'Mathematiques'=>['Geométrie'=>['Q1geo','Q2geo','Q3geo'],'Algèbre'=>['Q1algo','Q2algo','Q3algo']],
 'Culture  Generale'=>['Histoire'=>['Q1his','Q2hist','Q3hist'],'Cinéma'=>['Q1cin','Q2cin','Q3cin']],
 'Medecine'=>['Neurologie'=>['Q1neuro','Q2neuro','Q3neuro'],'Chirurgie'=>['Q1chi','Q2chi','Q3chi']],
@@ -32,17 +33,36 @@ $bdd=[
 ];
  if(isset($_GET['domaine']) and isset($_GET['sdomaine']) and trim($_GET['domaine']!='') and trim($_GET['sdomaine']!=''))
 {
-	echo "resultats pour ". $_GET['domaine'] . "/" . $_GET['sdomaine'] . "\n";
-	foreach($bdd as $cle=>$val)
+	echo "resultats pour ". $_GET['domaine'] . "/" . $_GET['sdomaine'] . " :<br/>";
+	if($_GET['sdomaine']=='general')
 	{
-		if ($cle==$_GET['domaine'])
+		foreach($bdd as $cle=>$val)
 		{
-			foreach($val as $c=>$v)
+			if ($cle==$_GET['domaine'])
 			{
-				if ($c==$_GET['sdomaine'])
+				foreach($val as $c=>$v)
 				{
 					foreach($v as $valeur)
-				echo "$valeur<br/>";
+					{
+						echo "$valeur<br/>";
+					}
+				}
+			}
+		}
+	}
+	else
+	{
+		foreach($bdd as $cle=>$val)
+		{
+			if ($cle==$_GET['domaine'])
+			{
+				foreach($val as $c=>$v)
+				{
+					if ($c==$_GET['sdomaine'])
+					{
+						foreach($v as $valeur)
+					echo "$valeur<br/>";
+					}
 				}
 			}
 		}
@@ -51,15 +71,17 @@ $bdd=[
 
 elseif (isset($_GET['domaine']) and trim($_GET['domaine']!=''))
 {
-	echo "resultats pour". $_GET['domaine']."\n";
+	echo "resultats pour ". $_GET['domaine']." : <br/>";
 	foreach($bdd as $cle=>$val)
 	{
 		if ($cle==$_GET['domaine'])
 		{
+			
+			echo '<a href="Importer.php?domaine='.$cle.'&sdomaine=general">Général</a><br/>';
 			foreach($val as $c=>$v)
 			{
-				foreach($v as $valeur)
-				echo "$valeur<br/>";
+				
+				echo '<a href="Importer.php?domaine='.$cle.'&sdomaine='.$c.'">'.$c.'</a><br/>';
 			}
 		}
 	}
@@ -70,8 +92,8 @@ else
 	echo "Domaines:<br/>";
 	foreach($bdd as $cle=>$val)
 	{
-		echo"<a href='Importer.php'.$cle>$cle</a><br/>";
 		
+		echo'<a href="Importer.php?domaine='.$cle.'">'.$cle.'</a><br/>';
 	}
 }
 ?>
