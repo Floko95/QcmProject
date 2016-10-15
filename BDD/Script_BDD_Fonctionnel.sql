@@ -11,6 +11,17 @@ DROP TABLE Domaine CASCADE;
 DROP TABLE Sous_Domaine CASCADE;
 
 
+CREATE TABLE Domaine(
+id_domaine serial NOT NULL PRIMARY KEY,
+nom_domaine varchar UNIQUE
+);
+
+CREATE TABLE Sous_Domaine(
+id_sous_domaine serial NOT NULL PRIMARY KEY,
+id_domaine int REFERENCES Domaine(id_domaine),
+nom_sous_domaine varchar UNIQUE
+);
+
 CREATE TABLE Questionneur(
 id_questionneur serial NOT NULL PRIMARY KEY,
 nom_questionneur varchar NOT NULL,
@@ -39,8 +50,6 @@ PRIMARY KEY (id_reponse)
 CREATE TABLE Qcm(
 id_qcm serial NOT NULL PRIMARY KEY,
 auteur int NOT NULL REFERENCES Questionneur(id_questionneur),
-theme varchar,
-sous_theme varchar,
 date_creation date,
 niveau varchar,
 note float
@@ -49,6 +58,8 @@ note float
 CREATE TABLE QCM_Question(
 id_qcm int REFERENCES Qcm(id_qcm),
 id_question int REFERENCES Question(id_question),
+domaine varchar REFERENCES Domaine(nom_domaine),
+sous_domaine varchar REFERENCES Sous_Domaine(nom_sous_domaine),
 PRIMARY KEY(id_qcm, id_question)
 );
 
@@ -65,7 +76,7 @@ FOREIGN KEY(id_reponse) REFERENCES Reponse(id_reponse)
 CREATE TABLE ReponsesQCMRepondant(
 utilisateur int NOT NULL REFERENCES Repondeur(id_repondeur),
 id_qcm int REFERENCES Qcm(id_qcm),
-id_reponse int,
+id_reponse int REFERENCES Reponse(id_reponse),
 rep_donnee varchar,
 PRIMARY KEY (utilisateur, id_qcm)
 );
@@ -78,15 +89,4 @@ moyenne float,
 note_qcm float,
 temps_passe time,
 PRIMARY KEY (utilisateur)
-);
-
-CREATE TABLE Domaine(
-id_domaine serial NOT NULL PRIMARY KEY,
-nom_domaine varchar UNIQUE
-);
-
-CREATE TABLE Sous_Domaine(
-id_sous_domaine serial NOT NULL PRIMARY KEY,
-id_domaine serial REFERENCES Domaine(id_domaine),
-nom_sous_domaine varchar UNIQUE
 );
