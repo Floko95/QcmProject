@@ -7,6 +7,8 @@ DROP TABLE ReponsesQCMRepondant CASCADE;
 DROP TABLE Questionneur CASCADE;
 DROP TABLE Repondeur CASCADE;
 DROP TABLE Statistiques CASCADE;
+DROP TABLE Domaine CASCADE;
+DROP TABLE Sous_Domaine CASCADE;
 
 
 CREATE TABLE Questionneur(
@@ -76,4 +78,15 @@ moyenne float,
 note_qcm float,
 temps_passe time,
 PRIMARY KEY (utilisateur)
+);
+
+CREATE TABLE Domaine(
+id_domaine serial NOT NULL PRIMARY KEY,
+nom_domaine varchar UNIQUE
+);
+
+CREATE TABLE Sous_Domaine(
+id_sous_domaine serial NOT NULL PRIMARY KEY,
+id_domaine serial REFERENCES Domaine(id_domaine),
+nom_sous_domaine varchar UNIQUE
 );
