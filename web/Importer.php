@@ -85,6 +85,7 @@ elseif (isset($_GET['domaine']) and trim($_GET['domaine']!=''))
 			}
 		}
 	}
+	echo'<form action="CreerDomaine.php" method="post"><input type="submit" name="sbouton" value="Creer Sous-domaine"/></form>';
 }
 
 else
@@ -94,7 +95,9 @@ else
 	{
 		
 		echo'<a href="Importer.php?domaine='.$cle.'">'.$cle.'</a><br/>';
+		
 	}
+	echo'<form action="CreerDomaine.php" method="post"><input type="submit" name="bouton" value="Creer Domaine"/></form>';
 }
 ?>
 
