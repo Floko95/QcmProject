@@ -22,81 +22,79 @@
 </form>
 <?php
 
-$bdd=[
-'Informatique'=>['BDD'=>['Q1bdd','Q2bdd','Q3bdd'],'PHP'=>['Q1php','Q2php','Q3php'],'JAVA'=>['Q1java','Q2java','Q3java'],'C'=>['Q1c','Q2c','Q3c'],'HTML'=>['Q1html','Q2html','Q3html']],
-'Mathematiques'=>['Geométrie'=>['Q1geo','Q2geo','Q3geo'],'Algèbre'=>['Q1algo','Q2algo','Q3algo']],
-'Culture  Generale'=>['Histoire'=>['Q1his','Q2hist','Q3hist'],'Cinéma'=>['Q1cin','Q2cin','Q3cin']],
-'Medecine'=>['Neurologie'=>['Q1neuro','Q2neuro','Q3neuro'],'Chirurgie'=>['Q1chi','Q2chi','Q3chi']],
-'Langues'=>['Anglais'=>['Q1ang','Q2ang','Q3ang'],'Espagnol'=>['Q1esp','Q2esp','Q3esp']],
-'Physique-chimie'=>['Physique'=>['Q1phys','Q2phys','Q3phys'],'Chimie'=>['Q1chim','Q2chim','Q3chim']]
 
-];
+try{
+$bdd=new PDO('pgsql:host=localhost;dbname=postgres','postgres','password');
+}
+catch(PDOException $e)
+{
+	die('<p>La connexion a la base à echoué.</p>');
+}
+$bdd->query('SET NAMES utf8');
+$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+
  if(isset($_GET['domaine']) and isset($_GET['sdomaine']) and trim($_GET['domaine']!='') and trim($_GET['sdomaine']!=''))
 {
 	echo "resultats pour ". $_GET['domaine'] . "/" . $_GET['sdomaine'] . " :<br/>";
 	if($_GET['sdomaine']=='general')
 	{
-		foreach($bdd as $cle=>$val)
+		$req=$bdd->prepare("SELECT * FROM public.question NATURAL JOIN public.qcm_question WHERE public.qcm_question.domaine=:domaine");
+		$req->bindValue(':domaine',$_GET['domaine']);
+		$req->execute();
+		echo '<form action="Creation.php" method="post">';
+		
+		while($ligne=$req->fetch(PDO::FETCH_ASSOC))
 		{
-			if ($cle==$_GET['domaine'])
-			{
-				foreach($val as $c=>$v)
-				{
-					foreach($v as $valeur)
-					{
-						echo "$valeur<br/>";
-					}
-				}
-			}
+			echo '<input type="checkbox" name="questions[]" value="'.$ligne['id_question'].'"/>';
+			echo '<a href="Visualisation.php?q='.$ligne['id_question'].'"> Question: '.$ligne['question'].'</a><br/>';
+			
 		}
+		echo '<input type="hidden" name="domaine" value="'.$_GET['domaine'].'"/>';
+		echo '<input type="submit"/></form>';
 	}
 	else
 	{
-		foreach($bdd as $cle=>$val)
+		$req=$bdd->prepare("SELECT * FROM public.question NATURAL JOIN public.qcm_question WHERE public.qcm_question.sous_domaine=:sdomaine");
+		$req->bindValue(':sdomaine',$_GET['sdomaine']);
+		$req->execute();
+		echo '<form action="Creation.php" method="post">';
+		while($ligne=$req->fetch(PDO::FETCH_ASSOC))
 		{
-			if ($cle==$_GET['domaine'])
-			{
-				foreach($val as $c=>$v)
-				{
-					if ($c==$_GET['sdomaine'])
-					{
-						foreach($v as $valeur)
-					echo "$valeur<br/>";
-					}
-				}
-			}
+			echo '<input type="checkbox" name="questions[]" value="'.$ligne['id_question'].'"/>';
+			echo '<a href="Visualisation.php?q='.$ligne['id_question'].'"> Question: '.$ligne['question'].'</a><br/>';
+			
 		}
+		echo '<input type="hidden" name="domaine" value="'.$_GET['domaine'].'"/>';
+		echo '<input type="hidden" name="sdomaine" value="'.$_GET['sdomaine'].'"/>';
+		echo '<input type="submit"/></form>';
 	}
 }
 
 elseif (isset($_GET['domaine']) and trim($_GET['domaine']!=''))
 {
 	echo "resultats pour ". $_GET['domaine']." : <br/>";
-	foreach($bdd as $cle=>$val)
-	{
-		if ($cle==$_GET['domaine'])
+	echo '<a href="Importer.php?domaine='.$_GET['domaine'].'&sdomaine=general">General</a><br/>';
+	$req=$bdd->prepare("SELECT * FROM public.sous_domaine NATURAL JOIN public.domaine WHERE public.domaine.nom_domaine=:ndom");
+	$req->bindValue(':ndom',$_GET['domaine']);
+	$req->execute();
+	while($ligne=$req->fetch(PDO::FETCH_ASSOC))
 		{
-			
-			echo '<a href="Importer.php?domaine='.$cle.'&sdomaine=general">Général</a><br/>';
-			foreach($val as $c=>$v)
-			{
-				
-				echo '<a href="Importer.php?domaine='.$cle.'&sdomaine='.$c.'">'.$c.'</a><br/>';
-			}
+			echo '<a href="Importer.php?domaine='.$_GET['domaine'].'&sdomaine='.$ligne['nom_sous_domaine'].'">'.$ligne['nom_sous_domaine'].'</a><br/>';
 		}
-	}
+	
 	echo'<form action="CreerDomaine.php" method="post"><input type="submit" name="sbouton" value="Creer Sous-domaine"/></form>';
 }
 
 else
 {
 	echo "Domaines:<br/>";
-	foreach($bdd as $cle=>$val)
-	{
-		
-		echo'<a href="Importer.php?domaine='.$cle.'">'.$cle.'</a><br/>';
-		
-	}
+	$req=$bdd->prepare("SELECT * FROM public.domaine");
+	$req->execute();
+	while($ligne=$req->fetch(PDO::FETCH_ASSOC))
+		{
+			echo '<a href="Importer.php?domaine='.$ligne['nom_domaine'].'">'.$ligne['nom_domaine'].'</a><br/>';
+		}
 	echo'<form action="CreerDomaine.php" method="post"><input type="submit" name="bouton" value="Creer Domaine"/></form>';
 }
 ?>
