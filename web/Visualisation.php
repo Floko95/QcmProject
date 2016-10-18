@@ -22,7 +22,7 @@ $bdd->query('SET NAMES utf8');
 $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 if(isset($_GET['q']) and trim($_GET['q']!=''))
 {
-	$req=$bdd->prepare("SELECT * FROM question NATURAL JOIN qcm_question WHERE id_question=:id");
+	$req=$bdd->prepare("SELECT * FROM public.question NATURAL JOIN public.qcm_question WHERE id_question=:id");
 	$req->bindValue(':id',$_GET['q']);
 	$req->execute();
 	while($ligne=$req->fetch(PDO::FETCH_ASSOC))
