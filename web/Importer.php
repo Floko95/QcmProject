@@ -39,7 +39,7 @@ $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	echo "resultats pour ". $_GET['domaine'] . "/" . $_GET['sdomaine'] . " :<br/>";
 	if($_GET['sdomaine']=='general')
 	{
-		$req=$bdd->prepare("SELECT * FROM public.question NATURAL JOIN public.qcm_question WHERE public.qcm_question.domaine=:domaine");
+		$req=$bdd->prepare("SELECT * FROM question NATURAL JOIN qcm_question WHERE qcm_question.domaine=:domaine");
 		$req->bindValue(':domaine',$_GET['domaine']);
 		$req->execute();
 		echo '<form action="Creation.php" method="post">';
@@ -55,7 +55,7 @@ $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	}
 	else
 	{
-		$req=$bdd->prepare("SELECT * FROM public.question NATURAL JOIN public.qcm_question WHERE public.qcm_question.sous_domaine=:sdomaine");
+		$req=$bdd->prepare("SELECT * FROM question NATURAL JOIN qcm_question WHERE qcm_question.sous_domaine=:sdomaine");
 		$req->bindValue(':sdomaine',$_GET['sdomaine']);
 		$req->execute();
 		echo '<form action="Creation.php" method="post">';
@@ -75,7 +75,7 @@ elseif (isset($_GET['domaine']) and trim($_GET['domaine']!=''))
 {
 	echo "resultats pour ". $_GET['domaine']." : <br/>";
 	echo '<a href="Importer.php?domaine='.$_GET['domaine'].'&sdomaine=general">General</a><br/>';
-	$req=$bdd->prepare("SELECT * FROM public.sous_domaine NATURAL JOIN public.domaine WHERE public.domaine.nom_domaine=:ndom");
+	$req=$bdd->prepare("SELECT * FROM sous_domaine NATURAL JOIN domaine WHERE domaine.nom_domaine=:ndom");
 	$req->bindValue(':ndom',$_GET['domaine']);
 	$req->execute();
 	while($ligne=$req->fetch(PDO::FETCH_ASSOC))
@@ -83,13 +83,13 @@ elseif (isset($_GET['domaine']) and trim($_GET['domaine']!=''))
 			echo '<a href="Importer.php?domaine='.$_GET['domaine'].'&sdomaine='.$ligne['nom_sous_domaine'].'">'.$ligne['nom_sous_domaine'].'</a><br/>';
 		}
 	
-	echo'<form action="CreerDomaine.php" method="post"><input type="submit" name="sbouton" value="Creer Sous-domaine"/></form>';
+	echo'<form action="CreerDomaine.php" method="post"><input type="hidden" value="'.$_GET['domaine'].'" name="domaine"/><input type="submit" name="sbouton" value="Creer Sous-domaine"/></form>';
 }
 
 else
 {
 	echo "Domaines:<br/>";
-	$req=$bdd->prepare("SELECT * FROM public.domaine");
+	$req=$bdd->prepare("SELECT * FROM domaine");
 	$req->execute();
 	while($ligne=$req->fetch(PDO::FETCH_ASSOC))
 		{
