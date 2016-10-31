@@ -30,6 +30,8 @@ if(isset($_GET['q']) and trim($_GET['q']!=''))
 			echo '<p>Question:'.$ligne['question'].'</p> <p>Domaine:'.$ligne['domaine'].'</p><p>Sous-domaine: '.$ligne['sous_domaine'].'</p>';
 			
 		}
+		if(isset($_GET['domaine']) and trim($_GET['domaine']!='') and isset($_GET['sdomaine']) and trim($_GET['sdomaine']!=''))
+			echo '<form action="Importer.php?domaine='.$_GET['domaine'].'&sdomaine='.$_GET['sdomaine'].'" method="post"><input type="hidden" name="idquest" value="'.$_GET['q'].'"/><input type="submit" value="Importer la question"/></form>';
 	
 	
 	

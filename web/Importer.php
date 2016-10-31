@@ -46,8 +46,12 @@ $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		
 		while($ligne=$req->fetch(PDO::FETCH_ASSOC))
 		{
+
+			if(isset($_POST['idquest'])and trim($_POST['idquest']!='') and $ligne['id_question']==$_POST['idquest'])
+			echo '<input type="checkbox" name="questions[]" value="'.$ligne['id_question'].'" checked/>';
+			else	
 			echo '<input type="checkbox" name="questions[]" value="'.$ligne['id_question'].'"/>';
-			echo '<a href="Visualisation.php?q='.$ligne['id_question'].'"> Question: '.$ligne['question'].'</a><br/>';
+			echo '<a href="Visualisation.php?q='.$ligne['id_question'].' & domaine='.$_GET['domaine'].'& sdomaine=general"> Question: '.$ligne['question'].'</a><br/>';
 			
 		}
 		echo '<input type="hidden" name="domaine" value="'.$_GET['domaine'].'"/>';
@@ -61,8 +65,11 @@ $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		echo '<form action="Creation.php" method="post">';
 		while($ligne=$req->fetch(PDO::FETCH_ASSOC))
 		{
+			if(isset($_POST['idquest'])and trim($_POST['idquest']!='') and $ligne['id_question']==$_POST['idquest'])
+			echo '<input type="checkbox" name="questions[]" value="'.$ligne['id_question'].'" checked/>';
+			else	
 			echo '<input type="checkbox" name="questions[]" value="'.$ligne['id_question'].'"/>';
-			echo '<a href="Visualisation.php?q='.$ligne['id_question'].'"> Question: '.$ligne['question'].'</a><br/>';
+			echo '<a href="Visualisation.php?q='.$ligne['id_question'].' & domaine='.$_GET['domaine'].'& sdomaine='.$_GET['sdomaine'].'"> Question: '.$ligne['question'].'</a><br/>';
 			
 		}
 		echo '<input type="hidden" name="domaine" value="'.$_GET['domaine'].'"/>';
