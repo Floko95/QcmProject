@@ -13,11 +13,18 @@
     <body>
 	<?php 
 	session_start();
-	 
-		if ($_SESSION['connecte'] != 'v')
-			header('Location: connexion.php?dc=v');
-		echo"<p>connexion reussie</br>Home à afficher ici </p>";
-		
+		if ($_SESSION['connecte']){
+			switch ($_SESSION['role']) {
+				case 'repondeur' :
+					echo('<p> Connexion répondeur réussie </p>');
+					break;
+				case 'questionneur' :
+					echo('<p> Connexion questionneur réussie </p>');
+					break;
+				default : die('<p> Vous n\'avez techniquement pas à voir ça O_o </p>');
+			} 
+		echo"<p> Home à afficher ici </p>";
+		}
 		?>
 		
     </body>
