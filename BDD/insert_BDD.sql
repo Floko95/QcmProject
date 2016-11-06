@@ -1,38 +1,38 @@
 INSERT INTO questionneur values
-(nextval('questionneur_id_questionneur_seq'),'quest','quest',2); -- questionneur test
+(nextval('ID_QUESTIONNEUR'),'quest','quest',2); -- questionneur test
 
 INSERT INTO repondeur values
-(nextval('repondeur_id_repondeur_seq'),'rep','rep');  -- répondeur test
+(nextval('ID_REPONDEUR'),'rep','rep');  -- répondeur test
 
 INSERT INTO domaine values
-(nextval('domaine_id_domaine_seq'),'Informatique'),(nextval('domaine_id_domaine_seq'),'Mathématiques'),(nextval('domaine_id_domaine_seq'),'Culture Générale'),(nextval('domaine_id_domaine_seq'),'Médecine'),(nextval('domaine_id_domaine_seq'),'Langues'),(nextval('domaine_id_domaine_seq'),'Physique Chimie');
+(nextval('ID_DOMAINE'),'Informatique'),(nextval('ID_DOMAINE'),'Mathématiques'),(nextval('ID_DOMAINE'),'Culture Générale'),(nextval('ID_DOMAINE'),'Médecine'),(nextval('ID_DOMAINE'),'Langues'),(nextval('ID_DOMAINE'),'Physique Chimie');
 
 INSERT INTO sous_domaine values
-(nextval('sous_domaine_id_sous_domaine_seq'),1,'BDD'),(nextval('sous_domaine_id_sous_domaine_seq'),1,'PHP'),(nextval('sous_domaine_id_sous_domaine_seq'),1,'JAVA'),(nextval('sous_domaine_id_sous_domaine_seq'),1,'C'),(nextval('sous_domaine_id_sous_domaine_seq'),1,'HTML'),
-(nextval('sous_domaine_id_sous_domaine_seq'),2,'Algèbre'),(nextval('sous_domaine_id_sous_domaine_seq'),2,'Géometrie'),(nextval('sous_domaine_id_sous_domaine_seq'),3,'Histoire'),(nextval('sous_domaine_id_sous_domaine_seq'),3,'Cinéma'),
-(nextval('sous_domaine_id_sous_domaine_seq'),4,'Neurologie'),(nextval('sous_domaine_id_sous_domaine_seq'),4,'Chirurgie'),(nextval('sous_domaine_id_sous_domaine_seq'),5,'Anglais'),(nextval('sous_domaine_id_sous_domaine_seq'),5,'Espagnol'),
-(nextval('sous_domaine_id_sous_domaine_seq'),6,'Physique'),(nextval('sous_domaine_id_sous_domaine_seq'),6,'Chimie');
+(nextval('ID_SOUS_DOMAINE'),1,'BDD'),(nextval('ID_SOUS_DOMAINE'),1,'PHP'),(nextval('ID_SOUS_DOMAINE'),1,'JAVA'),(nextval('ID_SOUS_DOMAINE'),1,'C'),(nextval('ID_SOUS_DOMAINE'),1,'HTML'),
+(nextval('ID_SOUS_DOMAINE'),2,'Algèbre'),(nextval('ID_SOUS_DOMAINE'),2,'Géometrie'),(nextval('ID_SOUS_DOMAINE'),3,'Histoire'),(nextval('ID_SOUS_DOMAINE'),3,'Cinéma'),
+(nextval('ID_SOUS_DOMAINE'),4,'Neurologie'),(nextval('ID_SOUS_DOMAINE'),4,'Chirurgie'),(nextval('ID_SOUS_DOMAINE'),5,'Anglais'),(nextval('ID_SOUS_DOMAINE'),5,'Espagnol'),
+(nextval('ID_SOUS_DOMAINE'),6,'Physique'),(nextval('ID_SOUS_DOMAINE'),6,'Chimie');
 
 INSERT INTO question values
-(nextval('question_id_question_seq'),'Qu''est ce qu''une clef étrangère ?'),(nextval('question_id_question_seq'),'Combien y a-t-il de formes normales en SQL ?'),(nextval('question_id_question_seq'),'Quelle instruction ne produit pas d''erreur de syntaxe ?'),
-(nextval('question_id_question_seq'),'Quelles sont les balises pour utiliser le php ?'),(nextval('question_id_question_seq'),'Peut-on exécuter du code php depuis un navigateur ?'),(nextval('question_id_question_seq'),'Que signifie l''acronyme PHP ?'),
-(nextval('question_id_question_seq'),'Quelle la principale différence entre le Java et le C ?'),(nextval('question_id_question_seq'),'De combien de Classe peut-on hériter ?'),(nextval('question_id_question_seq'),'Qu''est ce qu''une interface ?'),
-(nextval('question_id_question_seq'),'Quel est l''instruction de retour par défaut ?'),(nextval('question_id_question_seq'),'Existe t-il un type boolean en langage C ?'),(nextval('question_id_question_seq'),'A quoi sert le symbole * ?'),
-(nextval('question_id_question_seq'),'A quoi sert le langage HTML en informatique ?'),(nextval('question_id_question_seq'),'Avec quel autre langage utilise t-on très souvent l'' HTML ?'),(nextval('question_id_question_seq'),'Comment reconnait-on du code html ?'),
-(nextval('question_id_question_seq'),'Quel est le nom de l''algèbre qui se base sur la logique ?'),(nextval('question_id_question_seq'),'Quels sont les trois opérateurs logiques ?'),(nextval('question_id_question_seq'),'Quel algorithme permet de résoudre un système à 3 équations ?'),
-(nextval('question_id_question_seq'),'Comment appelle t-on un objet avec 7 sommets ?'),(nextval('question_id_question_seq'),'Combien d''arrêtes possède un cube ?'),(nextval('question_id_question_seq'),'Si deux plans sont sécants, comment appelle-t-on leur intersection ?'),
-(nextval('question_id_question_seq'),'Quand a eu lieu la bataille de Waterloo ?'),(nextval('question_id_question_seq'),'Quel est le vrai nom de l''empereur romain Auguste ?'),(nextval('question_id_question_seq'),'Quelle est la date précise du début de la 2ème guerre mondiale pour la France ?'),
-(nextval('question_id_question_seq'),'Dans quel film DiCaprio remporte-t-il son premier Oscar ?'),(nextval('question_id_question_seq'),'Quel est le film le plus rentable de l''Histoire du cinéma ?'),(nextval('question_id_question_seq'),'Quel est le premier long-métrage de Pixar créé uniquement par animation 3D ?'),
-(nextval('question_id_question_seq'),'Q1neuro'),(nextval('question_id_question_seq'),'Q2neuro'),(nextval('question_id_question_seq'),'Q3neuro'),
-(nextval('question_id_question_seq'),'Q1chir'),(nextval('question_id_question_seq'),'Q2chir'),(nextval('question_id_question_seq'),'Q3chir'),
-(nextval('question_id_question_seq'),'Q1ang'),(nextval('question_id_question_seq'),'Q2ang'),(nextval('question_id_question_seq'),'Q3ang'),
-(nextval('question_id_question_seq'),'Q1esp'),(nextval('question_id_question_seq'),'Q2esp'),(nextval('question_id_question_seq'),'Q3esp'),
-(nextval('question_id_question_seq'),'Q1phys'),(nextval('question_id_question_seq'),'Q2phys'),(nextval('question_id_question_seq'),'Q3phys'),
-(nextval('question_id_question_seq'),'Q1chim'),(nextval('question_id_question_seq'),'Q2chim'),(nextval('question_id_question_seq'),'Q3chim');
+(nextval('ID_QUESTION'),'Qu''est ce qu''une clef étrangère ?'),(nextval('ID_QUESTION'),'Combien y a-t-il de formes normales en SQL ?'),(nextval('ID_QUESTION'),'Quelle instruction ne produit pas d''erreur de syntaxe ?'),
+(nextval('ID_QUESTION'),'Quelles sont les balises pour utiliser le php ?'),(nextval('ID_QUESTION'),'Peut-on exécuter du code php depuis un navigateur ?'),(nextval('ID_QUESTION'),'Que signifie l''acronyme PHP ?'),
+(nextval('ID_QUESTION'),'Quelle la principale différence entre le Java et le C ?'),(nextval('ID_QUESTION'),'De combien de Classe peut-on hériter ?'),(nextval('ID_QUESTION'),'Qu''est ce qu''une interface ?'),
+(nextval('ID_QUESTION'),'Quel est l''instruction de retour par défaut ?'),(nextval('ID_QUESTION'),'Existe t-il un type boolean en langage C ?'),(nextval('ID_QUESTION'),'A quoi sert le symbole * ?'),
+(nextval('ID_QUESTION'),'A quoi sert le langage HTML en informatique ?'),(nextval('ID_QUESTION'),'Avec quel autre langage utilise t-on très souvent l'' HTML ?'),(nextval('ID_QUESTION'),'Comment reconnait-on du code html ?'),
+(nextval('ID_QUESTION'),'Quel est le nom de l''algèbre qui se base sur la logique ?'),(nextval('ID_QUESTION'),'Quels sont les trois opérateurs logiques ?'),(nextval('ID_QUESTION'),'Quel algorithme permet de résoudre un système à 3 équations ?'),
+(nextval('ID_QUESTION'),'Comment appelle t-on un objet avec 7 sommets ?'),(nextval('ID_QUESTION'),'Combien d''arrêtes possède un cube ?'),(nextval('ID_QUESTION'),'Si deux plans sont sécants, comment appelle-t-on leur intersection ?'),
+(nextval('ID_QUESTION'),'Quand a eu lieu la bataille de Waterloo ?'),(nextval('ID_QUESTION'),'Quel est le vrai nom de l''empereur romain Auguste ?'),(nextval('ID_QUESTION'),'Quelle est la date précise du début de la 2ème guerre mondiale pour la France ?'),
+(nextval('ID_QUESTION'),'Dans quel film DiCaprio remporte-t-il son premier Oscar ?'),(nextval('ID_QUESTION'),'Quel est le film le plus rentable de l''Histoire du cinéma ?'),(nextval('ID_QUESTION'),'Quel est le premier long-métrage de Pixar créé uniquement par animation 3D ?'),
+(nextval('ID_QUESTION'),'Q1neuro'),(nextval('ID_QUESTION'),'Q2neuro'),(nextval('ID_QUESTION'),'Q3neuro'),
+(nextval('ID_QUESTION'),'Q1chir'),(nextval('ID_QUESTION'),'Q2chir'),(nextval('ID_QUESTION'),'Q3chir'),
+(nextval('ID_QUESTION'),'Q1ang'),(nextval('ID_QUESTION'),'Q2ang'),(nextval('ID_QUESTION'),'Q3ang'),
+(nextval('ID_QUESTION'),'Q1esp'),(nextval('ID_QUESTION'),'Q2esp'),(nextval('ID_QUESTION'),'Q3esp'),
+(nextval('ID_QUESTION'),'Q1phys'),(nextval('ID_QUESTION'),'Q2phys'),(nextval('ID_QUESTION'),'Q3phys'),
+(nextval('ID_QUESTION'),'Q1chim'),(nextval('ID_QUESTION'),'Q2chim'),(nextval('ID_QUESTION'),'Q3chim');
 
 INSERT INTO qcm values
-(nextval('qcm_id_qcm_seq'),'quest','18/10/2016','facile',20),
-(nextval('qcm_id_qcm_seq'),'quest','05/11/2016','facile',20);
+(nextval('ID_QCM'),'quest','18/10/2016','facile',20),
+(nextval('ID_QCM'),'quest','05/11/2016','facile',20);
 
 
 INSERT INTO qcm_question values
