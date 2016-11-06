@@ -27,6 +27,8 @@ if(isset($_POST['questions']))
 		echo'<p>Question numéro:'.$v;
 	}
 }
+if(isset($_POST['question']))
+	echo'<p>Question numéro:'.$_POST['question'].'</p>';
 ?>
 </body>
 </html>
