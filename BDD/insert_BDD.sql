@@ -15,6 +15,7 @@ INSERT INTO sous_domaine values
 
 INSERT INTO question values
 (nextval('ID_QUESTION'),'Qu''est ce qu''une clef étrangère ?'),(nextval('ID_QUESTION'),'Combien y a-t-il de formes normales en SQL ?'),(nextval('ID_QUESTION'),'Quelle instruction ne produit pas d''erreur de syntaxe ?'),
+(nextval('ID_QUESTION'),'Qu''est ce que l''informatique ?'),(nextval('ID_QUESTION'),'Comment fonctionne un processeur ?'),(nextval('ID_QUESTION'),'Comment fonctionne un serveur ?'),
 (nextval('ID_QUESTION'),'Quelles sont les balises pour utiliser le php ?'),(nextval('ID_QUESTION'),'Peut-on exécuter du code php depuis un navigateur ?'),(nextval('ID_QUESTION'),'Que signifie l''acronyme PHP ?'),
 (nextval('ID_QUESTION'),'Quelle la principale différence entre le Java et le C ?'),(nextval('ID_QUESTION'),'De combien de Classe peut-on hériter ?'),(nextval('ID_QUESTION'),'Qu''est ce qu''une interface ?'),
 (nextval('ID_QUESTION'),'Quel est l''instruction de retour par défaut ?'),(nextval('ID_QUESTION'),'Existe t-il un type boolean en langage C ?'),(nextval('ID_QUESTION'),'A quoi sert le symbole * ?'),
@@ -32,15 +33,20 @@ INSERT INTO question values
 
 INSERT INTO qcm values
 (nextval('ID_QCM'),'quest','18/10/2016','facile',20),
+(nextval('ID_QCM'),'quest','05/11/2016','facile',20),
+(nextval('ID_QCM'),'quest','05/11/2016','facile',20),
+(nextval('ID_QCM'),'quest','05/11/2016','facile',20),
+(nextval('ID_QCM'),'quest','05/11/2016','facile',20),
+(nextval('ID_QCM'),'quest','05/11/2016','facile',20),
+(nextval('ID_QCM'),'quest','05/11/2016','facile',20),
 (nextval('ID_QCM'),'quest','05/11/2016','facile',20);
-
 
 INSERT INTO qcm_question values
 (1,1,'Informatique','BDD'),(1,2,'Informatique','BDD'),(1,3,'Informatique','BDD'),(1,4,'Informatique','PHP'),(1,5,'Informatique','PHP'),(1,6,'Informatique','PHP'),
-(1,7,'Informatique','JAVA'),(1,8,'Informatique','JAVA'),(1,9,'Informatique','JAVA'),(1,10,'Informatique','C'),(1,11,'Informatique','C'),(1,12,'Informatique','C'),
-(1,13,'Informatique','HTML'),(1,14,'Informatique','HTML'),(1,15,'Informatique','HTML'),(1,16,'Mathématiques','Algèbre'),(1,17,'Mathématiques','Algèbre'),(1,18,'Mathématiques','Algèbre'),
-(1,19,'Mathématiques','Géometrie'),(1,20,'Mathématiques','Géometrie'),(1,21,'Mathématiques','Géometrie'),(1,22,'Culture Générale','Histoire'),(1,23,'Culture Générale','Histoire'),(1,24,'Culture Générale','Histoire'),
-(1,25,'Culture Générale','Cinéma'),(1,26,'Culture Générale','Cinéma'),(1,27,'Culture Générale','Cinéma'),(1,28,'Médecine','Neurologie'),(1,29,'Médecine','Neurologie'),(1,30,'Médecine','Neurologie'),
-(1,31,'Médecine','Chirurgie'),(1,32,'Médecine','Chirurgie'),(1,33,'Médecine','Chirurgie'),(1,34,'Langues','Anglais'),(1,35,'Langues','Anglais'),(1,36,'Langues','Anglais'),
-(1,37,'Langues','Espagnol'),(1,38,'Langues','Espagnol'),(1,39,'Langues','Espagnol'),(1,40,'Physique Chimie','Physique'),(1,41,'Physique Chimie','Physique'),(1,42,'Physique Chimie','Physique'),
-(1,43,'Physique Chimie','Chimie'),(1,44,'Physique Chimie','Chimie'),(1,45,'Physique Chimie','Chimie');
+(2,7,'Informatique','JAVA'),(2,8,'Informatique','JAVA'),(2,9,'Informatique','JAVA'),(2,10,'Informatique','C'),(2,11,'Informatique','C'),(2,12,'Informatique','C'),
+(3,13,'Informatique','HTML'),(3,14,'Informatique','HTML'),(3,15,'Informatique','HTML'),(3,16,'Mathématiques','Algèbre'),(3,17,'Mathématiques','Algèbre'),(3,18,'Mathématiques','Algèbre'),
+(4,19,'Mathématiques','Géometrie'),(4,20,'Mathématiques','Géometrie'),(4,21,'Mathématiques','Géometrie'),(4,22,'Culture Générale','Histoire'),(4,23,'Culture Générale','Histoire'),(4,24,'Culture Générale','Histoire'),
+(5,25,'Culture Générale','Cinéma'),(5,26,'Culture Générale','Cinéma'),(5,27,'Culture Générale','Cinéma'),(5,28,'Médecine','Neurologie'),(5,29,'Médecine','Neurologie'),(5,30,'Médecine','Neurologie'),
+(6,31,'Médecine','Chirurgie'),(6,32,'Médecine','Chirurgie'),(6,33,'Médecine','Chirurgie'),(6,34,'Langues','Anglais'),(6,35,'Langues','Anglais'),(6,36,'Langues','Anglais'),
+(7,37,'Langues','Espagnol'),(7,38,'Langues','Espagnol'),(7,39,'Langues','Espagnol'),(7,40,'Physique Chimie','Physique'),(7,41,'Physique Chimie','Physique'),(7,42,'Physique Chimie','Physique'),
+(8,43,'Physique Chimie',NULL),(8,44,'Physique Chimie',NULL),(8,45,'Physique Chimie',NULL);
