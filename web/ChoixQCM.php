@@ -28,7 +28,7 @@ if(isset($_GET['idsd'])and trim($_GET['idsd']!=' ')){
 	$req->execute();
 	while($l=$req->fetch(PDO::FETCH_ASSOC))
 		{
-			echo '<p><a href="Execution.php?idsd='.$l['id_qcm'].'">'.$l['id_qcm'].' '.$l['auteur'].'</a></p>';
+			echo '<p><a href="Execution.php?iq='.$l['id_qcm'].'">'.$l['id_qcm'].' '.$l['auteur'].'</a></p>';
 		}
 }
 }catch(PDOException $e){
