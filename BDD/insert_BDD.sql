@@ -81,8 +81,3 @@ INSERT INTO qcm_question values
 (6,31,'Médecine','Chirurgie'),(6,32,'Médecine','Chirurgie'),(6,33,'Médecine','Chirurgie'),(6,34,'Langues','Anglais'),(6,35,'Langues','Anglais'),(6,36,'Langues','Anglais'),
 (7,37,'Langues','Espagnol'),(7,38,'Langues','Espagnol'),(7,39,'Langues','Espagnol'),(7,40,'Physique Chimie','Physique'),(7,41,'Physique Chimie','Physique'),(7,42,'Physique Chimie','Physique'),
 (8,43,'Physique Chimie',NULL),(8,44,'Physique Chimie',NULL),(8,45,'Physique Chimie',NULL);
-
-
-
-
-

@@ -56,6 +56,7 @@ id_qcm integer NOT NULL PRIMARY KEY DEFAULT nextval('ID_QCM'),
 auteur varchar NOT NULL REFERENCES Questionneur(nom_questionneur),
 date_creation date,
 niveau varchar,
+temps_total int DEFAULT null,
 note float
 );
 
