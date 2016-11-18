@@ -1,11 +1,5 @@
 <?php 
-try{
-$bdd=new PDO('pgsql:host=localhost;dbname=postgres','Lucie','2508028473F');
-}
-catch(PDOException $e)
-{
-	die('<p>La connexion a la base à echoué.</p>');
-}
+require_once('Connexionbdd.php');
 
 
 $bdd->query('SET NAMES utf8');

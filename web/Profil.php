@@ -11,15 +11,7 @@
 <body> 
 <?php 
 session_start();
-try{
-$bdd=new PDO('pgsql:host=localhost;dbname=postgres','postgres','pasword');
-$bdd->query('SET NAMES utf8');
-$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-}
-catch(PDOException $e)
-{
-	die('<p>La connexion a la base à echoué.</p>');
-}
+require_once('Connexionbdd.php');
 
 if (isset($_POST['qcmb']) and trim($_POST['qcmb']!=''))
 {

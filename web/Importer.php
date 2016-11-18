@@ -23,15 +23,7 @@
 <?php
 
 
-try{
-$bdd=new PDO('pgsql:host=localhost;dbname=postgres','postgres','password');
-}
-catch(PDOException $e)
-{
-	die('<p>La connexion a la base à echoué.</p>');
-}
-$bdd->query('SET NAMES utf8');
-$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+require_once('Connexionbdd.php');
 
 
  if(isset($_GET['domaine']) and isset($_GET['sdomaine']) and trim($_GET['domaine']!='') and trim($_GET['sdomaine']!=''))

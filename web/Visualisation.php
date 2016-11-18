@@ -10,16 +10,7 @@
 	
 <body> 
 <?php 
-try{
-$bdd=new PDO('pgsql:host=localhost;dbname=postgres','postgres','password');
-
-}
-catch(PDOException $e)
-{
-	die('<p>La connexion a la base à echoué.</p>');
-}
-$bdd->query('SET NAMES utf8');
-$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+require_once('Connexionbdd.php');
 if(isset($_GET['q']) and trim($_GET['q']!=''))
 {
 	$req=$bdd->prepare("SELECT * FROM public.question NATURAL JOIN public.qcm_question WHERE id_question=:id");

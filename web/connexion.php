@@ -11,15 +11,7 @@
 session_start();
 	if (isset($_POST['nom']) and isset($_POST['mdp']) and trim($_POST['nom']!='') and trim($_POST['mdp']!=''))
 		{
-		try{
-			$bdd=new PDO('pgsql:host=localhost;dbname=postgres','postgres','root');
-			$bdd->query('SET NAMES utf8');
-			$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		}
-		catch(PDOException $e)
-		{
-			die('<p>La connexion à la base a echoué.</p>');
-		}
+		require_once('Connexionbdd.php');
 		try {
 			$req = $bdd->prepare("SELECT * FROM public.repondeur WHERE nom_repondeur = :nom AND mdp_repondeur = :mdp");
 			$req->bindValue(':nom', $_POST['nom']);
