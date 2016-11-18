@@ -1,6 +1,6 @@
 <?php 
 try{
-$bdd=new PDO('pgsql:host=localhost;dbname=postgres','Lucie','2508028473F');
+$bdd=new PDO('pgsql:host=localhost;dbname=postgres','postgres','password');
 $bdd->query('SET NAMES utf8');
 			$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 }

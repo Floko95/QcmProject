@@ -49,11 +49,12 @@ elseif(isset($_POST['suppn']))
 }
 else
 {
-$req=$bdd->prepare("SELECT * FROM public.Qcm where auteur=:aut");
+$req=$bdd->prepare("SELECT id_qcm,domaine,sous_domaine FROM public.Qcm join public.Qcm_question on id_qcm where auteur=:aut");
 $req->bindValue(':aut',$_SESSION['user']);
 $req->execute();
 while($ligne=$req->fetch(PDO::FETCH_ASSOC))
 {
+	echo '<p>Domaine: '.$ligne['domaine'].'  Sous-domaine: '.$ligne['sous_domaine'].' </p>';
 	echo '<form action="Profil.php" method="post"><input type="submit" name="qcmb" value="QCM numéro '.$ligne['id_qcm'].'" /><input type="hidden" name="id" value="'.$ligne['id_qcm'].'" /></form>';
 	
 }
