@@ -18,9 +18,24 @@ if (isset($_POST['qcmb']) and trim($_POST['qcmb']!=''))
 	$req=$bdd->prepare("SELECT * FROM public.qcm_question natural join public.question where public.qcm_question.id_qcm=:id");
 	$req->bindValue(':id',$_POST['id']);
 	$req->execute();
+	
 	while($ligne=$req->fetch(PDO::FETCH_ASSOC))
 {
+	
 	echo 'Question: '.$ligne['question'].'<br/>';
+	$req2->prepare("SELECT * FROM public.qcm_question natural join public.reponse where id_question=:idq");
+	$req2->bindValue(':idq',$ligne['id_question']);
+	$req2->execute();
+	$c=0;
+	while($ligne2=$req2->fetch(PDO::FETCH_ASSOC))
+	{
+		if($ligne2['correct'])
+		echo '<p>Réponse correcte numéro '.$c.': '.$ligne2['reponse'].'</p><br/>';
+		else
+		echo '<p>Réponse numéro '.$c.': '.$ligne2['reponse'].'</p><br/>';
+		$c++;
+	}
+	
 	
 }
 echo ' <form action="Profil.php" method="post"><input type="hidden" name="id" value="'.$_POST['id'].'" /><input type="submit" name="supp" value="Supprimer le QCM" /></form>';
