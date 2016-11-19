@@ -1,8 +1,9 @@
-
-/* Script pour supprimer toute la BDD, a n'utiliser qu'en dernier recours */
+--> je laisse ces drop pour les handicapés
 
 DROP TABLE IF EXISTS Statistiques;
 DROP TABLE IF EXISTS Question_Reponse;
+
+/* Script pour supprimer toute la BDD */
 
 DROP TABLE IF EXISTS Qcm_Question ;
 DROP TABLE IF EXISTS Recapitulatif;
@@ -21,3 +22,5 @@ DROP SEQUENCE IF EXISTS ID_REPONDEUR;
 DROP SEQUENCE IF EXISTS ID_QUESTION;
 DROP SEQUENCE IF EXISTS ID_REPONSE;
 DROP SEQUENCE IF EXISTS ID_QCM;
+
+DROP ROLE qcm_default;

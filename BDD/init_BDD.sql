@@ -1,6 +1,8 @@
 
 /* Script d'initialisation de la BDD, a utiliser une seule fois */
 
+-- connexion qcm_default vX3Hg8i65Z
+
 CREATE SEQUENCE IF NOT EXISTS ID_DOMAINE START 1 INCREMENT 1 MAXVALUE 80;
 CREATE SEQUENCE IF NOT EXISTS ID_SOUS_DOMAINE START 1 INCREMENT 1 MAXVALUE 80;
 CREATE SEQUENCE IF NOT EXISTS ID_QUESTIONNEUR START 1 INCREMENT 1 MAXVALUE 100;
@@ -60,7 +62,7 @@ temps_total int DEFAULT null,
 note float
 );
 
-CREATE TABLE IF NOT EXISTS QCM_Question(
+CREATE TABLE IF NOT EXISTS Qcm_Question(
 id_qcm integer REFERENCES Qcm(id_qcm),
 id_question integer REFERENCES Question(id_question),
 domaine varchar REFERENCES Domaine(nom_domaine),
@@ -83,3 +85,16 @@ note_dernier_qcm float,
 temps_passe float,
 PRIMARY KEY (id_utilisateur)
 );
+
+
+CREATE ROLE qcm_default WITH NOSUPERUSER NOCREATEDB NOINHERIT LOGIN ENCRYPTED PASSWORD 'vX3Hg8i65Z' ;
+GRANT SELECT, INSERT, UPDATE, DELETE ON question TO qcm_default;
+GRANT SELECT, INSERT, UPDATE, DELETE ON reponse TO qcm_default;
+GRANT SELECT, INSERT, UPDATE, DELETE ON qcm TO qcm_default;
+GRANT SELECT, INSERT, UPDATE, DELETE ON qcm_question TO qcm_default
+GRANT SELECT, UPDATE ON recapitulatif TO qcm_default;
+GRANT SELECT, INSERT ON domaine TO qcm_default;
+GRANT SELECT, INSERT ON sous_domaine TO qcm_default;
+GRANT SELECT ON questionneur TO qcm_default;
+GRANT SELECT ON repondeur TO qcm_default;
+
