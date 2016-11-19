@@ -1,12 +1,17 @@
 <!DOCTYPE html>
+	<meta charset="utf-8" />
+    <link rel="stylesheet" href="c.css" />
+    <title> QCM | Connexion</title>
+ <head>
+  <body>
+	  
 
-<html>
-<head>
-<meta charset="utf-8" />
-<title>QCM-Connexion</title>
-</head>
-<body>
-
+<div class="container">
+  <div id="login-form">
+    <h3>Login</h3>
+    <fieldset>
+		
+		
 <?php
 session_start();
 	if (isset($_POST['nom']) and isset($_POST['mdp']) and trim($_POST['nom']!='') and trim($_POST['mdp']!=''))
@@ -23,7 +28,7 @@ session_start();
 					$_SESSION['user'] = $_POST['nom'];
 					$_SESSION['role'] = 'repondeur';
 					$_SESSION['connecte']= true;	
-					header('Location: Home.php');
+					header('Location: ar.php');
 					break;
 				case 0 : 	
 					echo('<p> Nom de repondeur ou mot de passe incorrect </p>');
@@ -48,7 +53,7 @@ session_start();
 					$_SESSION['user'] = $_POST['nom'];
 					$_SESSION['role'] = 'questionneur';
 					$_SESSION['connecte']= true;
-					header('Location: Home.php');
+					header('Location: aq.php');
 					break;
 				case 0 : 	
 					echo('<p> Nom de questionneur ou mot de passe incorrect </p>');
@@ -66,8 +71,8 @@ session_start();
 ?>
 
 <form action="connexion.php" method="post">
-<input type="text" name="nom"/>
-<input type="password" name="mdp"/>
+<input type="text" name="nom" placeholder="pseudo"/>
+<input type="password" name="mdp" placeholder="mot de passe"/>
 <input type="submit"/>
 </form>
 
