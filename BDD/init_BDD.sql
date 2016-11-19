@@ -91,7 +91,7 @@ CREATE ROLE qcm_default WITH NOSUPERUSER NOCREATEDB NOINHERIT LOGIN ENCRYPTED PA
 GRANT SELECT, INSERT, UPDATE, DELETE ON question TO qcm_default;
 GRANT SELECT, INSERT, UPDATE, DELETE ON reponse TO qcm_default;
 GRANT SELECT, INSERT, UPDATE, DELETE ON qcm TO qcm_default;
-GRANT SELECT, INSERT, UPDATE, DELETE ON qcm_question TO qcm_default
+GRANT SELECT, INSERT, UPDATE, DELETE ON qcm_question TO qcm_default;
 GRANT SELECT, UPDATE ON recapitulatif TO qcm_default;
 GRANT SELECT, INSERT ON domaine TO qcm_default;
 GRANT SELECT, INSERT ON sous_domaine TO qcm_default;
