@@ -37,16 +37,56 @@ require_once('Connexionbdd.php');
 try{
 
 
-if(isset($_POST['bouton'])and trim($_POST['bouton']!=' ')){
-	echo "beuleubeuleubeuleu c'est en travaux...";
-echo '<p><img src="http://asvhgbasket.kalisport.com/public/412/upload/images/articles/1-travaux-2-2015-10-19-16-23-58.jpg"/></p>';
+if(isset($_POST['reponse'])and trim($_POST['reponse']!=' ')){
+	print_r($_POST);
+	echo 'Vos réponses : </br></br>';
+	$maquestion;$plus=0;$moins=0;
+	foreach($_POST['reponse'] as $c=>$v){
 
-
+	
+	//////////
+	$questio=$bdd->prepare('Select * from public.question natural join public.reponse where id_reponse=:idrep');//pour chaque question
+	$questio->bindValue(':idrep',$v);
+	$questio->execute();
+	while($lo=$questio->fetch(PDO :: FETCH_ASSOC)){
+	echo ' '.$lo['id_question'].'</br>';
+	//$tb[]=[$lo['id_question']]=>$v;   --> a faire: associer les reponses donnees aux questions pour eviter les doublons de reponses.
+	}
+	//////////
+	$question=$bdd->prepare('Select * from public.question natural join public.reponse where id_reponse=:idrep');//pour chaque id question
+	$question->bindValue(':idrep',$v);
+	$question->execute();
+	while($l=$question->fetch(PDO :: FETCH_ASSOC)){
+		echo ' '.$l['question'].'</br>';
+		$maquestion=$l['question'];
+		echo 'Vous avez répondu : ';//affichage question
+		echo ' '.$l['reponse'].'</br>';
+		
+		if ($l['correct']){
+			echo 'Réponse juste</br></br>';
+			$plus++;
+		}else{
+			echo 'Réponse fausse : </br>';
+			$moins++;
+			echo 'La réponse juste était :' ;
+			$rep=$bdd->prepare('Select * from public.question natural join public.reponse where correct=TRUE and question=:mq');
+			$rep->bindValue(':mq',$maquestion);
+			$rep->execute();
+	while($l=$rep->fetch(PDO :: FETCH_ASSOC)){
+		echo' '.$l['reponse'];
+	}
+		} 
+	
+		echo'</br></br>';
+	}
+	
 }
 
-if(isset($_POST['reponse'])and trim($_POST['reponse']!=' ')){
-	echo 'beuleubeuleubeuleu';
-//////////////////////////////////////////////-> keep working
+echo 'plus'.$plus;
+echo'moins'.$moins;
+$score=($plus-$moins);
+echo ' Score : '.$score;
+
 
 }
 }catch(PDOException $e){

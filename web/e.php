@@ -50,15 +50,20 @@ if(isset($_GET['iq'])and trim($_GET['iq']!=' ')){
 	$req2->bindValue(':numeroquest',$ligne['id_question']);
 	$req2->execute();
 	echo'</br>';
+	echo '<form action="s.php" method="post">';
+		echo '<input type="hidden" name="qcm" value="'.$ligne['id_qcm'].'"/>';
 	while($l=$req2->fetch(PDO::FETCH_ASSOC))
 		{
-			echo '<form action="e.php" method="post"><input type="checkbox" name="reponse" value="'.$l['id_reponse'].'"/>'.htmlspecialchars($l['reponse'],ENT_QUOTES).'</form>';
+			//echo '<input type="hidden" name="question[]" value="'.$l['question'].'"/>';
+			echo'<input type="checkbox" name="reponse[]" value="'.$l['id_reponse'].'"/>'.htmlspecialchars($l['reponse'],ENT_QUOTES).'</br>';
 		
 		}
+		
 		echo'</br>';
-		}
-	echo'</br><form action="s.php" method="post"><input type="submit" name="bouton" value="Valider"/></form></br>';
-	
+		}///////////
+		echo'<input type="submit" name="checkboxes" value="VALIDER">';
+		echo'</form>';
+		
 
 		
 }		
