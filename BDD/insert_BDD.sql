@@ -15,9 +15,6 @@ INSERT INTO sous_domaine (id_domaine, nom_sous_domaine) values
 
 INSERT INTO question (question) values
 ('Qu''est ce qu''une clef étrangère ?'),('Combien y a-t-il de formes normales en SQL ?'),('Quelle instruction produit une erreur de syntaxe ?'),
-
-/*('Qu''est ce que l''informatique ?'),('Comment fonctionne un processeur ?'),('Comment fonctionne un serveur ?'),  ceci est bullshit  */
-
 ('Quelles sont les balises pour utiliser le php ?'),('Peut-on exécuter du code php depuis un navigateur seul?'),('Que signifie l''acronyme PHP ?'),
 ('Quelle la principale différence entre le Java et le C ?'),('De combien de Classe peut-on hériter ?'),('Qu''est ce qu''une interface ?'),
 ('Quel est l''instruction de retour par défaut ?'),('Existe t-il un type boolean en langage C ?'),('A quoi sert le symbole * ?'),
@@ -70,14 +67,22 @@ INSERT INTO qcm (auteur, date_creation, niveau, note) values
 ('quest','05/11/2016','facile',20),
 ('quest','05/11/2016','facile',20),
 ('quest','05/11/2016','facile',20),
+('quest','19/11/2016','facile',20),/*Modifié le 19/11/2016*/
+('quest','19/11/2016','facile',20),/*Modifié le 19/11/2016*/
+('quest','19/11/2016','facile',20),/*Modifié le 19/11/2016*/
+('quest','19/11/2016','facile',20),/*Modifié le 19/11/2016*/
+('quest','19/11/2016','facile',20),/*Modifié le 19/11/2016*/
+('quest','19/11/2016','facile',20),/*Modifié le 19/11/2016*/
+('quest','19/11/2016','facile',20),/*Modifié le 19/11/2016*/
 ('quest','05/11/2016','facile',20);
 
-INSERT INTO qcm_question values
-(1,1,'Informatique','BDD'),(1,2,'Informatique','BDD'),(1,3,'Informatique','BDD'),(1,4,'Informatique','PHP'),(1,5,'Informatique','PHP'),(1,6,'Informatique','PHP'),
-(2,7,'Informatique','JAVA'),(2,8,'Informatique','JAVA'),(2,9,'Informatique','JAVA'),(2,10,'Informatique','C'),(2,11,'Informatique','C'),(2,12,'Informatique','C'),
-(3,13,'Informatique','HTML'),(3,14,'Informatique','HTML'),(3,15,'Informatique','HTML'),(3,16,'Mathématiques','Algèbre'),(3,17,'Mathématiques','Algèbre'),(3,18,'Mathématiques','Algèbre'),
-(4,19,'Mathématiques','Géometrie'),(4,20,'Mathématiques','Géometrie'),(4,21,'Mathématiques','Géometrie'),(4,22,'Culture Générale','Histoire'),(4,23,'Culture Générale','Histoire'),(4,24,'Culture Générale','Histoire'),
-(5,25,'Culture Générale','Cinéma'),(5,26,'Culture Générale','Cinéma'),(5,27,'Culture Générale','Cinéma'),(5,28,'Médecine','Neurologie'),(5,29,'Médecine','Neurologie'),(5,30,'Médecine','Neurologie'),
-(6,31,'Médecine','Chirurgie'),(6,32,'Médecine','Chirurgie'),(6,33,'Médecine','Chirurgie'),(6,34,'Langues','Anglais'),(6,35,'Langues','Anglais'),(6,36,'Langues','Anglais'),
-(7,37,'Langues','Espagnol'),(7,38,'Langues','Espagnol'),(7,39,'Langues','Espagnol'),(7,40,'Physique Chimie','Physique'),(7,41,'Physique Chimie','Physique'),(7,42,'Physique Chimie','Physique'),
+INSERT INTO qcm_question values /*19/11/2016 => chaque qcm contient seulement les questions relatives à son sous-domaine, bref c'est moins la merde.*/
+(1,1,'Informatique','BDD'),(1,2,'Informatique','BDD'),(1,3,'Informatique','BDD'),(9,4,'Informatique','PHP'),(9,5,'Informatique','PHP'),(9,6,'Informatique','PHP'),
+(2,7,'Informatique','JAVA'),(2,8,'Informatique','JAVA'),(2,9,'Informatique','JAVA'),(10,10,'Informatique','C'),(10,11,'Informatique','C'),(10,12,'Informatique','C'),
+(3,13,'Informatique','HTML'),(3,14,'Informatique','HTML'),(3,15,'Informatique','HTML'),(11,16,'Mathématiques','Algèbre'),(11,17,'Mathématiques','Algèbre'),(11,18,'Mathématiques','Algèbre'),
+(4,19,'Mathématiques','Géometrie'),(4,20,'Mathématiques','Géometrie'),(4,21,'Mathématiques','Géometrie'),(12,22,'Culture Générale','Histoire'),(12,23,'Culture Générale','Histoire'),(12,24,'Culture Générale','Histoire'),
+(5,25,'Culture Générale','Cinéma'),(5,26,'Culture Générale','Cinéma'),(5,27,'Culture Générale','Cinéma'),(13,28,'Médecine','Neurologie'),(13,29,'Médecine','Neurologie'),(13,30,'Médecine','Neurologie'),
+(6,31,'Médecine','Chirurgie'),(6,32,'Médecine','Chirurgie'),(6,33,'Médecine','Chirurgie'),(14,34,'Langues','Anglais'),(14,35,'Langues','Anglais'),(14,36,'Langues','Anglais'),
+(7,37,'Langues','Espagnol'),(7,38,'Langues','Espagnol'),(7,39,'Langues','Espagnol'),(15,40,'Physique Chimie','Physique'),(15,41,'Physique Chimie','Physique'),(15,42,'Physique Chimie','Physique'),
 (8,43,'Physique Chimie',NULL),(8,44,'Physique Chimie',NULL),(8,45,'Physique Chimie',NULL);
+
