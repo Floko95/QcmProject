@@ -36,6 +36,7 @@ require_once('Connexionbdd.php');
 
 try{
 
+$date=time();
 if(isset($_GET['iq'])and trim($_GET['iq']!=' ')){
 
 	$req=$bdd->prepare("SELECT * FROM public.qcm_question natural join public.question where id_qcm=:idqcm");
@@ -52,11 +53,12 @@ if(isset($_GET['iq'])and trim($_GET['iq']!=' ')){
 	echo'</br>';
 	echo '<form action="s.php" method="post">';
 		echo '<input type="hidden" name="qcm" value="'.$ligne['id_qcm'].'"/>';
+		echo '<input type="hidden" name="temps" value="'.$date.'"/>';
 	while($l=$req2->fetch(PDO::FETCH_ASSOC))
 		{
 			//echo '<input type="hidden" name="question[]" value="'.$l['question'].'"/>';
 			echo'<input type="checkbox" name="reponse[]" value="'.$l['id_reponse'].'"/>'.htmlspecialchars($l['reponse'],ENT_QUOTES).'</br>';
-		
+			
 		}
 		
 		echo'</br>';
