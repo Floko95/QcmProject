@@ -42,22 +42,25 @@ echo "
 	</form>
 ";
 
-	if ($_POST['n'] < 2)
+	if (isset($_POST['n']))
 	{
-		echo "Il doit y avoir deux réponses minimum à votre question<br />";
-	}
-	else
-	{
-		echo"<form action='Questions.php' method=post>
-			<input type='text' placeholder='Question' name='q'/><br/><br/>";
-		for ($i=1;$i<=$_POST['n'];$i++)
+		if ($_POST['n'] < 2)
 		{
+			echo "Il doit y avoir deux réponses minimum à votre question<br />";
+		}
+		else
+		{
+			echo"<form action='Questions.php' method=post>
+				<input type='text' placeholder='Question' name='q'/><br/><br/>";
+			for ($i=1;$i<=$_POST['n'];$i++)
+			{
 			echo "
 				<input type='text' placeholder='Réponse' name='Rep[]'/><br/>
 			";
 		}
 		echo"<input type='submit' value='Sauvegarder et envoyer les réponses'/>
 		</form>";
+	}
 	}
 
 ?>
