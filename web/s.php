@@ -74,17 +74,40 @@ if(isset($_POST['reponse'])and trim($_POST['reponse']!=' ')){
 								$point->execute();
 								while($ligne=$point->fetch(PDO::FETCH_ASSOC)){
 										$score+=$ligne['valeur'];
+										echo 'Score : + '.$ligne['valeur'].'</br>';
 								}
 			}
 			$faux=0;
 			$vrai=0;
 		}
 	echo'</br></br></br>';
-	
-	echo ' Score : '.$score.'</br>Temps passé : '.$tempspasse.' secondes.</br></br>';
+	$time=0;
+	$tempsdepasse=$bdd->prepare('Select temps_total from public.qcm where id_qcm=:idqcm');
+	$tempsdepasse->bindValue(':idqcm',$_POST['qcm']);
+	$tempsdepasse->execute();
+	while($l=$tempsdepasse->fetch(PDO::FETCH_ASSOC)){
+		$time=$l['temps_total'];
+	}
+	if($tempspasse>$time){
+		$score-=1;
+		echo 'Vous avez dépassé le temps (score - 1) : '.$tempspasse.' secondes. </br>';
+	}
+	if($score<0){
+		$score=0;
+	}if ($tempspasse<=$time){
+	echo 'Temps passé : '.$tempspasse.' secondes.</br>';
+	}
+	echo ' Score : '.$score.'</br></br>';
 	}
 }
-
+/*
+$inserer=$bdd->prepare('insert into public.recapitulatif values(:numuser,:user,:nbqcm,:note,:tempspasse)');
+$inserer->bindValue(':numuser',$);
+$inserer->bindValue(':numuser',$);
+$inserer->bindValue(':numuser',$);
+$inserer->bindValue(':numuser',$);
+$inserer->bindValue(':numuser',$);
+$inserer->execute();*/
 }catch(PDOException $e){
 	die('<p>Votre requête est erronée.</p>');
 }
