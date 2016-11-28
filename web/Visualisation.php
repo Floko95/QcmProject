@@ -26,7 +26,7 @@ if(isset($_GET['q']) and trim($_GET['q']!=''))
 	
 	
 		
-		echo '<form action="Creation.php" method="post">
+		echo '<form action="choixc.php" method="post">
 		<input type="hidden" name="domaine" value="'.$_GET['domaine'].'"/>';
 		if($_GET['sdomaine']!='general')
 		{
