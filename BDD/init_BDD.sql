@@ -1,4 +1,5 @@
 
+
 /* Script d'initialisation de la BDD, a utiliser une seule fois */
 
 -- connexion qcm_default vX3Hg8i65Z
@@ -58,7 +59,7 @@ id_qcm integer NOT NULL PRIMARY KEY DEFAULT nextval('ID_QCM'),
 auteur varchar NOT NULL REFERENCES Questionneur(nom_questionneur),
 date_creation date,
 niveau varchar,
-temps_total int DEFAULT null,
+temps_total int DEFAULT 180, --le temps à null par défaut c'est caca(et ça fait foirer mes tests).
 note float
 );
 
@@ -97,4 +98,3 @@ GRANT SELECT, INSERT ON domaine TO qcm_default;
 GRANT SELECT, INSERT ON sous_domaine TO qcm_default;
 GRANT SELECT ON questionneur TO qcm_default;
 GRANT SELECT ON repondeur TO qcm_default;
-
