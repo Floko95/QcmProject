@@ -12,7 +12,7 @@
   <nav>
     <ul>
       <li><a href="ar.php">Home</a></li>
-      <li><a href="">Profil</a></li>
+      <li><a href="profilr.php">Profil</a></li>
       <li><a href="choixd.php">QCM</a></li>
       <li><a href="a.php">Déconnexion</a></li>
     </ul>
@@ -28,7 +28,9 @@
   <p>Tu as fini...quel est ton score ?</p>
 
 <?php 
+session_start();
 try{
+	
 require_once('Connexionbdd.php');
 $date=time().'</br>';
 $tempspasse=$date-$_POST['temps'];
@@ -100,16 +102,27 @@ if(isset($_POST['reponse'])and trim($_POST['reponse']!=' ')){
 	echo ' Score : '.$score.'</br></br>';
 	}
 }
-/*
-$inserer=$bdd->prepare('insert into public.recapitulatif values(:numuser,:user,:nbqcm,:note,:tempspasse)');
-$inserer->bindValue(':numuser',$);
-$inserer->bindValue(':numuser',$);
-$inserer->bindValue(':numuser',$);
-$inserer->bindValue(':numuser',$);
-$inserer->bindValue(':numuser',$);
-$inserer->execute();*/
+/////:////////::
+$tim=1;
+$ins=$bdd->prepare('select * from repondeur where nom_repondeur=:n');
+$ins->bindValue(':n',$_SESSION['user']);
+$ins->execute();
+while($lu=$tempsdepasse->fetch(PDO::FETCH_ASSOC)){
+		$tim=$lu['id_repondeur'];
+		echo $tim;
+		}
+
+
+$inserer=$bdd->prepare('insert into public.recapitulatif (id_utilisateur,utilisateur,nb_qcm_fait,note_dernier_qcm,temps_passe) values(:nuser,:user,:nbqcm,:note,:tempspasse)');
+$inserer->bindValue(':nuser',$tim);
+$inserer->bindValue(':user',$_SESSION['user']);
+$inserer->bindValue(':nbqcm',1);
+$inserer->bindValue(':note',$score);
+$inserer->bindValue(':tempspasse',$tempspasse);
+$inserer->execute();
+/////////////////////*/
 }catch(PDOException $e){
-	die('<p>Votre requête est erronée.</p>');
+	die('<p>Votre requête est erronée.</p>'.$e);
 }
 	
 ?>

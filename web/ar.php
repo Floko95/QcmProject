@@ -36,7 +36,7 @@
       <li><a href="a.php">Deconnexion</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="choixd.php">QCM</a></li>
-      <li><a href="profil.php">Profil</a></li>
+      <li><a href="profilr.php">Profil</a></li>
       <li><a href="#contact-me">Contact</a></li>
     </ul>
   </nav>

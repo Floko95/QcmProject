@@ -12,7 +12,7 @@
   <nav>
     <ul>
       <li><a href="ar.php">Home</a></li>
-      <li><a href="">Profil</a></li>
+      <li><a href="profilr.php">Profil</a></li>
       <li><a href="choixd.php">QCM</a></li>
       <li><a href="a.php">Déconnexion</a></li>
     </ul>
