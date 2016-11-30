@@ -6,7 +6,7 @@
         <title></title>
     </head>
     <body>
-		
+
 
 <div id="desk-nav">
   <nav>
@@ -21,7 +21,7 @@
 
 <!-- END NAVIGATION -->
 
-   
+
 
 <!-- About  -->
 
@@ -33,6 +33,8 @@
 
 
 <?php
+
+require_once("Connexionbdd.php");
 
 echo "
 	<form action='CreationQuestions.php' method=post>
@@ -54,12 +56,15 @@ echo "
 				<input type='text' placeholder='Question' name='q'/><br/><br/>";
 			for ($i=1;$i<=$_POST['n'];$i++)
 			{
-			echo "
-				<input type='text' placeholder='Réponse' name='Rep[]'/><br/>
-			";
+			echo "<input type='text' placeholder='Réponse' name='Rep[]'/><input type='checkbox' name='Vrai'/><br/>";
 		}
-		echo"<input type='submit' value='Sauvegarder et envoyer les réponses'/>
-		</form>";
+
+		echo "<br/><input type='text' placeholder='Points' name='points' style='width:50px;'/><br /><br />";
+		echo"<input type='submit' value='Sauvegarder et envoyer les réponses'/>";
+		//$req=$bdd->prepare('INSERT INTO question (question) VALUES ($_POST['q']');
+		//$req->execute();
+
+		echo "</form>";
 	}
 	}
 

@@ -52,20 +52,23 @@
     <p>
 <?php
 
-	//var_dump($_POST);
-	echo "Questions créées<br /><br />";
+	require_once('Connexionbdd.php');
 	echo 'Question : '.$_POST['q'].'<br /><br />';
+	//$req=$bdd->prepare('INSERT INTO question (question) VALUES ($_POST['q']');
+	//$req->execute();
 	echo 'Réponses : <br /><br />';
 
-	foreach($_POST['Rep'] as $Rep)
+	foreach($_POST['Rep']as $Rep)
 	{
-		echo $Rep.'<br />';
+		echo '-'.$Rep.'<br />';
 	}
+
+	echo '<br />Question à '.$_POST['points'].' points.';
 ?>
 </p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia qui, velit enim? Accusamus quasi, voluptatum minus voluptatem numquam inventore dolore nam odit quisquam! Voluptatum illum possimus, non! Magnam, quo officia.Lorem ipsum dolor sit amet,
+    <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia qui, velit enim? Accusamus quasi, voluptatum minus voluptatem numquam inventore dolore nam odit quisquam! Voluptatum illum possimus, non! Magnam, quo officia.Lorem ipsum dolor sit amet,
       consectetur adipisicing elit. Recusandae quas, deleniti natus fugit quidem dignissimos, laboriosam eaque debitis. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta delectus perspiciatis libero officia harum hic enim? Unde magni, libero
-      nemo ipsam, culpa saepe eos at officia, voluptatum, velit earum similique.</p>
+      nemo ipsam, culpa saepe eos at officia, voluptatum, velit earum similique.</p> -->
 
   </div>
 
@@ -84,6 +87,7 @@
 		
 	</body>
 </html>
+
 
 
 
