@@ -1,7 +1,4 @@
---> je laisse ces drop pour les handicapés
 
-DROP TABLE IF EXISTS Statistiques;
-DROP TABLE IF EXISTS Question_Reponse;
 
 /* Script pour supprimer toute la BDD */
 

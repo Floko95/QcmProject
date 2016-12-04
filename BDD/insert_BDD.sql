@@ -1,8 +1,12 @@
+
+
+/* Script d'insertion des données dans la BDD, à n'utiliser qu'une seule fois après init */
+
 INSERT INTO questionneur (nom_questionneur, mdp_questionneur ) values
-('quest','quest'); -- questionneur test
+('quest','quest'); 	-- questionneur test
 
 INSERT INTO repondeur (nom_repondeur, mdp_repondeur) values
-('rep','rep');  -- répondeur test
+('rep','rep'); 		-- répondeur test
 
 INSERT INTO domaine (nom_domaine) values
 ('Informatique'),('Mathématiques'),('Culture Générale'),('Médecine'),('Langues'),('Physique Chimie');
@@ -22,13 +26,8 @@ INSERT INTO question (question) values
 ('Quel est le nom de l''algèbre qui se base sur la logique ?'),('Quels sont les trois opérateurs logiques de base ?'),('Quel algorithme permet de résoudre un système à 3 équations ?'),
 ('Comment appelle t-on un objet avec 7 faces ?'),('Combien d''arrêtes possède un cube ?'),('Si deux plans sont sécants, comment appelle-t-on leur intersection ?'),
 ('Quand a eu lieu la bataille de Waterloo ?'),('Quel est le vrai nom de l''empereur romain Auguste ?'),('Quelle est la date précise du début de la 2ème guerre mondiale pour la France ?'),
-('Dans quel film DiCaprio remporte-t-il son premier Oscar ?'),('Quel est le film le plus rentable de l''Histoire du cinéma ?'),('Quel est le premier long-métrage de Pixar créé uniquement par animation 3D ?'),
-('Q1neuro'),('Q2neuro'),('Q3neuro'), 	-- ne pas faire
-('Q1chir'),('Q2chir'),('Q3chir'),	-- ne pas faire
-('Q1ang'),('Q2ang'),('Q3ang'),		-- ne pas faire
-('Q1esp'),('Q2esp'),('Q3esp'),		-- ne pas faire
-('Q1phys'),('Q2phys'),('Q3phys'),	-- ne pas faire
-('Q1chim'),('Q2chim'),('Q3chim');	-- ne pas faire
+('Dans quel film DiCaprio remporte-t-il son premier Oscar ?'),('Quel est le film le plus rentable de l''Histoire du cinéma ?'),('Quel est le premier long-métrage de Pixar créé uniquement par animation 3D ?');
+
 
 INSERT INTO reponse (id_question, reponse, correct) values
 (1,'Une valeur qui détermine l''unicité de chaque tuple',DEFAULT),(1,'Une valeur qui permet de lier une relation à une autre', TRUE),(1,'Une valeur qui permet d''accéder au rôle d''admin',DEFAULT),(1,'Je ne sais pas',DEFAULT),
@@ -59,30 +58,26 @@ INSERT INTO reponse (id_question, reponse, correct) values
 (26,'Avatar', DEFAULT),(26,'Le Monde de Nemo', DEFAULT),(26,'Autant on emporte le vent', TRUE),(26,'Star Wars IV', DEFAULT),
 (27,'Les Indestructibles', DEFAULT),(27,'1001 pattes', DEFAULT),(27,'Toy Story', TRUE),(27,'Monstres et cie', DEFAULT);
 
-INSERT INTO qcm (auteur, date_creation, niveau, note) values
-('quest','18/10/2016','facile',20),
-('quest','05/11/2016','facile',20),
-('quest','05/11/2016','facile',20),
-('quest','05/11/2016','facile',20),
-('quest','05/11/2016','facile',20),
-('quest','05/11/2016','facile',20),
-('quest','05/11/2016','facile',20),
-('quest','19/11/2016','facile',20),/*Modifié le 19/11/2016*/
-('quest','19/11/2016','facile',20),/*Modifié le 19/11/2016*/
-('quest','19/11/2016','facile',20),/*Modifié le 19/11/2016*/
-('quest','19/11/2016','facile',20),/*Modifié le 19/11/2016*/
-('quest','19/11/2016','facile',20),/*Modifié le 19/11/2016*/
-('quest','19/11/2016','facile',20),/*Modifié le 19/11/2016*/
-('quest','19/11/2016','facile',20),/*Modifié le 19/11/2016*/
-('quest','05/11/2016','facile',20);
+INSERT INTO qcm (auteur) values
+('quest'),
+('quest'),
+('quest'),
+('quest'),
+('quest'),
+('quest'),
+('quest'),
+('quest'),
+('quest'),
+('quest'),
+('quest'),
+('quest'),
+('quest'),
+('quest'),
+('quest');
 
-INSERT INTO qcm_question values /*19/11/2016 => chaque qcm contient seulement les questions relatives à son sous-domaine, bref c'est moins la merde.*/
+INSERT INTO qcm_question values 
 (1,1,'Informatique','BDD'),(1,2,'Informatique','BDD'),(1,3,'Informatique','BDD'),(9,4,'Informatique','PHP'),(9,5,'Informatique','PHP'),(9,6,'Informatique','PHP'),
 (2,7,'Informatique','JAVA'),(2,8,'Informatique','JAVA'),(2,9,'Informatique','JAVA'),(10,10,'Informatique','C'),(10,11,'Informatique','C'),(10,12,'Informatique','C'),
 (3,13,'Informatique','HTML'),(3,14,'Informatique','HTML'),(3,15,'Informatique','HTML'),(11,16,'Mathématiques','Algèbre'),(11,17,'Mathématiques','Algèbre'),(11,18,'Mathématiques','Algèbre'),
 (4,19,'Mathématiques','Géometrie'),(4,20,'Mathématiques','Géometrie'),(4,21,'Mathématiques','Géometrie'),(12,22,'Culture Générale','Histoire'),(12,23,'Culture Générale','Histoire'),(12,24,'Culture Générale','Histoire'),
-(5,25,'Culture Générale','Cinéma'),(5,26,'Culture Générale','Cinéma'),(5,27,'Culture Générale','Cinéma'),(13,28,'Médecine','Neurologie'),(13,29,'Médecine','Neurologie'),(13,30,'Médecine','Neurologie'),
-(6,31,'Médecine','Chirurgie'),(6,32,'Médecine','Chirurgie'),(6,33,'Médecine','Chirurgie'),(14,34,'Langues','Anglais'),(14,35,'Langues','Anglais'),(14,36,'Langues','Anglais'),
-(7,37,'Langues','Espagnol'),(7,38,'Langues','Espagnol'),(7,39,'Langues','Espagnol'),(15,40,'Physique Chimie','Physique'),(15,41,'Physique Chimie','Physique'),(15,42,'Physique Chimie','Physique'),
-(8,43,'Physique Chimie',NULL),(8,44,'Physique Chimie',NULL),(8,45,'Physique Chimie',NULL);
-
+(5,25,'Culture Générale','Cinéma'),(5,26,'Culture Générale','Cinéma'),(5,27,'Culture Générale','Cinéma');

@@ -1,6 +1,6 @@
 
 
-/* Script d'initialisation de la BDD, a utiliser une seule fois */
+/* Script d'initialisation de la BDD */
 
 -- connexion qcm_default vX3Hg8i65Z
 
@@ -43,7 +43,8 @@ CREATE TABLE IF NOT EXISTS Question(
 id_question integer PRIMARY KEY DEFAULT nextval('ID_QUESTION'),
 question varchar NOT NULL,
 valeur float NOT NULL DEFAULT 1.0, -- points gagnés lors d'une bonne réponse à la question
-temps integer NOT NULL DEFAULT 30, -- champs de durée en secondes 
+temps float NOT NULL DEFAULT 30, -- champs de durée en secondes 
+explication varchar,
 UNIQUE (question)
 );
 
@@ -57,10 +58,12 @@ correct boolean DEFAULT FALSE
 CREATE TABLE IF NOT EXISTS Qcm(
 id_qcm integer NOT NULL PRIMARY KEY DEFAULT nextval('ID_QCM'),
 auteur varchar NOT NULL REFERENCES Questionneur(nom_questionneur),
-date_creation date,
-niveau varchar,
-temps_total int DEFAULT 180, --le temps à null par défaut c'est caca(et ça fait foirer mes tests).
-note float
+date_creation date DEFAULT current_date,
+niveau varchar DEFAULT 'Normal',
+temps_total float,
+note_total float,
+visible boolean DEFAULT false,
+fini boolean DEFAULT false;
 );
 
 CREATE TABLE IF NOT EXISTS Qcm_Question(
@@ -70,12 +73,6 @@ domaine varchar REFERENCES Domaine(nom_domaine),
 sous_domaine varchar REFERENCES Sous_Domaine(nom_sous_domaine),
 PRIMARY KEY(id_qcm, id_question)
 );
-
-/*CREATE TABLE IF NOT EXISTS Question_Reponse(
-id_question integer REFERENCES Question(id_question),
-id_reponse integer REFERENCES Reponse(id_reponse),
-PRIMARY KEY(id_question, id_reponse)
-);*/
 
 CREATE TABLE IF NOT EXISTS Recapitulatif(
 id_utilisateur integer NOT NULL REFERENCES Repondeur(id_repondeur),
@@ -98,3 +95,6 @@ GRANT SELECT, INSERT ON domaine TO qcm_default;
 GRANT SELECT, INSERT ON sous_domaine TO qcm_default;
 GRANT SELECT ON questionneur TO qcm_default;
 GRANT SELECT ON repondeur TO qcm_default;
+GRANT USAGE ON ALL SEQUENCES IN SCHEMA public TO qcm_default; 
+REVOKE CREATE on SCHEMA public FROM qcm_default;
+REVOKE CREATE on DATABASE postgres FROM qcm_default;
