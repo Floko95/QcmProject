@@ -30,7 +30,7 @@
 <?php 
 session_start();
 try{
-	
+
 require_once('Connexionbdd.php');
 $date=time().'</br>';
 $tempspasse=$date-$_POST['temps'];
@@ -83,26 +83,28 @@ if(isset($_POST['reponse'])and trim($_POST['reponse']!=' ')){
 			$vrai=0;
 		}
 	echo'</br></br></br>';
+	
 	$time=0;
-	$tempsdepasse=$bdd->prepare('Select temps_total from public.qcm where id_qcm=:idqcm');
+	$tempsdepasse=$bdd->prepare('Select * FROM public.qcm_question natural join public.question where id_qcm=:idqcm');
 	$tempsdepasse->bindValue(':idqcm',$_POST['qcm']);
 	$tempsdepasse->execute();
+	$t=0;
 	while($l=$tempsdepasse->fetch(PDO::FETCH_ASSOC)){
-		$time=$l['temps_total'];
+		$t+=$l['temps'];
 	}
-	if($tempspasse>$time){
+	if($tempspasse>$t){
 		$score-=1;
 		echo 'Vous avez dépassé le temps (score - 1) : '.$tempspasse.' secondes. </br>';
 	}
 	if($score<0){
 		$score=0;
-	}if ($tempspasse<=$time){
+	}if ($tempspasse<=$t){
 	echo 'Temps passé : '.$tempspasse.' secondes.</br>';
 	}
 	echo ' Score : '.$score.'</br></br>';
 	}
 }
-/////:////////::
+
 $tim=1;
 $ins=$bdd->prepare('select * from repondeur where nom_repondeur=:n');
 $ins->bindValue(':n',$_SESSION['user']);
@@ -112,7 +114,14 @@ while($lu=$tempsdepasse->fetch(PDO::FETCH_ASSOC)){
 		echo $tim;
 		}
 
-
+/*$=$bdd->prepare('select * from repondeur where nom_repondeur=:n');
+$ins->bindValue(':n',$_SESSION['user']);
+$ins->execute();
+while($lu=$tempsdepasse->fetch(PDO::FETCH_ASSOC)){
+		$tim=$lu['id_repondeur'];
+		echo $tim;
+		}*/
+		
 $inserer=$bdd->prepare('insert into public.recapitulatif (id_utilisateur,utilisateur,nb_qcm_fait,note_dernier_qcm,temps_passe) values(:nuser,:user,:nbqcm,:note,:tempspasse)');
 $inserer->bindValue(':nuser',$tim);
 $inserer->bindValue(':user',$_SESSION['user']);

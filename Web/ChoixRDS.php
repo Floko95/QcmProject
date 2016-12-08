@@ -102,7 +102,7 @@ try{
         
         echo "<div class=\"box\"><div class=\"floded\">";
         
-       echo '<p><a href="e.php?id_qcm='.$l['id_qcm'].'"><h4>'.$l['id_qcm'].' '.$l['auteur'].'</h4></a></p>';
+       echo '<p><a href="Executer.php?id_qcm='.$l['id_qcm'].'"><h4>'.$l['id_qcm'].' '.$l['auteur'].'</h4></a></p>';
        
         echo "</div></div>";
         

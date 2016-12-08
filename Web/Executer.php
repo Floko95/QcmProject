@@ -39,6 +39,19 @@ try{
 $date=time();
 if(isset($_GET['iq'])and trim($_GET['iq']!=' ')){
 
+///////////////////Calcul temps total
+$temps=$bdd->prepare("SELECT * FROM public.qcm_question natural join public.question where id_qcm=:idqcm");
+	$temps->bindValue(':idqcm',$_GET['iq']);
+	$temps->execute();
+	$t=0;
+	while($ligne=$temps->fetch(PDO::FETCH_ASSOC))
+		{
+			$t+=$ligne['temps'];
+		}
+		echo '<p>Temps total : '.$t.' secondes.</p>';
+////////////////
+
+
 	$req=$bdd->prepare("SELECT * FROM public.qcm_question natural join public.question where id_qcm=:idqcm");
 	$req->bindValue(':idqcm',$_GET['iq']);
 	$req->execute();
@@ -56,13 +69,12 @@ if(isset($_GET['iq'])and trim($_GET['iq']!=' ')){
 		echo '<input type="hidden" name="temps" value="'.$date.'"/>';
 	while($l=$req2->fetch(PDO::FETCH_ASSOC))
 		{
-			//echo '<input type="hidden" name="question[]" value="'.$l['question'].'"/>';
 			echo'<input type="checkbox" name="reponse[]" value="'.$l['id_reponse'].'"/>'.htmlspecialchars($l['reponse'],ENT_QUOTES).'</br>';
 			
 		}
 		
 		echo'</br>';
-		}///////////
+		}
 		echo'<input type="submit" name="checkboxes" value="VALIDER">';
 		echo'</form>';
 		
