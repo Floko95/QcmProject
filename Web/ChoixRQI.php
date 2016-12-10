@@ -84,7 +84,7 @@ if(isset($_GET['idsd'])and trim($_GET['idsd']!=' ')){
 	while($l=$req->fetch(PDO::FETCH_ASSOC))
 		{
         echo "<div class=\"box\"><div class=\"floded\">";
-    echo '<p><a href="Executer.php?iq='.$l['id_qcm'].'"><h4>'.$l['id_qcm'].' '.$l['auteur'].'<h4></a></p>';
+    echo '<p><a href="Executer.php?iq='.$l['id_qcm'].'"><h4>QCM N°'.$l['id_qcm'].'<br/> créé par '.$l['auteur'].'<h4></a></p>';
         echo "</div></div>";
 			
 	}
