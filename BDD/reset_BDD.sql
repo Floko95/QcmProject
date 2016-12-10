@@ -2,8 +2,10 @@
 
 /* Script pour supprimer toute la BDD */
 
-DROP TABLE IF EXISTS Qcm_Question ;
 DROP TABLE IF EXISTS Recapitulatif;
+
+DROP TABLE IF EXISTS Qcm_Question ;
+DROP TABLE IF EXISTS Recap_Repondeur;
 DROP TABLE IF EXISTS Sous_Domaine;
 DROP TABLE IF EXISTS Domaine;
 DROP TABLE IF EXISTS Reponse;

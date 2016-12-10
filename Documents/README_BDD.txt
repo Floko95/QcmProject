@@ -1,4 +1,37 @@
-Dernière Modification BDD : 04/12/16
+Dernière Modification BDD : 09/12/16
+
+
+>> init_BDD.sql
+
++ ajout d'une relation Recap_Repondeur avec les statistiques pour chaque répondeur :
+	+ id_repondeur
+	+ id_qcm FOREIGN KEY 
+	+ domaine FOREIGN KEY 
+	+ sous_domaine FOREIGN KEY
+	+ date_qcm_fait
+	+ note_qcm
+	+ temps_qcm
+	+ PRIMARY KEY (id_repondeur, date_qcm_fait)
++ ajout de commentaires pour faciliter l'intégration dans le code php
++ ajout de nb_qcm_fait ; moyenne ; temps_total dans la relation Repondeur
++ ajout d'un commentaire pour 
+
+= modification du typage des variables de float à integer :
+ 	= question.temps 
+	= qcm.temps_total
+	= recap_repondeur.temps_qcm 
+	= recap_repondeur.temps_total
+
+- suppression de la relation Recapitulatif (redondance de données avec Profil_Repondeur)
+- suppression de quelques erreurs
+
+>> reset_BDD.sql
+
++ ajout de la commande de suppression de la relation recap_repondeur 
+
+
+
+Modification BDD : 04/12/16
 
 
 >> init_BDD.sql
@@ -30,6 +63,6 @@ Dernière Modification BDD : 04/12/16
 
 >> reset_BDD.sql
 
-+ ajout de la  du role qcm_default
-- suppression complète de la relation Question_Reponse
-- suppression complète de la relation Statistique
++ ajout de la commande de suppression du role qcm_default
+- suppression complète des commandes concernant la relation Question_Reponse
+- suppression complète des commandes concernant la relation Statistique
