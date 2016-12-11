@@ -34,15 +34,22 @@
 session_start();
 require_once('Connexionbdd.php');
 ///////////////////////////
-$req2=$bdd->prepare('SELECT * FROM public.recapitulatif ');/*order by date desc fetch first 5 rows only */
-	//$req2->bindValue(':idq',$ligne['id_question']);
-	$req2->execute();
-	while($ligne2=$req2->fetch(PDO::FETCH_ASSOC))
-	{
-		echo '<p>Utilisateur : '.$ligne2['utilisateur']./*'</br>Moyenne : '.$ligne2['moyenne'].' </br>Nombre de QCM faits : '.$ligne2['nbe_qcm_fait'].*/'<br/>Note dernier QCM : '.$ligne2['note_dernier_qcm'].'</br>Temps passé : '.$ligne2['temps_passe'].'';
+
+$tim=0;
+$ins=$bdd->prepare('select * from repondeur where nom_repondeur=:n');
+$ins->bindValue(':n',$_SESSION['user']);
+$ins->execute();
+while($lu=$ins->fetch(PDO::FETCH_ASSOC)){
+		$tim=$lu['id_repondeur'];
+		}
+
+$d=$bdd->prepare('SELECT * FROM recap_repondeur WHERE id_repondeur = :id_rep');
+$d->bindValue(':id_rep',$tim);
+$d->execute();
+	while($l=$d->fetch(PDO::FETCH_ASSOC)){
+		echo 'QCM n° '.$l['id_qcm'].'</br> Domaine : '.$l['domaine'].'</br> Sous-domaine : '.$l['sous_domaine'].'</br> Date : '.$l['date_qcm_fait'].'</br> Note : '.$l['note_qcm'].'</br> Temps : '.$l['temps_qcm'].'</br></br>';
 	}
-
-
+	
 ?>
 </div>
 
