@@ -15,13 +15,13 @@ CREATE SEQUENCE IF NOT EXISTS ID_QCM START 1 INCREMENT 1 MAXVALUE 400;
 
 CREATE TABLE IF NOT EXISTS Domaine(
 id_domaine integer PRIMARY KEY DEFAULT nextval('ID_DOMAINE'),
-nom_domaine varchar NOT NULL UNIQUE
+domaine varchar NOT NULL UNIQUE
 );
 
 CREATE TABLE IF NOT EXISTS Sous_Domaine(
 id_sous_domaine integer PRIMARY KEY DEFAULT nextval('ID_SOUS_DOMAINE'),
 id_domaine integer REFERENCES Domaine(id_domaine),
-nom_sous_domaine varchar NOT NULL UNIQUE
+sous_domaine varchar NOT NULL UNIQUE
 );
 
 CREATE TABLE IF NOT EXISTS Questionneur(
@@ -78,8 +78,8 @@ fini boolean DEFAULT FALSE			-- indique si le qcm est complet ou non
 CREATE TABLE IF NOT EXISTS Qcm_Question(
 id_qcm integer REFERENCES Qcm(id_qcm),
 id_question integer REFERENCES Question(id_question),
-nom_domaine varchar REFERENCES Domaine(nom_domaine),
-nom_sous_domaine varchar REFERENCES Sous_Domaine(nom_sous_domaine),
+domaine varchar REFERENCES Domaine(nom_domaine),
+sous_domaine varchar REFERENCES Sous_Domaine(nom_sous_domaine),
 PRIMARY KEY(id_qcm, id_question)
 );
 
@@ -92,8 +92,8 @@ id_repondeur integer REFERENCES Repondeur(id_repondeur),
 									--> INSERT INTO recap_repondeur (id_qcm, domaine, sous_domaine, date_qcm, note_qcm, temps_qcm) 
 									--> VALUES ($req1, $req2, $req3, date_trunc('seconds', now()), $note_obtenue, $temps_passee);
 id_qcm integer REFERENCES Qcm(id_qcm),	
-nom_domaine varchar REFERENCES Domaine(nom_domaine),		
-nom_sous_domaine varchar REFERENCES Sous_Domaine(nom_sous_domaine),
+domaine varchar REFERENCES Domaine(nom_domaine),		
+sous_domaine varchar REFERENCES Sous_Domaine(nom_sous_domaine),
 date_qcm_fait timestamp,
 note_qcm float,
 temps_qcm integer,
