@@ -105,31 +105,36 @@ if(isset($_POST['reponse'])and trim($_POST['reponse']!=' ')){
 	}
 }
 
-$tim=1;
+$tim=0;
 $ins=$bdd->prepare('select * from repondeur where nom_repondeur=:n');
 $ins->bindValue(':n',$_SESSION['user']);
 $ins->execute();
-while($lu=$tempsdepasse->fetch(PDO::FETCH_ASSOC)){
+while($lu=$ins->fetch(PDO::FETCH_ASSOC)){
 		$tim=$lu['id_repondeur'];
-		echo $tim;
 		}
 
-/*$=$bdd->prepare('select * from repondeur where nom_repondeur=:n');
-$ins->bindValue(':n',$_SESSION['user']);
-$ins->execute();
-while($lu=$tempsdepasse->fetch(PDO::FETCH_ASSOC)){
-		$tim=$lu['id_repondeur'];
-		echo $tim;
-		}*/
-		
-$inserer=$bdd->prepare('insert into public.recapitulatif (id_utilisateur,utilisateur,nb_qcm_fait,note_dernier_qcm,temps_passe) values(:nuser,:user,:nbqcm,:note,:tempspasse)');
-$inserer->bindValue(':nuser',$tim);
-$inserer->bindValue(':user',$_SESSION['user']);
-$inserer->bindValue(':nbqcm',1);
+
+$dom=0;$s_dom=0;
+$d_sd=$bdd->prepare('SELECT distinct domaine,sous_domaine FROM qcm_question natural join qcm WHERE id_qcm = :id_qcm');
+$d_sd->bindValue(':id_qcm',$_POST['qcm']);
+$d_sd->execute();
+	while($l=$d_sd->fetch(PDO::FETCH_ASSOC)){
+		$dom=$l['domaine'];
+		$s_dom=$l['sous_domaine'];
+	}
+
+
+$d='seconds';
+$inserer=$bdd->prepare('insert into public.recap_repondeur (id_repondeur,id_qcm,domaine,sous_domaine,date_qcm_fait,note_qcm,temps_qcm) values(:id_rep,:id_qcm,:dom,:s_dom,date_trunc(:mot,now()),:note,:tempspasse)');
+$inserer->bindValue(':id_rep',$tim);
+$inserer->bindValue(':id_qcm',$_POST['qcm']);
+$inserer->bindValue(':dom',$dom);
+$inserer->bindValue(':s_dom',$s_dom);
+$inserer->bindValue(':mot',$d);
 $inserer->bindValue(':note',$score);
 $inserer->bindValue(':tempspasse',$tempspasse);
 $inserer->execute();
-/////////////////////*/
+
 }catch(PDOException $e){
 	die('<p>Votre requête est erronée.</p>'.$e);
 }
