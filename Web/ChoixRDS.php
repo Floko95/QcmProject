@@ -88,7 +88,7 @@ try{
         
         echo "<div class=\"box\"><div class=\"floded\">";
         
-       echo '<p><a href="ChoixRQI.php?idsd='.$ligne['nom_sous_domaine'].'"><h4>'.$ligne['nom_sous_domaine'].'</h4></a></p>';
+       echo '<p><a href="ChoixRQI.php?idsd='.$ligne['sous_domaine'].'"><h4>'.$ligne['sous_domaine'].'</h4></a></p>';
        
         echo "</div></div>";
 			
