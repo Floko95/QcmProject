@@ -80,7 +80,7 @@
 	while($ligne=$req->fetch(PDO::FETCH_ASSOC))
     {
         echo "<div class=\"box\"><div class=\"floded\">";
-        echo '<a href="ChoixRDS.php?idd='.$ligne['id_domaine'].'&amp;nd='.$ligne['nom_domaine'].'"><h4>'.$ligne['nom_domaine'].'</h4></a>';
+        echo '<a href="ChoixRDS.php?idd='.$ligne['id_domaine'].'&amp;nd='.$ligne['domaine'].'"><h4>'.$ligne['domaine'].'</h4></a>';
         echo "</div></div>";
 			
 	}
