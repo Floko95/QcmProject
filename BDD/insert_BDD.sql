@@ -8,10 +8,10 @@ INSERT INTO questionneur (nom_questionneur, mdp_questionneur ) values
 INSERT INTO repondeur (nom_repondeur, mdp_repondeur) values
 ('rep','rep'); 		-- répondeur test
 
-INSERT INTO domaine (nom_domaine) values
+INSERT INTO domaine (domaine) values
 ('Informatique'),('Mathématiques'),('Culture Générale'),('Médecine'),('Langues'),('Physique Chimie');
 
-INSERT INTO sous_domaine (id_domaine, nom_sous_domaine) values
+INSERT INTO sous_domaine (id_domaine, sous_domaine) values
 (1,'BDD'),(1,'PHP'),(1,'JAVA'),(1,'C'),(1,'HTML'),
 (2,'Algèbre'),(2,'Géometrie'),(3,'Histoire'),(3,'Cinéma'),
 (4,'Neurologie'),(4,'Chirurgie'),(5,'Anglais'),(5,'Espagnol'),
