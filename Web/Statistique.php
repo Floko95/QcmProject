@@ -135,6 +135,7 @@ $inserer->bindValue(':note',$score);
 $inserer->bindValue(':tempspasse',$tempspasse);
 $inserer->execute();
 
+
 }catch(PDOException $e){
 	die('<p>Votre requête est erronée.</p>'.$e);
 }
