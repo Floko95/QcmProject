@@ -34,68 +34,83 @@
 session_start();
 require_once('Connexionbdd.php');
 
-if (isset($_POST['qcmb']) and trim($_POST['qcmb']!=''))
+if(isset($_GET['d']) and trim($_GET['d']!='') and !(isset($_GET['sd'])))//2-domaine sélectionné,affichage des sous domaines de ce domaine dans lesquels le questionneur a créé des qcms
+{
+	$req=$bdd->prepare("SELECT distinct domaine,sous_domaine  FROM public.qcm_question natural join public.qcm WHERE auteur=:a and domaine=:d");
+	$req->bindValue(':a',$_SESSION['user']);
+	$req->bindValue(':d',$_GET['d']);
+	$req->execute();
+	while($ligne=$req->fetch(PDO::FETCH_ASSOC))
+	{
+		echo '<a href="Profil.php?d='.$ligne['domaine'].'&sd='.$ligne['sous_domaine'].'">'.$ligne['sous_domaine'].'</a>';
+	}
+}	
+
+else if (isset($_GET['sd']) and trim($_GET['sd']!='') and isset($_GET['d']) and trim($_GET['d']!=''))//3-sous domaine sélectionné,affichage des qcms créés par le questionneur dans ce sous domaine
+{
+	$req=$bdd->prepare("SELECT  distinct id_qcm FROM public.qcm_question natural join public.qcm WHERE domaine=:d and sous_domaine=:sd and auteur=:a");
+	$req->bindValue(':a',$_SESSION['user']);
+	$req->bindValue(':d',$_GET['d']);
+	$req->bindValue(':sd',$_GET['sd']);
+	$req->execute();
+	
+	while($ligne=$req->fetch(PDO::FETCH_ASSOC))
+	{
+		 echo '<form action="Profil.php" method="post"><input type="submit" name="qcmb" value="QCM numéro '.$ligne['id_qcm'].'" /><input type="hidden" name="id" value="'.$ligne['id_qcm'].'" /></form>';
+	}
+}
+else if (isset($_POST['qcmb']) and trim($_POST['qcmb']!=''))//4-qcm sélectionné,affichage des questions/réponses.3 boutons:un pour supprimer,un pour modifier et le dernier pour modifier la visibilité.
 {
 	$req=$bdd->prepare("SELECT * FROM public.qcm_question natural join public.question where public.qcm_question.id_qcm=:id");
 	$req->bindValue(':id',$_POST['id']);
 	$req->execute();
 	
 	while($ligne=$req->fetch(PDO::FETCH_ASSOC))
-{
-	
-	echo 'Question: '.$ligne['question'].'<br/>';
-	$req2=$bdd->prepare("SELECT * FROM public.qcm_question natural join public.reponse where id_question=:idq");
-	$req2->bindValue(':idq',$ligne['id_question']);
-	$req2->execute();
-	$c=0;
-	echo'</br></br>';
-	while($ligne2=$req2->fetch(PDO::FETCH_ASSOC))
 	{
-		if($ligne2['correct'])
-		echo 'Réponse correcte numéro '.$c.': '.$ligne2['reponse'].'</br>';
-		else
-		echo 'Réponse numéro '.$c.': '.$ligne2['reponse'].'</br>';
-		$c++;
+	
+		echo 'Question: '.$ligne['question'].'<br/>';
+		$req2=$bdd->prepare("SELECT * FROM public.qcm_question natural join public.reponse where id_question=:idq");
+		$req2->bindValue(':idq',$ligne['id_question']);
+		$req2->execute();
+		$c=0;
+		echo'</br></br>';
+		while($ligne2=$req2->fetch(PDO::FETCH_ASSOC))
+		{
+			if($ligne2['correct'])
+			echo 'Réponse correcte numéro '.$c.': '.$ligne2['reponse'].'</br>';
+			else
+			echo 'Réponse numéro '.$c.': '.$ligne2['reponse'].'</br>';
+			$c++;
+		}
 	}
-	echo'</br></br>';
+	echo '<form action="SupprimerQCM.php" method="post"><input type="submit" name="supp" value="Supprimer"/><input type="hidden" name="id" value="'.$_POST['id'].'"/></form>';
+	echo '<form action="VisibiliteQCM.php"  method="post"><input type="submit" name="vis" value="Modifier la Visibilité"/><input type="hidden" name="id" value="'.$_POST['id'].'"/></form>';
+	echo '<form action="Profil.php" method="post"><input type="submit" name="modif" value="Modifier(en travaux)"/></form>';
 	
 }
-echo ' <form action="Profil.php" method="post"><input type="hidden" name="id" value="'.$_POST['id'].'" /><input type="submit" name="supp" value="Supprimer le QCM" /></form>';
+else//1-entrée du profil,affichage des domaines dans lesquels le questionneur a créé des qcms
+{
+	$req=$bdd->prepare("SELECT distinct domaine FROM public.qcm_question natural join public.qcm WHERE auteur=:a");
+	$req->bindValue(':a',$_SESSION['user']);
+	$req->execute();
+	while($ligne=$req->fetch(PDO::FETCH_ASSOC))
+	{
+		echo '<a href="Profil.php?d='.$ligne['domaine'].'">'.$ligne['domaine'].'</a>';
+	}
 }
 
-elseif (isset($_POST['supp']) and trim($_POST['supp']!=''))
-{
-	echo ' <p>Voulez vous vraiment supprimer le QCM numéro '.$_POST['id'].'?</p>';
-	echo ' <form action="Profil.php" method="post"><input type="hidden" name="id" value="'.$_POST['id'].'" /><input type="submit" name="suppc" value="Oui"/> <input type="submit" name="suppn" value="Non"/></form>';
-	
-}
-elseif(isset($_POST['suppc']))
-{
-	
-	$req=$bdd->prepare("DELETE  FROM public.qcm_question WHERE id_qcm=:id");
-	$req->bindValue(':id',$_POST['id']);
-	$req->execute();
-	$req=$bdd->prepare("DELETE  FROM public.qcm WHERE public.qcm.id_qcm=:id");
-	$req->bindValue(':id',$_POST['id']);
-	$req->execute();
-	echo ' <p> Le questionnaire numéro '.$_POST['id']. ' a été supprimé.</p><br/><a href=Profil.php>retour</a>';
-}
-elseif(isset($_POST['suppn']))
-{
-	header('Location: Profil.php');
-}
-else
-{
-$req=$bdd->prepare("SELECT distinct id_qcm,domaine,sous_domaine FROM public.Qcm natural join public.Qcm_question  where auteur=:aut");
-$req->bindValue(':aut',$_SESSION['user']);
-$req->execute();
-while($ligne=$req->fetch(PDO::FETCH_ASSOC))
-{
-	echo '<p>Domaine: '.$ligne['domaine'].'  Sous-domaine: '.$ligne['sous_domaine'].' </p>';
-	echo '<form action="Profil.php" method="post"><input type="submit" name="qcmb" value="QCM numéro '.$ligne['id_qcm'].'" /><input type="hidden" name="id" value="'.$ligne['id_qcm'].'" /></form>';
-	echo'</br>';
-}
-}
+
+
+
+
+
+
+
+
+
+
+
+
 ?>
 </div>
 
