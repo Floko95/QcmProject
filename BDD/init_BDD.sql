@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS Questionneur(
 id_questionneur integer PRIMARY KEY DEFAULT nextval('ID_QUESTIONNEUR'),
 nom_questionneur varchar NOT NULL UNIQUE,
 mdp_questionneur varchar NOT NULL,
-nb_qcm integer DEFAULT 0,			-- ceci va bientot basculer dans un futur profil_questionneur 
+nb_qcm_fait integer DEFAULT 0,
 UNIQUE (id_questionneur, nom_questionneur, mdp_questionneur)
 );
 
@@ -51,11 +51,10 @@ UNIQUE (id_repondeur, nom_repondeur, mdp_repondeur)
 
 CREATE TABLE IF NOT EXISTS Question(
 id_question integer PRIMARY KEY DEFAULT nextval('ID_QUESTION'),
-question varchar NOT NULL,
+question varchar NOT NULL UNIQUE,
 valeur float NOT NULL DEFAULT 1.0,	-- points gagnés lors d'une bonne réponse à la question
 temps integer NOT NULL DEFAULT 30, 	-- champs de durée en secondes 
-explication varchar DEFAULT NULL,	-- texte explicatif à afficher lors de la correction (pas nécessaire)
-UNIQUE (question)
+explication varchar DEFAULT NULL	-- texte explicatif à afficher lors de la correction (pas nécessaire)
 );
 
 CREATE TABLE IF NOT EXISTS Reponse(
@@ -79,8 +78,8 @@ fini boolean DEFAULT FALSE			-- indique si le qcm est complet ou non
 CREATE TABLE IF NOT EXISTS Qcm_Question(
 id_qcm integer REFERENCES Qcm(id_qcm),
 id_question integer REFERENCES Question(id_question),
-domaine varchar REFERENCES Domaine(nom_domaine),
-sous_domaine varchar REFERENCES Sous_Domaine(nom_sous_domaine),
+nom_domaine varchar REFERENCES Domaine(nom_domaine),
+nom_sous_domaine varchar REFERENCES Sous_Domaine(nom_sous_domaine),
 PRIMARY KEY(id_qcm, id_question)
 );
 
@@ -93,8 +92,8 @@ id_repondeur integer REFERENCES Repondeur(id_repondeur),
 									--> INSERT INTO recap_repondeur (id_qcm, domaine, sous_domaine, date_qcm, note_qcm, temps_qcm) 
 									--> VALUES ($req1, $req2, $req3, date_trunc('seconds', now()), $note_obtenue, $temps_passee);
 id_qcm integer REFERENCES Qcm(id_qcm),	
-domaine varchar REFERENCES Domaine(nom_domaine),		
-sous_domaine varchar REFERENCES Sous_Domaine(nom_sous_domaine),
+nom_domaine varchar REFERENCES Domaine(nom_domaine),		
+nom_sous_domaine varchar REFERENCES Sous_Domaine(nom_sous_domaine),
 date_qcm_fait timestamp,
 note_qcm float,
 temps_qcm integer,
