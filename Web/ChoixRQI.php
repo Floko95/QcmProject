@@ -3,7 +3,7 @@
     <link rel="stylesheet" href="ChoixRQI.css" />
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
-    <title> QCM | Choix Domaine</title>
+    <title> QCM | Choix QCM</title>
  <head>
   <body>
 
@@ -48,7 +48,7 @@
     <div class="rela-block top-center-container">
         <div class="inner-container top-text-container">
             <h2 class="rela-block top-main-text">Choisir QCM</h2>
-            <p>Bienvenue. Installe-toi, choisis un thème et arrête de regarder ailleurs, les QCM t'attendent !</p>
+            <p>Les choses sérieuses débutent: choisis un QCM !</p>
             <div class="rela-inline button white-text">Aléatoire</div>
         </div>
         <div class="inner-container top-search-container">
