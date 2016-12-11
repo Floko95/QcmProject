@@ -33,7 +33,7 @@
 <?php 
 session_start();
 require_once('Connexionbdd.php');
-///////////////////////////
+
 
 $tim=0;
 $ins=$bdd->prepare('select * from repondeur where nom_repondeur=:n');
@@ -43,6 +43,48 @@ while($lu=$ins->fetch(PDO::FETCH_ASSOC)){
 		$tim=$lu['id_repondeur'];
 		}
 
+
+$req1 =$bdd->query("SELECT count(id_qcm) as somme FROM recap_repondeur WHERE id_repondeur = $tim");
+$o=$req1->fetch();
+$req1->closeCursor();
+$one=$o['somme'];
+
+$req2 =$bdd->query("SELECT round(avg(note_qcm)::numeric,2) as round FROM recap_repondeur WHERE id_repondeur = $tim");
+$t=$req2->fetch();
+$req2->closeCursor();
+$two=$t['round'];
+
+$req3 =$bdd->query("SELECT sum(temps_qcm) as sum FROM recap_repondeur WHERE id_repondeur = $tim");
+$th=$req3->fetch();
+$req3->closeCursor();
+$three=$th['sum'];
+
+
+$up1 =$bdd->prepare ('UPDATE repondeur SET nb_qcm_fait = :o WHERE id_repondeur = :id');
+$up1->bindValue(':id',$tim);
+$up1->bindValue(':o',$one);
+$up1->execute();
+
+$up2 =$bdd->prepare ('UPDATE repondeur SET moyenne = :t WHERE id_repondeur = :id');
+$up2->bindValue(':id',$tim);
+$up2->bindValue(':t',$two);
+$up2->execute();
+
+$up3 =$bdd->prepare ('UPDATE repondeur SET temps_total = :th WHERE id_repondeur = :id');
+$up3->bindValue(':id',$tim);
+$up3->bindValue(':th',$three);
+$up3->execute();
+		
+	
+$statrep =$bdd->prepare ('Select * from repondeur WHERE id_repondeur = :id');
+$statrep->bindValue(':id',$tim);
+$statrep->execute();
+while($l=$statrep->fetch(PDO::FETCH_ASSOC)){
+		echo 'Nombre de QCM faits : '.$l['nb_qcm_fait'].'</br> Moyenne : '.$l['moyenne'].'</br> Temps_total : '.$l['temps_total'].'</br></br>';
+		}
+
+
+	
 $d=$bdd->prepare('SELECT * FROM recap_repondeur WHERE id_repondeur = :id_rep');
 $d->bindValue(':id_rep',$tim);
 $d->execute();
