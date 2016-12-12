@@ -92,8 +92,8 @@
 		{
 			echo 'Sous_domaine du qcm:'.$_POST['sdom'];
 		}
-		echo 'id du qcm: '.$_POST['id'];*/
-	}
+		echo 'id du qcm: '.$_POST['id'];
+	}*/
 ?>
 </p>
  
