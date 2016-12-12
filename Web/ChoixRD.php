@@ -75,7 +75,7 @@
 
     try{
 
-	$req=$bdd->prepare("SELECT * FROM public.domaine");
+	$req=$bdd->prepare("SELECT * FROM domaine");
 	$req->execute();
 	while($ligne=$req->fetch(PDO::FETCH_ASSOC))
     {
