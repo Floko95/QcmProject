@@ -74,12 +74,12 @@ elseif (isset($_GET['domaine']) and trim($_GET['domaine']!=''))
 {
 	echo "resultats pour ". $_GET['domaine']." : <br/>";
 	echo '<a href="Importer.php?domaine='.$_GET['domaine'].'&sdomaine=general">General</a><br/>';
-	$req=$bdd->prepare("SELECT * FROM public.sous_domaine NATURAL JOIN public.domaine WHERE public.domaine.nom_domaine=:ndom");
+	$req=$bdd->prepare("SELECT * FROM public.sous_domaine NATURAL JOIN public.domaine WHERE public.domaine.domaine=:ndom");
 	$req->bindValue(':ndom',$_GET['domaine']);
 	$req->execute();
 	while($ligne=$req->fetch(PDO::FETCH_ASSOC))
 		{
-			echo '<a href="Importer.php?domaine='.$_GET['domaine'].'&sdomaine='.$ligne['nom_sous_domaine'].'">'.$ligne['nom_sous_domaine'].'</a><br/>';
+			echo '<a href="Importer.php?domaine='.$_GET['domaine'].'&sdomaine='.$ligne['sous_domaine'].'">'.$ligne['sous_domaine'].'</a><br/>';
 		}
 	
 	echo'<form action="CreerDomaine.php" method="post"><input type="hidden" value="'.$_GET['domaine'].'" name="domaine"/><input type="submit" name="sbouton" value="Creer Sous-domaine"/></form>';
@@ -92,7 +92,7 @@ else
 	$req->execute();
 	while($ligne=$req->fetch(PDO::FETCH_ASSOC))
 		{
-			echo '<a href="Importer.php?domaine='.$ligne['nom_domaine'].'">'.$ligne['nom_domaine'].'</a><br/>';
+			echo '<a href="Importer.php?domaine='.$ligne['domaine'].'">'.$ligne['domaine'].'</a><br/>';
 		}
 	echo'<form action="CreerDomaine.php" method="post"><input type="submit" name="bouton" value="Creer Domaine"/></form>';
 }
