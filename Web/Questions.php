@@ -82,7 +82,18 @@
 
 	echo '<br />Question à '.$_POST['points'].' points.';
 
-	
+	/*if(isset($_POST['id']))
+	{
+		if(isset($_POST['dom']))
+		{
+			echo 'Domaine du qcm: '.$_POST['dom'];
+		}
+		if (isset($_POST['sdom']))
+		{
+			echo 'Sous_domaine du qcm:'.$_POST['sdom'];
+		}
+		echo 'id du qcm: '.$_POST['id'];*/
+	}
 ?>
 </p>
  
