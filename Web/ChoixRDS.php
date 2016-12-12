@@ -80,7 +80,7 @@ if(isset($_GET['idd'])and trim($_GET['idd']!=' ')){
 
 	
 try{
-	$req=$bdd->prepare("SELECT * FROM public.sous_domaine natural join public.domaine where id_domaine=:id");
+	$req=$bdd->prepare("SELECT * FROM sous_domaine natural join domaine where id_domaine=:id");
 	$req->bindValue(':id',$_GET['idd']);
 	$req->execute();
 	while($ligne=$req->fetch(PDO::FETCH_ASSOC))
@@ -94,7 +94,7 @@ try{
 			
 	}
     
-    $req=$bdd->prepare("SELECT distinct id_qcm,auteur FROM public.qcm natural join public.qcm_question where qcm_question.domaine=:nd and qcm_question.sous_domaine is null and qcm.id_qcm=qcm_question.id_qcm");
+    $req=$bdd->prepare("SELECT distinct id_qcm,auteur FROM qcm natural join qcm_question where qcm_question.domaine=:nd and qcm_question.sous_domaine is null and qcm.id_qcm=qcm_question.id_qcm");
 	$req->bindValue(':nd',$_GET['nd']);
 	$req->execute();
 	while($l=$req->fetch(PDO::FETCH_ASSOC))
