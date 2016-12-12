@@ -38,7 +38,7 @@ require_once("Connexionbdd.php");
 
 echo "
 	<form action='CreationQuestions.php' method=post>
-	<p>Combien de réponses voulez-vous pour votre question ?</p>
+	Combien de réponses voulez-vous pour votre question ?
 	<input type='text' name='n' size=1/><br/>
 	<input type='submit' value='Ajouter les réponses'/>
 	</form>
@@ -53,16 +53,17 @@ echo "
 		else
 		{
 			echo"<form action='Questions.php' method=post>
-				<input type='text' placeholder='Question' name='q'/><br/><br/>";
+				Intitulé de la question : <input type='text' name='q'/><br/><br/>";
 			for ($i=1;$i<=$_POST['n'];$i++)
 			{
-			echo "<input type='text' placeholder='Réponse' name='Rep[]'/><input type='checkbox' name='Vrai'/><br/>";
+			echo "Réponse $i : <input type='text' name='Rep[]'/><select name='select[]'>
+										<option value='Vrai'>Réponse Correcte</option>
+										<option value='Faux'>Réponse incorrecte</option>
+									</select><br/>";
 		}
-		
+
 		echo "<br/><input type='text' placeholder='Points' name='points' style='width:50px;'/><br /><br />";
 		echo"<input type='submit' value='Sauvegarder et envoyer les réponses'/>";
-		//$req=$bdd->prepare('INSERT INTO public.question (question) VALUES ($_POST['q']');
-		//$req->execute();
 
 		echo "</form>";
 	}
