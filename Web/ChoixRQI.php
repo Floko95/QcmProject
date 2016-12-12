@@ -78,7 +78,7 @@ try{
 	
 if(isset($_GET['idsd'])and trim($_GET['idsd']!=' ')){
 	echo'sous-domaine : '.$_GET['idsd'];
-	$req=$bdd->prepare("SELECT distinct id_qcm,auteur FROM public.qcm natural join public.qcm_question where qcm_question.sous_domaine=:idsd and qcm.id_qcm=qcm_question.id_qcm");
+	$req=$bdd->prepare("SELECT distinct id_qcm,auteur FROM qcm natural join qcm_question where qcm_question.sous_domaine=:idsd and qcm.id_qcm=qcm_question.id_qcm");
 	$req->bindValue(':idsd',$_GET['idsd']);
 	$req->execute();
 	while($l=$req->fetch(PDO::FETCH_ASSOC))
