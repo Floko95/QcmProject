@@ -36,15 +36,18 @@
 
 require_once("Connexionbdd.php");
 
-echo "
-	<form action='CreationQuestions.php' method=post>
-	Combien de réponses voulez-vous pour votre question ?
-	<input type='text' name='n' size=1/><br/>
-	<input type='submit' value='Ajouter les réponses'/>
-	</form>
-";
+	if (!isset($_POST['n']))
+	{
+		echo "
+			<form action='CreationQuestions.php' method=post>
+			Combien de réponses voulez-vous pour votre question ?
+			<input type='text' name='n' size=1/><br/>
+			<input type='submit' value='Ajouter les réponses'/>
+			</form>
+		";
+	}
 
-	if (isset($_POST['n']))
+	elseif (isset($_POST['n']))
 	{
 		if ($_POST['n'] < 2)
 		{
@@ -52,21 +55,37 @@ echo "
 		}
 		else
 		{
-			echo"<form action='Questions.php' method=post>
-				Intitulé de la question : <input type='text' name='q'/><br/><br/>";
+			echo "<form action='Questions.php' method=post>";
+			if(isset($_POST['id']))
+                        {
+                                if(isset($_POST['dom']))
+                                {
+                                        echo 'Domaine du qcm : '.$_POST['dom'];
+                                }
+                                if (isset($_POST['sdom']))
+                                {
+                                        echo ' Sous_domaine du qcm : '.$_POST['sdom'];
+                                }
+                                echo ' id du qcm : '.$_POST['id'];
+                        }
+
+			echo "Intitulé de la question : <input type='text' name='q'/><br/><br/>";
 			for ($i=1;$i<=$_POST['n'];$i++)
 			{
-			echo "Réponse $i : <input type='text' name='Rep[]'/><select name='select[]'>
+				echo "Réponse $i <input type='text' name='Rep[]'/><select name='select[]'>
 										<option value='Vrai'>Réponse Correcte</option>
-										<option value='Faux'>Réponse incorrecte</option>
+										<option value='Faux' selected>Réponse incorrecte</option>
 									</select><br/>";
+			}
+
+			echo "Temps de Réponse <input type='text' name='tps' style='width:50px;'/><br/>";
+			echo "Informations sur la question<br/>";
+			echo "<textarea name='exp' rows='10' cols='50' name='infos'></textarea><br/>";
+			echo "Points <input type='text' name='points' style='width:50px;'/><br /><br />";
+			echo"<input type='submit' value='Sauvegarder et envoyer les réponses'/>";
+
+			echo "</form>";
 		}
-
-		echo "<br/><input type='text' placeholder='Points' name='points' style='width:50px;'/><br /><br />";
-		echo"<input type='submit' value='Sauvegarder et envoyer les réponses'/>";
-
-		echo "</form>";
-	}
 	}
 
 
