@@ -54,35 +54,36 @@
 
 	require_once('Connexionbdd.php');
 
+if (isset($_POST['q']))
+{
 	echo 'Question : '.$_POST['q'].'<br /><br />';
 
-	$req=$bdd->prepare('INSERT INTO public.question (question,valeur) VALUES (:q,:v)');
+	/*$req=$bdd->prepare('INSERT INTO public.question (question,valeur) VALUES (:q,:v)');
 	$req->bindValue(':q',$_POST['q']);
 	$req->bindValue(':v',$_POST['points']);
-	$req->execute();
+	$req->execute();*/
 
 	echo 'Réponses : <br /><br />';
+	$tab = array_combine($_POST['Rep'], $_POST['select']);
 
-	foreach($_POST['select'] as $test)
-	{
-		if($test == 'Vrai')
-		{
-			$x = 'Correct';
-		}
-		elseif($test == 'Faux')
-		{
-			$x = 'Incorrect';
-		}
-	}
 
-	foreach($_POST['Rep']as $Rep)
+	//$req2 = $bdd->prepare('INSERT INTO public.reponse(question,correct) VALUES(:r,:c)');
+	foreach($tab as $Rep => $VF)
 	{
-		echo '- '.$Rep.' -> '.$x.'<br />';
+		if ($VF == 'Vrai')
+		{
+			echo $Rep.' -> Réponse Correcte<br/>';
+		}
+		elseif($VF == 'Faux')
+		{
+			echo $Rep.' -> Réponse Incorrecte<br/>';
+		}
 	}
 
 	echo '<br />Question à '.$_POST['points'].' points.';
+}
 
-	/*if(isset($_POST['id']))
+	if(isset($_POST['id']))
 	{
 		if(isset($_POST['dom']))
 		{
@@ -93,10 +94,10 @@
 			echo 'Sous_domaine du qcm:'.$_POST['sdom'];
 		}
 		echo 'id du qcm: '.$_POST['id'];
-	}*/
+	}
 ?>
 </p>
- 
+
 
   </div>
 
