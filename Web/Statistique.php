@@ -45,8 +45,9 @@ if(isset($_POST['reponse'])and trim($_POST['reponse']!=' ')){
 		while($quest=$question->fetch(PDO :: FETCH_ASSOC)){
 			echo '</br></br></br>Question : '.$quest['question'].'</br>';		//affichage question
 			$idquestionn=$quest['id_question'];
-			$reponse=$bdd->prepare('Select * from public.reponse natural join public.qcm_question where id_question=:idquestion');//pour chaque réponse de la question
+			$reponse=$bdd->prepare('Select * from public.reponse natural join public.qcm_question where id_question=:idquestion and id_qcm=:idqcm');//pour chaque réponse de la question
 			$reponse->bindValue(':idquestion',$idquestionn);
+			$reponse->bindValue(':idqcm',$_POST['qcm']);
 			$reponse->execute();
 			while($rep=$reponse->fetch(PDO::FETCH_ASSOC)){
 				foreach($_POST['reponse'] as $c=>$v){
@@ -59,8 +60,9 @@ if(isset($_POST['reponse'])and trim($_POST['reponse']!=' ')){
 							}else{
 								echo 'Réponse fausse : </br>';	//si la réponse est fausse
 								echo 'La réponse juste était :' ;
-								$repjuste=$bdd->prepare('Select * from public.question natural join public.reponse where correct=TRUE and id_question=:mq');//trouve la réponse juste
+								$repjuste=$bdd->prepare('Select * from public.question natural join public.reponse where correct=TRUE and id_question=:mq and id_qcm=:idqcm');//trouve la réponse juste
 								$repjuste->bindValue(':mq',$idquestionn);
+								$repjuste->bindValue(':idqcm',$_POST['qcm']);
 								$repjuste->execute();
 								while($l=$repjuste->fetch(PDO :: FETCH_ASSOC)){
 									echo' '.htmlspecialchars($l['reponse'],ENT_QUOTES);//affichage réponse juste
