@@ -3,19 +3,27 @@
 /* Script d'insertion des données dans la BDD, à n'utiliser qu'une seule fois après init */
 
 INSERT INTO questionneur (nom_questionneur, mdp_questionneur ) values
-('quest','quest'); 	-- questionneur test
+('quest','quest'), 	-- questionneur test
+
+('Bernard', 'System16');
 
 INSERT INTO repondeur (nom_repondeur, mdp_repondeur) values
-('rep','rep'); 		-- répondeur test
+('rep','rep'), 		-- répondeur test
+
+('Charlie', 'Didier');
 
 INSERT INTO domaine (domaine) values
-('Informatique'),('Mathématiques'),('Culture Générale'),('Médecine'),('Langues'),('Physique Chimie');
+('Informatique'),('Mathématiques'),('Culture Générale'),('Médecine'),('Langues'),('Physique Chimie'),
+
+('Démonstration');
 
 INSERT INTO sous_domaine (id_domaine, sous_domaine) values
 (1,'BDD'),(1,'PHP'),(1,'JAVA'),(1,'C'),(1,'HTML'),
 (2,'Algèbre'),(2,'Géometrie'),(3,'Histoire'),(3,'Cinéma'),
 (4,'Neurologie'),(4,'Chirurgie'),(5,'Anglais'),(5,'Espagnol'),
-(6,'Physique'),(6,'Chimie');
+(6,'Physique'),(6,'Chimie'),
+
+(7,'Test 1'), (7,'');
 
 INSERT INTO question (question) values
 ('Qu''est ce qu''une clef étrangère ?'),('Combien y a-t-il de formes normales en SQL ?'),('Quelle instruction produit une erreur de syntaxe ?'),
@@ -26,8 +34,9 @@ INSERT INTO question (question) values
 ('Quel est le nom de l''algèbre qui se base sur la logique ?'),('Quels sont les trois opérateurs logiques de base ?'),('Quel algorithme permet de résoudre un système à 3 équations ?'),
 ('Comment appelle t-on un objet avec 7 faces ?'),('Combien d''arrêtes possède un cube ?'),('Si deux plans sont sécants, comment appelle-t-on leur intersection ?'),
 ('Quand a eu lieu la bataille de Waterloo ?'),('Quel est le vrai nom de l''empereur romain Auguste ?'),('Quelle est la date précise du début de la 2ème guerre mondiale pour la France ?'),
-('Dans quel film DiCaprio remporte-t-il son premier Oscar ?'),('Quel est le film le plus rentable de l''Histoire du cinéma ?'),('Quel est le premier long-métrage de Pixar créé uniquement par animation 3D ?');
+('Dans quel film DiCaprio remporte-t-il son premier Oscar ?'),('Quel est le film le plus rentable de l''Histoire du cinéma ?'),('Quel est le premier long-métrage de Pixar créé uniquement par animation 3D ?'),
 
+('Question 28'),('Question 29'),('Question 30'),('Question 31'),('Question 32');
 
 INSERT INTO reponse (id_question, reponse, correct) values
 (1,'Une valeur qui détermine l''unicité de chaque tuple',DEFAULT),(1,'Une valeur qui permet de lier une relation à une autre', TRUE),(1,'Une valeur qui permet d''accéder au rôle d''admin',DEFAULT),(1,'Je ne sais pas',DEFAULT),
@@ -56,9 +65,16 @@ INSERT INTO reponse (id_question, reponse, correct) values
 (24,'1 septembre 1939', DEFAULT),(24,'2 septembre 1939', DEFAULT),(24,'3 septembre 1939', TRUE),(24,'4 septembre 1939', DEFAULT),
 (25,'Titanic', DEFAULT),(25,'Le Loup de Wall Street', DEFAULT),(25,'Inception', DEFAULT),(25,'The Revenant', TRUE),
 (26,'Avatar', DEFAULT),(26,'Le Monde de Nemo', DEFAULT),(26,'Autant on emporte le vent', TRUE),(26,'Star Wars IV', DEFAULT),
-(27,'Les Indestructibles', DEFAULT),(27,'1001 pattes', DEFAULT),(27,'Toy Story', TRUE),(27,'Monstres et cie', DEFAULT);
+(27,'Les Indestructibles', DEFAULT),(27,'1001 pattes', DEFAULT),(27,'Toy Story', TRUE),(27,'Monstres et cie', DEFAULT),
+
+(28,'aa', DEFAULT),(28,'bb',TRUE),
+(29,'cc', DEFAULT),(29,'dd',DEFAULT),(29,'ee',TRUE),
+(30,'ff', DEFAULT),(30,'gg',DEFAULT),(30,'hh',DEFAULT),(30,'ii',DEFAULT),(30,'jj',TRUE),
+(31,'kk', DEFAULT),(31,'ll',DEFAULT),(31,'mm',DEFAULT),(31,'nn',DEFAULT),(31,'oo', DEFAULT),(31,'pp',DEFAULT),(31,'qq',DEFAULT),(31,'rr',DEFAULT),(31,'ss', TRUE),
+(32,'tt', DEFAULT),(32,'uu',DEFAULT),(32,'vv',DEFAULT),(32,'ww',TRUE);
 
 INSERT INTO qcm (auteur) values
+('Bernard'),
 ('quest'),
 ('quest'),
 ('quest'),
@@ -67,17 +83,20 @@ INSERT INTO qcm (auteur) values
 ('quest'),
 ('quest'),
 ('quest'),
-('quest'),
-('quest'),
-('quest'),
-('quest'),
-('quest'),
-('quest'),
-('quest');
+
+('Bernard'),
+('Bernard');
+
 
 INSERT INTO qcm_question values 
-(1,1,'Informatique','BDD'),(1,2,'Informatique','BDD'),(1,3,'Informatique','BDD'),(9,4,'Informatique','PHP'),(9,5,'Informatique','PHP'),(9,6,'Informatique','PHP'),
-(2,7,'Informatique','JAVA'),(2,8,'Informatique','JAVA'),(2,9,'Informatique','JAVA'),(10,10,'Informatique','C'),(10,11,'Informatique','C'),(10,12,'Informatique','C'),
-(3,13,'Informatique','HTML'),(3,14,'Informatique','HTML'),(3,15,'Informatique','HTML'),(11,16,'Mathématiques','Algèbre'),(11,17,'Mathématiques','Algèbre'),(11,18,'Mathématiques','Algèbre'),
-(4,19,'Mathématiques','Géometrie'),(4,20,'Mathématiques','Géometrie'),(4,21,'Mathématiques','Géometrie'),(12,22,'Culture Générale','Histoire'),(12,23,'Culture Générale','Histoire'),(12,24,'Culture Générale','Histoire'),
-(5,25,'Culture Générale','Cinéma'),(5,26,'Culture Générale','Cinéma'),(5,27,'Culture Générale','Cinéma');
+(1,1,'Informatique','BDD'),(1,2,'Informatique','BDD'),(1,3,'Informatique','BDD'),
+(2,4,'Informatique','PHP'),(2,5,'Informatique','PHP'),(2,6,'Informatique','PHP'),
+(3,7,'Informatique','JAVA'),(3,8,'Informatique','JAVA'),(3,9,'Informatique','JAVA'),
+(4,10,'Informatique','C'),(4,11,'Informatique','C'),(4,12,'Informatique','C'),
+(5,13,'Informatique','HTML'),(5,14,'Informatique','HTML'),(5,15,'Informatique','HTML'),
+(6,16,'Mathématiques','Algèbre'),(6,17,'Mathématiques','Algèbre'),(6,18,'Mathématiques','Algèbre'),
+(7,19,'Mathématiques','Géometrie'),(7,20,'Mathématiques','Géometrie'),(7,21,'Mathématiques','Géometrie'),
+(8,22,'Culture Générale','Histoire'),(8,23,'Culture Générale','Histoire'),(8,24,'Culture Générale','Histoire'),
+(9,25,'Culture Générale','Cinéma'),(9,26,'Culture Générale','Cinéma'),(9,27,'Culture Générale','Cinéma'),
+
+(10,28,'Démonstration','Test 1'),(10,29,'Démonstration','Test 1'),(10,30,'Démonstration','Test 1'),(10,31,'Démonstration','Test 1'),(10,32,'Démonstration','Test 1');
