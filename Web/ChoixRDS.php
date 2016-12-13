@@ -75,35 +75,42 @@
 require_once('Connexionbdd.php');
 
 
-if(isset($_GET['idd'])and trim($_GET['idd']!=' ')){
-	if(isset($_GET['nd'])and trim($_GET['nd']!=' ')){
+if(isset($_POST['idd'])and trim($_POST['idd']!=' ')){
+	if(isset($_POST['nd'])and trim($_POST['nd']!=' ')){
 
 	
 try{
 	$req=$bdd->prepare("SELECT * FROM sous_domaine natural join domaine where id_domaine=:id");
-	$req->bindValue(':id',$_GET['idd']);
+	$req->bindValue(':id',$_POST['idd']);
 	$req->execute();
 	while($ligne=$req->fetch(PDO::FETCH_ASSOC))
 		{
         
         echo "<div class=\"box\"><div class=\"floded\">";
         
-       echo '<p><a href="ChoixRQI.php?idsd='.$ligne['sous_domaine'].'"><h4>'.$ligne['sous_domaine'].'</h4></a></p>';
+	   echo '<p><form action="ChoixRQI.php" method="post">
+	<input type="hidden" name="idsd" value="'.$ligne['sous_domaine'].'"/>
+	<h4><input type="submit" value="'.$ligne['sous_domaine'].'"	/><h4></form></p>';
+	
        
         echo "</div></div>";
 			
 	}
     
-    $req=$bdd->prepare("SELECT distinct id_qcm,auteur FROM qcm natural join qcm_question where qcm_question.domaine=:nd and qcm_question.sous_domaine is null and qcm.id_qcm=qcm_question.id_qcm");
-	$req->bindValue(':nd',$_GET['nd']);
+    $req=$bdd->prepare("SELECT distinct id_qcm,auteur FROM qcm natural join qcm_question where qcm_question.domaine=:nd and qcm_question.sous_domaine is null and qcm.id_qcm=qcm_question.id_qcm and visible=true");
+	$req->bindValue(':nd',$_POST['nd']);
 	$req->execute();
 	while($l=$req->fetch(PDO::FETCH_ASSOC))
 		{
         
         echo "<div class=\"box\"><div class=\"floded\">";
-        
-       echo '<p><a href="Executer.php?id_qcm='.$l['id_qcm'].'"><h4>'.$l['id_qcm'].' '.$l['auteur'].'</h4></a></p>';
        
+	   echo '<p><form action="Executer.php" method="post">
+	<input type="hidden" name="id_qcm" value="'.$l['id_qcm'].'"/>
+	<h4><input type="submit" value="'.$l['id_qcm'].' '.$l['auteur'].'"/><h4></form></p>';
+	
+	   
+	   
         echo "</div></div>";
         
         

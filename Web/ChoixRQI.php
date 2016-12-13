@@ -76,15 +76,19 @@
 require_once('Connexionbdd.php');
 try{
 	
-if(isset($_GET['idsd'])and trim($_GET['idsd']!=' ')){
-	echo'sous-domaine : '.$_GET['idsd'];
-	$req=$bdd->prepare("SELECT distinct id_qcm,auteur FROM qcm natural join qcm_question where qcm_question.sous_domaine=:idsd and qcm.id_qcm=qcm_question.id_qcm");
-	$req->bindValue(':idsd',$_GET['idsd']);
+if(isset($_POST['idsd'])and trim($_POST['idsd']!=' ')){
+	echo'sous-domaine : '.$_POST['idsd'];
+	$req=$bdd->prepare("SELECT distinct id_qcm,auteur FROM qcm natural join qcm_question where qcm_question.sous_domaine=:idsd and qcm.id_qcm=qcm_question.id_qcm and visible=true");
+	$req->bindValue(':idsd',$_POST['idsd']);
 	$req->execute();
 	while($l=$req->fetch(PDO::FETCH_ASSOC))
 		{
         echo "<div class=\"box\"><div class=\"floded\">";
-    echo '<p><a href="Executer.php?iq='.$l['id_qcm'].'"><h4>QCM N°'.$l['id_qcm'].'<br/> créé par '.$l['auteur'].'<h4></a></p>';
+	
+	echo '<p><form action="Executer.php" method="post">
+	<input type="hidden" name="iq" value="'.$l['id_qcm'].'"/>
+	<h4><input type="submit" value="QCM N°'.$l['id_qcm'].' créé par '.$l['auteur'].'"/><h4></form></p>';
+	
         echo "</div></div>";
 			
 	}

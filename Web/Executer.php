@@ -14,7 +14,7 @@
       <li><a href="AccueilR.php">Home</a></li>
       <li><a href="ProfilR.php">Profil</a></li>
       <li><a href="ChoixRD.php">QCM</a></li>
-      <li><a href="Index.php">Déconnexion</a></li>
+      <li><a href="a.php">Déconnexion</a></li>
     </ul>
   </nav>
 </div>
@@ -37,11 +37,11 @@ require_once('Connexionbdd.php');
 try{
 
 $date=time();
-if(isset($_GET['iq'])and trim($_GET['iq']!=' ')){
+if(isset($_POST['iq'])and trim($_POST['iq']!=' ')){
 
 ///////////////////Calcul temps total
 $temps=$bdd->prepare("SELECT * FROM public.qcm_question natural join public.question where id_qcm=:idqcm");
-	$temps->bindValue(':idqcm',$_GET['iq']);
+	$temps->bindValue(':idqcm',$_POST['iq']);
 	$temps->execute();
 	$t=0;
 	while($ligne=$temps->fetch(PDO::FETCH_ASSOC))
@@ -53,14 +53,14 @@ $temps=$bdd->prepare("SELECT * FROM public.qcm_question natural join public.ques
 
 
 	$req=$bdd->prepare("SELECT * FROM public.qcm_question natural join public.question where id_qcm=:idqcm");
-	$req->bindValue(':idqcm',$_GET['iq']);
+	$req->bindValue(':idqcm',$_POST['iq']);
 	$req->execute();
 	
 	while($ligne=$req->fetch(PDO::FETCH_ASSOC))
 		{
 			echo ''.$ligne['id_question'].'. '.htmlspecialchars($ligne['question'],ENT_QUOTES).'</br>';
 	$req2=$bdd->prepare("SELECT * FROM public.reponse natural join public.question natural join qcm_question where id_qcm=:idqcm and id_question=:numeroquest"); 
-	$req2->bindValue(':idqcm',$_GET['iq']);
+	$req2->bindValue(':idqcm',$_POST['iq']);
 	$req2->bindValue(':numeroquest',$ligne['id_question']);
 	$req2->execute();
 	echo'</br>';
