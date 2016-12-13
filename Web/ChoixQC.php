@@ -24,13 +24,8 @@
 
   <div id="content-container">
 	 
-    <h2 id="desk-hero"> Commencer à créer votre QCM</h2>
-     <div id="menu-front">
-		 <ul>
-			 <li><a href="CreationQuestions.php">Créer une question</a></li>
-			 <li><a href="Importer.php">Importer une question</a></li>
-		 </ul>
-    </div>	  
+    <h2 id="desk-hero"> Choisissez les paramètres de votre QCM</h2>
+     
   </div>
 
 </header>
