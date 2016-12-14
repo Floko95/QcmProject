@@ -39,13 +39,13 @@ if(isset($_POST['reponse'])and trim($_POST['reponse']!=' ')){
 	if(isset($_POST['checkboxes'])and trim($_POST['checkboxes']!=' ')){
 		echo 'Vos réponses au QCM n° '.$_POST['qcm'].' : </br>';
 
-		$question=$bdd->prepare('Select * from public.qcm natural join public.qcm_question natural join question where id_qcm=:idqcm');//pour chaque question
+		$question=$bdd->prepare('Select * from qcm natural join qcm_question natural join question where id_qcm=:idqcm');//pour chaque question
 		$question->bindValue(':idqcm',$_POST['qcm']);
 		$question->execute();
 		while($quest=$question->fetch(PDO :: FETCH_ASSOC)){
 			echo '</br></br></br>Question : '.$quest['question'].'</br>';		//affichage question
 			$idquestionn=$quest['id_question'];
-			$reponse=$bdd->prepare('Select * from public.reponse natural join public.qcm_question where id_question=:idquestion and id_qcm=:idqcm');//pour chaque réponse de la question
+			$reponse=$bdd->prepare('Select * from reponse natural join qcm_question where id_question=:idquestion and id_qcm=:idqcm');//pour chaque réponse de la question
 			$reponse->bindValue(':idquestion',$idquestionn);
 			$reponse->bindValue(':idqcm',$_POST['qcm']);
 			$reponse->execute();
@@ -60,7 +60,7 @@ if(isset($_POST['reponse'])and trim($_POST['reponse']!=' ')){
 							}else{
 								echo 'Réponse fausse : </br>';	//si la réponse est fausse
 								echo 'La réponse juste était :' ;
-								$repjuste=$bdd->prepare('Select * from public.question natural join public.reponse where correct=TRUE and id_question=:mq and id_qcm=:idqcm');//trouve la réponse juste
+								$repjuste=$bdd->prepare('Select * from question natural join reponse natural join qcm where correct=TRUE and id_question=:mq and id_qcm=:idqcm');//trouve la réponse juste
 								$repjuste->bindValue(':mq',$idquestionn);
 								$repjuste->bindValue(':idqcm',$_POST['qcm']);
 								$repjuste->execute();
@@ -87,7 +87,7 @@ if(isset($_POST['reponse'])and trim($_POST['reponse']!=' ')){
 	echo'</br></br></br>';
 	
 	$time=0;
-	$tempsdepasse=$bdd->prepare('Select * FROM public.qcm_question natural join public.question where id_qcm=:idqcm');
+	$tempsdepasse=$bdd->prepare('Select * FROM qcm_question natural join question where id_qcm=:idqcm');
 	$tempsdepasse->bindValue(':idqcm',$_POST['qcm']);
 	$tempsdepasse->execute();
 	$t=0;
@@ -127,7 +127,7 @@ $d_sd->execute();
 
 
 $d='seconds';
-$inserer=$bdd->prepare('insert into public.recap_repondeur (id_repondeur,id_qcm,domaine,sous_domaine,date_qcm_fait,note_qcm,temps_qcm) values(:id_rep,:id_qcm,:dom,:s_dom,date_trunc(:mot,now()),:note,:tempspasse)');
+$inserer=$bdd->prepare('insert into recap_repondeur (id_repondeur,id_qcm,domaine,sous_domaine,date_qcm_fait,note_qcm,temps_qcm) values(:id_rep,:id_qcm,:dom,:s_dom,date_trunc(:mot,now()),:note,:tempspasse)');
 $inserer->bindValue(':id_rep',$tim);
 $inserer->bindValue(':id_qcm',$_POST['qcm']);
 $inserer->bindValue(':dom',$dom);
