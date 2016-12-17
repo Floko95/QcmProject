@@ -1,14 +1,17 @@
+
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8" />
-		 <link rel="stylesheet" href="test.css" />
+		 <link rel="stylesheet" href="Resultat.css" />
+        <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
         <title></title>
     </head>
-    <body>
-		
+    <body> 
 
-<div id="desk-nav">
+
+        
+        <div id="desk-nav">
   <nav>
     <ul>
       <li><a href="AccueilR.php">Home</a></li>
@@ -18,16 +21,17 @@
     </ul>
   </nav>
 </div>
+        
+        
+        
+        
+        
+<?php require_once('Connexionbdd.php'); ?>
 
-<!-- END NAVIGATION -->
-<!-- About  -->
-
-<div id="about-me">
-
-<h2>Statistiques</h2>
-  <p>Tu as fini...quel est ton score ?</p>
-
-<?php 
+<div class="container">
+    <h1>Résultat</h1>
+    
+    <?php 
 session_start();
 try{
 
@@ -37,32 +41,43 @@ $tempspasse=$date-$_POST['temps'];
 $score=0;$faux=0;$vrai=0;
 if(isset($_POST['reponse'])and trim($_POST['reponse']!=' ')){
 	if(isset($_POST['checkboxes'])and trim($_POST['checkboxes']!=' ')){
-		echo 'Vos réponses au QCM n° '.$_POST['qcm'].' : </br>';
-
-		$question=$bdd->prepare('Select * from public.qcm natural join public.qcm_question natural join question where id_qcm=:idqcm');//pour chaque question
+		echo '<h2>Vos réponses au QCM n° '.$_POST['qcm'].' : </h2> ';
+        
+        $question=$bdd->prepare('Select * from qcm natural join public.qcm_question natural join question where id_qcm=:idqcm');//pour chaque question
 		$question->bindValue(':idqcm',$_POST['qcm']);
 		$question->execute();
 		while($quest=$question->fetch(PDO :: FETCH_ASSOC)){
-			echo '</br></br></br>Question : '.$quest['question'].'</br>';		//affichage question
-			$idquestionn=$quest['id_question'];
+        
+            echo "<div class=\"form-group\"><label class=\"control-label\" for=\"select\">";
+			echo 'Question : '.$quest['question'];		//affichage question
+            echo "</label><i class=\"bar\"></i></div> ";
+            
+              $idquestionn=$quest['id_question'];
 			$reponse=$bdd->prepare('Select * from public.reponse natural join public.qcm_question where id_question=:idquestion and id_qcm=:idqcm');//pour chaque réponse de la question
 			$reponse->bindValue(':idquestion',$idquestionn);
-			$reponse->bindValue(':idqcm',$_POST['qcm']);
+            $reponse->bindValue(':idqcm',$_POST['qcm']);
 			$reponse->execute();
 			while($rep=$reponse->fetch(PDO::FETCH_ASSOC)){
 				foreach($_POST['reponse'] as $c=>$v){
+					
+					
 					if($rep['id_reponse']==$v){
-						echo '</br>Vous avez répondu : ';		//affichage réponse donnée
-						echo ' '.htmlspecialchars($rep['reponse'],ENT_QUOTES).'</br>';
-							if ($rep['correct']){
-								echo 'Réponse juste</br>';		//si la réponse est juste
-								$vrai+=1;
+                    
+        
+         echo'<i class="helper"></i><i class="helper"></i></br> Votre réponse: '.htmlspecialchars($rep['reponse'],ENT_QUOTES);
+       
+        
+                    if ($rep['correct']){
+                        
+         echo'<i class="helper"><div class="green">Réponse juste</i></div> ';
+        
+                           $vrai+=1;
 							}else{
-								echo 'Réponse fausse : </br>';	//si la réponse est fausse
+								echo'<i class="helper"><div class="red">Réponse fausse</i></div> </br>';	//si la réponse est fausse
 								echo 'La réponse juste était :' ;
-								$repjuste=$bdd->prepare('Select * from public.question natural join public.reponse where correct=TRUE and id_question=:mq and id_qcm=:idqcm');//trouve la réponse juste
+								$repjuste=$bdd->prepare('Select * from public.question natural join public.reponse natural join qcm where correct=TRUE and id_question=:mq and id_qcm=:idqcm');//trouve la réponse juste
 								$repjuste->bindValue(':mq',$idquestionn);
-								$repjuste->bindValue(':idqcm',$_POST['qcm']);
+                                $repjuste->bindValue(':idqcm',$_POST['qcm']);
 								$repjuste->execute();
 								while($l=$repjuste->fetch(PDO :: FETCH_ASSOC)){
 									echo' '.htmlspecialchars($l['reponse'],ENT_QUOTES);//affichage réponse juste
@@ -78,7 +93,7 @@ if(isset($_POST['reponse'])and trim($_POST['reponse']!=' ')){
 								$point->execute();
 								while($ligne=$point->fetch(PDO::FETCH_ASSOC)){
 										$score+=$ligne['valeur'];
-										echo 'Score : + '.$ligne['valeur'].'</br>';
+										echo '</br>Score : + '.$ligne['valeur'].'</br>';
 								}
 			}
 			$faux=0;
@@ -101,6 +116,7 @@ if(isset($_POST['reponse'])and trim($_POST['reponse']!=' ')){
 	if($score<0){
 		$score=0;
 	}if ($tempspasse<=$t){
+        
 	echo 'Temps passé : '.$tempspasse.' secondes.</br>';
 	}
 	echo ' Score : '.$score.'</br></br>';
@@ -136,36 +152,25 @@ $inserer->bindValue(':mot',$d);
 $inserer->bindValue(':note',$score);
 $inserer->bindValue(':tempspasse',$tempspasse);
 $inserer->execute();
+}
 
-
-}catch(PDOException $e){
+catch(PDOException $e){
 	die('<p>Votre requête est erronée.</p>'.$e);
 }
 	
+	 echo '<div class="button-container">
+    <a href="ProfilR.php"><button class="button" type="submit"><span>IDK</span></button></a>
+  </div>';
+    
+     echo "</form>";
 ?>
-</div>
-
-<!-- END ABOUT  -->
 
 
-<!-- Footer -->
-
-
-<div id="footer-media">
-
-  <a target="_blank" href="https://www.instagram.com/"><img src="https://raw.githubusercontent.com/atloomer/personal-site-revamp/gh-pages/img/insta-icon.png" alt="instagram icon" /></a>
   
-  <a target="_blank" href="https://www.facebook.com/"><img src="https://raw.githubusercontent.com/atloomer/personal-site-revamp/gh-pages/img/facebook-icon.png" alt="facebook icon" /></a>
-
 </div>
-
-<footer>
-
-  <p>&copy;  DUT Informatique  <span class="year">2016</span>. All Rights Reserved. </p>
-  
-</footer>
-
-<!-- END FOOTER  -->
-	
-	</body>
+    
+    </body>
 	</html>
+            
+            
+            

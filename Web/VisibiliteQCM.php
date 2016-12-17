@@ -44,12 +44,12 @@ if(isset($_POST['vis']) and trim($_POST['vis']!=''))
 		if($ligne['visible'])
 		{echo '<p>le qcm numero'.$ligne['id_qcm'].' est actuellement visible. Le rendre invisible?</p>';
 		echo '<form action="VisibiliteQCM.php" method="post"><input type="hidden" name="idqcm" value="'.$ligne['id_qcm'].'"/><input type="submit" name="visf" value="Oui"/></form>';
-		echo '<form action="Profil.php"><input type="submit" value="Non"/></form>';
+		echo '<form action="VisualisationQCM.php" method="post"><input type="hidden" name="id" value="'.$ligne['id_qcm'].'"/><input type="submit" value="Non"/></form>';
 		}
 		else{
 			echo '<p>le qcm numero'.$ligne['id_qcm'].' est actuellement invisible. Le rendre visible?</p>';
 			echo '<form action="VisibiliteQCM.php" method="post"><input type="hidden" name="idqcm" value="'.$ligne['id_qcm'].'"/><input type="submit" name="vist" value="Oui"/></form>';
-		echo '<form action="Profil.php"><input type="submit" value="Non"/></form>';
+		echo '<form action="VisualisationQCM.php" method="post"><input type="hidden" name="id" value="'.$ligne['id_qcm'].'"/><input type="submit" value="Non"/></form>';
 		}
 	}	
 	else
@@ -60,14 +60,14 @@ if(isset($_POST['visf']) and trim($_POST['visf']))
 	$req=$bdd->prepare("UPDATE qcm SET visible = false WHERE id_qcm=:id");
 	$req->bindValue(':id',$_POST['idqcm']);
 	$req->execute();
-	echo '<p>le qcm a été rendu invisible</p><a href="Profil.php">Retour au profil</a>';
+	echo '<p>le qcm a été rendu invisible</p><form action="VisualisationQCM.php" method="post"><input type="hidden" name="id" value="'.$_POST['idqcm'].'"/><input type="submit" value="Retour au qcm"/></form>';
 }
 if(isset($_POST['vist']) and trim($_POST['vist']))
 {
 	$req=$bdd->prepare("UPDATE qcm SET visible = true WHERE id_qcm=:id");
 	$req->bindValue(':id',$_POST['idqcm']);
 	$req->execute();
-	echo '<p>le qcm a été rendu visible</p><a href="Profil.php">Retour au profil</a>';
+	echo '<p>le qcm a été rendu visible</p><form action="VisualisationQCM.php" method="post"><input type="hidden" name="id" value="'.$_POST['idqcm'].'"/><input type="submit" value="Retour au qcm"/></form>';
 }
 ?>
 </div>
@@ -75,22 +75,6 @@ if(isset($_POST['vist']) and trim($_POST['vist']))
 <!-- END ABOUT  -->
 
 
-<!-- Footer -->
-
-
-<div id="footer-media">
-
-  <a target="_blank" href="https://www.instagram.com/"><img src="https://raw.githubusercontent.com/atloomer/personal-site-revamp/gh-pages/img/insta-icon.png" alt="instagram icon" /></a>
-  
-  <a target="_blank" href="https://www.facebook.com/"><img src="https://raw.githubusercontent.com/atloomer/personal-site-revamp/gh-pages/img/facebook-icon.png" alt="facebook icon" /></a>
-
-</div>
-
-<footer>
-
-  <p>&copy;  DUT Informatique  <span class="year">2016</span>. All Rights Reserved. </p>
-  
-</footer>
 
 <!-- END FOOTER  -->
 	

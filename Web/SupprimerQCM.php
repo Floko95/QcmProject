@@ -2,45 +2,56 @@
 <html>
     <head>
         <meta charset="utf-8" />
-		 <link rel="stylesheet" href="test.css" />
+		 <link rel="stylesheet" href="SupprimerQCM.css" />
+        <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
         <title></title>
     </head>
     <body>
-		
-
-<div id="desk-nav">
+   
+        
+        <div id="desk-nav">
   <nav>
     <ul>
-      <li><a href="Index.php">Home</a></li>
+      <li><a href="AccueilQ.php">Home</a></li>
       <li><a href="Profil.php">Profil</a></li>
       <li><a href="ChoixQC.php">QCM</a></li>
       <li><a href="Index.php">Déconnexion</a></li>
     </ul>
   </nav>
 </div>
-
-<!-- END NAVIGATION -->
-
-   
-
-<!-- About  -->
-
-<div id="about-me">
-
-<h2>Profil</h2>
-  <p>Profil Questionneur.</p>
-
-<?php 
+        
+        
+        
+        <?php 
 session_start();
 require_once('Connexionbdd.php');
-
-
 if (isset($_POST['supp']) and trim($_POST['supp']!=''))//bouton supprimer pressé
-{
-	echo ' <p>Voulez vous vraiment supprimer le QCM numéro '.$_POST['id'].'?</p>';
-	echo ' <form action="SupprimerQCM.php" method="post"><input type="hidden" name="id" value="'.$_POST['id'].'" /><input type="submit" name="suppc" value="Oui"/> <input type="submit" name="suppn" value="Non"/></form>';
-	
-}
+{?>
+
+<div class="blanket"></div>
+<div class="square">
+  <div class="main">
+    <span class='fa fa-trash'><img src="http://img11.hostingpics.net/pics/229674delete24.png"></span>
+    <strong>SUPPRIMER</strong>
+    
+    <?php echo ' <p>Suppression du QCM numéro '.$_POST['id'].'?</p>'; ?>
+    
+  </div>
+    
+   <?php echo ' <form action="SupprimerQCM.php" method="post"><input type="hidden" name="id" value="'.$_POST['id'].'" />' ?>
+    
+  <div class="inner-square left">
+    <span class='fa fa-check'><img src="http://img11.hostingpics.net/pics/124460checkmark24.png"></span>
+      <input type="submit" name="suppc"/>
+  </div>
+  <div class="inner-square right">
+    <span class='fa fa-remove'><input type="submit" name="suppn"/><img src="http://img11.hostingpics.net/pics/218305xmark24.png"></span>
+      
+  </div>
+</div>
+        
+        
+       <?php }
 elseif(isset($_POST['suppc']))
 {
 	
@@ -58,30 +69,7 @@ elseif(isset($_POST['suppn']))
 }
 
 ?>
-</div>
 
-<!-- END ABOUT  -->
-
-
-<!-- Footer -->
-
-
-<div id="footer-media">
-
-  <a target="_blank" href="https://www.instagram.com/"><img src="https://raw.githubusercontent.com/atloomer/personal-site-revamp/gh-pages/img/insta-icon.png" alt="instagram icon" /></a>
   
-  <a target="_blank" href="https://www.facebook.com/"><img src="https://raw.githubusercontent.com/atloomer/personal-site-revamp/gh-pages/img/facebook-icon.png" alt="facebook icon" /></a>
-
-</div>
-
-<footer>
-
-  <p>&copy;  DUT Informatique  <span class="year">2016</span>. All Rights Reserved. </p>
-  
-</footer>
-
-<!-- END FOOTER  -->
-	
-	</body>
+    </body>
 	</html>
-

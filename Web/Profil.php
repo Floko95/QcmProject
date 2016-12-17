@@ -2,7 +2,10 @@
 <html>
     <head>
         <meta charset="utf-8" />
-		 <link rel="stylesheet" href="test.css" />
+		 <link rel="stylesheet" href="P.css" />
+              <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
         <title></title>
     </head>
     <body>
@@ -19,16 +22,50 @@
   </nav>
 </div>
 
-<!-- END NAVIGATION -->
-
-   
-
-<!-- About  -->
-
-<div id="about-me">
-
-<h2>Profil</h2>
-  <p>Profil Questionneur.</p>
+ <div class="material-wrap">
+<div class="material clearfix">
+	<div class="top-bar">
+		<div class="pull-left">
+			<a href="#" class="menu-tgl pull-left"><i class="fa fa-bars"></i></a>
+		</div>
+		<span class="title">Profil</span>
+		<div class="pull-right">
+			<a href="#" class="search-tgl pull-left"><i class="fa fa-search"></i></a>
+			<a href="#" class="option-tgl pull-left"><i class="fa fa-ellipsis-v"></i></a>
+		</div>
+	</div>
+	<div class="profile">
+		<div class="cover">
+			<span class="vec vec_a"></span>
+			<span class="vec vec_b"></span>
+			<span class="vec vec_c"></span>
+			<span class="vec vec_d"></span>
+			<span class="vec vec_e"></span>
+		</div>
+		<div class="photo">
+			<a href="" target="_blank"><img src="http://icons.iconarchive.com/icons/webalys/kameleon.pics/512/Alien-icon.png"></a>
+		</div>
+		<div class="info">
+			<div class="name">Pseudo</div>
+			<div class="position">Rang</div>
+		</div>
+		<input id="toggle" type="checkbox" class="plus"><label for="toggle" class="toggle"></label>
+		<div class="links">
+			<a href="" data-title="IDK"><i class="fa fa-facebook"></i></a>
+			<a href="" data-title="IDK"><i class="fa fa-twitter"></i></a>
+			<a href="" data-title="IDK"><i class="fa fa-codepen"></i></a>
+			<a href="" data-title="IDK"><i class="fa fa-pinterest"></i></a>
+		</div>
+	</div>
+    
+    
+    <div class="tabs-content">
+		<div class="friend-list">
+			<div class="list-ul">
+				<div class="list-li title">Récapitulatif</div>
+                
+                
+                
 
 <?php 
 session_start();
@@ -42,7 +79,13 @@ if(isset($_GET['d']) and trim($_GET['d']!='') and !(isset($_GET['sd'])))//2-doma
 	$req->execute();
 	while($ligne=$req->fetch(PDO::FETCH_ASSOC))
 	{
+        echo'    <div class="list-li clearfix">	
+					<div class="info pull-left">
+						<div class="name">';
 		echo '<a href="Profil.php?d='.$ligne['domaine'].'&sd='.$ligne['sous_domaine'].'">'.$ligne['sous_domaine'].'</a>';
+        echo'</div>
+					</div>
+				</div>';
 	}
 }	
 
@@ -56,38 +99,16 @@ else if (isset($_GET['sd']) and trim($_GET['sd']!='') and isset($_GET['d']) and 
 	
 	while($ligne=$req->fetch(PDO::FETCH_ASSOC))
 	{
-		 echo '<form action="Profil.php" method="post"><input type="submit" name="qcmb" value="QCM numéro '.$ligne['id_qcm'].'" /><input type="hidden" name="id" value="'.$ligne['id_qcm'].'" /></form>';
+        echo'    <div class="list-li clearfix">	
+					<div class="info pull-left">
+						<div class="name">';
+		 echo '<form action="VisualisationQCM.php" method="post"><input type="submit" name="qcmb" value="QCM numéro '.$ligne['id_qcm'].'" /><input type="hidden" name="id" value="'.$ligne['id_qcm'].'" /></form>';
+        echo'</div>
+					</div>
+				</div>';
 	}
 }
-else if (isset($_POST['qcmb']) and trim($_POST['qcmb']!=''))//4-qcm sélectionné,affichage des questions/réponses.3 boutons:un pour supprimer,un pour modifier et le dernier pour modifier la visibilité.
-{
-	$req=$bdd->prepare("SELECT * FROM public.qcm_question natural join public.question where public.qcm_question.id_qcm=:id");
-	$req->bindValue(':id',$_POST['id']);
-	$req->execute();
-	
-	while($ligne=$req->fetch(PDO::FETCH_ASSOC))
-	{
-	
-		echo 'Question: '.$ligne['question'].'<br/>';
-		$req2=$bdd->prepare("SELECT * FROM public.qcm_question natural join public.reponse where id_question=:idq");
-		$req2->bindValue(':idq',$ligne['id_question']);
-		$req2->execute();
-		$c=0;
-		echo'</br></br>';
-		while($ligne2=$req2->fetch(PDO::FETCH_ASSOC))
-		{
-			if($ligne2['correct'])
-			echo 'Réponse correcte numéro '.$c.': '.$ligne2['reponse'].'</br>';
-			else
-			echo 'Réponse numéro '.$c.': '.$ligne2['reponse'].'</br>';
-			$c++;
-		}
-	}
-	echo '<form action="SupprimerQCM.php" method="post"><input type="submit" name="supp" value="Supprimer"/><input type="hidden" name="id" value="'.$_POST['id'].'"/></form>';
-	echo '<form action="VisibiliteQCM.php"  method="post"><input type="submit" name="vis" value="Modifier la Visibilité"/><input type="hidden" name="id" value="'.$_POST['id'].'"/></form>';
-	echo '<form action="Profil.php" method="post"><input type="submit" name="modif" value="Modifier(en travaux)"/></form>';
-	
-}
+
 else//1-entrée du profil,affichage des domaines dans lesquels le questionneur a créé des qcms
 {
 	$req=$bdd->prepare("SELECT distinct domaine FROM public.qcm_question natural join public.qcm WHERE auteur=:a");
@@ -95,7 +116,13 @@ else//1-entrée du profil,affichage des domaines dans lesquels le questionneur a
 	$req->execute();
 	while($ligne=$req->fetch(PDO::FETCH_ASSOC))
 	{
+         echo'    <div class="list-li clearfix">	
+					<div class="info pull-left">
+						<div class="name">';
 		echo '<a href="Profil.php?d='.$ligne['domaine'].'">'.$ligne['domaine'].'</a>';
+        echo'</div>
+					</div>
+				</div>';
 	}
 }
 
@@ -112,29 +139,13 @@ else//1-entrée du profil,affichage des domaines dans lesquels le questionneur a
 
 
 ?>
+                
+                
 </div>
-
-<!-- END ABOUT  -->
-
-
-<!-- Footer -->
-
-
-<div id="footer-media">
-
-  <a target="_blank" href="https://www.instagram.com/"><img src="https://raw.githubusercontent.com/atloomer/personal-site-revamp/gh-pages/img/insta-icon.png" alt="instagram icon" /></a>
-  
-  <a target="_blank" href="https://www.facebook.com/"><img src="https://raw.githubusercontent.com/atloomer/personal-site-revamp/gh-pages/img/facebook-icon.png" alt="facebook icon" /></a>
-
+		</div>
+	</div>
 </div>
-
-<footer>
-
-  <p>&copy;  DUT Informatique  <span class="year">2016</span>. All Rights Reserved. </p>
-  
-</footer>
-
-<!-- END FOOTER  -->
+</div>
 	
 	</body>
 	</html>

@@ -26,7 +26,7 @@
 require_once('Connexionbdd.php');
 
 
- if(isset($_GET['domaine']) and isset($_GET['sdomaine']) and trim($_GET['domaine']!='') and trim($_GET['sdomaine']!=''))
+ /*if(isset($_GET['domaine']) and isset($_GET['sdomaine']) and trim($_GET['domaine']!='') and trim($_GET['sdomaine']!=''))
 {
 	echo "resultats pour ". $_GET['domaine'] . "/" . $_GET['sdomaine'] . " :<br/>";
 	if($_GET['sdomaine']=='general')
@@ -95,6 +95,51 @@ else
 			echo '<a href="Importer.php?domaine='.$ligne['domaine'].'">'.$ligne['domaine'].'</a><br/>';
 		}
 	echo'<form action="CreerDomaine.php" method="post"><input type="submit" name="bouton" value="Creer Domaine"/></form>';
+}*/
+if (isset($_POST['idd']) and trim($_POST['idd']!=''))
+{
+	$req=$bdd->prepare("SELECT distinct sous_domaine,domaine from qcm_question where id_qcm=:id");
+	$req->execute();
+	$ligne=$req->fetch(PDO::FETCH_ASSOC);
+	if ($ligne['sous_domaine']=='')
+	{
+		$req=$bdd->prepare("SELECT * FROM public.question NATURAL JOIN public.qcm_question WHERE public.qcm_question.domaine=:domaine");
+		$req->bindValue(':domaine',$ligne['domaine']);
+		$req->execute();
+		echo '<form action="Questions.php" method="post">';
+		
+		while($ligne=$req->fetch(PDO::FETCH_ASSOC))
+		{
+
+			if(isset($_POST['idquest'])and trim($_POST['idquest']!='') and $ligne['id_question']==$_POST['idquest'])
+			echo '<input type="checkbox" name="questions[]" value="'.$ligne['id_question'].'" checked/>';
+			else	
+			echo '<input type="checkbox" name="questions[]" value="'.$ligne['id_question'].'"/>';
+			echo '<a href="Visualisation.php?q='.$ligne['id_question'].'</a>';
+			
+		}
+		
+		echo '<input type="submit" value="Importer"/></form>';
+	}
+	else
+	{
+		$req=$bdd->prepare("SELECT * FROM public.question NATURAL JOIN public.qcm_question WHERE sous_domaine=:sdomaine and domaine=:domaine");
+		$req->bindValue(':sdomaine',$ligne['sous_domaine']);
+		$req->bindValue(':domaine',$ligne['domaine']);
+		$req->execute();
+		echo '<form action="Questions.php" method="post">';
+		while($ligne=$req->fetch(PDO::FETCH_ASSOC))
+		{
+			if(isset($_POST['idquest'])and trim($_POST['idquest']!='') and $ligne['id_question']==$_POST['idquest'])
+			echo '<input type="checkbox" name="questions[]" value="'.$ligne['id_question'].'" checked/>';
+			else	
+			echo '<input type="checkbox" name="questions[]" value="'.$ligne['id_question'].'"/>';
+			echo '<a href="Visualisation.php?q='.$ligne['id_question'].'"> Question: '.$ligne['question'].'</a>';
+			
+		}
+
+		echo '<input type="submit" value="Importer/></form>';
+	}
 }
 ?>
 

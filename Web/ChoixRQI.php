@@ -3,46 +3,26 @@
     <link rel="stylesheet" href="ChoixRQI.css" />
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
     <title> QCM | Choix QCM</title>
  <head>
   <body>
 
-	  
-
-<input type="checkbox" id="menuCheckbox"/>
-<input type="checkbox" id="searchCheckbox"/>
-
-
-<div class="side-menu">
-    <label for="menuCheckbox" class="checkbox-label side-menu-label">
-        <div class="abs-center white-x"></div>
-    </label>
-    <div class="rela-block menu-content">
-        <h3 class="rela-block list-header">Navigation</h3>
-        <ul class="rela-block options-list">
-			<a href="AccueilR.php"><li>Accueil</li></a>
-			<a href="ProfilR.php"><li>Profil</li></a>
-            <li>IDK</li>
-            <li>IDK</li>
-        </ul>
-        <h3 class="rela-block list-header">Explore</h3>
-        <ul class="rela-block options-list">
-            <li>IDK</li>
-            <li>IDK</li>
-          
-        </ul>
-    </div>
-    
-    
-    
-    <div class="social-buttons-container">
-        <div class="rela-inline social-button twitter"></div>
-        <div class="rela-inline social-button facebook"></div>
-        <div class="rela-inline social-button pinterest"></div>
-        <div class="rela-inline social-button instagram"></div>
-    </div>
+	
+    <div id="desk-nav">
+  <nav>
+    <ul>
+      <li><a href="AccueilR.php">Home</a></li>
+      <li><a href="ProfilR.php">Profil</a></li>
+      <li><a href="ChoixRD.php">QCM</a></li>
+      <li><a href="Index.php">Déconnexion</a></li>
+    </ul>
+  </nav>
 </div>
+      
+      
 
+<input type="checkbox" id="searchCheckbox"/>
 
 <div class="rela-block top-container">
     <div class="rela-block top-center-container">
@@ -56,9 +36,6 @@
             <input type="text" placeholder="Type Something" class="top-search"/>
         </div>
     </div>
-    <label for="menuCheckbox" class="checkbox-label menu-label">
-        <div class="abs-center black-lines"></div>
-    </label>
     <label for="searchCheckbox" class="checkbox-label search-label">
         <div class="abs-center magnifying-glass"></div>
     </label>
@@ -76,15 +53,19 @@
 require_once('Connexionbdd.php');
 try{
 	
-if(isset($_GET['idsd'])and trim($_GET['idsd']!=' ')){
-	echo'sous-domaine : '.$_GET['idsd'];
-	$req=$bdd->prepare("SELECT distinct id_qcm,auteur FROM qcm natural join qcm_question where qcm_question.sous_domaine=:idsd and qcm.id_qcm=qcm_question.id_qcm");
-	$req->bindValue(':idsd',$_GET['idsd']);
+if(isset($_POST['idsd'])and trim($_POST['idsd']!=' ')){
+	echo'sous-domaine : '.$_POST['idsd'];
+	$req=$bdd->prepare("SELECT distinct id_qcm,auteur FROM qcm natural join qcm_question where qcm_question.sous_domaine=:idsd and qcm.id_qcm=qcm_question.id_qcm and visible=true");
+	$req->bindValue(':idsd',$_POST['idsd']);
 	$req->execute();
 	while($l=$req->fetch(PDO::FETCH_ASSOC))
 		{
         echo "<div class=\"box\"><div class=\"floded\">";
-    echo '<p><a href="Executer.php?iq='.$l['id_qcm'].'"><h4>QCM N°'.$l['id_qcm'].'<br/> créé par '.$l['auteur'].'<h4></a></p>';
+	
+	echo '<p><form action="Executer.php" method="post">
+	<input type="hidden" name="iq" value="'.$l['id_qcm'].'"/>
+	<h4><input type="submit" value="QCM N°'.$l['id_qcm'].' créé par '.$l['auteur'].'"/><h4></form></p>';
+	
         echo "</div></div>";
 			
 	}

@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8" />
-		 <link rel="stylesheet" href="test.css" />
+		 <link rel="stylesheet" href="VisualisationQCM.css" />
         <title></title>
     </head>
     <body>
@@ -19,89 +19,62 @@
   </nav>
 </div>
 
-<!-- END NAVIGATION -->
+<div class="container">
+    <h1>Visualisation de votre QCM</h1>
 
-   
-
-<!-- About  -->
-
-<div id="about-me">
-
-
-<h2>Visualisation de votre QCM</h2>
   
 
 
 <?php
 session_start();
 require_once("Connexionbdd.php");
- if (isset($_POST['q'])){
-/*
-$affichageqcm=$bdd->prepare('select * from qcm natural join qcm_question natural join question natural join reponse natural join questionneur where id_qcm=:iq and nom_questionneur=:nr');
-$affichageqcm->bindValue(':iq',2);//$_POST['iq']
-$affichageqcm->bindValue(':nr',$_SESSION['user']);
-$affichageqcm->execute();
-while($ligne=$affichageqcm->fetch(PDO::FETCH_ASSOC)){
-	if($ligne['correct']){
-	echo '<div id=correct>Question : '.$ligne['question'].'</br>Réponse : '.$ligne['reponse'].'</br></div>';
-	}else{
-	echo '<div id=false>Question : '.$ligne['question'].'</br>Réponse : '.$ligne['reponse'].'</br></div>';
-	}
-}*/
- 
- 
- 	$req=$bdd->prepare("SELECT * FROM qcm natural join qcm_question natural join question where id_qcm=:idqcm");
-	$req->bindValue(':idqcm',3);//$_POST['iq']
+if (isset($_POST['id']) and trim($_POST['id']!=''))//4-qcm sélectionné,affichage des questions/réponses.3 boutons:un pour supprimer,un pour modifier et le dernier pour modifier la visibilité.
+{
+	$req=$bdd->prepare("SELECT * FROM public.qcm_question natural join public.question where public.qcm_question.id_qcm=:id");
+	$req->bindValue(':id',$_POST['id']);
 	$req->execute();
-	while($ligne=$req->fetch(PDO::FETCH_ASSOC)){
-	echo 'Question : '.htmlspecialchars($ligne['question'],ENT_QUOTES).'</br>';
 	
-	//echo "<form action='VisualisationQCM.php' method='GET'><input type='submit' value='Reponses' name='voirreponses'/></form>";
-	
-	//if(isset($_GET['voirreponses'])){
-	
-	$req2=$bdd->prepare("SELECT * FROM reponse natural join question natural join qcm_question natural join qcm where id_qcm=:idqcm and id_question=:numeroquest"); 
-	$req2->bindValue(':idqcm',3);//$_POST['iq']
-	$req2->bindValue(':numeroquest',$ligne['id_question']);
-	$req2->execute();
-	echo'</br>';
-	while($l=$req2->fetch(PDO::FETCH_ASSOC)){
-			if($l['correct']){
-	echo '<div id=correct>Réponse : '.$l['reponse'].'</br></div>';
-	}else{
-	echo '<div id=false>Réponse : '.$l['reponse'].'</br></div>';
+	while($ligne=$req->fetch(PDO::FETCH_ASSOC))
+	{
+	echo "<div class=\"form-group\"><label class=\"control-label\" for=\"select\">";
+		echo 'Question: '.$ligne['question'].'<br/>';
+		echo "</label><i class=\"bar\"></i></div> ";
+		$req2=$bdd->prepare("SELECT * FROM public.qcm_question natural join public.reponse where id_question=:idq");
+		$req2->bindValue(':idq',$ligne['id_question']);
+		$req2->execute();
+		
+		echo'</br></br>';
+		while($ligne2=$req2->fetch(PDO::FETCH_ASSOC))
+		{
+			if($ligne2['correct']){
+				echo'<i class="helper"><div class="green">';
+			echo $ligne2['reponse'];
+			echo '</div> ';
+			}else{
+				echo'<i class="helper"><div class="red">';
+			echo $ligne2['reponse'];
+			echo '</div> ';
+			
+		}
+		}
 	}
-		}
-	//}
-		echo'</br>';
-		}
- 
- 
- }
+	
+
+	
+	
+	
+	echo '<form action="SupprimerQCM.php" method="post"><input type="submit" name="supp" value="Supprimer"/><input type="hidden" name="id" value="'.$_POST['id'].'"/></form>';
+	echo '<form action="VisibiliteQCM.php"  method="post"><input type="submit" name="vis" value="Modifier la Visibilité"/><input type="hidden" name="id" value="'.$_POST['id'].'"/></form>';
+	echo '<form action="Profil.php" method="post"><input type="submit" name="modif" value="Modifier(en travaux)"/></form>';
+	
+}
 ?>
 </div>
 
-<!-- END ABOUT  -->
 
 
-<!-- Footer -->
 
 
-<div id="footer-media">
-
-  <a target="_blank" href="https://www.instagram.com/"><img src="https://raw.githubusercontent.com/atloomer/personal-site-revamp/gh-pages/img/insta-icon.png" alt="instagram icon" /></a>
-  
-  <a target="_blank" href="https://www.facebook.com/"><img src="https://raw.githubusercontent.com/atloomer/personal-site-revamp/gh-pages/img/facebook-icon.png" alt="facebook icon" /></a>
-
-</div>
-
-<footer>
-
-  <p>&copy;  DUT Informatique  <span class="year">2016</span>. All Rights Reserved. </p>
-  
-</footer>
-
-<!-- END FOOTER  -->
 	
 	</body>
 	</html>

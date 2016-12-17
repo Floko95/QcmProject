@@ -2,13 +2,14 @@
 <html>
     <head>
         <meta charset="utf-8" />
-		 <link rel="stylesheet" href="test.css" />
+		 <link rel="stylesheet" href="ProfilR.css" />
+        <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
         <title></title>
     </head>
     <body>
-		
-
-<div id="desk-nav">
+    
+        
+        <div id="desk-nav">
   <nav>
     <ul>
       <li><a href="AccueilR.php">Home</a></li>
@@ -18,23 +19,54 @@
     </ul>
   </nav>
 </div>
-
-<!-- END NAVIGATION -->
-
-   
-
-<!-- About  -->
-
-<div id="about-me">
-
-<h2>Profil</h2>
-  <p>Pour voir les QCM effectués et leur statistiques.</p>
-
-<?php 
+        
+        
+        <?php 
 session_start();
 require_once('Connexionbdd.php');
-
-
+?>
+        
+        
+    <div class="material-wrap">
+<div class="material clearfix">
+	<div class="top-bar">
+		<div class="pull-left">
+			<a href="#" class="menu-tgl pull-left"><i class="fa fa-bars"></i></a>
+		</div>
+		<span class="title">Profil</span>
+		<div class="pull-right">
+			<a href="#" class="search-tgl pull-left"><i class="fa fa-search"></i></a>
+			<a href="#" class="option-tgl pull-left"><i class="fa fa-ellipsis-v"></i></a>
+		</div>
+	</div>
+	<div class="profile">
+		<div class="cover">
+			<span class="vec vec_a"></span>
+			<span class="vec vec_b"></span>
+			<span class="vec vec_c"></span>
+			<span class="vec vec_d"></span>
+			<span class="vec vec_e"></span>
+		</div>
+		<div class="photo">
+			<a href="" target="_blank"><img src="http://icons.iconarchive.com/icons/webalys/kameleon.pics/512/Alien-icon.png"></a>
+		</div>
+		<div class="info">
+			<div class="name">Pseudo</div>
+			<div class="position">Rang</div>
+		</div>
+		<a href="" onClick="javascript:window.history.go(-1)"> <input id="toggle" type="checkbox" class="plus"><label for="toggle" class="toggle"></label>
+		<div class="links">
+			<a href="" data-title="IDK"><i class="fa fa-facebook"></i></a>
+			<a href="" data-title="IDK"><i class="fa fa-twitter"></i></a>
+			<a href="" data-title="IDK"><i class="fa fa-codepen"></i></a>
+			<a href="" data-title="IDK"><i class="fa fa-pinterest"></i></a>
+		</div>
+            </a>
+	</div>
+    
+   
+    
+    <?php 
 $tim=0;
 $ins=$bdd->prepare('select * from repondeur where nom_repondeur=:n');
 $ins->bindValue(':n',$_SESSION['user']);
@@ -80,42 +112,70 @@ $statrep =$bdd->prepare ('Select * from repondeur WHERE id_repondeur = :id');
 $statrep->bindValue(':id',$tim);
 $statrep->execute();
 while($l=$statrep->fetch(PDO::FETCH_ASSOC)){
-		echo 'Nombre de QCM faits : '.$l['nb_qcm_fait'].'</br> Moyenne : '.$l['moyenne'].'</br> Temps_total : '.$l['temps_total'].'</br></br>';
-		}
-
-
-	
-$d=$bdd->prepare('SELECT * FROM recap_repondeur WHERE id_repondeur = :id_rep');
+    echo '<div class="tabs clearfix"> <a href="#">';
+    
+    echo $l['temps_total'];    
+        
+    echo '</a><a href="#">';
+    echo $l['nb_qcm_fait'];
+    
+    echo '</a><a href="#">';
+    
+    echo $l['moyenne'];
+    
+    echo '</a></div>';
+}
+    ?>
+        
+	<div class="tabs-content">
+		<div class="friend-list">
+			<div class="list-ul">
+				<div class="list-li title">Récapitulatif</div>
+                
+    <?php
+    $d=$bdd->prepare('SELECT * FROM recap_repondeur WHERE id_repondeur = :id_rep');
 $d->bindValue(':id_rep',$tim);
 $d->execute();
 	while($l=$d->fetch(PDO::FETCH_ASSOC)){
-		echo 'QCM n° '.$l['id_qcm'].'</br> Domaine : '.$l['domaine'].'</br> Sous-domaine : '.$l['sous_domaine'].'</br> Date : '.$l['date_qcm_fait'].'</br> Note : '.$l['note_qcm'].'</br> Temps : '.$l['temps_qcm'].'</br></br>';
-	}
+                
+				
+            echo'    <div class="list-li clearfix">	
+					<div class="info pull-left">
+						<div class="name">';
+              
+                echo $l['domaine']. $l['sous_domaine'];
+                
+                echo'</div>
+						<div class="time">';
+                    
+                    echo $l['date_qcm_fait'];
+        
+       echo' </div>
+					</div>
+					<div class="action pull-right">
+						<div class="name">';
+           echo $l['note_qcm'];
+        
+        echo'</div>
+						<div class="time">';
+        echo $l['temps_qcm'];
+        
+        echo'</div>
+					</div>
+				</div>';
+    }
+                                
+        ?>        
 	
-?>
+			</div>
+		</div>
+	</div>
 </div>
-
-<!-- END ABOUT  -->
-
-
-<!-- Footer -->
-
-
-<div id="footer-media">
-
-  <a target="_blank" href="https://www.instagram.com/"><img src="https://raw.githubusercontent.com/atloomer/personal-site-revamp/gh-pages/img/insta-icon.png" alt="instagram icon" /></a>
-  
-  <a target="_blank" href="https://www.facebook.com/"><img src="https://raw.githubusercontent.com/atloomer/personal-site-revamp/gh-pages/img/facebook-icon.png" alt="facebook icon" /></a>
-
 </div>
-
-<footer>
-
-  <p>&copy;  DUT Informatique  <span class="year">2016</span>. All Rights Reserved. </p>
-  
-</footer>
-
-<!-- END FOOTER  -->
-	
-	</body>
+    
+    
+    </body>
 	</html>
+    
+    
+    
