@@ -5,23 +5,25 @@
 INSERT INTO questionneur (nom_questionneur, mdp_questionneur ) values
 ('quest','quest'), 	-- questionneur test
 
-('Bernard','System16');
+('Bernard', 'System16');
 
 INSERT INTO repondeur (nom_repondeur, mdp_repondeur) values
 ('rep','rep'), 		-- répondeur test
 
 ('Charlie', 'Didier');
+
 INSERT INTO domaine (domaine) values
 ('Informatique'),('Mathématiques'),('Culture Générale'),('Médecine'),('Langues'),('Physique Chimie'),
 
 ('Démonstration');
+
 INSERT INTO sous_domaine (id_domaine, sous_domaine) values
 (1,'BDD'),(1,'PHP'),(1,'JAVA'),(1,'C'),(1,'HTML'),
 (2,'Algèbre'),(2,'Géometrie'),(3,'Histoire'),(3,'Cinéma'),
 (4,'Neurologie'),(4,'Chirurgie'),(5,'Anglais'),(5,'Espagnol'),
 (6,'Physique'),(6,'Chimie'),
 
-(7,'Test');
+(7,'Test 1'), (7,'');
 
 INSERT INTO question (question) values
 ('Qu''est ce qu''une clef étrangère ?'),('Combien y a-t-il de formes normales en SQL ?'),('Quelle instruction produit une erreur de syntaxe ?'),
@@ -34,7 +36,7 @@ INSERT INTO question (question) values
 ('Quand a eu lieu la bataille de Waterloo ?'),('Quel est le vrai nom de l''empereur romain Auguste ?'),('Quelle est la date précise du début de la 2ème guerre mondiale pour la France ?'),
 ('Dans quel film DiCaprio remporte-t-il son premier Oscar ?'),('Quel est le film le plus rentable de l''Histoire du cinéma ?'),('Quel est le premier long-métrage de Pixar créé uniquement par animation 3D ?'),
 
-('Quelle est la couleur du ciel ?'),('Qui suis-je ?'),('Où est Charlie ?'),('Quel jour est-on ?'),('Quelle est la troisième couleur de l''arc-en-ciel ?'),('What is Love ?');
+('Question 28'),('Question 29'),('Question 30'),('Question 31'),('Question 32');
 
 INSERT INTO reponse (id_question, reponse, correct) values
 (1,'Une valeur qui détermine l''unicité de chaque tuple',DEFAULT),(1,'Une valeur qui permet de lier une relation à une autre', TRUE),(1,'Une valeur qui permet d''accéder au rôle d''admin',DEFAULT),(1,'Je ne sais pas',DEFAULT),
@@ -65,26 +67,26 @@ INSERT INTO reponse (id_question, reponse, correct) values
 (26,'Avatar', DEFAULT),(26,'Le Monde de Nemo', DEFAULT),(26,'Autant on emporte le vent', TRUE),(26,'Star Wars IV', DEFAULT),
 (27,'Les Indestructibles', DEFAULT),(27,'1001 pattes', DEFAULT),(27,'Toy Story', TRUE),(27,'Monstres et cie', DEFAULT),
 
-(28,'Bleu', TRUE),(28,'Violet', DEFAULT),(28,'Rouge', DEFAULT),
-(29,'Charlie', DEFAULT),(29,'Une machine',TRUE),(29,'stupide', DEFAULT),(29,'une patate', DEFAULT),
-(30,'dans la cuisine', DEFAULT),(30,'ici', TRUE),
-(31,'Lundi', DEFAULT),(31,'Mardi', DEFAULT),(31,'Mercredi', TRUE),(31,'Jeudi', DEFAULT),(31,'Vendredi', DEFAULT),(31,'Samedi', DEFAULT),(31,'Dimanche', DEFAULT),
-(32,'Rouge', DEFAULT),(32,'Jaune', TRUE),(32,'Vert', DEFAULT),(32,'Bleu', DEFAULT),
-(33,'Baby don''t hurt me',TRUE ),(33,'Mom''s spaghetti',DEFAULT ),(33,'Before you go go ...',DEFAULT );
+(28,'aa', DEFAULT),(28,'bb',TRUE),
+(29,'cc', DEFAULT),(29,'dd',DEFAULT),(29,'ee',TRUE),
+(30,'ff', DEFAULT),(30,'gg',DEFAULT),(30,'hh',DEFAULT),(30,'ii',DEFAULT),(30,'jj',TRUE),
+(31,'kk', DEFAULT),(31,'ll',DEFAULT),(31,'mm',DEFAULT),(31,'nn',DEFAULT),(31,'oo', DEFAULT),(31,'pp',DEFAULT),(31,'qq',DEFAULT),(31,'rr',DEFAULT),(31,'ss', TRUE),
+(32,'tt', DEFAULT),(32,'uu',DEFAULT),(32,'vv',DEFAULT),(32,'ww',TRUE);
 
-INSERT INTO qcm (auteur,fini) values
-('Bernard',true),
-('quest',true),
-('quest',true),
-('quest',true),
-('quest',true),
-('quest',true),
-('quest',true),
-('quest',true),
-('quest',true),
+INSERT INTO qcm (auteur) values
+('Bernard'),
+('quest'),
+('quest'),
+('quest'),
+('quest'),
+('quest'),
+('quest'),
+('quest'),
+('quest'),
 
+('Bernard'),
+('Bernard');
 
-('Bernard',true);
 
 INSERT INTO qcm_question values 
 (1,1,'Informatique','BDD'),(1,2,'Informatique','BDD'),(1,3,'Informatique','BDD'),
@@ -97,5 +99,4 @@ INSERT INTO qcm_question values
 (8,22,'Culture Générale','Histoire'),(8,23,'Culture Générale','Histoire'),(8,24,'Culture Générale','Histoire'),
 (9,25,'Culture Générale','Cinéma'),(9,26,'Culture Générale','Cinéma'),(9,27,'Culture Générale','Cinéma'),
 
-(10,28,'Démonstration','Test'),(10,29,'Démonstration','Test'),(10,30,'Démonstration','Test'),(10,31,'Démonstration','Test'),
-(10,32,'Démonstration','Test'),(10,33,'Démonstration','Test');
+(10,28,'Démonstration','Test 1'),(10,29,'Démonstration','Test 1'),(10,30,'Démonstration','Test 1'),(10,31,'Démonstration','Test 1'),(10,32,'Démonstration','Test 1');

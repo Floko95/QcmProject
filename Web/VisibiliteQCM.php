@@ -44,12 +44,12 @@ if(isset($_POST['vis']) and trim($_POST['vis']!=''))
 		if($ligne['visible'])
 		{echo '<p>le qcm numero'.$ligne['id_qcm'].' est actuellement visible. Le rendre invisible?</p>';
 		echo '<form action="VisibiliteQCM.php" method="post"><input type="hidden" name="idqcm" value="'.$ligne['id_qcm'].'"/><input type="submit" name="visf" value="Oui"/></form>';
-		echo '<form action="VisualisationQCM.php"><input type="hidden" name="id" value="'.$ligne['id_qcm'].'"/><input type="submit" value="Non"/></form>';
+		echo '<form action="VisualisationQCM.php" method="post"><input type="hidden" name="id" value="'.$ligne['id_qcm'].'"/><input type="submit" value="Non"/></form>';
 		}
 		else{
 			echo '<p>le qcm numero'.$ligne['id_qcm'].' est actuellement invisible. Le rendre visible?</p>';
 			echo '<form action="VisibiliteQCM.php" method="post"><input type="hidden" name="idqcm" value="'.$ligne['id_qcm'].'"/><input type="submit" name="vist" value="Oui"/></form>';
-		echo '<form action="VisualisationQCM.php"><input type="hidden" name="id" value="'.$ligne['id_qcm'].'"/><input type="submit" value="Non"/></form>';
+		echo '<form action="VisualisationQCM.php" method="post"><input type="hidden" name="id" value="'.$ligne['id_qcm'].'"/><input type="submit" value="Non"/></form>';
 		}
 	}	
 	else
