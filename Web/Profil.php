@@ -87,6 +87,22 @@ if(isset($_GET['d']) and trim($_GET['d']!='') and !(isset($_GET['sd'])))//2-doma
 					</div>
 				</div>';
 	}
+	
+	
+	$req2=$bdd->prepare("SELECT  distinct id_qcm FROM public.qcm_question natural join public.qcm WHERE domaine=:d and auteur=:a and sous_domaine is NULL");
+	$req2->bindValue(':a',$_SESSION['user']);
+	$req2->bindValue(':d',$_GET['d']);
+	$req2->execute();
+	while($ligne=$req2->fetch(PDO::FETCH_ASSOC))
+	{
+        echo'    <div class="list-li clearfix">	
+					<div class="info pull-left">
+						<div class="name">';
+		 echo '<form action="VisualisationQCM.php" method="post"><input type="submit" name="qcmb" value="QCM numéro '.$ligne['id_qcm'].'" /><input type="hidden" name="id" value="'.$ligne['id_qcm'].'" /></form>';
+        echo'</div>
+					</div>
+				</div>';
+	}
 }	
 
 else if (isset($_GET['sd']) and trim($_GET['sd']!='') and isset($_GET['d']) and trim($_GET['d']!=''))//3-sous domaine sélectionné,affichage des qcms créés par le questionneur dans ce sous domaine
