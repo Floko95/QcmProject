@@ -28,7 +28,8 @@
     <div class="rela-block top-center-container">
         <div class="inner-container top-text-container">
             <h2 class="rela-block top-main-text">Choisir QCM</h2>
-            <p>Les choses sérieuses débutent: choisis un QCM !</p>
+            <p><?php if(isset($_POST['nd'])){echo 'Domaine : '.$_POST['nd'];}
+			echo '  ';if(isset($_POST['idsd'])){echo 'Sous-domaine : '.$_POST['idsd'];}?></p>
             <div class="rela-inline button white-text">Aléatoire</div>
         </div>
         <div class="inner-container top-search-container">
@@ -54,21 +55,27 @@ require_once('Connexionbdd.php');
 try{
 	
 if(isset($_POST['idsd'])and trim($_POST['idsd']!=' ')){
-	echo'sous-domaine : '.$_POST['idsd'];
 	$req=$bdd->prepare("SELECT distinct id_qcm,auteur FROM qcm natural join qcm_question where qcm_question.sous_domaine=:idsd and qcm.id_qcm=qcm_question.id_qcm and visible=true");
 	$req->bindValue(':idsd',$_POST['idsd']);
 	$req->execute();
+	$tour=0;
 	while($l=$req->fetch(PDO::FETCH_ASSOC))
 		{
         echo "<div class=\"box\"><div class=\"floded\">";
-	
+	$tour+=1;
 	echo '<p><form action="Executer.php" method="post">
 	<input type="hidden" name="iq" value="'.$l['id_qcm'].'"/>
+	<input type="hidden" name="nd" value="'.$_POST['nd'].'"/>
+	<input type="hidden" name="idsd" value="'.$_POST['idsd'].'"/>
 	<h4><input type="submit" value="QCM N°'.$l['id_qcm'].' créé par '.$l['auteur'].'"/><h4></form></p>';
 	
         echo "</div></div>";
 			
 	}
+  if ($tour==0){
+    echo "</br>Ce Sous-domaine ne contient pas de QCM</br>";
+	}
+	
 }
 }catch(PDOException $e){
 	die('<p>Votre requête est erronée.</p>');

@@ -4,12 +4,15 @@
         <meta charset="utf-8" />
 		 <link rel="stylesheet" href="E.css" />
         <title></title>
+		 <p><?php if(isset($_POST['nd'])){echo 'Domaine : '.$_POST['nd'];}?></p> 
+		 <p><?php if(isset($_POST['idsd'])){echo 'Sous-domaine : '.$_POST['idsd'];}?></p>
+		  <p><?php if(isset($_POST['iq'])){echo 'QCM n° '.$_POST['iq'];}?></p> 
     </head>
     <body>
 		
 <div class="container">
     <h1>Bonne chance</h1>
-    
+    <p>Attention: Il peut y avoir plusieurs réponses possibles.</p>
     
   
 

@@ -28,7 +28,7 @@
     <div class="rela-block top-center-container">
         <div class="inner-container top-text-container">
             <h2 class="rela-block top-main-text">Choisir Sous-Domaine</h2>
-            <p>Choisis sagement ou au hasard...</p>
+            <p><?php if(isset($_POST['nd'])){echo 'Domaine : '.$_POST['nd'];}?></p>
             <div class="rela-inline button white-text">Aléatoire</div>
         </div>
         <div class="inner-container top-search-container">
@@ -60,18 +60,18 @@ try{
 	$req=$bdd->prepare("SELECT * FROM sous_domaine natural join domaine where id_domaine=:id");
 	$req->bindValue(':id',$_POST['idd']);
 	$req->execute();
+	$tour=-1;
 	while($ligne=$req->fetch(PDO::FETCH_ASSOC))
 		{
-        
-        echo "<div class=\"box\"><div class=\"floded\">";
-        
+        $tour+=1;
+        echo "<div class=\"box\"><div class=\"floded\">"; 
 	   echo '<p><form action="ChoixRQI.php" method="post">
 	<input type="hidden" name="idsd" value="'.$ligne['sous_domaine'].'"/>
+	<input type="hidden" name="nd" value="'.$_POST['nd'].'"/>
 	<h4><input type="submit" value="'.$ligne['sous_domaine'].'"	/><h4></form></p>';
-	
-       
-        echo "</div></div>";
-			
+        echo "</div></div>";	
+	}if ($tour==-1){
+    echo "</br>Ce domaine ne contient pas de sous-domaine</br>";
 	}
     
     $req=$bdd->prepare("SELECT distinct id_qcm,auteur FROM qcm natural join qcm_question where qcm_question.domaine=:nd and qcm_question.sous_domaine is null and qcm.id_qcm=qcm_question.id_qcm and visible=true");
@@ -79,22 +79,18 @@ try{
 	$req->execute();
 	while($l=$req->fetch(PDO::FETCH_ASSOC))
 		{
-        
         echo "<div class=\"box\"><div class=\"floded\">";
-       
 	   echo '<p><form action="Executer.php" method="post">
-	<input type="hidden" name="id_qcm" value="'.$l['id_qcm'].'"/>
-	<h4><input type="submit" value="'.$l['id_qcm'].' '.$l['auteur'].'"/><h4></form></p>';
-	
-	   
-	   
+	<input type="hidden" name="iq" value="'.$l['id_qcm'].'"/>
+	<input type="hidden" name="nd" value="'.$_POST['nd'].'"/>
+	<input type="hidden" name="idsd" value="Aucun"/>
+	<h4><input type="submit" value="QCM N°'.$l['id_qcm'].' créé par '.$l['auteur'].'"/><h4></form></p>';
         echo "</div></div>";
-        
-        
-        
-		
-    }
-    
+	 }
+   
+
+	
+	
    }catch(PDOException $e){
 	die('<p>Votre requête est erronée.</p>');
 }	

@@ -69,7 +69,11 @@ echo '<p><form action="ChoixRDS.php" method="post">
 	   echo "</div></div>";
 			
 	}
-		
+
+	
+
+
+	
     }catch(PDOException $e){
 	   die('<p>Votre requête est erronée.</p>');
 }	
