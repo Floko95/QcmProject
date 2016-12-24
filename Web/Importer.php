@@ -98,12 +98,13 @@ else
 }*/
 if (isset($_POST['idd']) and trim($_POST['idd']!=''))
 {
-	$req=$bdd->prepare("SELECT distinct sous_domaine,domaine from qcm_question where id_qcm=:id");
+	$req=$bdd->prepare("SELECT distinct sous_domaine,domaine from qcm where id_qcm=:id");
+	$req->bindValue(':id',$_POST['idd']);
 	$req->execute();
 	$ligne=$req->fetch(PDO::FETCH_ASSOC);
 	if ($ligne['sous_domaine']=='')
 	{
-		$req=$bdd->prepare("SELECT * FROM public.question NATURAL JOIN public.qcm_question WHERE public.qcm_question.domaine=:domaine");
+		$req=$bdd->prepare("SELECT * FROM question INNER JOIN qcm_question ON question.id_question = qcm_question.id_question INNER JOIN qcm ON qcm.id_qcm = qcm_question.id_qcm WHERE qcm.domaine = :domaine");
 		$req->bindValue(':domaine',$ligne['domaine']);
 		$req->execute();
 		echo '<form action="Questions.php" method="post">';
@@ -123,7 +124,7 @@ if (isset($_POST['idd']) and trim($_POST['idd']!=''))
 	}
 	else
 	{
-		$req=$bdd->prepare("SELECT * FROM public.question NATURAL JOIN public.qcm_question WHERE sous_domaine=:sdomaine and domaine=:domaine");
+		$req=$bdd->prepare("SELECT * FROM public.question NATURAL JOIN public.qcm WHERE qcm.sous_domaine=:sdomaine and qcm.domaine=:domaine");
 		$req->bindValue(':sdomaine',$ligne['sous_domaine']);
 		$req->bindValue(':domaine',$ligne['domaine']);
 		$req->execute();

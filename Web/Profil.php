@@ -73,7 +73,7 @@ require_once('Connexionbdd.php');
 
 if(isset($_GET['d']) and trim($_GET['d']!='') and !(isset($_GET['sd'])))//2-domaine sélectionné,affichage des sous domaines de ce domaine dans lesquels le questionneur a créé des qcms
 {
-	$req=$bdd->prepare("SELECT distinct domaine,sous_domaine  FROM public.qcm_question natural join public.qcm WHERE auteur=:a and domaine=:d");
+	$req=$bdd->prepare("SELECT distinct domaine,sous_domaine  FROM public.qcm WHERE auteur=:a and domaine=:d");
 	$req->bindValue(':a',$_SESSION['user']);
 	$req->bindValue(':d',$_GET['d']);
 	$req->execute();
@@ -89,7 +89,7 @@ if(isset($_GET['d']) and trim($_GET['d']!='') and !(isset($_GET['sd'])))//2-doma
 	}
 	
 	
-	$req2=$bdd->prepare("SELECT  distinct id_qcm FROM public.qcm_question natural join public.qcm WHERE domaine=:d and auteur=:a and sous_domaine is NULL");
+	$req2=$bdd->prepare("SELECT  distinct id_qcm FROM public.qcm WHERE domaine=:d and auteur=:a and sous_domaine is NULL");
 	$req2->bindValue(':a',$_SESSION['user']);
 	$req2->bindValue(':d',$_GET['d']);
 	$req2->execute();
@@ -107,7 +107,7 @@ if(isset($_GET['d']) and trim($_GET['d']!='') and !(isset($_GET['sd'])))//2-doma
 
 else if (isset($_GET['sd']) and trim($_GET['sd']!='') and isset($_GET['d']) and trim($_GET['d']!=''))//3-sous domaine sélectionné,affichage des qcms créés par le questionneur dans ce sous domaine
 {
-	$req=$bdd->prepare("SELECT  distinct id_qcm FROM public.qcm_question natural join public.qcm WHERE domaine=:d and sous_domaine=:sd and auteur=:a");
+	$req=$bdd->prepare("SELECT  distinct id_qcm FROM public.qcm WHERE domaine=:d and sous_domaine=:sd and auteur=:a");
 	$req->bindValue(':a',$_SESSION['user']);
 	$req->bindValue(':d',$_GET['d']);
 	$req->bindValue(':sd',$_GET['sd']);
@@ -127,7 +127,7 @@ else if (isset($_GET['sd']) and trim($_GET['sd']!='') and isset($_GET['d']) and 
 
 else//1-entrée du profil,affichage des domaines dans lesquels le questionneur a créé des qcms
 {
-	$req=$bdd->prepare("SELECT distinct domaine FROM public.qcm_question natural join public.qcm WHERE auteur=:a");
+	$req=$bdd->prepare("SELECT distinct domaine FROM public.qcm WHERE auteur=:a");
 	$req->bindValue(':a',$_SESSION['user']);
 	$req->execute();
 	while($ligne=$req->fetch(PDO::FETCH_ASSOC))

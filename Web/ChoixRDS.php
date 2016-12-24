@@ -74,7 +74,7 @@ try{
     echo "</br>Ce domaine ne contient pas de sous-domaine</br>";
 	}
     
-    $req=$bdd->prepare("SELECT distinct id_qcm,auteur FROM qcm natural join qcm_question where qcm_question.domaine=:nd and qcm_question.sous_domaine is null and qcm.id_qcm=qcm_question.id_qcm and visible=true");
+    $req=$bdd->prepare("SELECT distinct id_qcm,auteur FROM qcm natural join qcm_question where qcm.domaine=:nd and qcm.sous_domaine is null and qcm.id_qcm=qcm_question.id_qcm and visible=true");
 	$req->bindValue(':nd',$_POST['nd']);
 	$req->execute();
 	while($l=$req->fetch(PDO::FETCH_ASSOC))
