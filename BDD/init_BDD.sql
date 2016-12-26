@@ -21,7 +21,7 @@ domaine varchar NOT NULL UNIQUE
 CREATE TABLE IF NOT EXISTS Sous_Domaine(
 id_sous_domaine integer PRIMARY KEY DEFAULT nextval('ID_SOUS_DOMAINE'),
 id_domaine integer REFERENCES Domaine(id_domaine),
-sous_domaine varchar NOT NULL UNIQUE
+sous_domaine varchar UNIQUE
 );
 
 CREATE TABLE IF NOT EXISTS Questionneur(
@@ -67,6 +67,8 @@ correct boolean DEFAULT FALSE
 CREATE TABLE IF NOT EXISTS Qcm(
 id_qcm integer NOT NULL PRIMARY KEY DEFAULT nextval('ID_QCM'),
 auteur varchar NOT NULL REFERENCES Questionneur(nom_questionneur),
+domaine varchar REFERENCES Domaine(domaine),
+sous_domaine varchar REFERENCES Sous_Domaine(sous_domaine),
 date_creation date DEFAULT current_date,
 niveau varchar DEFAULT 'Normal',
 temps_total integer,				-- à calculer par la somme de chaque question.temps
@@ -78,8 +80,6 @@ fini boolean DEFAULT FALSE			-- indique si le qcm est complet ou non
 CREATE TABLE IF NOT EXISTS Qcm_Question(
 id_qcm integer REFERENCES Qcm(id_qcm),
 id_question integer REFERENCES Question(id_question),
-domaine varchar REFERENCES Domaine(domaine),
-sous_domaine varchar REFERENCES Sous_Domaine(sous_domaine),
 PRIMARY KEY(id_qcm, id_question)
 );
 
@@ -93,7 +93,7 @@ id_repondeur integer REFERENCES Repondeur(id_repondeur),
 									--> VALUES ($req1, $req2, $req3, date_trunc('seconds', now()), $note_obtenue, $temps_passee);
 id_qcm integer REFERENCES Qcm(id_qcm),	
 domaine varchar REFERENCES Domaine(domaine),		
-sous_domaine varchar REFERENCES Sous_Domaine(sous_domaine),
+sous_domaine varchar REFERENCES Sous_domaine(sous_domaine),
 date_qcm_fait timestamp,
 note_qcm float,
 temps_qcm integer,

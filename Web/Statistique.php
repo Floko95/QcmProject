@@ -53,7 +53,7 @@ if(isset($_POST['reponse'])and trim($_POST['reponse']!=' ')){
             echo "</label><i class=\"bar\"></i></div> ";
             
               $idquestionn=$quest['id_question'];
-			$reponse=$bdd->prepare('Select * from public.reponse natural join public.qcm_question where id_question=:idquestion and id_qcm=:idqcm');//pour chaque réponse de la question
+			$reponse=$bdd->prepare('Select * from public.reponse INNER JOIN public.qcm_question ON reponse.id_question = qcm_question.id_question WHERE qcm_question.id_question=:idquestion and qcm_question.id_qcm=:idqcm;');//pour chaque réponse de la question
 			$reponse->bindValue(':idquestion',$idquestionn);
             $reponse->bindValue(':idqcm',$_POST['qcm']);
 			$reponse->execute();
@@ -75,7 +75,7 @@ if(isset($_POST['reponse'])and trim($_POST['reponse']!=' ')){
 							}else{
 								echo'<i class="helper"><div class="red">Réponse fausse</i></div> </br>';	//si la réponse est fausse
 								echo 'La réponse juste était :' ;
-								$repjuste=$bdd->prepare('Select * from public.question natural join public.reponse natural join qcm where correct=TRUE and id_question=:mq and id_qcm=:idqcm');//trouve la réponse juste
+								$repjuste=$bdd->prepare('Select * from public.reponse INNER JOIN public.question ON reponse.id_question = question.id_question INNER JOIN public.qcm_question ON question.id_question = qcm_question.id_question WHERE qcm_question.id_question = :mq and qcm_question.id_qcm = :idqcm and reponse.correct=TRUE');//trouve la réponse juste
 								$repjuste->bindValue(':mq',$idquestionn);
                                 $repjuste->bindValue(':idqcm',$_POST['qcm']);
 								$repjuste->execute();
@@ -133,7 +133,7 @@ while($lu=$ins->fetch(PDO::FETCH_ASSOC)){
 
 
 $dom=0;$s_dom=0;
-$d_sd=$bdd->prepare('SELECT distinct domaine,sous_domaine FROM qcm_question natural join qcm WHERE id_qcm = :id_qcm');
+$d_sd=$bdd->prepare('SELECT distinct domaine,sous_domaine FROM qcm WHERE id_qcm = :id_qcm');
 $d_sd->bindValue(':id_qcm',$_POST['qcm']);
 $d_sd->execute();
 	while($l=$d_sd->fetch(PDO::FETCH_ASSOC)){
