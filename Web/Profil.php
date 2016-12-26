@@ -21,7 +21,10 @@
     </ul>
   </nav>
 </div>
-
+<?php 
+session_start();
+require_once('Connexionbdd.php');
+?>
  <div class="material-wrap">
 <div class="material clearfix">
 	<div class="top-bar">
@@ -46,8 +49,7 @@
 			<a href="" target="_blank"><img src="http://icons.iconarchive.com/icons/webalys/kameleon.pics/512/Alien-icon.png"></a>
 		</div>
 		<div class="info">
-			<div class="name">Pseudo</div>
-			<div class="position">Rang</div>
+		<?php echo '<div class="name">'.$_SESSION['user'].'</div>';?>
 		</div>
 		<input id="toggle" type="checkbox" class="plus"><label for="toggle" class="toggle"></label>
 		<div class="links">
@@ -68,8 +70,7 @@
                 
 
 <?php 
-session_start();
-require_once('Connexionbdd.php');
+
 
 if(isset($_GET['d']) and trim($_GET['d']!='') and !(isset($_GET['sd'])))//2-domaine sélectionné,affichage des sous domaines de ce domaine dans lesquels le questionneur a créé des qcms
 {

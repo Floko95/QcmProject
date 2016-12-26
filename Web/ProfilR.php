@@ -51,8 +51,7 @@ require_once('Connexionbdd.php');
 			<a href="" target="_blank"><img src="http://icons.iconarchive.com/icons/webalys/kameleon.pics/512/Alien-icon.png"></a>
 		</div>
 		<div class="info">
-			<div class="name">Pseudo</div>
-			<div class="position">Rang</div>
+        <?php echo '<div class="name">'.$_SESSION['user'].'</div>';?>
 		</div>
 		<a href="" onClick="javascript:window.history.go(-1)"> <input id="toggle" type="checkbox" class="plus"><label for="toggle" class="toggle"></label>
 		<div class="links">
