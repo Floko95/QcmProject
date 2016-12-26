@@ -132,7 +132,7 @@ while($l=$statrep->fetch(PDO::FETCH_ASSOC)){
                 
     <?php
 	///////////////////
-if(isset($_GET['d'])and trim ($_GET['d']!='')){
+if(isset($_GET['d'])and trim ($_GET['d']!='') and !isset($_GET['sd'])){
 	//  where recap_repondeur.domaine=domaine.domaine and sous_domaine.id_domaine=domaine.id_domaine and sous_domaine.id_domaine=:d
 	$req=$bdd->prepare("SELECT distinct domaine,sous_domaine FROM recap_repondeur natural join sous_domaine natural join domaine where id_domaine=:d");
 	$req->bindValue(':d',$_GET['d']);
