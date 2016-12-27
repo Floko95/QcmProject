@@ -133,19 +133,21 @@ while($l=$statrep->fetch(PDO::FETCH_ASSOC)){
     <?php
 	
 if(isset($_GET['d'])and trim ($_GET['d']!='') and isset($_GET['sd']) and trim ($_GET['sd']!='') ){
+	
+	
+	
 $d=$bdd->prepare('SELECT * FROM recap_repondeur WHERE id_repondeur = :id_rep and sous_domaine=:sd');
 $d->bindValue(':id_rep',$tim);
 $d->bindValue(':sd',$_GET['sd']);
 $d->execute();
 	while($l=$d->fetch(PDO::FETCH_ASSOC)){
-                
+	
 				
             echo'    <div class="list-li clearfix">	
 					<div class="info pull-left">
 						<div class="name">';
               
                 echo $l['domaine'].' '.$l['sous_domaine'];
-                
                 echo'</div>
 						<div class="time">';
                     
@@ -155,16 +157,20 @@ $d->execute();
 					</div>
 					<div class="action pull-right">
 						<div class="name">';
-           echo $l['note_qcm'];
+
+						
+						
+           echo 'Note '.$l['note_qcm'];
         
         echo'</div>
 						<div class="time">';
-        echo $l['temps_qcm'];
+        echo 'Temps '.$l['temps_qcm'].' sec.';
         
         echo'</div>
 					</div>
 				</div>';
-    }
+   
+}
 
 }else if(isset($_GET['d'])and trim ($_GET['d']!='') and !isset($_GET['sd'])){
 	$req=$bdd->prepare("SELECT distinct domaine,sous_domaine FROM recap_repondeur natural join sous_domaine natural join domaine where id_domaine=:d and id_repondeur=:id_rep");
