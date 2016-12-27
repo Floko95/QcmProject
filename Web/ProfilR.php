@@ -51,8 +51,7 @@ require_once('Connexionbdd.php');
 			<a href="" target="_blank"><img src="http://icons.iconarchive.com/icons/webalys/kameleon.pics/512/Alien-icon.png"></a>
 		</div>
 		<div class="info">
-			<div class="name">Pseudo</div>
-			<div class="position">Rang</div>
+        <?php echo '<div class="name">'.$_SESSION['user'].'</div>';?>
 		</div>
 		<a href="" onClick="javascript:window.history.go(-1)"> <input id="toggle" type="checkbox" class="plus"><label for="toggle" class="toggle"></label>
 		<div class="links">
@@ -106,7 +105,6 @@ $up3 =$bdd->prepare ('UPDATE repondeur SET temps_total = :th WHERE id_repondeur 
 $up3->bindValue(':id',$tim);
 $up3->bindValue(':th',$three);
 $up3->execute();
-		
 	
 $statrep =$bdd->prepare ('Select * from repondeur WHERE id_repondeur = :id');
 $statrep->bindValue(':id',$tim);
@@ -133,6 +131,38 @@ while($l=$statrep->fetch(PDO::FETCH_ASSOC)){
 				<div class="list-li title">Récapitulatif</div>
                 
     <?php
+	///////////////////
+if(isset($_GET['d'])and trim ($_GET['d']!='') and !isset($_GET['sd'])){
+	//  where recap_repondeur.domaine=domaine.domaine and sous_domaine.id_domaine=domaine.id_domaine and sous_domaine.id_domaine=:d
+	$req=$bdd->prepare("SELECT distinct domaine,sous_domaine FROM recap_repondeur natural join sous_domaine natural join domaine where id_domaine=:d");
+	$req->bindValue(':d',$_GET['d']);
+	$req->execute();
+	while($ligne=$req->fetch(PDO::FETCH_ASSOC))
+	{
+        echo'    <div class="list-li clearfix">	
+					<div class="info pull-left">
+						<div class="name">';
+		echo '<a href="ProfilR.php?d='.$ligne['domaine'].'&sd='.$ligne['sous_domaine'].'">'.$ligne['sous_domaine'].'</a>';
+        echo'</div>
+					</div>
+				</div>';
+	}
+}else{	 
+	$dom=$bdd->prepare('SELECT distinct id_domaine,domaine FROM domaine natural join recap_repondeur');
+	$dom->execute();
+	while($li=$dom->fetch(PDO::FETCH_ASSOC)){
+		echo '
+		<div class="list-li clearfix">	
+					<div class="info pull-left">
+						<div class="name">';
+              echo '<a href="ProfilR.php?d='.$li['id_domaine'].'">'.$li['domaine'].'</a>';
+                
+                echo'</div></div></div>';
+	}
+}
+	/////////////////////
+	/*
+	
     $d=$bdd->prepare('SELECT * FROM recap_repondeur WHERE id_repondeur = :id_rep');
 $d->bindValue(':id_rep',$tim);
 $d->execute();
@@ -163,7 +193,7 @@ $d->execute();
         echo'</div>
 					</div>
 				</div>';
-    }
+    }*/
                                 
         ?>        
 	

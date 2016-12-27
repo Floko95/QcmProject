@@ -7,11 +7,14 @@
     </head>
     <body>
 		
-
+<?php 
+session_start();
+require_once('Connexionbdd.php');
+?>
 
 <div id="desk-nav">
-  
-  <a href="#home">Logo
+
+  <a href="#home"><?php echo 'Utilisateur : '.htmlspecialchars($_SESSION['user'],ENT_QUOTES); ?>
    <!-- Image Logo -->
   </a>
   
@@ -26,6 +29,7 @@
   </nav>
 </div>
 
+
 <!-- END NAVIGATION -->
 
     <img id="al-bg-photo" src="http://img15.hostingpics.net/pics/145380brainpaintmindcreative.jpg" />
@@ -35,9 +39,8 @@
 <div id="about-me">
 
 <h2>ABOUT</h2>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam quibusdam similique odit nesciunt, tempore omnis veritatis, praesentium iste fuga amet sed quisquam repellat nobis eius ipsa nisi ea tempora distinctio. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos non dignissimos molestias. Voluptas, vitae! Facilis eveniet, iusto dolore tempora quo nam voluptatem consequatur soluta sint repudiandae officiis, autem, modi numquam.</p>
-  <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia ipsa perspiciatis enim nesciunt neque, cum dolore. Enim nisi, cumque eaque, nam odio, tenetur commodi omnis ea doloremque labore vel culpa.</p>
-</div>
+  <p>Nous sommes une équipe de cinq étudiants en DUT Informatique à l’Université Paris 13. Réalisé dans le cadre de nos projets tuteurés de S3, ce site vous permettra, suivant votre catégorie, de créer ou de répondre à des QCM. Il s’articule donc autour de ces deux fonctionnalités codées en html, php et css, et s’appuie sur une base de données postgresql.</p>
+  </div>
 
 <!-- END ABOUT  -->
 
