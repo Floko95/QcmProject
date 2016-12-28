@@ -32,7 +32,10 @@
     <h1>Résultat</h1>
     
     <?php 
-session_start();
+	 include('EviteMessageFormulaire.php');
+//session_start();
+
+if(isset($_POST['qcm'])and trim($_POST['qcm'])){
 try{
 
 require_once('Connexionbdd.php');
@@ -159,10 +162,16 @@ catch(PDOException $e){
 }
 	
 	 echo '<div class="button-container">
-    <a href="ProfilR.php"><button class="button" type="submit"><span>IDK</span></button></a>
+    <a href="ProfilR.php"><button class="button" type="submit"><span>Profil</span></button></a>
   </div>';
     
      echo "</form>";
+}else{
+	echo 'Tous vos résultats se trouvent sur votre profil.';
+	 echo '<div class="button-container">
+    <a href="ProfilR.php"><button class="button" type="submit"><span>Profil</span></button></a></div>';
+    
+}
 ?>
 
 
