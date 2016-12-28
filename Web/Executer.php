@@ -17,8 +17,11 @@
   
 
  <?php 
+ include('EviteMessageFormulaire.php');
 require_once('Connexionbdd.php');
-
+//session_start();
+echo var_dump($_SESSION);
+if (isset($_SESSION['executer']) and $_SESSION['executer']==1){
 
 try{
 
@@ -79,6 +82,14 @@ $temps=$bdd->prepare("SELECT * FROM public.qcm_question natural join public.ques
 }catch(PDOException $e){
 	echo'Exception reçue : ',$e->getMessage(),'\n';
 }	
+$_SESSION['executer']=0;
+}else{
+	echo 'Vous ne pouvez pas revenir sur un QCM.';
+	 echo '<div class="button-container">
+    <a href="AccueilR.php"><button class="button" type="submit"><span>Accueil</span></button></a></div>';
+    
+
+}
 ?>
 </div>
 

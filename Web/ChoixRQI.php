@@ -50,7 +50,8 @@
     
     
     <?php 
-
+	 include('EviteMessageFormulaire.php');
+//session_start();
 require_once('Connexionbdd.php');
 try{
 	
@@ -68,7 +69,7 @@ if(isset($_POST['idsd'])and trim($_POST['idsd']!=' ')){
 	<input type="hidden" name="nd" value="'.$_POST['nd'].'"/>
 	<input type="hidden" name="idsd" value="'.$_POST['idsd'].'"/>
 	<h4><input type="submit" value="QCM N°'.$l['id_qcm'].' créé par '.$l['auteur'].'"/><h4></form></p>';
-	
+	$_SESSION['executer']=1;
         echo "</div></div>";
 			
 	}
