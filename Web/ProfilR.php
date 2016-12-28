@@ -131,11 +131,51 @@ while($l=$statrep->fetch(PDO::FETCH_ASSOC)){
 				<div class="list-li title">Récapitulatif</div>
                 
     <?php
-	///////////////////
-if(isset($_GET['d'])and trim ($_GET['d']!='') and !isset($_GET['sd'])){
-	//  where recap_repondeur.domaine=domaine.domaine and sous_domaine.id_domaine=domaine.id_domaine and sous_domaine.id_domaine=:d
-	$req=$bdd->prepare("SELECT distinct domaine,sous_domaine FROM recap_repondeur natural join sous_domaine natural join domaine where id_domaine=:d");
+	
+if(isset($_GET['d'])and trim ($_GET['d']!='') and isset($_GET['sd']) and trim ($_GET['sd']!='') ){
+	
+	
+	
+$d=$bdd->prepare('SELECT * FROM recap_repondeur WHERE id_repondeur = :id_rep and sous_domaine=:sd');
+$d->bindValue(':id_rep',$tim);
+$d->bindValue(':sd',$_GET['sd']);
+$d->execute();
+	while($l=$d->fetch(PDO::FETCH_ASSOC)){
+	
+				
+            echo'    <div class="list-li clearfix">	
+					<div class="info pull-left">
+						<div class="name">';
+              
+                echo $l['domaine'].' '.$l['sous_domaine'];
+                echo'</div>
+						<div class="time">';
+                    
+                    echo $l['date_qcm_fait'];
+        
+       echo' </div>
+					</div>
+					<div class="action pull-right">
+						<div class="name">';
+
+						
+						
+           echo 'Note '.$l['note_qcm'];
+        
+        echo'</div>
+						<div class="time">';
+        echo 'Temps '.$l['temps_qcm'].' sec.';
+        
+        echo'</div>
+					</div>
+				</div>';
+   
+}
+
+}else if(isset($_GET['d'])and trim ($_GET['d']!='') and !isset($_GET['sd'])){
+	$req=$bdd->prepare("SELECT distinct domaine,sous_domaine FROM recap_repondeur natural join sous_domaine natural join domaine where id_domaine=:d and id_repondeur=:id_rep");
 	$req->bindValue(':d',$_GET['d']);
+	$req->bindValue(':id_rep',$tim);
 	$req->execute();
 	while($ligne=$req->fetch(PDO::FETCH_ASSOC))
 	{
@@ -148,7 +188,8 @@ if(isset($_GET['d'])and trim ($_GET['d']!='') and !isset($_GET['sd'])){
 				</div>';
 	}
 }else{	 
-	$dom=$bdd->prepare('SELECT distinct id_domaine,domaine FROM domaine natural join recap_repondeur');
+	$dom=$bdd->prepare('SELECT distinct id_domaine,domaine FROM domaine natural join recap_repondeur where id_repondeur = :id_rep ');
+	$dom->bindValue(':id_rep',$tim);
 	$dom->execute();
 	while($li=$dom->fetch(PDO::FETCH_ASSOC)){
 		echo '
@@ -160,40 +201,6 @@ if(isset($_GET['d'])and trim ($_GET['d']!='') and !isset($_GET['sd'])){
                 echo'</div></div></div>';
 	}
 }
-	/////////////////////
-	/*
-	
-    $d=$bdd->prepare('SELECT * FROM recap_repondeur WHERE id_repondeur = :id_rep');
-$d->bindValue(':id_rep',$tim);
-$d->execute();
-	while($l=$d->fetch(PDO::FETCH_ASSOC)){
-                
-				
-            echo'    <div class="list-li clearfix">	
-					<div class="info pull-left">
-						<div class="name">';
-              
-                echo $l['domaine']. $l['sous_domaine'];
-                
-                echo'</div>
-						<div class="time">';
-                    
-                    echo $l['date_qcm_fait'];
-        
-       echo' </div>
-					</div>
-					<div class="action pull-right">
-						<div class="name">';
-           echo $l['note_qcm'];
-        
-        echo'</div>
-						<div class="time">';
-        echo $l['temps_qcm'];
-        
-        echo'</div>
-					</div>
-				</div>';
-    }*/
                                 
         ?>        
 	
