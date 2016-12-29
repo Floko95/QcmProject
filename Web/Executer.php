@@ -19,8 +19,6 @@
  <?php 
  include('EviteMessageFormulaire.php');
 require_once('Connexionbdd.php');
-//session_start();
-echo var_dump($_SESSION);
 if (isset($_SESSION['executer']) and $_SESSION['executer']==1){
 
 try{
