@@ -33,7 +33,6 @@
     
     <?php 
 	 include('EviteMessageFormulaire.php');
-//session_start();
 
 if(isset($_POST['qcm'])and trim($_POST['qcm'])){
 try{
@@ -46,7 +45,7 @@ if(isset($_POST['reponse'])and trim($_POST['reponse']!=' ')){
 	if(isset($_POST['checkboxes'])and trim($_POST['checkboxes']!=' ')){
 		echo '<h2>Vos réponses au QCM n° '.$_POST['qcm'].' : </h2> ';
         
-        $question=$bdd->prepare('Select * from qcm natural join public.qcm_question natural join question where id_qcm=:idqcm');//pour chaque question
+        $question=$bdd->prepare('Select * from qcm natural join qcm_question natural join question where id_qcm=:idqcm');//pour chaque question
 		$question->bindValue(':idqcm',$_POST['qcm']);
 		$question->execute();
 		while($quest=$question->fetch(PDO :: FETCH_ASSOC)){
@@ -56,7 +55,7 @@ if(isset($_POST['reponse'])and trim($_POST['reponse']!=' ')){
             echo "</label><i class=\"bar\"></i></div> ";
             
               $idquestionn=$quest['id_question'];
-			$reponse=$bdd->prepare('Select * from public.reponse INNER JOIN public.qcm_question ON reponse.id_question = qcm_question.id_question WHERE qcm_question.id_question=:idquestion and qcm_question.id_qcm=:idqcm;');//pour chaque réponse de la question
+			$reponse=$bdd->prepare('Select * from reponse INNER JOIN qcm_question ON reponse.id_question = qcm_question.id_question WHERE qcm_question.id_question=:idquestion and qcm_question.id_qcm=:idqcm;');//pour chaque réponse de la question
 			$reponse->bindValue(':idquestion',$idquestionn);
             $reponse->bindValue(':idqcm',$_POST['qcm']);
 			$reponse->execute();
@@ -78,7 +77,7 @@ if(isset($_POST['reponse'])and trim($_POST['reponse']!=' ')){
 							}else{
 								echo'<i class="helper"><div class="red">Réponse fausse</i></div> </br>';	//si la réponse est fausse
 								echo 'La réponse juste était :' ;
-								$repjuste=$bdd->prepare('Select * from public.reponse INNER JOIN public.question ON reponse.id_question = question.id_question INNER JOIN public.qcm_question ON question.id_question = qcm_question.id_question WHERE qcm_question.id_question = :mq and qcm_question.id_qcm = :idqcm and reponse.correct=TRUE');//trouve la réponse juste
+								$repjuste=$bdd->prepare('Select * from reponse INNER JOIN question ON reponse.id_question = question.id_question INNER JOIN public.qcm_question ON question.id_question = qcm_question.id_question WHERE qcm_question.id_question = :mq and qcm_question.id_qcm = :idqcm and reponse.correct=TRUE');//trouve la réponse juste
 								$repjuste->bindValue(':mq',$idquestionn);
                                 $repjuste->bindValue(':idqcm',$_POST['qcm']);
 								$repjuste->execute();
@@ -90,7 +89,7 @@ if(isset($_POST['reponse'])and trim($_POST['reponse']!=' ')){
 					}
 				}
 			}
-			if($faux==0 && $vrai==1){
+			if($faux==0 && $vrai>=1){//faire peut-etre une requete sur le vrai pour savoir combien de reponses justes il y a
 				$point=$bdd->prepare('Select * from question where id_question=:mq');
 								$point->bindValue(':mq',$idquestionn);
 								$point->execute();
@@ -163,14 +162,14 @@ catch(PDOException $e){
 	
 	 echo '<div class="button-container">
     <a href="ProfilR.php"><button class="button" type="submit"><span>Profil</span></button></a>
-  </div>';
+    <a href="ChoixRD.php"><button class="button" type="submit"><span>Refaire un QCM</span></button></a></div>';
     
      echo "</form>";
 }else{
 	echo 'Tous vos résultats se trouvent sur votre profil.';
 	 echo '<div class="button-container">
     <a href="ProfilR.php"><button class="button" type="submit"><span>Profil</span></button></a></div>';
-    
+	
 }
 ?>
 
