@@ -3,6 +3,7 @@
 
 <html>
 	<head>
+	 <link rel="stylesheet" href="VisualisationQCM.css" />
 	<title>QCM-Visualisation</title>
 	
 	</head>
@@ -11,33 +12,42 @@
 <body> 
 <?php 
 require_once('Connexionbdd.php');
-if(isset($_GET['q']) and trim($_GET['q']!=''))
+if(isset($_POST['q']) and trim($_POST['q']!=''))
 {
-	$req=$bdd->prepare("SELECT * FROM public.question NATURAL JOIN public.qcm_question WHERE id_question=:id");
-	$req->bindValue(':id',$_GET['q']);
+	$req=$bdd->prepare("SELECT * FROM qcm WHERE id_qcm=:id");
+	$req->bindValue(':id',$_POST['id']);
 	$req->execute();
 	$ligne=$req->fetch(PDO::FETCH_ASSOC);
+	echo'<p> Domaine: '.$ligne['domaine'].'</p><p>Sous domaine:'.$ligne['sous_domaine'].'</p>';
+	$req=$bdd->prepare("SELECT * FROM public.question  WHERE id_question=:idq");
+	$req->bindValue(':idq',$_POST['q']);
+	$req->execute();
+	$ligne=$req->fetch(PDO::FETCH_ASSOC);
+		echo "<div class=\"form-group\"><label class=\"control-label\" for=\"select\">";
+		echo 'Question: '.$ligne['question'].'<br/>';
+		echo "</label><i class=\"bar\"></i></div> ";
+		$req2=$bdd->prepare("SELECT * FROM public.qcm_question natural join public.reponse where id_question=:idq");
+		$req2->bindValue(':idq',$ligne['id_question']);
+		$req2->execute();
 		
-			echo '<p>Question:'.$ligne['question'].'</p> <p>Domaine:'.$ligne['domaine'].'</p><p>Sous-domaine: '.$ligne['sous_domaine'].'</p>';
-			
-		
-		if(isset($_GET['domaine']) and trim($_GET['domaine']!='') and isset($_GET['sdomaine']) and trim($_GET['sdomaine']!=''))
-		{echo '<form action="Importer.php?domaine='.$_GET['domaine'].'&sdomaine='.$_GET['sdomaine'].'" method="post"><input type="hidden" name="idquest" value="'.$_GET['q'].'"/><input type="submit" value="Ajouter cette question à la liste de questions a Importer"/></form>';
-	
-	
-		
-		echo '<form action="choixc.php" method="post">
-		<input type="hidden" name="domaine" value="'.$_GET['domaine'].'"/>';
-		if($_GET['sdomaine']!='general')
+		echo'</br></br>';
+		while($ligne2=$req2->fetch(PDO::FETCH_ASSOC))
 		{
-			echo '<input type="hidden" name="sdomaine" value="'.$_GET['sdomaine'].'"/>';
+			if($ligne2['correct']){
+				echo'<i class="helper"><div class="green">';
+			echo $ligne2['reponse'];
+			echo '</div> ';
+			}else{
+				echo'<i class="helper"><div class="red">';
+			echo $ligne2['reponse'];
+			echo '</div> ';
+			}						
 		}
-		
-		echo'<input type="hidden" name="question" 
-									value="'.$ligne['id_question'].'"/>
-									<input type="submit" value="Importer cette question" /></form>';
-		}
-	
+	echo '<form action="Questions.php" method="post">
+		<input type="hidden" name="id" value="'.$_POST['id'].'"/>
+		<input type="hidden" name="q" value="'.$_POST['q'].'"/>
+		<input type="submit" value="Importer cette question" />
+		</form>';
 	
 }
 ?>
