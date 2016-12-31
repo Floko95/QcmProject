@@ -83,8 +83,8 @@ $monidqcm;
 	}
 
 if (isset($_POST['q'])){
-	
-	
+	if(is_string($_POST['q']))//si on arrive de la création d'une question,on insère les créations dans la table
+	{
 	//inserer question
 	if(isset($_POST['exp']) and trim($_POST['exp'])!=''){
 	$req=$bdd->prepare('INSERT INTO question (question,valeur,temps,explication) VALUES (:q,:v,:t,:e)');
@@ -134,9 +134,13 @@ if (isset($_POST['q'])){
 	$req3->execute();
 	}
 	}
+	}
+	else if (is_int($_POST['q']))//si on arrive de l'importation, on récupère l'id de la question importée
+	{
+		$idq=$_POST['q'];
+	}
 	
-	
-	$req4 = $bdd->prepare('INSERT INTO qcm_question(id_qcm,id_question) VALUES(:idqcm,:idquestion)');
+	$req4 = $bdd->prepare('INSERT INTO qcm_question(id_qcm,id_question) VALUES(:idqcm,:idquestion)');//dans les deux cas on relie la question au qcm et on affiche le contenu du qcm en cours de creation
 	$req4->bindValue(':idqcm',$monidqcm);
 	$req4->bindValue(':idquestion',$idq);
 	$req4->execute();
