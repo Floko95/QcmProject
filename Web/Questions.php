@@ -81,11 +81,15 @@ $monidqcm;
 		echo 'id du qcm: '.$_POST['id'];
 		$monidqcm=$_POST['id'];
 	}
+//$monidqcm->id qcm que l'on cree
 
 if (isset($_POST['q'])){
-	if(is_string($_POST['q']))//si on arrive de la création d'une question,on insère les créations dans la table
-	{
+	//if(is_string($_POST['q']))//si on arrive de la création d'une question,on insère les créations dans la table
+	//{
 	//inserer question
+	///////////////
+	
+	if(isset($_POST['creaquestion'])){//si on arrive de creation question
 	if(isset($_POST['exp']) and trim($_POST['exp'])!=''){
 	$req=$bdd->prepare('INSERT INTO question (question,valeur,temps,explication) VALUES (:q,:v,:t,:e)');
 	$req->bindValue(':q',$_POST['q']);
@@ -101,8 +105,25 @@ if (isset($_POST['q'])){
 	$req->execute();
 	}
 	
+	/*else{//si on arrive d'importer
+	if(isset($_POST['exp']) and trim($_POST['exp'])!=''){
+	$req=$bdd->prepare('INSERT INTO  (question,valeur,temps,explication) VALUES (:q,:v,:t,:e)');
+	$req->bindValue(':q',$_POST['q']);
+	$req->bindValue(':v',$_POST['points']);
+	$req->bindValue(':t',$_POST['tps']);
+	$req->bindValue(':e',$_POST['exp']);
+	$req->execute();
+	}else{
+	$req=$bdd->prepare('INSERT INTO question (question,valeur,temps) VALUES (:q,:v,:t)');
+	$req->bindValue(':q',$_POST['q']);
+	$req->bindValue(':v',$_POST['points']);
+	$req->bindValue(':t',$_POST['tps']);
+	$req->execute();
+	}	
+	}*/
+	///////////////
 	$tab = array_combine($_POST['Rep'], $_POST['select']);
-	
+	echo var_dump($_POST);
 	
 	//recuperer id question pour l'inserer dans reponse
 	$idq=0;
@@ -134,18 +155,26 @@ if (isset($_POST['q'])){
 	$req3->execute();
 	}
 	}
-	}
-	else if (is_int($_POST['q']))//si on arrive de l'importation, on récupère l'id de la question importée
-	{
-		$idq=$_POST['q'];
-	}
+	
+	//}
+	//else if (is_int($_POST['q']))//si on arrive de l'importation, on récupère l'id de la question importée
+	//{
+		//$idq=$_POST['q'];
+	//}
 	
 	$req4 = $bdd->prepare('INSERT INTO qcm_question(id_qcm,id_question) VALUES(:idqcm,:idquestion)');//dans les deux cas on relie la question au qcm et on affiche le contenu du qcm en cours de creation
 	$req4->bindValue(':idqcm',$monidqcm);
 	$req4->bindValue(':idquestion',$idq);
 	$req4->execute();
 	
-	
+	}else{
+		//$idq=$_POST['q'];
+	$req4 = $bdd->prepare('INSERT INTO qcm_question(id_qcm,id_question) VALUES(:idqcm,:idquestion)');//dans les deux cas on relie la question au qcm et on affiche le contenu du qcm en cours de creation
+	$req4->bindValue(':idqcm',$monidqcm);
+	$req4->bindValue(':idquestion',$_POST['q']);
+	$req4->execute();
+		
+	}
 	
 	echo ' </br>';
 	if(isset($monidqcm)){

@@ -83,6 +83,7 @@ require_once("Connexionbdd.php");
 			echo "Informations sur la question<br/>";
 			echo "<textarea name='exp' rows='10' cols='50' name='infos'></textarea><br/>";
 			echo "Points <input type='text' name='points' style='width:50px;'/><br /><br />";
+			echo  "<input type='hidden' name='creaquestion' value='creaquestion'/>";
 			echo"<input type='submit' value='Sauvegarder et envoyer les réponses'/>";
 
 			echo "</form>";
