@@ -65,7 +65,8 @@ if (isset($_POST['id']) and trim($_POST['id']!=''))//4-qcm sélectionné,afficha
 	
 	echo '<form action="SupprimerQCM.php" method="post"><input type="submit" name="supp" value="Supprimer"/><input type="hidden" name="id" value="'.$_POST['id'].'"/></form>';
 	echo '<form action="VisibiliteQCM.php"  method="post"><input type="submit" name="vis" value="Modifier la Visibilité"/><input type="hidden" name="id" value="'.$_POST['id'].'"/></form>';
-	echo '<form action="Profil.php" method="post"><input type="submit" name="modif" value="Modifier(en travaux)"/></form>';
+	echo '<form action="Questions.php" method="post">
+	<input type="hidden" name="id" value="'.$_POST['id'].'"/><input type="submit" name="modif" value="Modifier "/></form>';
 	
 }
 ?>
