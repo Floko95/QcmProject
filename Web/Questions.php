@@ -69,6 +69,13 @@ session_start();
 require_once('Connexionbdd.php');
 
 $monidqcm;
+if(isset($_POST['modif']))
+{
+	$req=$bdd->prepare("UPDATE qcm SET fini = false WHERE id_qcm=:id");
+	$req->bindValue(':id',$_POST['id']);
+	$req->execute();
+	echo '<p> reprise de la création du QCM numéro '.$_POST['id'].'</p>';
+}
 	if(isset($_POST['id'])){
 		
 		if(isset($_POST['dom'])){
@@ -206,7 +213,7 @@ if (isset($_POST['q'])){
 	
 	
 }
-
+echo '<form action="Finaliser.php" method="post"><input type="hidden" name="id" value="'.$_POST['id'].'"/><input type="submit" value="Valider QCM"/></form>';
 ?>
 </p>
 

@@ -13,13 +13,7 @@
 
 
 
-<form action="Importer.php">
-<p>Domaine:</p>
-<input type="text" name="domaine" />
-<p>Sous-Domaine:</p>
-<input type="text" name="sdomaine" />
-<input type="submit"/>
-</form>
+
 <?php
 
 
@@ -48,14 +42,16 @@ if (isset($_POST['idd']) and trim($_POST['idd']!=''))
 	//if(){
 	if($ligne['sous_domaine']==null){
 		//SELECT distinct * FROM question INNER JOIN qcm_question ON question.id_question = qcm_question.id_question INNER JOIN qcm ON qcm.id_qcm = qcm_question.id_qcm WHERE qcm.domaine = :domaine
-		$req=$bdd->prepare("Select distinct * from question natural join qcm_question natural join qcm where domaine=:domaine");
+		$req=$bdd->prepare("Select distinct * from question natural join qcm_question natural join qcm where domaine=:domaine EXCEPT Select * from question natural join qcm_question natural join qcm where id_qcm=:id");
 		$req->bindValue(':domaine',$ligne['domaine']);
+		$req->bindValue(':id',$_POST['idd']);
 		$req->execute();	
 	
 	}else{
-		$req=$bdd->prepare("SELECT distinct * FROM question NATURAL JOIN qcm natural join qcm_question WHERE sous_domaine=:sdomaine and domaine=:domaine");
+		$req=$bdd->prepare("SELECT distinct * FROM question NATURAL JOIN qcm natural join qcm_question WHERE sous_domaine=:sdomaine and domaine=:domaine EXCEPT Select  * from question NATURAL JOIN qcm natural join qcm_question where id_qcm=:id");
 		$req->bindValue(':sdomaine',$ligne['sous_domaine']);
 		$req->bindValue(':domaine',$ligne['domaine']);
+		$req->bindValue(':id',$_POST['idd']);
 		$req->execute();
 	}
 	$dejadansqcm=0;

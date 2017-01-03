@@ -12,7 +12,7 @@
 <body> 
 <?php 
 require_once('Connexionbdd.php');
-echo var_dump($_POST);
+
 //q->id question
 //id->id qcm
 if(isset($_POST['q']) and trim($_POST['q']!=''))
