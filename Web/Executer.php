@@ -46,7 +46,10 @@ $temps=$bdd->prepare("SELECT * FROM public.qcm_question natural join public.ques
 	while($ligne=$req->fetch(PDO::FETCH_ASSOC))
 		{
 			echo "<div class=\"form-group\"><label class=\"control-label\" for=\"select\">";
-			echo ''.$ligne['id_question'].'. '.htmlspecialchars($ligne['question'],ENT_QUOTES).'</br>';
+			echo ''.htmlspecialchars($ligne['question'],ENT_QUOTES).'</br>';
+			if($ligne['explication']!=null){
+			echo ''.htmlspecialchars($ligne['explication'],ENT_QUOTES).'</br>';
+			}
 			echo "</label><i class=\"bar\"></i></div> ";
 			
 	$req2=$bdd->prepare("SELECT * FROM public.reponse natural join public.question natural join qcm_question where id_qcm=:idqcm and id_question=:numeroquest"); 

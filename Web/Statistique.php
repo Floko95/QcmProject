@@ -114,7 +114,7 @@ if(isset($_POST['qcm'])and trim($_POST['qcm'])){ //si on arrive de la page execu
 							echo' '.htmlspecialchars($l['reponse'],ENT_QUOTES);						//affichage réponse juste
 						}
 					
-					}else{
+					}else if($vrai==0 && $faux==0){
 						echo'</br><i class="helper"><div class="red">Vous n\'avez pas répondu à cette question.</i></div> </br>';	//si aucune réponse à la question
 
 					}
