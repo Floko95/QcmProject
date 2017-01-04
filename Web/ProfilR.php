@@ -75,6 +75,18 @@ while($lu=$ins->fetch(PDO::FETCH_ASSOC)){
 		}
 
 
+if(isset($_GET['d']) and trim($_GET['d']!='') and !isset($_GET['sd'])){
+$d=$_GET['d'];
+$req2 =$bdd->query("SELECT round(avg(note_qcm)::numeric,2) as round FROM recap_repondeur natural join domaine WHERE id_repondeur = $tim and id_domaine=$d");
+$t=$req2->fetch();
+$req2->closeCursor();
+$two=$t['round'];
+    echo '<div class="tabs clearfix"> <a href="#">';
+   echo '<a href="#">';
+    echo 'Moyenne : '.$two;
+    echo '</a></div>';
+}	
+		
 $req1 =$bdd->query("SELECT count(id_qcm) as somme FROM recap_repondeur WHERE id_repondeur = $tim");
 $o=$req1->fetch();
 $req1->closeCursor();
@@ -117,11 +129,13 @@ while($l=$statrep->fetch(PDO::FETCH_ASSOC)){
     echo '</a><a href="#">';
     echo $l['nb_qcm_fait'];
     
-    echo '</a><a href="#">';
+    echo '</a>';
+//<a href="#">';
     
-    echo $l['moyenne'];
+   // echo $l['moyenne'];
     
-    echo '</a></div>';
+   // echo '</a>
+	echo '</div>';
 }
     ?>
         
@@ -173,6 +187,7 @@ $d->execute();
 }
 
 }else if(isset($_GET['d'])and trim ($_GET['d']!='') and !isset($_GET['sd'])){
+	
 	$req=$bdd->prepare("SELECT distinct domaine,sous_domaine FROM recap_repondeur natural join sous_domaine natural join domaine where id_domaine=:d and id_repondeur=:id_rep");
 	$req->bindValue(':d',$_GET['d']);
 	$req->bindValue(':id_rep',$tim);
@@ -187,7 +202,44 @@ $d->execute();
 					</div>
 				</div>';
 	}
+	
+	$req=$bdd->prepare("SELECT * FROM recap_repondeur natural join domaine WHERE id_repondeur=:id_rep and id_domaine=:d and sous_domaine is null");
+	$req->bindValue(':d',$_GET['d']);
+	$req->bindValue(':id_rep',$tim);
+	$req->execute();
+	while($l=$req->fetch(PDO::FETCH_ASSOC))
+		{
+            echo'    <div class="list-li clearfix">	
+					<div class="info pull-left">
+						<div class="name">';
+              
+                echo $l['domaine'].' '.$l['sous_domaine'];
+                echo'</div>
+						<div class="time">';
+                    
+                    echo $l['date_qcm_fait'];
+        
+       echo' </div>
+					</div>
+					<div class="action pull-right">
+						<div class="name">';
+
+						
+						
+           echo 'Note '.$l['note_qcm'];
+        
+        echo'</div>
+						<div class="time">';
+        echo 'Temps '.$l['temps_qcm'].' sec.';
+        
+        echo'</div>
+					</div>
+				</div>';
+   
+	}
 }else{	 
+
+	
 	$dom=$bdd->prepare('SELECT distinct id_domaine,domaine FROM domaine natural join recap_repondeur where id_repondeur = :id_rep ');
 	$dom->bindValue(':id_rep',$tim);
 	$dom->execute();
