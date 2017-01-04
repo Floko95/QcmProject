@@ -62,24 +62,24 @@ if (isset($_POST['idd']) and trim($_POST['idd']!=''))
 				<input type="hidden" name="id" value="'.$_POST['idd'].'"/>';
 				if(isset($ligne['id_question'])){
 				
-				/*foreach($mesquestions as $cle=>$val){
+				foreach($mesquestions as $cle=>$val){
 					if($ligne['id_question']==$val){
 					$dejadansqcm+=1;
 				
 					}
-				}*/
-				//if($dejadansqcm==0){
+				}
+				if($dejadansqcm==0){
 				echo '<input type="hidden" name="q" value="'.$ligne['id_question'].'"/>
 				<input type="submit" value="'.$ligne['question'].'"/>';
 				}
-				//}
+				}
 				echo '</form>';
 		}
 	//}
 		
 		
-	
-}
+//SELECT distinct id_question, question FROM question natural JOIN qcm natural join qcm_question WHERE sous_domaine='HTML' and domaine='Informatique'	
+}// SELECT distinct * FROM question natural JOIN qcm natural join qcm_question WHERE sous_domaine='HTML' and domaine='Informatique'  EXCEPT Select * from question NATURAL JOIN qcm natural join qcm_question where id_question = 13
 ?>
 
 </body>
