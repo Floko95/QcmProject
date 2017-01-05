@@ -4,22 +4,23 @@
         <meta charset="utf-8" />
 		 <link rel="stylesheet" href="E.css" />
         <title></title>
-		 <p><?php if(isset($_POST['nd'])){echo 'Domaine : '.$_POST['nd'];}?></p> 
-		 <p><?php if(isset($_POST['idsd'])){echo 'Sous-domaine : '.$_POST['idsd'];}?></p>
-		  <p><?php if(isset($_POST['iq'])){echo 'QCM n° '.$_POST['iq'];}?></p> 
+		 
     </head>
     <body>
 		
 <div class="container">
     <h1>Bonne chance</h1>
+	<p><?php include('EviteMessageFormulaire.php'); if(isset($_POST['nd'])){echo 'Domaine : '.$_POST['nd'];}
+echo '</br>';	if(isset($_POST['idsd'])){echo 'Sous-domaine : '.$_POST['idsd'];}
+echo '</br>'; if(isset($_POST['iq'])){echo 'QCM n° '.$_POST['iq'];}?></p> 
     <p>Attention: Il peut y avoir plusieurs réponses possibles.</p>
     
   
 
  <?php 
- include('EviteMessageFormulaire.php');
+ 
 require_once('Connexionbdd.php');
-if (isset($_SESSION['executer']) and $_SESSION['executer']==1){
+if (isset($_POST['executer']) and $_POST['executer']==1){
 
 try{
 
@@ -83,7 +84,7 @@ $temps=$bdd->prepare("SELECT * FROM public.qcm_question natural join public.ques
 }catch(PDOException $e){
 	echo'Exception reçue : ',$e->getMessage(),'\n';
 }	
-$_SESSION['executer']=0;
+$_POST['executer']=0;
 }else{
 	echo 'Vous ne pouvez pas revenir sur un QCM.';
 	 echo '<div class="button-container">

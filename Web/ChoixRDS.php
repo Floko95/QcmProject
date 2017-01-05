@@ -28,8 +28,9 @@
     <div class="rela-block top-center-container">
         <div class="inner-container top-text-container">
             <h2 class="rela-block top-main-text">Choisir Sous-Domaine</h2>
-            <p><?php if(isset($_POST['nd'])){echo 'Domaine : '.$_POST['nd'];}?></p>
-            <div class="rela-inline button white-text">Aléatoire</div>
+            <p><?php
+			//include('EviteMessageFormulaire.php');
+			if(isset($_POST['nd'])){echo 'Domaine : '.$_POST['nd'];}?></p>
         </div>
         <div class="inner-container top-search-container">
             <p class="search-text">Search Domain</p>
@@ -49,7 +50,6 @@
     
     
    <?php 
-session_start();
 require_once('Connexionbdd.php');
 
 
@@ -80,13 +80,15 @@ try{
 	$req->execute();
 	while($l=$req->fetch(PDO::FETCH_ASSOC))
 		{
+		$executer=1;
         echo "<div class=\"box\"><div class=\"floded\">";
 	   echo '<p><form action="Executer.php" method="post">
 	<input type="hidden" name="iq" value="'.$l['id_qcm'].'"/>
 	<input type="hidden" name="nd" value="'.$_POST['nd'].'"/>
 	<input type="hidden" name="idsd" value="Aucun"/>
+	<input type="hidden" name="executer" value="'.$executer.'"/>
 	<h4><input type="submit" value="QCM N°'.$l['id_qcm'].' créé par '.$l['auteur'].'"/><h4></form></p>';
-	$_SESSION['executer']=1;
+	
         echo "</div></div>";
 	 }
    
