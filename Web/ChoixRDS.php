@@ -8,7 +8,7 @@
  <head>
   <body>
 
-	    <div id="desk-nav">
+<div id="desk-nav">
   <nav>
     <ul>
       <li><a href="AccueilR.php">Home</a></li>
@@ -20,8 +20,6 @@
 </div>
 
 
-      
-      
 <input type="checkbox" id="searchCheckbox"/>
 
 <div class="rela-block top-container">
@@ -29,7 +27,6 @@
         <div class="inner-container top-text-container">
             <h2 class="rela-block top-main-text">Choisir Sous-Domaine</h2>
             <p><?php
-			//include('EviteMessageFormulaire.php');
 			if(isset($_POST['nd'])){echo 'Domaine : '.$_POST['nd'];}?></p>
         </div>
         <div class="inner-container top-search-container">
@@ -43,69 +40,58 @@
 </div>
 
 
-	  
-	  
-
 <div class="rela-block image-grid-container">
-    
-    
-   <?php 
-require_once('Connexionbdd.php');
+      
+<?php 
+	require_once('Connexionbdd.php');
 
+	if(isset($_POST['idd'])and trim($_POST['idd']!=' ') and isset($_POST['nd'])and trim($_POST['nd']!=' ')){
 
-if(isset($_POST['idd'])and trim($_POST['idd']!=' ')){
-	if(isset($_POST['nd'])and trim($_POST['nd']!=' ')){
-
-	
-try{
-	$req=$bdd->prepare("SELECT * FROM sous_domaine natural join domaine where id_domaine=:id");
-	$req->bindValue(':id',$_POST['idd']);
-	$req->execute();
-	$tour=-1;
-	while($ligne=$req->fetch(PDO::FETCH_ASSOC))
-		{
-        $tour+=1;
-        echo "<div class=\"box\"><div class=\"floded\">"; 
-	   echo '<p><form action="ChoixRQI.php" method="post">
-	<input type="hidden" name="idsd" value="'.$ligne['sous_domaine'].'"/>
-	<input type="hidden" name="nd" value="'.$_POST['nd'].'"/>
-	<h4><input type="submit" value="'.$ligne['sous_domaine'].'"	/><h4></form></p>';
-        echo "</div></div>";	
-	}if ($tour==-1){
-    echo "</br>Ce domaine ne contient pas de sous-domaine</br>";
-	}
+		try{
+			
+			$req=$bdd->prepare("SELECT * FROM sous_domaine natural join domaine where id_domaine=:id");
+			$req->bindValue(':id',$_POST['idd']);
+			$req->execute();
+			$tour=-1;
+			while($ligne=$req->fetch(PDO::FETCH_ASSOC)){
+			
+				$tour+=1;
+				echo "<div class=\"box\"><div class=\"floded\">"; 
+				echo '<p><form action="ChoixRQI.php" method="post">
+					<input type="hidden" name="idsd" value="'.$ligne['sous_domaine'].'"/>
+					<input type="hidden" name="nd" value="'.$_POST['nd'].'"/>
+					<h4><input type="submit" value="'.$ligne['sous_domaine'].'"	/><h4></form></p>';
+				echo "</div></div>";	
+			
+			}if ($tour==-1){
+				echo "</br>Ce domaine ne contient pas de sous-domaine</br>";
+			}
     
-    $req=$bdd->prepare("SELECT distinct id_qcm,auteur FROM qcm natural join qcm_question where qcm.domaine=:nd and qcm.sous_domaine is null and qcm.id_qcm=qcm_question.id_qcm and visible=true");
-	$req->bindValue(':nd',$_POST['nd']);
-	$req->execute();
-	while($l=$req->fetch(PDO::FETCH_ASSOC))
-		{
-		$executer=1;
-        echo "<div class=\"box\"><div class=\"floded\">";
-	   echo '<p><form action="Executer.php" method="post">
-	<input type="hidden" name="iq" value="'.$l['id_qcm'].'"/>
-	<input type="hidden" name="nd" value="'.$_POST['nd'].'"/>
-	<input type="hidden" name="idsd" value="Aucun"/>
-	<input type="hidden" name="executer" value="'.$executer.'"/>
-	<h4><input type="submit" value="QCM N°'.$l['id_qcm'].' créé par '.$l['auteur'].'"/><h4></form></p>';
-	
-        echo "</div></div>";
-	 }
+			$req=$bdd->prepare("SELECT distinct id_qcm,auteur FROM qcm natural join qcm_question where qcm.domaine=:nd and qcm.sous_domaine is null and qcm.id_qcm=qcm_question.id_qcm and visible=true");
+			$req->bindValue(':nd',$_POST['nd']);
+			$req->execute();
+			while($l=$req->fetch(PDO::FETCH_ASSOC)){
+				
+				$executer=1;
+				echo "<div class=\"box\"><div class=\"floded\">";
+				echo '<p><form action="Executer.php" method="post">
+					<input type="hidden" name="iq" value="'.$l['id_qcm'].'"/>
+					<input type="hidden" name="nd" value="'.$_POST['nd'].'"/>
+					<input type="hidden" name="idsd" value="Aucun"/>
+					<input type="hidden" name="executer" value="'.$executer.'"/>
+					<h4><input type="submit" value="QCM N°'.$l['id_qcm'].' créé par '.$l['auteur'].'"/><h4></form></p>';
+				echo "</div></div>";
+			}
    
-
-	
-	
-   }catch(PDOException $e){
-	die('<p>Votre requête est erronée.</p>');
-}	
-}	
-}
-	
+		}catch(PDOException $e){
+			die('<p>Votre requête est erronée.</p>');
+		}	
+	}	
 ?>
     
 </div>
 
-      <div class="rela-block button black-text load-button"><a href="" onClick="javascript:window.history.go(-1)">Retour</a></div>
 
-	 </body>
-	</head>
+		<div class="rela-block button black-text load-button"><a href="" onClick="javascript:window.history.go(-1)">Retour</a></div>
+	</body>
+</head>

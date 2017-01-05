@@ -42,45 +42,44 @@
         <div class="abs-center magnifying-glass"></div>
     </label>
 </div>
-
-
-	  
 	  
 
 <div class="rela-block image-grid-container">
     
     
-    <?php 
-require_once('Connexionbdd.php');
-try{
-if(isset($_POST['idsd'])and trim($_POST['idsd']!=' ')){
-	$req=$bdd->prepare("SELECT distinct id_qcm,auteur FROM qcm natural join qcm_question where qcm.sous_domaine=:idsd and qcm.id_qcm=qcm_question.id_qcm and visible=true");
-	$req->bindValue(':idsd',$_POST['idsd']);
-	$req->execute();
-	$tour=0;
-	while($l=$req->fetch(PDO::FETCH_ASSOC))
-		{
-        echo "<div class=\"box\"><div class=\"floded\">";
-	$executer=1;
-	$tour+=1;
-	echo '<p><form action="Executer.php" method="post">
-	<input type="hidden" name="iq" value="'.$l['id_qcm'].'"/>
-	<input type="hidden" name="nd" value="'.$_POST['nd'].'"/>
-	<input type="hidden" name="idsd" value="'.$_POST['idsd'].'"/>
-	<input type="hidden" name="executer" value="'.$executer.'"/>
-	<h4><input type="submit" value="QCM N°'.$l['id_qcm'].' créé par '.$l['auteur'].'"/><h4></form></p>';
-	//$_SESSION['executer']=1;
-        echo "</div></div>";
-			
-	}
-  if ($tour==0){
-    echo "<p>Ce sous-domaine ne contient pas de QCM</p>";
-	}
+<?php 
+	require_once('Connexionbdd.php');
 	
-}
-}catch(PDOException $e){
-	die('<p>Votre requête est erronée.</p>');
-}
+	try{
+		if(isset($_POST['idsd'])and trim($_POST['idsd']!=' ')){
+			
+			$req=$bdd->prepare("SELECT distinct id_qcm,auteur FROM qcm natural join qcm_question where qcm.sous_domaine=:idsd and qcm.id_qcm=qcm_question.id_qcm and visible=true");
+			$req->bindValue(':idsd',$_POST['idsd']);
+			$req->execute();
+			$tour=0;
+			while($l=$req->fetch(PDO::FETCH_ASSOC)){
+				
+				echo "<div class=\"box\"><div class=\"floded\">";
+				$executer=1;
+				$tour+=1;
+				echo '<p><form action="Executer.php" method="post">
+					<input type="hidden" name="iq" value="'.$l['id_qcm'].'"/>
+					<input type="hidden" name="nd" value="'.$_POST['nd'].'"/>
+					<input type="hidden" name="idsd" value="'.$_POST['idsd'].'"/>
+					<input type="hidden" name="executer" value="'.$executer.'"/>
+					<h4><input type="submit" value="QCM N°'.$l['id_qcm'].' créé par '.$l['auteur'].'"/><h4></form></p>';
+				echo "</div></div>";
+			
+			}
+  
+			if ($tour==0){
+				echo "<p>Ce sous-domaine ne contient pas de QCM</p>";
+			}
+		}
+		
+	}catch(PDOException $e){
+		die('<p>Votre requête est erronée.</p>');
+	}
 
 ?>
     

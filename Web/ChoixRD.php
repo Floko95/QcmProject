@@ -43,40 +43,28 @@
 </div>
 
 
-	  
-	  
 
 <div class="rela-block image-grid-container">
     
     
-    <?php require_once('Connexionbdd.php');
+<?php require_once('Connexionbdd.php');
 
     try{
-
-	$req=$bdd->prepare("SELECT * FROM domaine");
-	$req->execute();
-	while($ligne=$req->fetch(PDO::FETCH_ASSOC))
-    {
-        echo "<div class=\"box\"><div class=\"floded\">";
 		
-echo '<p><form action="ChoixRDS.php" method="post">
-	<input type="hidden" name="idd" value="'.$ligne['id_domaine'].'"/>
-	<input type="hidden" name="nd" value="'.$ligne['domaine'].'"/>
-	<h4><input type="submit" value="'.$ligne['domaine'].'"/><h4></form></p>';
-	
+		$req=$bdd->prepare("SELECT * FROM domaine");
+		$req->execute();
+		while($ligne=$req->fetch(PDO::FETCH_ASSOC)){
+			echo "<div class=\"box\"><div class=\"floded\">";
+			echo '<p><form action="ChoixRDS.php" method="post">
+				<input type="hidden" name="idd" value="'.$ligne['id_domaine'].'"/>
+				<input type="hidden" name="nd" value="'.$ligne['domaine'].'"/>
+				<h4><input type="submit" value="'.$ligne['domaine'].'"/><h4></form></p>';
+			echo "</div></div>";
+		}
 
-
-	   echo "</div></div>";
-			
-	}
-
-	
-
-
-	
-    }catch(PDOException $e){
+	}catch(PDOException $e){
 	   die('<p>Votre requête est erronée.</p>');
-}	
+	}	
 ?>
     
 </div>
