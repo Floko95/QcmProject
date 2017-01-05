@@ -22,7 +22,7 @@ body{
 	margin:0;
 	color:#ecf0f1;
 	/*background:#b1cfd6;*/
-	font:300 18px/18px Roboto;
+	font:300 18px/18px Trebuchet MS;
 }
 *,:after,:before{box-sizing:border-box}
 .pull-left{float:left}
@@ -33,7 +33,7 @@ body{
 .material{
 	width:350px;
 	/*height:550px;*/
-	margin:5% auto 0;
+	margin:8% auto 0;
 	position:relative;
 	background:#1e1d23;
 }

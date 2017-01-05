@@ -21,9 +21,9 @@ require_once('Connexionbdd.php');
   <nav>   
     <ul>
       <li><a href="Index.php">Deconnexion</a></li>
-      <li><a href="#about">About</a></li>
+      <li><a href="#about">Information</a></li>
       <li><a href="ChoixRD.php">QCM</a></li>
-      <li><a href="profilr.php">Profil</a></li>
+      <li><a href="ProfilR.php">Profil</a></li>
       <li><a href="#contact-me">Contact</a></li>
     </ul>
   </nav>
@@ -37,7 +37,7 @@ require_once('Connexionbdd.php');
 <a name="about"></a>
 <div id="about-me">
 
-<h2>ABOUT</h2>
+<h2>INFORMATION</h2>
   <p>Nous sommes une équipe de cinq étudiants en DUT Informatique à l’Université Paris 13. Réalisé dans le cadre de nos projets tuteurés de S3, ce site vous permettra, suivant votre catégorie, de créer ou de répondre à des QCM. Il s’articule donc autour de ces deux fonctionnalités codées en html, php et css, et s’appuie sur une base de données postgresql.</p>
   </div>
 
@@ -116,17 +116,6 @@ require_once('Connexionbdd.php');
 <!-- Footer -->
 
 
-
-<div id="footer-media">
-
-<!--  Instagram  -->
-  <a target="_blank" href="https://www.instagram.com/"><img src="https://raw.githubusercontent.com/atloomer/personal-site-revamp/gh-pages/img/insta-icon.png" alt="instagram icon" /></a>
-  
-<!--  Facebook  -->
-  <a target="_blank" href="https://www.facebook.com/"><img src="https://raw.githubusercontent.com/atloomer/personal-site-revamp/gh-pages/img/facebook-icon.png" alt="facebook icon" /></a>
-
-</div>
-
 <footer>
 
   <p>&copy;  DUT Informatique  <span class="year">2016</span>. All Rights Reserved. </p>
@@ -139,7 +128,7 @@ require_once('Connexionbdd.php');
         
         
         	<?php 
-	session_start();
+	
 		if ($_SESSION['connecte']){
 			switch ($_SESSION['role']) {
 				case 'repondeur' :

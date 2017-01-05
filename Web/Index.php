@@ -18,8 +18,8 @@
   
   <nav>   
     <ul>
-      <li><a href="connexion.php">Connexion</a></li>
-      <li><a href="#about">About</a></li>
+      <li><a href="Connexion.php">Connexion</a></li>
+      <li><a href="#about">Information</a></li>
       <li><a href="#contact-me">Contact</a></li>
     </ul>
   </nav>
@@ -33,9 +33,8 @@
 <a name="about"></a>
 <div id="about-me">
 
-<h2>ABOUT</h2>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam quibusdam similique odit nesciunt, tempore omnis veritatis, praesentium iste fuga amet sed quisquam repellat nobis eius ipsa nisi ea tempora distinctio. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos non dignissimos molestias. Voluptas, vitae! Facilis eveniet, iusto dolore tempora quo nam voluptatem consequatur soluta sint repudiandae officiis, autem, modi numquam.</p>
-  <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia ipsa perspiciatis enim nesciunt neque, cum dolore. Enim nisi, cumque eaque, nam odio, tenetur commodi omnis ea doloremque labore vel culpa.</p>
+<h2>INFORMATION</h2>
+    <p>Nous sommes une équipe de cinq étudiants en DUT Informatique à l’Université Paris 13. Réalisé dans le cadre de nos projets tuteurés de S3, ce site vous permettra, suivant votre catégorie, de créer ou de répondre à des QCM. Il s’articule donc autour de ces deux fonctionnalités codées en html, php et css, et s’appuie sur une base de données postgresql.</p>
 </div>
 
 <!-- END ABOUT  -->

@@ -2,68 +2,32 @@
 <html>
     <head>
         <meta charset="utf-8" />
-		 <link rel="stylesheet" href="choixc.css" />
+		 <link rel="stylesheet" href="Questions.css" />
+        <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
         <title></title>
     </head>
     <body>
 
-		<a name="home"></a>
-<div id="desk-nav">
-  <nav>
-    <ul>
-      <li><a href="AccueilQ.php">Home</a></li>
-      <li><a href="Profil.php">Profil</a></li>
-      <li><a href="#">QCM</a></li>
-      <li><a href="Index.php">Déconnexion</a></li>
-    </ul>
-  </nav>
-</div>
 
-
-<header class="parallax-window" data-parallax="scroll">
-
-  <div id="content-container">
-
-    <h2 id="desk-hero"> Commencer à créer votre QCM</h2>
-     <div id="menu-front">
-		 <ul>
-		 <?php
-		 $monidqcm=$_POST['id'];
-		echo' <li>	<form action="CreationQuestions.php" method="post">
-			<input type="hidden" name="idd" value="'.$_POST['id'].'"/>
-			<input type="hidden" name="idqcm" value="'.$monidqcm.'"/>
-			<input type="submit" value="Créer une question"/></form>
-			</li>';
-			
+        <div id="desk-nav">
+		<nav>
+			<ul>
+				<li><a href="AccueilQ.php">Home</a></li>
+				<li><a href="Profil.php">Profil</a></li>
+				<li><a href="ChoixQC.php">QCM</a></li>
+				<li><a href="Index.php">Déconnexion</a></li>
+			</ul>
+		</nav>
+	</div>
+        
+        
+        
+        
+        
+    <div class="container">
+    <h1>Liste Question</h1>
 		
-			echo' <li><form action="Importer.php" method="post">
-			<input type="hidden" name="idd" value="'.$_POST['id'].'"/>
-			<input type="hidden" name="idqcm" value="'.$monidqcm.'"/>
-			<input type="submit" value="Importer une question"/></form>
-			</li>';
-			 
-			 ?>
-		 </ul>
-    </div>
-  </div>
 
-</header>
-
-<!-- END LANDING PAGE --> 
-
-
-
-<!-- About -->
-
-
-
-<div id="about-text">
-
-  <h2>Question</h2>
-
-  <div id="aboutLayout">
-
-    <p>
 <?php
 session_start();
 require_once('Connexionbdd.php');
@@ -74,7 +38,7 @@ if(isset($_POST['modif']))
 	$req=$bdd->prepare("UPDATE qcm SET fini = false WHERE id_qcm=:id");
 	$req->bindValue(':id',$_POST['id']);
 	$req->execute();
-	echo '<p> reprise de la création du QCM numéro '.$_POST['id'].'</p>';
+	echo 'reprise de la création du QCM numéro '.$_POST['id'];
 }
 	if(isset($_POST['id'])){
 		
@@ -85,7 +49,7 @@ if(isset($_POST['modif']))
 			echo 'Sous_domaine du qcm:'.$_POST['sdom'].'</br>';
 		}
 		
-		echo 'id du qcm: '.$_POST['id'];
+		echo '<h2>id du qcm: '.$_POST['id'].'</h2>';
 		$monidqcm=$_POST['id'];
 	}
 //$monidqcm->id qcm que l'on cree
@@ -130,7 +94,6 @@ if (isset($_POST['q'])){
 	}*/
 	///////////////
 	$tab = array_combine($_POST['Rep'], $_POST['select']);
-	echo var_dump($_POST);
 	
 	//recuperer id question pour l'inserer dans reponse
 	$idq=0;
@@ -189,8 +152,9 @@ if (isset($_POST['q'])){
 	$req->bindValue(':idqcm',$monidqcm);
 	$req->execute();
 	while($ligne=$req->fetch(PDO::FETCH_ASSOC)){
-	echo 'Question : '.htmlspecialchars($ligne['question'],ENT_QUOTES).'</br>';
-	
+        echo "<div class=\"form-group\"><label class=\"control-label\" for=\"select\">";
+	echo 'Q : '.htmlspecialchars($ligne['question'],ENT_QUOTES).'</br>';
+	echo "</label><i class=\"bar\"></i></div> ";
 	
 	
 	$req2=$bdd->prepare("SELECT * FROM reponse natural join question natural join qcm_question natural join qcm where id_qcm=:idqcm and id_question=:numeroquest"); // 
@@ -199,36 +163,47 @@ if (isset($_POST['q'])){
 	$req2->execute();
 	echo'</br>';
 	while($l=$req2->fetch(PDO::FETCH_ASSOC)){
-			if($l['correct']){
-	echo '<div id=correct>Réponse : '.$l['reponse'].'</br></div>';
-	}else{
-	echo '<div id=false>Réponse : '.$l['reponse'].'</br></div>';
-	}
-		}
+        if($l['correct']){
+             echo '<i class="helper"><div class="green"> '.$l['reponse'].' </i></div>';
+        }else{
+                  echo '<i class="helper"><div class="red">'.$l['reponse'].' </i></div>';
+	   }  
+    }
 
 	echo'</br>';
 	}	
 
 }
-	
-	
+		
 }
-echo '<form action="Finaliser.php" method="post"><input type="hidden" name="id" value="'.$_POST['id'].'"/><input type="submit" value="Valider QCM"/></form>';
+
 ?>
-</p>
 
 
-  </div>
-
-</div>
-
-<!-- END ABOUT -->
-
-<!-- FOOTER -->
-
-  <footer>
-    <p>&copy; DUT Informatique. All Rights Reserved.<span class="year">2016</span></p>
-  </footer>
+        
+         <?php
+        
+        
+            echo '<form action="Finaliser.php" method="post">
+            <input type="hidden" name="id" value="'.$_POST['id'].'"/>
+            <div class="button-container"><button type="submit" class="button"><span>Valider QCM</span></button></form>';
+        
+		 $monidqcm=$_POST['id'];
+        
+            echo' <form action="CreationQuestions.php" method="post">
+			<input type="hidden" name="idd" value="'.$_POST['id'].'"/>
+			<input type="hidden" name="idqcm" value="'.$monidqcm.'"/>
+			<button type="submit" class="button"><span>Créer Question</span></button></form>';
+			
+		
+			echo' <form action="Importer.php" method="post">
+			<input type="hidden" name="idd" value="'.$_POST['id'].'"/>
+			<input type="hidden" name="idqcm" value="'.$monidqcm.'"/>
+			<button type="submit" class="button"><span>Importer Question</span></button></div></form>';
+			 
+        ?>
+        
+        </div>
 
 </body>
 </html>

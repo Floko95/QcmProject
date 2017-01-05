@@ -200,12 +200,11 @@ body .container .content .submit-wrap {
   position: absolute;
   bottom: 0;
   width: 100%;
-}
-body .container .content .submit-wrap a {
+    margin-bottom: 20%;
   font-size: 12px;
   display: block;
-  margin-top: 10px;
   text-align: center;
   text-decoration: none;
-  color: #999999;
+  color: #999999;    
+
 }

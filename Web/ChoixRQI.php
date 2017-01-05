@@ -74,7 +74,7 @@ if(isset($_POST['idsd'])and trim($_POST['idsd']!=' ')){
 			
 	}
   if ($tour==0){
-    echo "</br>Ce Sous-domaine ne contient pas de QCM</br>";
+    echo "<p>Ce sous-domaine ne contient pas de QCM</p>";
 	}
 	
 }

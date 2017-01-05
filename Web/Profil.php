@@ -21,6 +21,9 @@
     </ul>
   </nav>
 </div>
+        
+        
+        
 <?php 
 session_start();
 require_once('Connexionbdd.php');
@@ -28,14 +31,9 @@ require_once('Connexionbdd.php');
  <div class="material-wrap">
 <div class="material clearfix">
 	<div class="top-bar">
-		<div class="pull-left">
-			<a href="#" class="menu-tgl pull-left"><i class="fa fa-bars"></i></a>
-		</div>
+		
 		<span class="title">Profil</span>
-		<div class="pull-right">
-			<a href="#" class="search-tgl pull-left"><i class="fa fa-search"></i></a>
-			<a href="#" class="option-tgl pull-left"><i class="fa fa-ellipsis-v"></i></a>
-		</div>
+		
 	</div>
 	<div class="profile">
 		<div class="cover">
@@ -46,7 +44,7 @@ require_once('Connexionbdd.php');
 			<span class="vec vec_e"></span>
 		</div>
 		<div class="photo">
-			<a href="" target="_blank"><img src="http://icons.iconarchive.com/icons/webalys/kameleon.pics/512/Alien-icon.png"></a>
+			<img src="http://icons.iconarchive.com/icons/webalys/kameleon.pics/512/Alien-icon.png">
 		</div>
 		<div class="info">
 		<?php echo '<div class="name">'.$_SESSION['user'].'</div>';?>
@@ -63,7 +61,7 @@ require_once('Connexionbdd.php');
     
     <div class="tabs-content">
 		<div class="friend-list">
-			<div class="list-ul">
+			
 				<div class="list-li title">Récapitulatif</div>
                 
                 
@@ -162,7 +160,7 @@ else//1-entrée du profil,affichage des domaines dans lesquels le questionneur a
 		</div>
 	</div>
 </div>
-</div>
+
 	
 	</body>
 	</html>

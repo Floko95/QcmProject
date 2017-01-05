@@ -30,14 +30,9 @@ require_once('Connexionbdd.php');
     <div class="material-wrap">
 <div class="material clearfix">
 	<div class="top-bar">
-		<div class="pull-left">
-			<a href="#" class="menu-tgl pull-left"><i class="fa fa-bars"></i></a>
-		</div>
+		
 		<span class="title">Profil</span>
-		<div class="pull-right">
-			<a href="#" class="search-tgl pull-left"><i class="fa fa-search"></i></a>
-			<a href="#" class="option-tgl pull-left"><i class="fa fa-ellipsis-v"></i></a>
-		</div>
+		
 	</div>
 	<div class="profile">
 		<div class="cover">
@@ -48,7 +43,7 @@ require_once('Connexionbdd.php');
 			<span class="vec vec_e"></span>
 		</div>
 		<div class="photo">
-			<a href="" target="_blank"><img src="http://icons.iconarchive.com/icons/webalys/kameleon.pics/512/Alien-icon.png"></a>
+			<img src="http://icons.iconarchive.com/icons/webalys/kameleon.pics/512/Alien-icon.png"></a>
 		</div>
 		<div class="info">
         <?php echo '<div class="name">'.$_SESSION['user'].'</div>';?>
@@ -73,46 +68,38 @@ $ins->execute();
 while($lu=$ins->fetch(PDO::FETCH_ASSOC)){
 		$tim=$lu['id_repondeur'];
 		}
-
-
 if(isset($_GET['d']) and trim($_GET['d']!='') and !isset($_GET['sd'])){
 $d=$_GET['d'];
 $req2 =$bdd->query("SELECT round(avg(note_qcm)::numeric,2) as round FROM recap_repondeur natural join domaine WHERE id_repondeur = $tim and id_domaine=$d");
 $t=$req2->fetch();
 $req2->closeCursor();
 $two=$t['round'];
-    echo '<div class="tabs clearfix"> <a href="#">';
-   echo '<a href="#">';
+    echo '<div class="tabs clearfix"> <ul>';
+   echo '<li>';
     echo 'Moyenne : '.$two;
-    echo '</a></div>';
+    echo '</li></div>';
 }	
 		
 $req1 =$bdd->query("SELECT count(id_qcm) as somme FROM recap_repondeur WHERE id_repondeur = $tim");
 $o=$req1->fetch();
 $req1->closeCursor();
 $one=$o['somme'];
-
 $req2 =$bdd->query("SELECT round(avg(note_qcm)::numeric,2) as round FROM recap_repondeur WHERE id_repondeur = $tim");
 $t=$req2->fetch();
 $req2->closeCursor();
 $two=$t['round'];
-
 $req3 =$bdd->query("SELECT sum(temps_qcm) as sum FROM recap_repondeur WHERE id_repondeur = $tim");
 $th=$req3->fetch();
 $req3->closeCursor();
 $three=$th['sum'];
-
-
 $up1 =$bdd->prepare ('UPDATE repondeur SET nb_qcm_fait = :o WHERE id_repondeur = :id');
 $up1->bindValue(':id',$tim);
 $up1->bindValue(':o',$one);
 $up1->execute();
-
 $up2 =$bdd->prepare ('UPDATE repondeur SET moyenne = :t WHERE id_repondeur = :id');
 $up2->bindValue(':id',$tim);
 $up2->bindValue(':t',$two);
 $up2->execute();
-
 $up3 =$bdd->prepare ('UPDATE repondeur SET temps_total = :th WHERE id_repondeur = :id');
 $up3->bindValue(':id',$tim);
 $up3->bindValue(':th',$three);
@@ -122,14 +109,14 @@ $statrep =$bdd->prepare ('Select * from repondeur WHERE id_repondeur = :id');
 $statrep->bindValue(':id',$tim);
 $statrep->execute();
 while($l=$statrep->fetch(PDO::FETCH_ASSOC)){
-    echo '<div class="tabs clearfix"> <a href="#">';
+    echo ' <div class="tabs clearfix"><li>';
     
-    echo $l['temps_total'];    
+    echo 'Temps total: '.$l['temps_total'].'';    
         
-    echo '</a><a href="#">';
-    echo $l['nb_qcm_fait'];
+    echo '</li><li>';
+    echo '  Total QCM: ' .$l['nb_qcm_fait'].'';
     
-    echo '</a>';
+    echo '</li></ul>';
 //<a href="#">';
     
    // echo $l['moyenne'];
@@ -171,7 +158,6 @@ $d->execute();
 					</div>
 					<div class="action pull-right">
 						<div class="name">';
-
 						
 						
            echo 'Note '.$l['note_qcm'];
@@ -185,7 +171,6 @@ $d->execute();
 				</div>';
    
 }
-
 }else if(isset($_GET['d'])and trim ($_GET['d']!='') and !isset($_GET['sd'])){
 	
 	$req=$bdd->prepare("SELECT distinct domaine,sous_domaine FROM recap_repondeur natural join sous_domaine natural join domaine where id_domaine=:d and id_repondeur=:id_rep");
@@ -223,7 +208,6 @@ $d->execute();
 					</div>
 					<div class="action pull-right">
 						<div class="name">';
-
 						
 						
            echo 'Note '.$l['note_qcm'];
@@ -238,7 +222,6 @@ $d->execute();
    
 	}
 }else{	 
-
 	
 	$dom=$bdd->prepare('SELECT distinct id_domaine,domaine FROM domaine natural join recap_repondeur where id_repondeur = :id_rep ');
 	$dom->bindValue(':id_rep',$tim);
@@ -265,6 +248,4 @@ $d->execute();
     
     </body>
 	</html>
-    
-    
     

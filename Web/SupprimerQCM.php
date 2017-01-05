@@ -9,16 +9,7 @@
     <body>
    
         
-        <div id="desk-nav">
-  <nav>
-    <ul>
-      <li><a href="AccueilQ.php">Home</a></li>
-      <li><a href="Profil.php">Profil</a></li>
-      <li><a href="ChoixQC.php">QCM</a></li>
-      <li><a href="Index.php">Déconnexion</a></li>
-    </ul>
-  </nav>
-</div>
+        
         
         
         
@@ -41,11 +32,10 @@ if (isset($_POST['supp']) and trim($_POST['supp']!=''))//bouton supprimer press�
    <?php echo ' <form action="SupprimerQCM.php" method="post"><input type="hidden" name="id" value="'.$_POST['id'].'" />' ?>
     
   <div class="inner-square left">
-    <span class='fa fa-check'><img src="http://img11.hostingpics.net/pics/124460checkmark24.png"></span>
-      <input type="submit" name="suppc"/>
+      <button type="submit" name="suppc" class ="green"><img src="http://img11.hostingpics.net/pics/124460checkmark24.png"></button>
   </div>
   <div class="inner-square right">
-    <span class='fa fa-remove'><input type="submit" name="suppn"/><img src="http://img11.hostingpics.net/pics/218305xmark24.png"></span>
+     <button type="submit" name="suppn" class="red"> <img src="http://img11.hostingpics.net/pics/218305xmark24.png"></button>
       
   </div>
 </div>
@@ -61,7 +51,8 @@ elseif(isset($_POST['suppc']))
 	$req=$bdd->prepare("DELETE  FROM public.qcm WHERE public.qcm.id_qcm=:id");
 	$req->bindValue(':id',$_POST['id']);
 	$req->execute();
-	echo ' <p> Le questionnaire numéro '.$_POST['id']. ' a été supprimé.</p><br/><a href=Profil.php>Retour au profil</a>';
+	echo 'Le questionnaire numéro '.$_POST['id']. ' a été supprimé. ';
+    echo '<a href=Profil.php> Retour au profil</a>';
 }
 elseif(isset($_POST['suppn']))
 {
