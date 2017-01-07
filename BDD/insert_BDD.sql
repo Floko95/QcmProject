@@ -61,16 +61,16 @@ INSERT INTO reponse (id_question, reponse, correct) values
 (26,'Avatar', DEFAULT),(26,'Le Monde de Nemo', DEFAULT),(26,'Autant on emporte le vent', TRUE),(26,'Star Wars IV', DEFAULT),
 (27,'Les Indestructibles', DEFAULT),(27,'1001 pattes', DEFAULT),(27,'Toy Story', TRUE),(27,'Monstres et cie', DEFAULT);
 
-INSERT INTO qcm (auteur,domaine,sous_domaine,visible) values
-('Bernard','Informatique','BDD',true),
-('quest','Informatique','PHP',true),
-('quest','Informatique','JAVA',true),
-('quest','Informatique','C',true),
-('quest','Informatique','HTML',true),
-('quest','Mathématiques','Algèbre',true),
-('quest','Mathématiques','Géometrie',true),
-('Bernard','Culture Générale','Histoire',true),
-('Bernard','Culture Générale','Cinéma',true);
+INSERT INTO qcm (auteur,domaine,sous_domaine,visible,fini) values 
+('Bernard','Informatique','BDD',true,true),
+('quest','Informatique','PHP',true,true),
+('quest','Informatique','JAVA',true,true),
+('quest','Informatique','C',true,true),
+('quest','Informatique','HTML',true,true),
+('quest','Mathématiques','Algèbre',true,true),
+('quest','Mathématiques','Géometrie',true,true),
+('Bernard','Culture Générale','Histoire',true,true),
+('Bernard','Culture Générale','Cinéma',true,true);
 
 INSERT INTO qcm_question values 
 (1,1),(1,2),(1,3),

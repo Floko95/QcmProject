@@ -2,74 +2,63 @@
 <html>
     <head>
         <meta charset="utf-8" />
-		 <link rel="stylesheet" href="AccueilQ.css" />
+		 <link rel="stylesheet" href="AccueilR.css" />
+         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300" rel="stylesheet">
+         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet">
+         <link href="https://fonts.googleapis.com/css?family=Redressed" rel="stylesheet">
         <title></title>
     </head>
     <body>
-		
+
 <?php 
 session_start();
 require_once('Connexionbdd.php');
 ?>
 
 <div id="desk-nav">
-
-  <a href="#home"><?php echo 'Utilisateur : '.htmlspecialchars($_SESSION['user'],ENT_QUOTES); ?>
-   <!-- Image Logo -->
-  </a>
-  
-  <nav>   
-    <ul>
+  <h1><?php echo 'Utilisateur : '.htmlspecialchars($_SESSION['user'],ENT_QUOTES); ?></h1>
+    <nav><ul>
       <li><a href="Index.php">Deconnexion</a></li>
-      <li><a href="#about">Information</a></li>
+      <li><a href="#information">Information</a></li>
       <li><a href="ChoixQC.php">QCM</a></li>
       <li><a href="Profil.php">Profil</a></li>
-      <li><a href="#contact-me">Contact</a></li>
-    </ul>
-  </nav>
+      <li><a href="#contact">Contact</a></li>
+    </ul></nav>
 </div>
-
 
 <!-- END NAVIGATION -->
 
-    <img id="al-bg-photo" src="http://img15.hostingpics.net/pics/145380brainpaintmindcreative.jpg" />
-
-<!-- About Me -->
-<a name="about"></a>
-<div id="about-me">
-
-<h2>INFORMATION</h2>
-  <p>Nous sommes une équipe de cinq étudiants en DUT Informatique à l’Université Paris 13. Réalisé dans le cadre de nos projets tuteurés de S3, ce site vous permettra, suivant votre catégorie, de créer ou de répondre à des QCM. Il s’articule donc autour de ces deux fonctionnalités codées en html, php et css, et s’appuie sur une base de données postgresql.</p>
-  </div>
-
-<!-- END ABOUT  -->
+    <img id="banniere" src="http://img15.hostingpics.net/pics/145380brainpaintmindcreative.jpg" />
 
 
-<!-- Portfolio and Resume  -->
+<!-- INFORMATION -->
 
-<div id="port-res">
-
-<!-- Portfolio -->
-<div id="portfolio">
-
-  <a href="Importer.php"><h2>QCM</h2></a>
-  <p>Start working</p>
-
+<div id="information">
+    <h2>INFORMATION</h2>
+    <p>Nous sommes une équipe de cinq étudiants en DUT Informatique à l’Université Paris 13. Réalisé dans le cadre de nos projets tuteurés de S3, ce site vous permettra, suivant votre catégorie, de créer ou de répondre à des QCM. Il s’articule donc autour de ces deux fonctionnalités codées en html, php et css, et s’appuie sur une base de données postgresql.</p>
 </div>
 
-<!-- End Portfolio  -->
+<!-- END INFORMATION  -->
 
-<!-- Resume -->
-<div id="resume">
 
-  <a href="#"><h2>Profil</h2></a>
-  <p>Check your profil</p>
+<!-- Profil and QCM  -->
 
+<div id="pro-qcm">
+    <div id="qcm">
+        <a href="ChoixQC.php"><h2>QCM</h2></a>
+        <p>Start working</p>
+    </div>
+
+    <div id="profil">
+        <a href="Profil.php"><h2>Profil</h2></a>
+        <p>Check your profil</p>
+    </div>
 </div>
+
 
 <!-- End Resume -->
   
-</div>
+
 
 <!-- END PORTFOLIO AND RESUME  -->
 
@@ -117,9 +106,6 @@ require_once('Connexionbdd.php');
 <!-- Footer -->
 
 
-
-
-
 <footer>
 
   <p>&copy;  DUT Informatique  <span class="year">2016</span>. All Rights Reserved. </p>
@@ -129,8 +115,9 @@ require_once('Connexionbdd.php');
 <!-- END FOOTER  -->
         
         
-        		
-		<?php 
+        
+        
+        	<?php 
 	
 		if ($_SESSION['connecte']){
 			switch ($_SESSION['role']) {
@@ -141,9 +128,11 @@ require_once('Connexionbdd.php');
 					echo('<p> Connexion questionneur réussie </p>');
 					break;
 				default : die('<p> Vous n\'avez techniquement pas à voir ça O_o </p>');
-			}
+			} 
         }
 		?>
 	
 	</body>
 	</html>
+		
+		
