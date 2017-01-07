@@ -49,20 +49,15 @@ require_once('Connexionbdd.php');
 		<div class="info">
 		<?php echo '<div class="name">'.$_SESSION['user'].'</div>';?>
 		</div>
-		<input id="toggle" type="checkbox" class="plus"><label for="toggle" class="toggle"></label>
-		<div class="links">
-			<a href="" data-title="IDK"><i class="fa fa-facebook"></i></a>
-			<a href="" data-title="IDK"><i class="fa fa-twitter"></i></a>
-			<a href="" data-title="IDK"><i class="fa fa-codepen"></i></a>
-			<a href="" data-title="IDK"><i class="fa fa-pinterest"></i></a>
-		</div>
+		<label for="toggle" class="toggle"><a href="" onClick="javascript:window.history.go(-1)"><img src="http://img15.hostingpics.net/pics/571733arrow8724.png"></a></label>
+		
 	</div>
     
     
     <div class="tabs-content">
 		<div class="friend-list">
 			
-				<div class="list-li title">Récapitulatif</div>
+				<div class="list-li title">Mettre S/ S-D ici !</div>
                 
                 
                 
@@ -97,7 +92,7 @@ if(isset($_GET['d']) and trim($_GET['d']!='') and !(isset($_GET['sd'])))//2-doma
         echo'    <div class="list-li clearfix">	
 					<div class="info pull-left">
 						<div class="name">';
-		 echo '<form action="VisualisationQCM.php" method="post"><input type="submit" name="qcmb" value="QCM numéro '.$ligne['id_qcm'].'" /><input type="hidden" name="id" value="'.$ligne['id_qcm'].'" /></form>';
+		 echo '<form action="VisualisationQCM.php" method="post"><button type="submit" name="qcmb"> QCM Général n° '.$ligne['id_qcm'].' <nutton><input type="hidden" name="id" value="'.$ligne['id_qcm'].'" /></form>';
         echo'</div>
 					</div>
 				</div>';
@@ -117,7 +112,7 @@ else if (isset($_GET['sd']) and trim($_GET['sd']!='') and isset($_GET['d']) and 
         echo'    <div class="list-li clearfix">	
 					<div class="info pull-left">
 						<div class="name">';
-		 echo '<form action="VisualisationQCM.php" method="post"><input type="submit" name="qcmb" value="QCM numéro '.$ligne['id_qcm'].'" /><input type="hidden" name="id" value="'.$ligne['id_qcm'].'" /></form>';
+		 echo '<form action="VisualisationQCM.php" method="post"><button type="submit" name="qcmb"> QCM numéro '.$ligne['id_qcm'].' </button><input type="hidden" name="id" value="'.$ligne['id_qcm'].'" /></form>';
         echo'</div>
 					</div>
 				</div>';
@@ -140,28 +135,14 @@ else//1-entrée du profil,affichage des domaines dans lesquels le questionneur a
 				</div>';
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 ?>
                 
                 
 </div>
-		</div>
-	</div>
+</div>
+</div>
 </div>
 
 	
 	</body>
 	</html>
-
