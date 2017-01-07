@@ -61,7 +61,7 @@ INSERT INTO reponse (id_question, reponse, correct) values
 (26,'Avatar', DEFAULT),(26,'Le Monde de Nemo', DEFAULT),(26,'Autant on emporte le vent', TRUE),(26,'Star Wars IV', DEFAULT),
 (27,'Les Indestructibles', DEFAULT),(27,'1001 pattes', DEFAULT),(27,'Toy Story', TRUE),(27,'Monstres et cie', DEFAULT);
 
-INSERT INTO qcm (auteur,domaine,sous_domaine,visible,fini) values
+INSERT INTO qcm (auteur,domaine,sous_domaine,visible,fini) values 
 ('Bernard','Informatique','BDD',true,true),
 ('quest','Informatique','PHP',true,true),
 ('quest','Informatique','JAVA',true,true),
