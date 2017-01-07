@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8" />
-		 <link rel="stylesheet" href="AccueilR.css" />
+		 <link rel="stylesheet" href="Index.css" />
          <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300" rel="stylesheet">
          <link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet">
          <link href="https://fonts.googleapis.com/css?family=Redressed" rel="stylesheet">
