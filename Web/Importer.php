@@ -18,7 +18,7 @@
 
 
 require_once('Connexionbdd.php');
-$mesquestions=array();
+
 //$post idqcm -> id qcm cree
 
 if (isset($_POST['idd']) and trim($_POST['idd']!=''))
@@ -42,42 +42,44 @@ if (isset($_POST['idd']) and trim($_POST['idd']!=''))
 	//if(){
 	if($ligne['sous_domaine']==null){
 		//SELECT distinct * FROM question INNER JOIN qcm_question ON question.id_question = qcm_question.id_question INNER JOIN qcm ON qcm.id_qcm = qcm_question.id_qcm WHERE qcm.domaine = :domaine
-		$req=$bdd->prepare("Select distinct * from question natural join qcm_question natural join qcm where domaine=:domaine EXCEPT Select * from question natural join qcm_question natural join qcm where id_qcm=:id");
+		$req=$bdd->prepare("Select distinct id_question,question from question natural join qcm_question natural join qcm where domaine=:domaine ");
 		$req->bindValue(':domaine',$ligne['domaine']);
-		$req->bindValue(':id',$_POST['idd']);
+		
 		$req->execute();	
 	
 	}else{
-		$req=$bdd->prepare("SELECT distinct * FROM question NATURAL JOIN qcm natural join qcm_question WHERE sous_domaine=:sdomaine and domaine=:domaine EXCEPT Select  * from question NATURAL JOIN qcm natural join qcm_question where id_qcm=:id");
+		$req=$bdd->prepare("SELECT distinct id_question,question FROM question NATURAL JOIN qcm natural join qcm_question WHERE sous_domaine=:sdomaine and domaine=:domaine ");
 		$req->bindValue(':sdomaine',$ligne['sous_domaine']);
 		$req->bindValue(':domaine',$ligne['domaine']);
-		$req->bindValue(':id',$_POST['idd']);
+		
 		$req->execute();
 	}
-	$dejadansqcm=0;
+	
 	while($ligne=$req->fetch(PDO::FETCH_ASSOC))
 		{
-			//echo var_dump($_POST);
+			
+		$req2=$bdd->prepare("select * from qcm_question where id_qcm=:id");
+		$req2->bindValue(':id',$_POST['idd']);
+		$req2->execute();
+		$test=0;
+			while($ligne2=$req2->fetch(PDO::FETCH_ASSOC))
+			{
+				if($ligne2['id_question']==$ligne['id_question'])
+					$test=1;
+			}
+			if($test==0)
+			{
 			echo '<form action="Visualisation.php" method="post">
 				<input type="hidden" name="id" value="'.$_POST['idd'].'"/>';
-				if(isset($ligne['id_question'])){
-				
-				foreach($mesquestions as $cle=>$val){
-					if($ligne['id_question']==$val){
-					$dejadansqcm+=1;
-				
-					}
-				}
-				if($dejadansqcm==0){
 				echo '<input type="hidden" name="q" value="'.$ligne['id_question'].'"/>
 				<input type="submit" value="'.$ligne['question'].'"/>';
-				}
-				}
 				echo '</form>';
+			}
+			
 		}
 	//}
 		
-		
+echo '<form action="Questions.php" method="post"><input type="hidden" name="id" value="'.$_POST['idd'].'"/><input type="submit" value="Retour"/></form>';		
 //SELECT distinct id_question, question FROM question natural JOIN qcm natural join qcm_question WHERE sous_domaine='HTML' and domaine='Informatique'	
 }// SELECT distinct * FROM question natural JOIN qcm natural join qcm_question WHERE sous_domaine='HTML' and domaine='Informatique'  EXCEPT Select * from question NATURAL JOIN qcm natural join qcm_question where id_question = 13
 ?>
