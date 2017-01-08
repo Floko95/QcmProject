@@ -2,7 +2,7 @@
 	<meta charset="utf-8" />
     <link rel="stylesheet" href="ChoixRDS.css" />
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
     <title> QCM | Choix Sous Domaine</title>
  <head>
@@ -20,7 +20,6 @@
 </div>
 
 
-<input type="checkbox" id="searchCheckbox"/>
 
 <div class="rela-block top-container">
     <div class="rela-block top-center-container">
@@ -29,14 +28,8 @@
             <p><?php
 			if(isset($_POST['nd'])){echo 'Domaine : '.$_POST['nd'];}?></p>
         </div>
-        <div class="inner-container top-search-container">
-            <p class="search-text">Search Domain</p>
-            <input type="text" placeholder="Type Something" class="top-search"/>
-        </div>
     </div>
-    <label for="searchCheckbox" class="checkbox-label search-label">
-        <div class="abs-center magnifying-glass"></div>
-    </label>
+   
 </div>
 
 
@@ -90,8 +83,6 @@
 ?>
     
 </div>
-
-
 		<div class="rela-block button black-text load-button"><a href="" onClick="javascript:window.history.go(-1)">Retour</a></div>
 	</body>
 </head>

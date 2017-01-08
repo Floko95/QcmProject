@@ -2,7 +2,7 @@
 	<meta charset="utf-8" />
     <link rel="stylesheet" href="ChoixRQI.css" />
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
     <title> QCM | Choix QCM</title>
  <head>
@@ -22,7 +22,7 @@
       
       
 
-<input type="checkbox" id="searchCheckbox"/>
+
 
 <div class="rela-block top-container">
     <div class="rela-block top-center-container">
@@ -33,14 +33,7 @@
 			if(isset($_POST['nd'])){echo 'Domaine : '.$_POST['nd'];}
 			echo '</br>';if(isset($_POST['idsd'])){echo 'Sous-domaine : '.$_POST['idsd'];}?></p>
         </div>
-        <div class="inner-container top-search-container">
-            <p class="search-text">Search Domain</p>
-            <input type="text" placeholder="Type Something" class="top-search"/>
-        </div>
     </div>
-    <label for="searchCheckbox" class="checkbox-label search-label">
-        <div class="abs-center magnifying-glass"></div>
-    </label>
 </div>
 	  
 
