@@ -55,12 +55,15 @@ if(isset($_POST['modif']))
 //$monidqcm->id qcm que l'on cree
 
 if (isset($_POST['q'])){
-	//if(is_string($_POST['q']))//si on arrive de la création d'une question,on insère les créations dans la table
-	//{
-	//inserer question
-	///////////////
+	
+
 	
 	if(isset($_POST['creaquestion'])){//si on arrive de creation question
+	
+	
+	
+		
+	
 	if(isset($_POST['exp']) and trim($_POST['exp'])!=''){
 	$req=$bdd->prepare('INSERT INTO question (question,valeur,temps,explication) VALUES (:q,:v,:t,:e)');
 	$req->bindValue(':q',$_POST['q']);
@@ -76,23 +79,28 @@ if (isset($_POST['q'])){
 	$req->execute();
 	}
 	
-	/*else{//si on arrive d'importer
-	if(isset($_POST['exp']) and trim($_POST['exp'])!=''){
-	$req=$bdd->prepare('INSERT INTO  (question,valeur,temps,explication) VALUES (:q,:v,:t,:e)');
-	$req->bindValue(':q',$_POST['q']);
-	$req->bindValue(':v',$_POST['points']);
-	$req->bindValue(':t',$_POST['tps']);
-	$req->bindValue(':e',$_POST['exp']);
-	$req->execute();
-	}else{
-	$req=$bdd->prepare('INSERT INTO question (question,valeur,temps) VALUES (:q,:v,:t)');
-	$req->bindValue(':q',$_POST['q']);
-	$req->bindValue(':v',$_POST['points']);
-	$req->bindValue(':t',$_POST['tps']);
-	$req->execute();
-	}	
-	}*/
-	///////////////
+///////////////07012017
+		$i=0;
+		$note_tota=$bdd->prepare("SELECT id_question FROM question where question=:q");
+$note_tota->bindValue(':q',$_POST['q']);
+$note_tota->execute();
+while($ligne=$note_tota->fetch(PDO::FETCH_ASSOC)){
+	$i=$ligne['id_question'];
+}
+
+$note_total=$bdd->prepare("SELECT valeur FROM question where id_question=:q");
+$note_total->bindValue(':q',$i);
+$note_total->execute();
+while($ligne=$note_total->fetch(PDO::FETCH_ASSOC)){
+	$note=$ligne['valeur'];
+}
+$up=$bdd->prepare("update qcm set note_total=note_total+:n where id_qcm=:mq");
+$up->bindValue(':n',$note);
+$up->bindValue(':mq',$monidqcm);
+$up->execute();
+
+
+///////////////
 	$tab = array_combine($_POST['Rep'], $_POST['select']);
 	
 	//recuperer id question pour l'inserer dans reponse
@@ -126,11 +134,6 @@ if (isset($_POST['q'])){
 	}
 	}
 	
-	//}
-	//else if (is_int($_POST['q']))//si on arrive de l'importation, on récupère l'id de la question importée
-	//{
-		//$idq=$_POST['q'];
-	//}
 	
 	$req4 = $bdd->prepare('INSERT INTO qcm_question(id_qcm,id_question) VALUES(:idqcm,:idquestion)');//dans les deux cas on relie la question au qcm et on affiche le contenu du qcm en cours de creation
 	$req4->bindValue(':idqcm',$monidqcm);
@@ -138,6 +141,24 @@ if (isset($_POST['q'])){
 	$req4->execute();
 	
 	}else{
+
+		
+				///////////////07012017
+	$note=0;
+$note_total=$bdd->prepare("SELECT valeur FROM question where id_question=:q");
+$note_total->bindValue(':q',$_POST['q']);
+$note_total->execute();
+while($ligne=$note_total->fetch(PDO::FETCH_ASSOC)){
+	$note=$ligne['valeur'];
+}
+	
+$up=$bdd->prepare("update qcm set note_total=note_total+:n where id_qcm=:q");
+$up->bindValue(':n',$note);
+$up->bindValue(':q',$monidqcm);
+$up->execute();
+///////////////
+		
+		
 		//$idq=$_POST['q'];
 	$req4 = $bdd->prepare('INSERT INTO qcm_question(id_qcm,id_question) VALUES(:idqcm,:idquestion)');//dans les deux cas on relie la question au qcm et on affiche le contenu du qcm en cours de creation
 	$req4->bindValue(':idqcm',$monidqcm);
@@ -153,7 +174,7 @@ if (isset($_POST['q'])){
 	$req->execute();
 	while($ligne=$req->fetch(PDO::FETCH_ASSOC)){
         echo "<div class=\"form-group\"><label class=\"control-label\" for=\"select\">";
-	echo 'Q : '.htmlspecialchars($ligne['question'],ENT_QUOTES).'</br>';
+	echo 'Q : '.htmlspecialchars($ligne['question'],ENT_QUOTES).'note'.$ligne['note_total'].'</br>';
 	echo "</label><i class=\"bar\"></i></div> ";
 	
 	
@@ -183,6 +204,8 @@ if (isset($_POST['q'])){
         
          <?php
         
+		
+		
         
             echo '<form action="Finaliser.php" method="post">
             <input type="hidden" name="id" value="'.$_POST['id'].'"/>

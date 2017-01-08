@@ -145,12 +145,12 @@ if(isset($_POST['qcm'])and trim($_POST['qcm'])){ //si on arrive de la page execu
 					$score=0;
 				}
 				
-				$tems=$bdd->prepare('select note_total from qcm where id_qcm=:q');
-				$tems->bindValue(':q',$_POST['qcm']);
+				$tems=$bdd->prepare('select * from qcm where id_qcm=:s');
+				$tems->bindValue(':s',$_POST['qcm']);
 				$tems->execute();
-				/*while($lu=$tems->fetch(PDO::FETCH_ASSOC)){
-					$score=($score*20)/$lu['$note_total'];
-				}*/
+				while($lu=$tems->fetch(PDO::FETCH_ASSOC)){
+					$score=($score*20)/$lu['note_total'];
+				}
 
 				echo ' Score : '.$score.'</br></br>';
 			}
