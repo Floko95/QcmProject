@@ -66,24 +66,29 @@ if(isset($_GET['d']) and trim($_GET['d']!='')and !(isset($_GET['sd'])))//domaine
 }
 else if (isset($_GET['sd']) and trim($_GET['sd']!='') and isset($_GET['d']) and trim($_GET['d']!=''))//sous domaine sélectionné,création du qcm avec valeurs par defaut et id attribué.
 {
+	
+	
 	if($_GET['sd']=='general'){
-	$req=$bdd->prepare("INSERT into qcm(auteur,domaine) values(:quest,:d)");
+	$req=$bdd->prepare("INSERT into qcm(auteur,domaine,note_total) values(:quest,:d,0)");
 	$req->bindValue(':quest',$_SESSION['user']);
 	$req->bindValue(':d',$_GET['d']);
 	$req->execute();
 	}else{
-	$req=$bdd->prepare("INSERT into qcm(auteur,domaine,sous_domaine) values(:quest,:d,:sd)");
+	
+	$req=$bdd->prepare("INSERT into qcm(auteur,domaine,sous_domaine,note_total) values(:quest,:d,:sd,0)");
 	$req->bindValue(':quest',$_SESSION['user']);
 	$req->bindValue(':d',$_GET['d']);
 	$req->bindValue(':sd',$_GET['sd']);
 	$req->execute();	
 	}
 	
+	
 	$req=$bdd->prepare("SELECT * from qcm");
 	$req->execute();
 	while($ligne=$req->fetch(PDO::FETCH_ASSOC)){
 		$id=$ligne['id_qcm'];
 		}
+		
 	
 	echo '<p>Vous allez maintenant pouvoir créer votre qcm</p>';
 	if($_GET['sd']=='general')

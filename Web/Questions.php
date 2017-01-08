@@ -52,6 +52,8 @@ if(isset($_POST['modif']))
 		echo '<h2>id du qcm: '.$_POST['id'].'</h2>';
 		$monidqcm=$_POST['id'];
 	}
+	
+	
 //$monidqcm->id qcm que l'on cree
 
 if (isset($_POST['q'])){
@@ -144,7 +146,7 @@ $up->execute();
 
 		
 				///////////////07012017
-	$note=0;
+	$note;
 $note_total=$bdd->prepare("SELECT valeur FROM question where id_question=:q");
 $note_total->bindValue(':q',$_POST['q']);
 $note_total->execute();
@@ -152,6 +154,7 @@ while($ligne=$note_total->fetch(PDO::FETCH_ASSOC)){
 	$note=$ligne['valeur'];
 }
 	
+	 
 $up=$bdd->prepare("update qcm set note_total=note_total+:n where id_qcm=:q");
 $up->bindValue(':n',$note);
 $up->bindValue(':q',$monidqcm);
@@ -174,7 +177,7 @@ $up->execute();
 	$req->execute();
 	while($ligne=$req->fetch(PDO::FETCH_ASSOC)){
         echo "<div class=\"form-group\"><label class=\"control-label\" for=\"select\">";
-	echo 'Q : '.htmlspecialchars($ligne['question'],ENT_QUOTES).'note'.$ligne['note_total'].'</br>';
+	echo 'Q : '.htmlspecialchars($ligne['question'],ENT_QUOTES).'</br>';
 	echo "</label><i class=\"bar\"></i></div> ";
 	
 	
@@ -211,14 +214,13 @@ $up->execute();
             <input type="hidden" name="id" value="'.$_POST['id'].'"/>
             <div class="button-container"><button type="submit" class="button"><span>Valider QCM</span></button></form>';
         
-		 $monidqcm=$_POST['id'];
-        
+		
             echo' <form action="CreationQuestions.php" method="post">
 			<input type="hidden" name="idd" value="'.$_POST['id'].'"/>
 			<input type="hidden" name="idqcm" value="'.$monidqcm.'"/>
 			<button type="submit" class="button"><span>Créer Question</span></button></form>';
 			
-		
+			
 			echo' <form action="Importer.php" method="post">
 			<input type="hidden" name="idd" value="'.$_POST['id'].'"/>
 			<input type="hidden" name="idqcm" value="'.$monidqcm.'"/>
