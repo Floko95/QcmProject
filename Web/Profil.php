@@ -51,3 +51,84 @@ require_once('Connexionbdd.php'); ?>
 	</div>
     
     
+    <div class="tabs-content">
+		<div class="liste">
+			
+         
+
+<?php 
+if(isset($_GET['d']) and trim($_GET['d']!='') and !(isset($_GET['sd'])))//2-domaine sélectionné,affichage des sous domaines de ce domaine dans lesquels le questionneur a créé des qcms
+{
+	echo '<div class="list title"> '.$_GET['d'].'</div>';
+	$req=$bdd->prepare("SELECT distinct domaine,sous_domaine  FROM public.qcm WHERE auteur=:a and domaine=:d");
+	$req->bindValue(':a',$_SESSION['user']);
+	$req->bindValue(':d',$_GET['d']);
+	$req->execute();
+	while($ligne=$req->fetch(PDO::FETCH_ASSOC))
+	{
+        echo'<div class="list">	
+        <div class="info pull-left">
+        <div class="name">';
+        echo '<a href="Profil.php?d='.$ligne['domaine'].'&sd='.$ligne['sous_domaine'].'">'.$ligne['sous_domaine'].'</a>';
+        echo'</div></div></div>';
+	}
+	
+	$req2=$bdd->prepare("SELECT  distinct id_qcm FROM public.qcm WHERE domaine=:d and auteur=:a and sous_domaine is NULL");
+	$req2->bindValue(':a',$_SESSION['user']);
+	$req2->bindValue(':d',$_GET['d']);
+	$req2->execute();
+	while($ligne=$req2->fetch(PDO::FETCH_ASSOC))
+	{
+        echo'<div class="list">	
+		<div class="info pull-left">
+        <div class="name">';
+        echo '<form action="VisualisationQCM.php" method="post"><button type="submit" name="qcmb"> QCM Général n° '.$ligne['id_qcm'].' <nutton><input type="hidden" name="id" value="'.$ligne['id_qcm'].'" /></form>';
+        echo'</div></div></div>';
+	}
+}
+            
+else if (isset($_GET['sd']) and trim($_GET['sd']!='') and isset($_GET['d']) and trim($_GET['d']!=''))//3-sous domaine sélectionné,affichage des qcms créés par le questionneur dans ce sous domaine
+{
+	echo '<div class="list title">'.$_GET['d'].' / '.$_GET['sd'].'</div>';
+	$req=$bdd->prepare("SELECT  distinct id_qcm FROM public.qcm WHERE domaine=:d and sous_domaine=:sd and auteur=:a");
+	$req->bindValue(':a',$_SESSION['user']);
+	$req->bindValue(':d',$_GET['d']);
+	$req->bindValue(':sd',$_GET['sd']);
+	$req->execute();
+	
+	while($ligne=$req->fetch(PDO::FETCH_ASSOC))
+	{
+        echo'<div class="list">	
+        <div class="info pull-left">
+        <div class="name">';
+        echo '<form action="VisualisationQCM.php" method="post"><button type="submit" name="qcmb"> QCM numéro '.$ligne['id_qcm'].' </button><input type="hidden" name="id" value="'.$ligne['id_qcm'].'" /></form>';
+        echo'</div></div></div>';
+	}
+}
+            
+else//1-entrée du profil,affichage des domaines dans lesquels le questionneur a créé des qcms
+{
+	echo '<div class="list title">Récapitulatif</div>';
+	$req=$bdd->prepare("SELECT distinct domaine FROM public.qcm WHERE auteur=:a");
+	$req->bindValue(':a',$_SESSION['user']);
+	$req->execute();
+	while($ligne=$req->fetch(PDO::FETCH_ASSOC))
+	{
+        echo'<div class="list">	
+        <div class="info pull-left">
+        <div class="name">';
+        echo '<a href="Profil.php?d='.$ligne['domaine'].'">'.$ligne['domaine'].'</a>';
+        echo'</div></div></div>';
+	}
+}
+?>
+                
+                
+</div>
+</div>
+</div>
+</div>
+
+	
+	</body>
+	</html>
