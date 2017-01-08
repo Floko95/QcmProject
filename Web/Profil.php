@@ -69,6 +69,7 @@ if(isset($_GET['d']) and trim($_GET['d']!='') and !(isset($_GET['sd'])))//2-doma
         echo'<div class="list">	
         <div class="info pull-left">
         <div class="name">';
+		if($ligne['sous_domaine']!=NULL)
         echo '<a href="Profil.php?d='.$ligne['domaine'].'&sd='.$ligne['sous_domaine'].'">'.$ligne['sous_domaine'].'</a>';
         echo'</div></div></div>';
 	}
