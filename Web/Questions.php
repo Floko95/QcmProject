@@ -29,204 +29,193 @@
 		
 
 <?php
-session_start();
-require_once('Connexionbdd.php');
+	session_start();					//pour utiliser les $_session
+	require_once('Connexionbdd.php');
 
-$monidqcm;
-if(isset($_POST['modif']))
-{
-	$req=$bdd->prepare("UPDATE qcm SET fini = false WHERE id_qcm=:id");
-	$req->bindValue(':id',$_POST['id']);
-	$req->execute();
-	echo 'reprise de la création du QCM numéro '.$_POST['id'];
-}
-	if(isset($_POST['id'])){
+	
+	if(isset($_POST['modif'])){				//si le questionneur a choisi de modifier un qcm déjà créé
+	
+		$req=$bdd->prepare("UPDATE qcm SET fini = false WHERE id_qcm=:id");
+		$req->bindValue(':id',$_POST['id']);
+		$req->execute();
+		echo 'Reprise de la création du QCM numéro '.$_POST['id'];
+	}
+	
+	if(isset($_POST['id'])){				//si le questionneur vient de choixQC, donc du choix domaine/sous domaine
 		
-		if(isset($_POST['dom'])){
-			echo 'Domaine du qcm: '.$_POST['dom'].'</br>';
+		if(isset($_POST['dom'])){			//si le domaine est renseigné
+			echo 'Domaine du qcm: '.$_POST['dom'].'</br>'; //affichage du domaine
 		}
-		if (isset($_POST['sdom'])){
-			echo 'Sous_domaine du qcm:'.$_POST['sdom'].'</br>';
+		if (isset($_POST['sdom'])){			//si le sous domaine est renseigné
+			echo 'Sous_domaine du qcm:'.$_POST['sdom'].'</br>'; //affichage du domaine
 		}
 		
-		echo '<h2>id du qcm: '.$_POST['id'].'</h2>';
+	}
+		echo '<h2>QCM n° '.$_POST['id'].'</h2>';  //affichage de l'id du qcm
 		$monidqcm=$_POST['id'];
-	}
-	
-	
-//$monidqcm->id qcm que l'on cree
-
-if (isset($_POST['q'])){
-	
-
-	
-	if(isset($_POST['creaquestion'])){//si on arrive de creation question
-	
-	
-	
 		
 	
-	if(isset($_POST['exp']) and trim($_POST['exp'])!=''){
-	$req=$bdd->prepare('INSERT INTO question (question,valeur,temps,explication) VALUES (:q,:v,:t,:e)');
-	$req->bindValue(':q',$_POST['q']);
-	$req->bindValue(':v',$_POST['points']);
-	$req->bindValue(':t',$_POST['tps']);
-	$req->bindValue(':e',$_POST['exp']);
-	$req->execute();
-	}else{
-	$req=$bdd->prepare('INSERT INTO question (question,valeur,temps) VALUES (:q,:v,:t)');
-	$req->bindValue(':q',$_POST['q']);
-	$req->bindValue(':v',$_POST['points']);
-	$req->bindValue(':t',$_POST['tps']);
-	$req->execute();
-	}
 	
-///////////////07012017
-		$i=0;
-		$note_tota=$bdd->prepare("SELECT id_question FROM question where question=:q");
-$note_tota->bindValue(':q',$_POST['q']);
-$note_tota->execute();
-while($ligne=$note_tota->fetch(PDO::FETCH_ASSOC)){
-	$i=$ligne['id_question'];
-}
-
-$note_total=$bdd->prepare("SELECT valeur FROM question where id_question=:q");
-$note_total->bindValue(':q',$i);
-$note_total->execute();
-while($ligne=$note_total->fetch(PDO::FETCH_ASSOC)){
-	$note=$ligne['valeur'];
-}
-$up=$bdd->prepare("update qcm set note_total=note_total+:n where id_qcm=:mq");
-$up->bindValue(':n',$note);
-$up->bindValue(':mq',$monidqcm);
-$up->execute();
+	
 
 
-///////////////
-	$tab = array_combine($_POST['Rep'], $_POST['select']);
-	
-	//recuperer id question pour l'inserer dans reponse
-	$idq=0;
-	$idquestion=$bdd->prepare('select id_question from question where question=:q');
-	$idquestion->bindValue(':q',$_POST['q']);
-	$idquestion->execute();
-	while($ligne=$idquestion->fetch(PDO::FETCH_ASSOC))
-    {
-		$idq=$ligne['id_question'];
-	}
-	
-	$select;
-	foreach($_POST['select'] as $clee => $vall){
-		$select[]=$vall;
-	}
-	
-	//inserer les reponses suivant faux/vrai
-	foreach($_POST['Rep'] as $cle => $val){
-	if($select[$cle]=='Vrai'){
-	$req2 = $bdd->prepare('INSERT INTO Reponse(id_question,reponse,correct) VALUES(:q,:rep,true)');
-	$req2->bindValue(':q',$idq);
-	$req2->bindValue(':rep',$val);
-	$req2->execute();
-	
-	}elseif($select[$cle]=='Faux'){
-	$req3 = $bdd->prepare('INSERT INTO reponse(id_question,reponse,correct) VALUES(:q,:rep,false)');
-	$req3->bindValue(':q',$idq);
-	$req3->bindValue(':rep',$val);
-	$req3->execute();
-	}
-	}
-	
-	
-	$req4 = $bdd->prepare('INSERT INTO qcm_question(id_qcm,id_question) VALUES(:idqcm,:idquestion)');//dans les deux cas on relie la question au qcm et on affiche le contenu du qcm en cours de creation
-	$req4->bindValue(':idqcm',$monidqcm);
-	$req4->bindValue(':idquestion',$idq);
-	$req4->execute();
-	
-	}else{
-
+	if (isset($_POST['q'])){	//si on arrive soit de création question, soit d'importer question
 		
-				///////////////07012017
-	$note;
-$note_total=$bdd->prepare("SELECT valeur FROM question where id_question=:q");
-$note_total->bindValue(':q',$_POST['q']);
-$note_total->execute();
-while($ligne=$note_total->fetch(PDO::FETCH_ASSOC)){
-	$note=$ligne['valeur'];
-}
+		if(isset($_POST['creaquestion'])){		//si on arrive de creation question
+	
+			if(isset($_POST['exp']) and trim($_POST['exp'])!=''){ 	//si une explication a été donnée à la création de la question
+				
+				$req=$bdd->prepare('INSERT INTO question (question,valeur,temps,explication) VALUES (:q,:v,:t,:e)');	//insertion de la question dans la base
+				$req->bindValue(':q',$_POST['q']);
+				$req->bindValue(':v',$_POST['points']);
+				$req->bindValue(':t',$_POST['tps']);
+				$req->bindValue(':e',$_POST['exp']);
+				$req->execute();
+			
+			}else{
+				
+				$req=$bdd->prepare('INSERT INTO question (question,valeur,temps) VALUES (:q,:v,:t)');
+				$req->bindValue(':q',$_POST['q']);
+				$req->bindValue(':v',$_POST['points']);
+				$req->bindValue(':t',$_POST['tps']);
+				$req->execute();
+			
+			}
+
+			
+			$idquestion=$bdd->prepare('select id_question from question where question=:q');	//récupération de l'id de la question créée dans $idq
+			$idquestion->bindValue(':q',$_POST['q']);
+			$idquestion->execute();
+			while($ligne=$idquestion->fetch(PDO::FETCH_ASSOC)){
+				$idq=$ligne['id_question'];
+			}
+
+			$note_total=$bdd->prepare("SELECT valeur FROM question where id_question=:q");		//récupération du nombre de points de la question
+			$note_total->bindValue(':q',$idq);
+			$note_total->execute();
+			while($ligne=$note_total->fetch(PDO::FETCH_ASSOC)){
+				$note=$ligne['valeur'];
+			}
+			
+			$up=$bdd->prepare("update qcm set note_total=note_total+:n where id_qcm=:mq");		//incrémentation du score total du qcm avec la valeur de $note
+			$up->bindValue(':n',$note);
+			$up->bindValue(':mq',$monidqcm);
+			$up->execute();
+			
+			
+			foreach($_POST['select'] as $c => $v){				//crée un tableau qui contient les valeurs 
+				$select[]=$v;
+			}
+	
+	
+			foreach($_POST['Rep'] as $cle => $val){		//pour chaque réponse créée
+				
+				
+				if($select[$cle]=='Vrai'){			//si elle est vraie
+					
+					$req2 = $bdd->prepare('INSERT INTO Reponse(id_question,reponse,correct) VALUES(:q,:rep,true)');  //insertion avec correct=true
+					$req2->bindValue(':q',$idq);
+					$req2->bindValue(':rep',$val);
+					$req2->execute();
+					
+				}elseif($select[$cle]=='Faux'){		//si elle est fausse
+					
+					
+					$req2 = $bdd->prepare('INSERT INTO Reponse(id_question,reponse,correct) VALUES(:q,:rep,false)');  //insertion avec correct=false
+					$req2->bindValue(':q',$idq);
+					$req2->bindValue(':rep',$val);
+					$req2->execute();
+				}
+			}
+	
+	
+			$req4 = $bdd->prepare('INSERT INTO qcm_question(id_qcm,id_question) VALUES(:idqcm,:idquestion)'); //on relie la question au qcm 
+			$req4->bindValue(':idqcm',$monidqcm);
+			$req4->bindValue(':idquestion',$idq);
+			$req4->execute();
+	
+		}else{ //si on arrive d'importer
+
+	
+			$note;
+			$note_total=$bdd->prepare("SELECT valeur FROM question where id_question=:q");		//récupération du nombre de points de la question
+			$note_total->bindValue(':q',$_POST['q']);
+			$note_total->execute();
+			while($ligne=$note_total->fetch(PDO::FETCH_ASSOC)){
+				$note=$ligne['valeur'];
+			}
 	
 	 
-$up=$bdd->prepare("update qcm set note_total=note_total+:n where id_qcm=:q");
-$up->bindValue(':n',$note);
-$up->bindValue(':q',$monidqcm);
-$up->execute();
-///////////////
+			$up=$bdd->prepare("update qcm set note_total=note_total+:n where id_qcm=:q");		//incrémentation du score total du qcm avec la valeur de $note
+			$up->bindValue(':n',$note);
+			$up->bindValue(':q',$monidqcm);
+			$up->execute();
+
+			
+			$req4 = $bdd->prepare('INSERT INTO qcm_question(id_qcm,id_question) VALUES(:idqcm,:idquestion)');	//on relie la question au qcm 
+			$req4->bindValue(':idqcm',$monidqcm);
+			$req4->bindValue(':idquestion',$_POST['q']);
+			$req4->execute();
 		
+		}
+	
+		echo ' </br>';
 		
-		//$idq=$_POST['q'];
-	$req4 = $bdd->prepare('INSERT INTO qcm_question(id_qcm,id_question) VALUES(:idqcm,:idquestion)');//dans les deux cas on relie la question au qcm et on affiche le contenu du qcm en cours de creation
-	$req4->bindValue(':idqcm',$monidqcm);
-	$req4->bindValue(':idquestion',$_POST['q']);
-	$req4->execute();
+		if(isset($monidqcm)){	
+		
+			$req=$bdd->prepare("SELECT * FROM qcm natural join qcm_question natural join question where id_qcm=:idqcm");	//affichage de la question
+			$req->bindValue(':idqcm',$monidqcm);
+			$req->execute();
+			while($ligne=$req->fetch(PDO::FETCH_ASSOC)){
+				
+				echo "<div class=\"form-group\"><label class=\"control-label\" for=\"select\">";
+				echo  htmlspecialchars($ligne['question'],ENT_QUOTES).'</br>';
+				echo  'Points : '.htmlspecialchars($ligne['valeur'],ENT_QUOTES).'  Temps : '.htmlspecialchars($ligne['temps'],ENT_QUOTES).' sec.';
+				
+				if($ligne['explication']!=null){
+					echo  '  Explication : '.htmlspecialchars($ligne['explication'],ENT_QUOTES).'</br></br>';
+				}
+				
+				echo "</label><i class=\"bar\"></i></div> ";
+	
+	
+				$req2=$bdd->prepare("SELECT * FROM reponse natural join question natural join qcm_question natural join qcm where id_qcm=:idqcm and id_question=:numeroquest"); //affichage des réponses 
+				$req2->bindValue(':idqcm',$monidqcm);
+				$req2->bindValue(':numeroquest',$ligne['id_question']);
+				$req2->execute();
+				echo'</br></br>';
+				while($l=$req2->fetch(PDO::FETCH_ASSOC)){
+					if($l['correct']){																//affichage en vert si la réponse est juste
+						echo '<i class="helper"><div class="green"> '.htmlspecialchars($l['reponse'],ENT_QUOTES).' </i></div>';
+					}else{																			//affichage en rouge si la réponse est fausse
+						echo '<i class="helper"><div class="red">'.htmlspecialchars($l['reponse'],ENT_QUOTES).' </i></div>';
+					}  
+				}
+
+				echo'</br>';
+			}	
+
+		}
 		
 	}
-	
-	echo ' </br>';
-	if(isset($monidqcm)){
- 	$req=$bdd->prepare("SELECT * FROM qcm natural join qcm_question natural join question where id_qcm=:idqcm");
-	$req->bindValue(':idqcm',$monidqcm);
-	$req->execute();
-	while($ligne=$req->fetch(PDO::FETCH_ASSOC)){
-        echo "<div class=\"form-group\"><label class=\"control-label\" for=\"select\">";
-	echo 'Q : '.htmlspecialchars($ligne['question'],ENT_QUOTES).'</br>';
-	echo "</label><i class=\"bar\"></i></div> ";
-	
-	
-	$req2=$bdd->prepare("SELECT * FROM reponse natural join question natural join qcm_question natural join qcm where id_qcm=:idqcm and id_question=:numeroquest"); // 
-	$req2->bindValue(':idqcm',$monidqcm);
-	$req2->bindValue(':numeroquest',$ligne['id_question']);
-	$req2->execute();
-	echo'</br>';
-	while($l=$req2->fetch(PDO::FETCH_ASSOC)){
-        if($l['correct']){
-             echo '<i class="helper"><div class="green"> '.$l['reponse'].' </i></div>';
-        }else{
-                  echo '<i class="helper"><div class="red">'.$l['reponse'].' </i></div>';
-	   }  
-    }
-
-	echo'</br>';
-	}	
-
-}
-		
-}
-
-?>
-
-
-        
-         <?php
+            
+	echo '<form action="Finaliser.php" method="post">
+		<input type="hidden" name="id" value="'.$_POST['id'].'"/>
+        <div class="button-container"><button type="submit" class="button"><span>Valider QCM</span></button></form>';
         
 		
-		
-        
-            echo '<form action="Finaliser.php" method="post">
-            <input type="hidden" name="id" value="'.$_POST['id'].'"/>
-            <div class="button-container"><button type="submit" class="button"><span>Valider QCM</span></button></form>';
-        
-		
-            echo' <form action="CreationQuestions.php" method="post">
-			<input type="hidden" name="idd" value="'.$_POST['id'].'"/>
-			<input type="hidden" name="idqcm" value="'.$monidqcm.'"/>
-			<button type="submit" class="button"><span>Créer Question</span></button></form>';
+    echo' <form action="CreationQuestions.php" method="post">
+		<input type="hidden" name="idd" value="'.$_POST['id'].'"/>
+		<input type="hidden" name="idqcm" value="'.$monidqcm.'"/>
+		<button type="submit" class="button"><span>Créer Question</span></button></form>';
 			
 			
-			echo' <form action="Importer.php" method="post">
-			<input type="hidden" name="idd" value="'.$_POST['id'].'"/>
-			<input type="hidden" name="idqcm" value="'.$monidqcm.'"/>
-			<button type="submit" class="button"><span>Importer Question</span></button></div></form>';
+	echo' <form action="Importer.php" method="post">
+		<input type="hidden" name="idd" value="'.$_POST['id'].'"/>
+		<input type="hidden" name="idqcm" value="'.$monidqcm.'"/>
+		<button type="submit" class="button"><span>Importer Question</span></button></div></form>';
 			 
-        ?>
+  ?>
         
         </div>
 
