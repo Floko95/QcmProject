@@ -48,28 +48,6 @@ require_once('Connexionbdd.php');
 			$repondeur=$l['id_repondeur'];										//$repondeur contient maintenant l'id rep
 		}
 		
-		if(isset($_GET['d']) and trim($_GET['d']!='') and !isset($_GET['sd'])){	//après avoir cliqué sur un domaine, on est sur la page où les sous-domaines sont affichés 
-			
-			$d=$_GET['d'];														//variable pour utilisation de l'id du domaine dans la requete pour calculer le moyenne
-			$moy=$bdd->query("SELECT round(avg(note_qcm)::numeric,2) as round FROM recap_repondeur natural join domaine WHERE id_repondeur = $repondeur and id_domaine=$d");
-			$t=$moy->fetch();
-			$moy->closeCursor();
-			$moyenne=$t['round'];													//contient la moyenne du domaine dans lequel on est
-            
-			$insertm =$bdd->prepare ('UPDATE repondeur SET moyenne = :m WHERE id_repondeur = :id');		//enregistre la moyenne dans la table du repondeur
-			$insertm->bindValue(':id',$repondeur);
-			$insertm->bindValue(':m',$moyenne);
-			$insertm->execute();
-            
-            echo '<div class="followers">
-				<div class="follow_count">'; 
-			echo $moyenne; 																				//affiche la moyenne 
-			echo ' </div>
-				Moyenne Domaine
-			</div>';
-            
-		}																						
-
 
 		$nbqcm=$bdd->query("SELECT count(id_qcm) as somme FROM recap_repondeur WHERE id_repondeur = $repondeur");  //compte le nombre de qcm faits
 		$n=$nbqcm->fetch();
@@ -112,21 +90,6 @@ require_once('Connexionbdd.php');
 		
 		echo '<div class="right_col"><h2 class="name">';
 
-		if(isset($_GET['d'])and trim ($_GET['d']!='') and !isset($_GET['sd']) ){				//après avoir cliqué sur un domaine, on est sur la page où les sous-domaines sont affichés 
-			
-			$nomdom=$bdd->prepare('SELECT domaine FROM domaine WHERE id_domaine= :d');				//récupère le nom du domaine courant 
-			$nomdom->bindValue(':d',$_GET['d']);													
-			$nomdom->execute();
-			while($l=$nomdom->fetch(PDO::FETCH_ASSOC)){
-				echo $l['domaine'];																//affichage du domaine dans lequel on est
-			}
-		}
-
-
-		if(!isset($_GET['d']) ){																//si on est sur la premiere page, affichage de 'domaines' 
-			echo 'Domaines : ';
-		}
-		
 		echo'</h2>';
 		
 		if(isset($_GET['d'])and trim ($_GET['d']!='') and isset($_GET['sd']) and trim ($_GET['sd']!='') ){	//après avoir cliqué sur un sous-domaine, on est sur la page où les qcm sont affichés 
@@ -143,7 +106,7 @@ require_once('Connexionbdd.php');
 				<ul class="contact_information">															
 					<li class="website"><a class="nostyle" href="#"> 
 					<?php 
-						echo $l['domaine'].' '.$l['sous_domaine']; 
+						echo 'QCM n° '.$l['id_qcm'].' '; 
 						echo $l['date_qcm_fait'];
 						echo 'Note '.$l['note_qcm'].'/20';
 						echo 'Temps '.$l['temps_qcm'].' sec.';
@@ -158,6 +121,38 @@ require_once('Connexionbdd.php');
     
     
     }else if(isset($_GET['d'])and trim ($_GET['d']!='') and !isset($_GET['sd'])){	 //après avoir cliqué sur un domaine, on est sur la page où les sous-domaines sont affichés 
+	
+
+			
+			$nomdom=$bdd->prepare('SELECT domaine FROM domaine WHERE id_domaine= :d');				//récupère le nom du domaine courant 
+			$nomdom->bindValue(':d',$_GET['d']);													
+			$nomdom->execute();
+			while($l=$nomdom->fetch(PDO::FETCH_ASSOC)){
+				echo $l['domaine'];																//affichage du domaine dans lequel on est
+			}
+		
+		
+			
+			$d=$_GET['d'];														//variable pour utilisation de l'id du domaine dans la requete pour calculer le moyenne
+			$moy=$bdd->query("SELECT round(avg(note_qcm)::numeric,2) as round FROM recap_repondeur natural join domaine WHERE id_repondeur = $repondeur and id_domaine=$d");
+			$t=$moy->fetch();
+			$moy->closeCursor();
+			$moyenne=$t['round'];													//contient la moyenne du domaine dans lequel on est
+            
+			$insertm =$bdd->prepare ('UPDATE repondeur SET moyenne = :m WHERE id_repondeur = :id');		//enregistre la moyenne dans la table du repondeur
+			$insertm->bindValue(':id',$repondeur);
+			$insertm->bindValue(':m',$moyenne);
+			$insertm->execute();
+            
+            echo '<div class="followers">
+				<div class="follow_count">'; 
+			echo $moyenne; 																				//affiche la moyenne 
+			echo ' </div>
+				Moyenne Domaine
+			</div>';
+            
+		
+
 	
 		$ssdom=$bdd->prepare("SELECT distinct domaine,sous_domaine FROM recap_repondeur natural join sous_domaine natural join domaine where id_domaine=:d and id_repondeur=:id_rep"); //affichage des sous-doamines du domaine courant
 		$ssdom->bindValue(':d',$_GET['d']);
@@ -183,8 +178,9 @@ require_once('Connexionbdd.php');
             
                ?>
            
-			<ul class="contact_information">
-				<li class="website"><a class="nostyle" href="#">  <?php echo $l['domaine'].' '.$l['sous_domaine'];
+			<ul class="contact_information">									
+				<li class="website"><a class="nostyle" href="#">  <?php 
+				echo 'QCM n° '.$l['id_qcm'].' '; 
 				  echo $l['date_qcm_fait'];
 					echo 'Note '.$l['note_qcm'].'/20';
 					echo 'Temps '.$l['temps_qcm'].' sec.';
@@ -196,7 +192,10 @@ require_once('Connexionbdd.php');
             <?php
 		}
     
-	}else{	 
+	}else{	//première page
+															 
+		echo 'Domaines : ';            //si on est sur la premiere page, affichage de 'domaines'
+	
 	
 		$dom=$bdd->prepare('SELECT distinct id_domaine,domaine FROM domaine natural join recap_repondeur where id_repondeur = :id_rep ');   //si on n'a pas encore cliqué sur un domaine, affichage des domaines où le répondeur a effectué des qcm
 		$dom->bindValue(':id_rep',$repondeur);
