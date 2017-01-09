@@ -39,7 +39,7 @@ if (isset($_POST['id']) and trim($_POST['id']!=''))//4-qcm sélectionné,afficha
 	echo "<div class=\"form-group\"><label class=\"control-label\" for=\"select\">";
 		echo 'Question: '.$ligne['question'].'<br/>';
 		echo "</label><i class=\"bar\"></i></div> ";
-		$req2=$bdd->prepare("SELECT distinct * FROM public.qcm_question natural join public.reponse where id_question=:idq");
+		$req2=$bdd->prepare("SELECT distinct id_question,correct,reponse FROM public.qcm_question natural join public.reponse where id_question=:idq");
 		$req2->bindValue(':idq',$ligne['id_question']);
 		$req2->execute();
 		
