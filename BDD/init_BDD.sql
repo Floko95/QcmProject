@@ -71,8 +71,8 @@ domaine varchar REFERENCES Domaine(domaine),
 sous_domaine varchar REFERENCES Sous_Domaine(sous_domaine),
 date_creation date DEFAULT current_date,
 niveau varchar DEFAULT 'Normal',
-temps_total integer,				-- à calculer par la somme de chaque question.temps
-note_total float,					-- à calculer par la somme de chaque question.valeur
+temps_total integer DEFAULT 0,				-- à calculer par la somme de chaque question.temps
+note_total float DEFAULT 0.0,					-- à calculer par la somme de chaque question.valeur
 visible boolean DEFAULT FALSE,		-- indique si le qcm peut etre vu par un repondeur ou non
 fini boolean DEFAULT FALSE			-- indique si le qcm est complet ou non
 );
