@@ -49,16 +49,24 @@ require_once('Connexionbdd.php');
 		}
 		
 
-		$nbqcm=$bdd->query("SELECT count(id_qcm) as somme FROM recap_repondeur WHERE id_repondeur = $repondeur");  //compte le nombre de qcm faits
-		$n=$nbqcm->fetch();
-		$nbqcm->closeCursor();
-		$nombreqcm=$n['somme'];
+		$nbqcm=$bdd->prepare("SELECT count(id_qcm) as somme FROM recap_repondeur WHERE id_repondeur = :repondeur");  //compte le nombre de qcm faits
+		$nbqcm->bindValue(':repondeur', $repondeur);
+		$nbqcm->execute();
+			while($ligne=$nbqcm->fetch(PDO::FETCH_ASSOC)){
+				$nombreqcm=$ligne['somme'];																
+			}
+		
 
-		$tpsqcm=$bdd->query("SELECT sum(temps_qcm) as sum FROM recap_repondeur WHERE id_repondeur = $repondeur");  //compte le temps total des qcm faits
-		$t=$tpsqcm->fetch();
-		$tpsqcm->closeCursor();
-		$tempsqcm=$t['sum'];
-
+		$tpsqcm=$bdd->prepare("SELECT sum(temps_qcm) as sum FROM recap_repondeur WHERE id_repondeur = :repondeur");  //compte le temps total des qcm faits
+		$tpsqcm->bindValue(':repondeur', $repondeur);
+		$tpsqcm->execute();
+			while($ligne=$tpsqcm->fetch(PDO::FETCH_ASSOC)){
+				$tempsqcm=$ligne['sum'];																
+			}
+			
+		
+	
+		
 		$up1 =$bdd->prepare ('UPDATE repondeur SET nb_qcm_fait = :o WHERE id_repondeur = :id');						//enregistre le nouveau nbe de qcm faits dans la base 
 		$up1->bindValue(':id',$repondeur);
 		$up1->bindValue(':o',$nombreqcm);
@@ -132,19 +140,14 @@ require_once('Connexionbdd.php');
 			}
 		
 		
-			
-			//$d=$_GET['d'];														//variable pour utilisation de l'id du domaine dans la requete pour calculer le moyenne
-			/*$moy=$bdd->query("SELECT round(avg(note_qcm)::numeric,2) as round FROM recap_repondeur natural join domaine WHERE id_repondeur = $repondeur and id_domaine= $_GET['d']");
-			$t=$moy->fetch();
-			$moy->closeCursor();
-			$moyenne=$t['round'];	*/												//contient la moyenne du domaine dans lequel on est
+														
             
 			$moy=$bdd->prepare("SELECT round(avg(note_qcm)::numeric,2) as round FROM recap_repondeur natural join domaine WHERE id_repondeur = :repondeur and id_domaine=:d");
 			$moy->bindValue(':d',$_GET['d']);
 			$moy->bindValue(':repondeur', $repondeur);
 			$moy->execute();
 			while($ligne=$moy->fetch(PDO::FETCH_ASSOC)){
-				$moyenne = $ligne['round'];
+				$moyenne = $ligne['round'];																//contient la moyenne du domaine dans lequel on est
 			}
 			
 			
