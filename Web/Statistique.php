@@ -57,7 +57,8 @@ if(isset($_POST['qcm'])and trim($_POST['qcm'])){ //si on arrive de la page execu
 					$idquestionn=$quest['id_question'];								//recupère l'id de la question pour les requetes à venir
 					$reponsetrue=0;													//pour connaitre le nombre de réponses vraies de la question
 					
-					$reponse=$bdd->prepare('Select * from reponse INNER JOIN qcm_question ON reponse.id_question = qcm_question.id_question WHERE qcm_question.id_question=:idquestion and qcm_question.id_qcm=:idqcm;');//pour chaque réponse de la question
+					$reponse=$bdd->prepare('Select * from reponse INNER JOIN qcm_question ON reponse.id_question = qcm_question.id_question 
+					WHERE qcm_question.id_question=:idquestion and qcm_question.id_qcm=:idqcm;');//pour chaque réponse de la question
 					$reponse->bindValue(':idquestion',$idquestionn);				//pour chaque réponse à la question		
 					$reponse->bindValue(':idqcm',$_POST['qcm']);
 					$reponse->execute();
@@ -77,8 +78,11 @@ if(isset($_POST['qcm'])and trim($_POST['qcm'])){ //si on arrive de la page execu
 									$vrai+=1; 										                        //on incrémente le compteur de bonnes réponses cochées
 								}else{												                        //sinon, si la reponse est fausse
 									echo'<i class="helper"><div class="red">Réponse fausse</i></div> </br>';//affichage 'réponse fausse'
-									echo 'La réponse juste était :' ;											
-									$repjuste=$bdd->prepare('Select * from reponse INNER JOIN question ON reponse.id_question = question.id_question INNER JOIN public.qcm_question ON question.id_question = qcm_question.id_question WHERE qcm_question.id_question = :mq and qcm_question.id_qcm = :idqcm and reponse.correct=TRUE');//trouve la réponse juste
+									echo 'La réponse juste était :' ;				
+									
+									$repjuste=$bdd->prepare('Select reponse from reponse INNER JOIN question ON reponse.id_question = question.id_question 
+									INNER JOIN public.qcm_question ON question.id_question = qcm_question.id_question 
+									WHERE qcm_question.id_question = :mq and qcm_question.id_qcm = :idqcm and reponse.correct=TRUE');//trouve la réponse juste
 									$repjuste->bindValue(':mq',$idquestionn);
 									$repjuste->bindValue(':idqcm',$_POST['qcm']);
 									$repjuste->execute();
@@ -93,10 +97,10 @@ if(isset($_POST['qcm'])and trim($_POST['qcm'])){ //si on arrive de la page execu
 					}
 					
 					if($faux==0 && $vrai==$reponsetrue){	                                    //si pas de reponses fausses et toutes les reponses vraies
-						$point=$bdd->prepare('Select * from question where id_question=:mq');
+						
+						$point=$bdd->prepare('Select valeur from question where id_question=:mq');
 						$point->bindValue(':mq',$idquestionn);
 						$point->execute();
-						
 						while($ligne=$point->fetch(PDO::FETCH_ASSOC)){
 							$score+=$ligne['valeur'];											//score incrémenté de la valeur attribuée à la question
 							echo '</br>Score : + '.$ligne['valeur'].'</br>';					//affichage de l'incrémentation du score
@@ -106,7 +110,7 @@ if(isset($_POST['qcm'])and trim($_POST['qcm'])){ //si on arrive de la page execu
 						echo'<i class="helper"><div class="red">...mais incomplète</i></div> </br>'; //affichage de l'état incomplet de la réponse
 						echo 'La réponse juste était :' ;											 //correction
 						
-						$repjuste=$bdd->prepare('Select * from reponse INNER JOIN question ON reponse.id_question = question.id_question INNER JOIN public.qcm_question ON question.id_question = qcm_question.id_question WHERE qcm_question.id_question = :mq and qcm_question.id_qcm = :idqcm and reponse.correct=TRUE');//trouve la réponse juste
+						$repjuste=$bdd->prepare('Select reponse from reponse INNER JOIN question ON reponse.id_question = question.id_question INNER JOIN public.qcm_question ON question.id_question = qcm_question.id_question WHERE qcm_question.id_question = :mq and qcm_question.id_qcm = :idqcm and reponse.correct=TRUE');//trouve la réponse juste
 						$repjuste->bindValue(':mq',$idquestionn);
                         $repjuste->bindValue(':idqcm',$_POST['qcm']);
 						$repjuste->execute();
@@ -126,7 +130,7 @@ if(isset($_POST['qcm'])and trim($_POST['qcm'])){ //si on arrive de la page execu
 				echo'</br></br></br>';
 				$time=0;					
 				
-				$tempsdepasse=$bdd->prepare('Select * FROM public.qcm_question natural join public.question where id_qcm=:idqcm');
+				$tempsdepasse=$bdd->prepare('Select temps FROM public.qcm_question natural join public.question where id_qcm=:idqcm');
 				$tempsdepasse->bindValue(':idqcm',$_POST['qcm']);
 				$tempsdepasse->execute();
 				$t=0;
@@ -135,8 +139,8 @@ if(isset($_POST['qcm'])and trim($_POST['qcm'])){ //si on arrive de la page execu
 				}
 				
 				if($tempspasse>$t){
-					$score-=1;
-					echo 'Vous avez dépassé le temps (score - 1) : '.$tempspasse.' secondes. </br>';
+					$score-=5;
+					echo 'Vous avez dépassé le temps (score - 5) : '.$tempspasse.' secondes. </br>';
 				}else{
 					echo 'Temps passé : '.$tempspasse.' secondes.</br>';
 				}
@@ -145,7 +149,7 @@ if(isset($_POST['qcm'])and trim($_POST['qcm'])){ //si on arrive de la page execu
 					$score=0;
 				}
 				
-				$tems=$bdd->prepare('select * from qcm where id_qcm=:s');
+				$tems=$bdd->prepare('select note_total from qcm where id_qcm=:s');
 				$tems->bindValue(':s',$_POST['qcm']);
 				$tems->execute();
 				while($lu=$tems->fetch(PDO::FETCH_ASSOC)){
@@ -160,7 +164,7 @@ if(isset($_POST['qcm'])and trim($_POST['qcm'])){ //si on arrive de la page execu
 		}
 		$tim=0;
 		
-		$ins=$bdd->prepare('select * from repondeur where nom_repondeur=:n');
+		$ins=$bdd->prepare('select id_repondeur from repondeur where nom_repondeur=:n');
 		$ins->bindValue(':n',$_SESSION['user']);
 		$ins->execute();
 		while($lu=$ins->fetch(PDO::FETCH_ASSOC)){
