@@ -133,12 +133,21 @@ require_once('Connexionbdd.php');
 		
 		
 			
-			$d=$_GET['d'];														//variable pour utilisation de l'id du domaine dans la requete pour calculer le moyenne
-			$moy=$bdd->query("SELECT round(avg(note_qcm)::numeric,2) as round FROM recap_repondeur natural join domaine WHERE id_repondeur = $repondeur and id_domaine=$d");
+			//$d=$_GET['d'];														//variable pour utilisation de l'id du domaine dans la requete pour calculer le moyenne
+			/*$moy=$bdd->query("SELECT round(avg(note_qcm)::numeric,2) as round FROM recap_repondeur natural join domaine WHERE id_repondeur = $repondeur and id_domaine= $_GET['d']");
 			$t=$moy->fetch();
 			$moy->closeCursor();
-			$moyenne=$t['round'];													//contient la moyenne du domaine dans lequel on est
+			$moyenne=$t['round'];	*/												//contient la moyenne du domaine dans lequel on est
             
+			$moy=$bdd->prepare("SELECT round(avg(note_qcm)::numeric,2) as round FROM recap_repondeur natural join domaine WHERE id_repondeur = :repondeur and id_domaine=:d");
+			$moy->bindValue(':d',$_GET['d']);
+			$moy->bindValue(':repondeur', $repondeur);
+			$moy->execute();
+			while($ligne=$moy->fetch(PDO::FETCH_ASSOC)){
+				$moyenne = $ligne['round'];
+			}
+			
+			
 			$insertm =$bdd->prepare ('UPDATE repondeur SET moyenne = :m WHERE id_repondeur = :id');		//enregistre la moyenne dans la table du repondeur
 			$insertm->bindValue(':id',$repondeur);
 			$insertm->bindValue(':m',$moyenne);
