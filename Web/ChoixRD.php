@@ -45,9 +45,9 @@
 
     try{
 		
-		$req=$bdd->prepare("SELECT * FROM domaine");
+		$req=$bdd->prepare("SELECT id_domaine,domaine FROM domaine");
 		$req->execute();
-		while($ligne=$req->fetch(PDO::FETCH_ASSOC)){
+		while($ligne=$req->fetch(PDO::FETCH_ASSOC)){						//affichage des domaines existant, avc un formulaire pour passer à la page de choix du sous-domaine
 			echo "<div class=\"box\"><div class=\"floded\">";
 			echo '<p><form action="ChoixRDS.php" method="post">
 				<input type="hidden" name="idd" value="'.$ligne['id_domaine'].'"/>
