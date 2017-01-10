@@ -78,7 +78,8 @@ if(isset($_POST['qcm'])and trim($_POST['qcm'])){ //si on arrive de la page execu
 									$vrai+=1; 										                        //on incrémente le compteur de bonnes réponses cochées
 								}else{												                        //sinon, si la reponse est fausse
 									echo'<i class="helper"><div class="red">Réponse fausse</i></div> </br>';//affichage 'réponse fausse'
-									echo 'La réponse juste était :' ;											
+									echo 'La réponse juste était :' ;				
+									
 									$repjuste=$bdd->prepare('Select reponse from reponse INNER JOIN question ON reponse.id_question = question.id_question 
 									INNER JOIN public.qcm_question ON question.id_question = qcm_question.id_question 
 									WHERE qcm_question.id_question = :mq and qcm_question.id_qcm = :idqcm and reponse.correct=TRUE');//trouve la réponse juste
