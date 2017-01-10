@@ -86,7 +86,7 @@ require_once("Connexionbdd.php");
 			}
 						
 			echo'<input type="hidden" name="id" value="'.$_POST['idqcm'].'"/>';
-			echo "Temps de Réponse <input type='text' name='tps' style='width:50px;'/><br/>";
+			echo "Temps de Réponse <input type='text' name='tps'/><br/>";
 			echo "Informations sur la question<br/>";
 			echo "<textarea name='exp' rows='10' cols='50' name='infos'></textarea><br/>";
 			echo "Points <input type='text' name='points' style='width:50px;'/><br /><br />";
