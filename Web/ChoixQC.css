@@ -6,6 +6,7 @@ body {
 height: 100%;
   max-width: 100%;
   margin: 0;
+    max-height: 100%;
   padding: 0;
     bottom: 0%;
   font-family: "Open Sans";
@@ -13,7 +14,7 @@ height: 100%;
   letter-spacing: 2px;
   font-weight: 400;
   line-height: 24px;
-  background-size: 100%;
+ 
 	background: rgb(244,226,156);
 background: -moz-linear-gradient(-45deg, rgba(244,226,156,0) 0%, rgba(59,41,58,1) 100%), -moz-linear-gradient(left, rgba(244,226,156,1) 0%, rgba(130,96,87,1) 100%);
 background: -webkit-linear-gradient(-45deg, rgba(244,226,156,0) 0%,rgba(59,41,58,1) 100%), -webkit-linear-gradient(left, rgba(244,226,156,1) 0%,rgba(130,96,87,1) 100%);
@@ -292,6 +293,22 @@ input {
     font-family: 'PT Sans Narrow', sans-serif;
     font-size: 16px;
     left: auto;
+}
+
+    .start1 {
+    background-image: linear-gradient(#8b9da9, #fff6e4);
+ box-shadow: inset 0 0 100px hsla(0,0%,0%,.3);
+    width: 180px;
+    height: 30px;
+    border: 0 solid rgba(0,0,0,0.2);
+    color: #fff;
+    font-size: 14px;
+    position: relative;   
+    cursor: pointer;
+    font-family: 'PT Sans Narrow', sans-serif;
+    font-size: 16px;
+    left: 41%;
+    margin-bottom: 40px;
     
 }
 
@@ -339,7 +356,7 @@ input {
 .button.load-button {
   border-width: 4px;
   font-weight: 600;
-  margin-bottom: 50px;
+  margin-bottom: 120px;
 }
 .button.load-button a{
   text-decoration: none;
