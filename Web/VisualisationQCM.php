@@ -37,7 +37,7 @@ if (isset($_POST['id']) and trim($_POST['id']!=''))//qcm sélectionné à partir
 	while($ligne=$req->fetch(PDO::FETCH_ASSOC))//on parcourt toutes ces questions
 	{
 	echo "<div class=\"form-group\"><label class=\"control-label\" for=\"select\">";
-		echo 'Question: '.htmlspecialchars($ligne2['question'],ENT_QUOTES);.'<br/>';//on affiche la question 
+		echo 'Question: '.htmlspecialchars($ligne['question'],ENT_QUOTES).'<br/>';//on affiche la question 
 		echo "</label><i class=\"bar\"></i></div> ";
 		$req2=$bdd->prepare("SELECT distinct id_question,correct,reponse FROM public.qcm_question natural join public.reponse where id_question=:idq");//on sélectionne les réponses reliées à cette question,et ce une //seule fois (car l'id de la question parcourue est présent à chaque fois que cette question est reliée à //un qcm)
 		$req2->bindValue(':idq',$ligne['id_question']);
