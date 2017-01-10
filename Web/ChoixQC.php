@@ -94,12 +94,12 @@ else if (isset($_GET['sd']) and trim($_GET['sd']!='') and isset($_GET['d']) and 
 	if($_GET['sd']=='general')
 	{
          
-		echo '<form action="Questions.php" method="post"><input type="hidden" name="id" value="'.$id.'"/><input type="hidden" name="dom" value="'.$_GET['d'].'"/><button type="submit"class="start"/>Commencer le QCM</button></form>';
+		echo '<form action="ChoixQQ.php" method="post"><input type="hidden" name="id" value="'.$id.'"/><input type="hidden" name="dom" value="'.$_GET['d'].'"/><button type="submit"class="start"/>Commencer le QCM</button></form>';
         
 	}
 	else
 	{
-		echo '<form action="Questions.php" method="post"><input type="hidden" name="id" value="'.$id.'"/><input type="hidden" name="dom" value="'.$_GET['d'].'"/><input type="hidden" name="sdom" value="'.$_GET['sd'].'"/><button type="submit"class="start"/>Commencer le QCM</button></form>';
+		echo '<form action="ChoixQQ.php" method="post"><input type="hidden" name="id" value="'.$id.'"/><input type="hidden" name="dom" value="'.$_GET['d'].'"/><input type="hidden" name="sdom" value="'.$_GET['sd'].'"/><button type="submit"class="start"/>Commencer le QCM</button></form>';
 		
 	}
 }//redirection vers Questions.php avec le domaine,l'id du qcm  et le sous domaione du qcm en $_post.si domaine général le sous domaine n'est pas transmis
