@@ -51,7 +51,14 @@ require_once("Connexionbdd.php");
 	{
 		if ($_POST['n'] < 2)
 		{
-			echo "Il doit y avoir deux réponses minimum à votre question<br />";
+			echo '
+				<form action="CreationQuestions.php" method=post>
+				<input type="hidden" name="idqcm" value="'.$_POST['idqcm'].'"/>
+				Il doit y avoir au moins deux réponses à votre question
+				<input type="text" name="n" size=1/><br/>
+				<input type="submit" value="Ajouter les réponses"/>
+				</form>
+			';
 		}
 		else
 		{
