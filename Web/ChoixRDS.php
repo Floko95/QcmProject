@@ -38,17 +38,17 @@
 <?php 
 	require_once('Connexionbdd.php');
 
-	if(isset($_POST['idd'])and trim($_POST['idd']!=' ') and isset($_POST['nd'])and trim($_POST['nd']!=' ')){
+	if(isset($_POST['idd'])and trim($_POST['idd']!=' ') and isset($_POST['nd'])and trim($_POST['nd']!=' ')){ 	//si on vient de la page ChoixRD
 
 		try{
 			
-			$req=$bdd->prepare("SELECT * FROM sous_domaine natural join domaine where id_domaine=:id");
+			$req=$bdd->prepare("SELECT sous_domaine FROM sous_domaine natural join domaine where id_domaine=:id");		//selection des sous-domaines liés au domaine choisi
 			$req->bindValue(':id',$_POST['idd']);
 			$req->execute();
-			$tour=-1;
-			while($ligne=$req->fetch(PDO::FETCH_ASSOC)){
+			$tour=-1;												//variable qui sert à determiner si le domaine contient des sous-domaines
+			while($ligne=$req->fetch(PDO::FETCH_ASSOC)){			//pour chaque sous-domaine, un formulaire permet de passer à la page de choix des QCM, ChoixRQI.
 			
-				$tour+=1;
+				$tour+=1;											//si on entre dans la boucle, il y a des sous-domaines, donc $tour s'incrémente
 				echo "<div class=\"box\"><div class=\"floded\">"; 
 				echo '<p><form action="ChoixRQI.php" method="post">
 					<input type="hidden" name="idsd" value="'.$ligne['sous_domaine'].'"/>
@@ -56,14 +56,14 @@
 					<h4><input type="submit" value="'.$ligne['sous_domaine'].'"	/><h4></form></p>';
 				echo "</div></div>";	
 			
-			}if ($tour==-1){
-				echo "</br>Ce domaine ne contient pas de sous-domaine</br>";
+			}if ($tour==-1){										//si tour n'a pas été incrémenté, il n'y a pas de sous-domaines
+				echo "</br>Ce domaine ne contient pas de sous-domaine</br>";	//affichage d'un message d'information
 			}
     
 			$req=$bdd->prepare("SELECT distinct id_qcm,auteur FROM qcm natural join qcm_question where qcm.domaine=:nd and qcm.sous_domaine is null and qcm.id_qcm=qcm_question.id_qcm and visible=true");
 			$req->bindValue(':nd',$_POST['nd']);
 			$req->execute();
-			while($l=$req->fetch(PDO::FETCH_ASSOC)){
+			while($l=$req->fetch(PDO::FETCH_ASSOC)){		//affichage des qcm sans sous domaine, avec un formulaire qui conduit sur la page d'execution du QCM choisi, Executer.php
 				
 				$executer=1;
 				echo "<div class=\"box\"><div class=\"floded\">";
