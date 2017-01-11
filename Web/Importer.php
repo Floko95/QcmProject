@@ -29,37 +29,30 @@
 
 require_once('Connexionbdd.php');
 
-//$post idqcm -> id qcm cree
 
-if (isset($_POST['idd']) and trim($_POST['idd']!=''))
+
+if (isset($_POST['idd']) and trim($_POST['idd']!=''))//id du qcm en cours de modification reçu
 {
 	
 	
-/*	$req=$bdd->prepare("SELECT * FROM qcm natural join qcm_question natural join question where id_qcm=:idqcm");
-	$req->bindValue(':idqcm',$_POST['idqcm']);
-	$req->execute();
-	while($l=$req->fetch(PDO::FETCH_ASSOC)){
-	echo 'Question : '.htmlspecialchars($l['question'],ENT_QUOTES).'</br>';
-	$mesquestions[]+=$l['id_question'];
-	}*/
+
 	
-	$req=$bdd->prepare("SELECT distinct sous_domaine,domaine from qcm where id_qcm=:id");
+	$req=$bdd->prepare("SELECT distinct sous_domaine,domaine from qcm where id_qcm=:id");//on sélectionne le sous domaine et le domaine de ce qcm
 	$req->bindValue(':id',$_POST['idqcm']);
 	$req->execute();
 	$ligne=$req->fetch(PDO::FETCH_ASSOC);
 	
-	/////////
-	echo '<h2> '.$ligne['sous_domaine'].' '.$ligne['domaine'].'</h2>'; 
-	/////////
-	//if(){
-	if($ligne['sous_domaine']==null){
-		//SELECT distinct * FROM question INNER JOIN qcm_question ON question.id_question = qcm_question.id_question INNER JOIN qcm ON qcm.id_qcm = qcm_question.id_qcm WHERE qcm.domaine = :domaine
+	
+	echo '<h2> '.$ligne['sous_domaine'].' '.$ligne['domaine'].'</h2>'; //on les affiche
+	
+	if($ligne['sous_domaine']==null){//on sélectionne toutes les questions de la table de ce domaine
+		
 		$req=$bdd->prepare("Select distinct id_question,question from question natural join qcm_question natural join qcm where domaine=:domaine ");
 		$req->bindValue(':domaine',$ligne['domaine']);
 		
 		$req->execute();	
 	
-	}else{
+	}else{//si le domaine n'est pas null,on sélectionne toutes les questions de la table de ce sous domaine inclus dans ce domaine 
 		$req=$bdd->prepare("SELECT distinct id_question,question FROM question NATURAL JOIN qcm natural join qcm_question WHERE sous_domaine=:sdomaine and domaine=:domaine ");
 		$req->bindValue(':sdomaine',$ligne['sous_domaine']);
 		$req->bindValue(':domaine',$ligne['domaine']);
@@ -70,7 +63,7 @@ if (isset($_POST['idd']) and trim($_POST['idd']!=''))
 	while($ligne=$req->fetch(PDO::FETCH_ASSOC))
 		{
 			
-		$req2=$bdd->prepare("select * from qcm_question where id_qcm=:id");
+		$req2=$bdd->prepare("select * from qcm_question where id_qcm=:id");//on selectionne en parallele les questions déjà dans le qcm en cours
 		$req2->bindValue(':id',$_POST['idd']);
 		$req2->execute();
 		$test=0;
@@ -79,7 +72,7 @@ if (isset($_POST['idd']) and trim($_POST['idd']!=''))
 				if($ligne2['id_question']==$ligne['id_question'])
 					$test=1;
 			}
-			if($test==0)
+			if($test==0)//Si la question de la table est déjà dans le qcm en cours,on ne la propose pas à l'insertion.
 			{
 			echo '<form action="Visualisation.php" method="post">
 				<input type="hidden" name="id" value="'.$_POST['idd'].'"/>';
@@ -91,15 +84,14 @@ if (isset($_POST['idd']) and trim($_POST['idd']!=''))
 	
 	
 				<li></i><input type="submit" value="'.$ligne['question'].'"/></li></ul>';
-				echo '</form>';
+				echo '</form>';//la quesiton devient un bouton,envoyant sur visualisation.php
 			}
 			
 		}
-	//}
+	
 		
-echo '<form class="notes-form" action="Questions.php" method="post"><input type="hidden" name="id" value="'.$_POST['idd'].'"/><input class="retour" type="submit" value="Retour"/></form>';		
-//SELECT distinct id_question, question FROM question natural JOIN qcm natural join qcm_question WHERE sous_domaine='HTML' and domaine='Informatique'	
-}// SELECT distinct * FROM question natural JOIN qcm natural join qcm_question WHERE sous_domaine='HTML' and domaine='Informatique'  EXCEPT Select * from question NATURAL JOIN qcm natural join qcm_question where id_question = 13
+echo '<form class="notes-form" action="Questions.php" method="post"><input type="hidden" name="id" value="'.$_POST['idd'].'"/><input class="retour" type="submit" value="Retour"/></form>';	//si on change d'avis,on peut toujours retourner à questions.php
+
 ?>
 
 		</div>

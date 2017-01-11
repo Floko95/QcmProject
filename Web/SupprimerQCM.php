@@ -23,7 +23,7 @@
         <div class="main">
         <span class='fa fa-trash'><img src="http://img11.hostingpics.net/pics/229674delete24.png"></span>
         <strong>SUPPRIMER</strong>
-        <?php echo ' <p>Suppression du QCM numéro '.$_POST['id'].'?</p>'; ?>
+        <?php echo ' <p>Suppression du QCM numéro '.$_POST['id'].'?</p>'; //on propose la suppression du qcm?>
         </div>
     
         <?php echo ' <form action="SupprimerQCM.php" method="post"><input type="hidden" name="id" value="'.$_POST['id'].'" />' ?>
@@ -38,7 +38,7 @@
        <?php }
         elseif(isset($_POST['suppc'])){
 	
-	       $req=$bdd->prepare("DELETE  FROM public.qcm_question WHERE id_qcm=:id");
+	       $req=$bdd->prepare("DELETE  FROM public.qcm_question WHERE id_qcm=:id");//on le supprime de la table si on a choisi oui
 	       $req->bindValue(':id',$_POST['id']);
 	       $req->execute();
 	       $req=$bdd->prepare("DELETE  FROM public.qcm WHERE public.qcm.id_qcm=:id");
@@ -57,7 +57,7 @@
 						<h1>Success!</h1>
                         <?php 
                         echo '<p>Le questionnaire numéro '.$_POST['id']. ' a été supprimé. </p>';
-                        echo '<a href=Profil.php><button type="button" class="redo btn"> Retour au profil</button></a>';
+                        echo '<a href=Profil.php><button type="button" class="redo btn"> Retour au profil</button></a>';//on reoturne au profil s'il a été supprimé
 					   ?>
 				</div>
         </div>
@@ -69,7 +69,7 @@
 
 <?php
 
-        }elseif(isset($_POST['suppn'])){
+        }elseif(isset($_POST['suppn'])){//si on a changé d'avis on retourne au profil
             header('Location: Profil.php');
         }   
 
