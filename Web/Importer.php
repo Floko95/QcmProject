@@ -1,19 +1,29 @@
 <!DOCTYPE html>
-
-
 <html>
 	<head>
+		<meta charset="utf-8" />
+		 <link rel="stylesheet" href="Importer.css" />
+        <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
 	<title>QCM-Importer</title>
-	
 	</head>
-	
-	
 <body> 
+    
+    
+           	  <div id="desk-nav">
+  <nav>
+    <ul>
+      <li><a href="AccueilQ.php">Home</a></li>
+      <li><a href="Profil.php">Profil</a></li>
+      <li><a href="ChoixQC.php">QCM</a></li>
+      <li><a href="Index.php">Déconnexion</a></li>
+    </ul>
+  </nav>
+</div>
 
-
-
-
-
+<div class="container cf">
+  <div class="task-wrapper cf">
+    <div class="the-days">
+	
 <?php
 
 
@@ -23,6 +33,8 @@ require_once('Connexionbdd.php');
 
 if (isset($_POST['idd']) and trim($_POST['idd']!=''))
 {
+	
+	
 /*	$req=$bdd->prepare("SELECT * FROM qcm natural join qcm_question natural join question where id_qcm=:idqcm");
 	$req->bindValue(':idqcm',$_POST['idqcm']);
 	$req->execute();
@@ -37,7 +49,7 @@ if (isset($_POST['idd']) and trim($_POST['idd']!=''))
 	$ligne=$req->fetch(PDO::FETCH_ASSOC);
 	
 	/////////
-	echo $ligne['sous_domaine'].' '.$ligne['domaine']; 
+	echo '<h2> '.$ligne['sous_domaine'].' '.$ligne['domaine'].'</h2>'; 
 	/////////
 	//if(){
 	if($ligne['sous_domaine']==null){
@@ -72,17 +84,27 @@ if (isset($_POST['idd']) and trim($_POST['idd']!=''))
 			echo '<form action="Visualisation.php" method="post">
 				<input type="hidden" name="id" value="'.$_POST['idd'].'"/>';
 				echo '<input type="hidden" name="q" value="'.$ligne['id_question'].'"/>
-				<input type="submit" value="'.$ligne['question'].'"/>';
+                
+	<div class="notes-module cf">
+          <ul id="notes-001" class="notes-list">
+	
+	
+	
+				<li></i><input type="submit" value="'.$ligne['question'].'"/></li></ul>';
 				echo '</form>';
 			}
 			
 		}
 	//}
 		
-echo '<form action="Questions.php" method="post"><input type="hidden" name="id" value="'.$_POST['idd'].'"/><input type="submit" value="Retour"/></form>';		
+echo '<form class="notes-form" action="Questions.php" method="post"><input type="hidden" name="id" value="'.$_POST['idd'].'"/><input class="retour" type="submit" value="Retour"/></form>';		
 //SELECT distinct id_question, question FROM question natural JOIN qcm natural join qcm_question WHERE sous_domaine='HTML' and domaine='Informatique'	
 }// SELECT distinct * FROM question natural JOIN qcm natural join qcm_question WHERE sous_domaine='HTML' and domaine='Informatique'  EXCEPT Select * from question NATURAL JOIN qcm natural join qcm_question where id_question = 13
 ?>
 
+		</div>
+	  </div>
+	</div>
+	</div>
 </body>
 </html>
