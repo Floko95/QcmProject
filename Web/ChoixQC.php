@@ -42,14 +42,14 @@
 <?php
 session_start();
 require_once('Connexionbdd.php');
-if(isset($_GET['d']) and trim($_GET['d']!='')and !(isset($_GET['sd'])))//domaine sélectionné,affichage des sous domaines de ce domaine
+if(isset($_GET['d']) and trim($_GET['d']!='')and !(isset($_GET['sd'])))//2- domaine sélectionné,affichage des sous domaines de ce domaine
 {
 	$req=$bdd->prepare("SELECT * from sous_domaine natural join domaine where domaine=:d");
 	$req->bindValue(':d',$_GET['d']);
 	$req->execute();
     
     echo "<div class=\"box\"><div class=\"floded\">"; 
-				echo '<p><form action="ChoixQC.php?d='.$_GET['d'].'&sd=general" " method="post">
+				echo '<p><form action="ChoixQC.php?d='.$_GET['d'].'&sd=general" " >
 					<h4><input type="submit" value="Général"/><h4></form></p>';
 				echo "</div></div>";
     
@@ -57,52 +57,41 @@ if(isset($_GET['d']) and trim($_GET['d']!='')and !(isset($_GET['sd'])))//domaine
 	{
            
         echo "<div class=\"box\"><div class=\"floded\">"; 
-				echo '<p><form action="ChoixQC.php?d='.$ligne['domaine'].'&sd='.$ligne['sous_domaine'].'" method="post">
-					<input type="hidden" name="idsd" value="'.$ligne['sous_domaine'].'"/>
-					<input type="hidden" name="nd" value="'.$_POST['nd'].'"/>
+				echo '<p><form action="ChoixQC.php?d='.$ligne['domaine'].'&sd='.$ligne['sous_domaine'].'" >
 					<h4><input type="submit" value="'.$ligne['sous_domaine'].'"	/><h4></form></p>';
 				echo "</div></div>";
 	}
 }
-else if (isset($_GET['sd']) and trim($_GET['sd']!='') and isset($_GET['d']) and trim($_GET['d']!=''))//sous domaine sélectionné,création du qcm avec valeurs par defaut et id attribué.
+else if (isset($_GET['sd']) and trim($_GET['sd']!='') and isset($_GET['d']) and trim($_GET['d']!=''))//3- sous domaine sélectionné,création du qcm avec valeurs par defaut et id attribué.
 {
-	
-	
-	if($_GET['sd']=='general'){
-	$req=$bdd->prepare("INSERT into qcm(auteur,domaine,note_total) values(:quest,:d,0)");
-	$req->bindValue(':quest',$_SESSION['user']);
-	$req->bindValue(':d',$_GET['d']);
-	$req->execute();
+	if($_GET['sd']=='general'){//si le domaine sélectionné à été "general", on n'associe pas de sous domaine au qcm créé.
+		$req=$bdd->prepare("INSERT into qcm(auteur,domaine,note_total) values(:quest,:d,0)");
+		$req->bindValue(':quest',$_SESSION['user']);
+		$req->bindValue(':d',$_GET['d']);
+		$req->execute();
 	}else{
-	
-	$req=$bdd->prepare("INSERT into qcm(auteur,domaine,sous_domaine,note_total) values(:quest,:d,:sd,0)");
-	$req->bindValue(':quest',$_SESSION['user']);
-	$req->bindValue(':d',$_GET['d']);
-	$req->bindValue(':sd',$_GET['sd']);
-	$req->execute();	
+		$req=$bdd->prepare("INSERT into qcm(auteur,domaine,sous_domaine,note_total) values(:quest,:d,:sd,0)");
+		$req->bindValue(':quest',$_SESSION['user']);
+		$req->bindValue(':d',$_GET['d']);
+		$req->bindValue(':sd',$_GET['sd']);
+		$req->execute();	
 	}
-	
-	
 	$req=$bdd->prepare("SELECT * from qcm");
 	$req->execute();
-	while($ligne=$req->fetch(PDO::FETCH_ASSOC)){
-		$id=$ligne['id_qcm'];
+	while($ligne=$req->fetch(PDO::FETCH_ASSOC)){//récupère l'id du dernier qcm implémenté dans la base
+			$id=$ligne['id_qcm'];
 		}
-		
-	
 	echo '<p>Vous allez maintenant pouvoir créer votre qcm</p>';
 	if($_GET['sd']=='general')
-	{
-         
-		echo '<form action="ChoixQQ.php" method="post"><input type="hidden" name="id" value="'.$id.'"/><input type="hidden" name="dom" value="'.$_GET['d'].'"/><button type="submit"class="start"/>Commencer le QCM</button></form>';
-        
+	{  
+		echo '<form action="ChoixQQ.php" method="post"><input type="hidden" name="id" value="'.$id.'"/><input type="hidden" name="dom" value="'.$_GET['d'].'"/><button type="submit"class="start"/>Commencer le QCM</button></form>';  
 	}
 	else
 	{
 		echo '<form action="ChoixQQ.php" method="post"><input type="hidden" name="id" value="'.$id.'"/><input type="hidden" name="dom" value="'.$_GET['d'].'"/><input type="hidden" name="sdom" value="'.$_GET['sd'].'"/><button type="submit"class="start"/>Commencer le QCM</button></form>';
-		
 	}
-}//redirection vers Questions.php avec le domaine,l'id du qcm  et le sous domaione du qcm en $_post.si domaine général le sous domaine n'est pas transmis
+}//redirection vers Questions.php avec le domaine,l'id du qcm  et le sous domaine du qcm en $_post. si le sous domaine est général le sous domaine n'est pas transmis.
+
 else//1-entrée de la création du qcm,affichage des domaines de la bdd
 {
 	$req=$bdd->prepare("SELECT * from domaine");
@@ -111,9 +100,8 @@ else//1-entrée de la création du qcm,affichage des domaines de la bdd
 	{
        
         echo "<div class=\"box\"><div class=\"floded\">";
-        echo '<p><form action="ChoixQC.php?d='.$ligne['domaine'].'" method="post">
-				<input type="hidden" name="idd" value="'.$ligne['id_domaine'].'"/>
-				<input type="hidden" name="nd" value="'.$ligne['domaine'].'"/>
+        echo '<p><form action="ChoixQC.php?d='.$ligne['domaine'].'" >
+				
 				<h4><input type="submit" value="'.$ligne['domaine'].'"/><h4></form></p>';
         echo "</div></div>";
 	}
