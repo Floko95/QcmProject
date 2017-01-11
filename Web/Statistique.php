@@ -5,6 +5,9 @@
         <meta charset="utf-8" />
 		 <link rel="stylesheet" href="Resultat.css" />
         <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
+           <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
+         <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+        
         <title></title>
     </head>
     <body> 
@@ -204,7 +207,7 @@ if(isset($_POST['qcm'])and trim($_POST['qcm'])){ //si on arrive de la page execu
     echo "</form>";
 
 }else{
-	echo 'Tous vos résultats se trouvent sur votre profil.';
+	echo '<h3>Tous vos résultats se trouvent sur votre profil.</h3>';
 	echo '<div class="button-container">
 		<a href="ProfilR.php"><button class="button" type="submit"><span>Profil</span></button></a></div>';
 }

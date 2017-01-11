@@ -2,33 +2,23 @@
 <html>
     <head>
         <meta charset="utf-8" />
-		 <link rel="stylesheet" href="test.css" />
+		 <link rel="stylesheet" href="VisibiliteQCM.css" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,500;700" rel="stylesheet">
         <title></title>
     </head>
     <body>
 		
 
-<div id="desk-nav">
-  <nav>
-    <ul>
-      <li><a href="Index.php">Home</a></li>
-      <li><a href="Profil.php">Profil</a></li>
-      <li><a href="ChoixQC.php">QCM</a></li>
-      <li><a href="Index.php">Déconnexion</a></li>
-    </ul>
-  </nav>
-</div>
 
 <!-- END NAVIGATION -->
 
    
 
-<!-- About  -->
-
-<div id="about-me">
-
-<h2>Profil</h2>
-  <p>Profil Questionneur.</p>
+<div class="conf-modal center success">
+    <div class="title-icon">
+    <img src="http://jimy.co/res/icon-success.jpg">
+    </div>
+    <div class="title-text"><h1>Visibilité</h1></div>
 
 <?php 
 session_start();
@@ -42,18 +32,22 @@ if(isset($_POST['vis']) and trim($_POST['vis']!=''))
 	if($ligne['fini'])
 	{
 		if($ligne['visible'])
+			
 		{echo '<p>le qcm numero'.$ligne['id_qcm'].' est actuellement visible. Le rendre invisible?</p>';
-		echo '<form action="VisibiliteQCM.php" method="post"><input type="hidden" name="idqcm" value="'.$ligne['id_qcm'].'"/><input type="submit" name="visf" value="Oui"/></form>';
-		echo '<form action="VisualisationQCM.php" method="post"><input type="hidden" name="id" value="'.$ligne['id_qcm'].'"/><input type="submit" value="Non"/></form>';
+		echo '<div class="modal-footer"><form action="VisibiliteQCM.php" method="post"><input type="hidden" name="idqcm" value="'.$ligne['id_qcm'].'"/><input type="submit" name="visf" class="conf-but green" value="Oui"/></form>';
+		echo '<form action="VisualisationQCM.php" method="post"><input type="hidden" name="id" value="'.$ligne['id_qcm'].'"/><input type="submit" class="conf-but" value="Non"/></form></div>';
+		echo '</div>';
 		}
 		else{
 			echo '<p>le qcm numero'.$ligne['id_qcm'].' est actuellement invisible. Le rendre visible?</p>';
-			echo '<form action="VisibiliteQCM.php" method="post"><input type="hidden" name="idqcm" value="'.$ligne['id_qcm'].'"/><input type="submit" name="vist" value="Oui"/></form>';
-		echo '<form action="VisualisationQCM.php" method="post"><input type="hidden" name="id" value="'.$ligne['id_qcm'].'"/><input type="submit" value="Non"/></form>';
+			echo '<div class="modal-footer"><form action="VisibiliteQCM.php" method="post"><input type="hidden" name="idqcm" value="'.$ligne['id_qcm'].'"/><input type="submit" name="vist" class="conf-but green" value="Oui"/></form>';
+		echo '<form action="VisualisationQCM.php" method="post"><input type="hidden" name="id" value="'.$ligne['id_qcm'].'"/><input type="submit" class="conf-but" value="Non"/></form></div>';
+		echo '</div>';
 		}
 	}	
 	else
 			echo '<p>Ce QCM n\'est pas terminé,Impossible de le rendre visible</p><a href="Profil.php">Retour au profil</a>';
+		echo '</div>';
 }
 if(isset($_POST['visf']) and trim($_POST['visf']))
 {
@@ -70,13 +64,7 @@ if(isset($_POST['vist']) and trim($_POST['vist']))
 	echo '<p>le qcm a été rendu visible</p><form action="VisualisationQCM.php" method="post"><input type="hidden" name="id" value="'.$_POST['idqcm'].'"/><input type="submit" value="Retour au qcm"/></form>';
 }
 ?>
-</div>
 
-<!-- END ABOUT  -->
-
-
-
-<!-- END FOOTER  -->
 	
 	</body>
 	</html>

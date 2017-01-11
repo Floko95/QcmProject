@@ -42,7 +42,7 @@ p {
 
 .container {
   position: relative;
-  max-width: 40rem;
+  max-width: 50rem;
   margin: 5rem auto;
   background: #fff;
   width: 100%;
@@ -127,7 +127,7 @@ p {
   position: absolute;
   top: 1.25rem;
   pointer-events: none;
-  padding-left: 0.125rem;
+  padding-left: 1.125rem;
   z-index: 1;
   color: #b3b3b3;
   font-size: 1rem;
@@ -324,6 +324,7 @@ p {
   font-size: .9rem;
   color: #4f93ce;
   margin: 1rem 0;
+  margin-bottom: 15%;
   padding: 0.75rem 3rem;
   cursor: pointer;
   -webkit-transition: background-color 0.28s ease, color 0.28s ease, box-shadow 0.28s ease;
@@ -367,4 +368,13 @@ p {
 }
 .button:focus {
   outline: none;
+}
+
+
+h3 {
+   text-align: center;
+  margin: 6% 0 1em; 
+  margin-bottom: 5%;
+    font-family: "Fjalla One", sans-serif;
+    font-weight: 300;
 }
