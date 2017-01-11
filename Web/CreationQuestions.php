@@ -65,15 +65,15 @@ require_once("Connexionbdd.php");
 			echo "<form action='Questions.php' method=post>";
 			if(isset($_POST['id']))
                         {
-                                if(isset($_POST['dom']))
+                                if(isset($_POST['dom'])) // si le domaine est spécifié
                                 {
-                                        echo 'Domaine du qcm : '.$_POST['dom'];
+                                        echo 'Domaine du qcm : '.$_POST['dom']; // on affiche le domaine
                                 }
-                                if (isset($_POST['sdom']))
+                                if (isset($_POST['sdom'])) // si le sous domaine est spécifié
                                 {
-                                        echo ' Sous_domaine du qcm : '.$_POST['sdom'];
-                                }
-                                echo ' id du qcm : '.$_POST['id'];
+                                        echo ' Sous_domaine du qcm : '.$_POST['sdom']; // on affiche le sous domaine
+				}
+                                echo ' id du qcm : '.$_POST['id']; // on affiche l'Id du QCM
                         }
 
 			echo "Intitulé de la question : <input type='text' name='q'/><br/><br/>";
