@@ -114,17 +114,14 @@ require_once('../Autres/Connexionbdd.php');
 		<div class="liste">
 <?php
 	
-    if(isset($_GET['d'])and trim ($_GET['d']!='') and isset($_GET['sd']) and trim ($_GET['sd']!='') ){	
-        //après avoir cliqué sur un sous-domaine, on est sur la page où les qcm sont affichés 
+    if(isset($_GET['d'])and trim ($_GET['d']!='') and isset($_GET['sd']) and trim ($_GET['sd']!='') ){	//après avoir cliqué sur un sous-domaine, on est sur la page où les qcm sont affichés 
 	       
             echo '<div class="list title"> '.$_GET['d'].'</br>'.$_GET['sd'].'</div>';
-            $statqcm=$bdd->prepare('SELECT * FROM recap_repondeur WHERE id_repondeur = :id_rep and sous_domaine=:sd');	
-            //affiche les differents qcm et leurs statistiques
+            $statqcm=$bdd->prepare('SELECT * FROM recap_repondeur WHERE id_repondeur = :id_rep and sous_domaine=:sd');	//affiche les differents qcm et leurs statistiques
 			$statqcm->bindValue(':id_rep',$repondeur);
 			$statqcm->bindValue(':sd',$_GET['sd']);
 			$statqcm->execute();
-			while($l=$statqcm->fetch(PDO::FETCH_ASSOC)){ 													
-            //affichage des stats des qcm du domaine/sdomaine courants 
+			while($l=$statqcm->fetch(PDO::FETCH_ASSOC)){ 											//affichage des stats des qcm du domaine/sdomaine courants 
 	
 				echo'<div class="list">	
                 <div class="info pull-left">
@@ -148,17 +145,15 @@ require_once('../Autres/Connexionbdd.php');
             }
 
                       
-    }else if(isset($_GET['d'])and trim ($_GET['d']!='') and !isset($_GET['sd'])){	 
-    //après avoir cliqué sur un domaine, on est sur la page où les sous-domaines sont affichés 
+    }else if(isset($_GET['d'])and trim ($_GET['d']!='') and !isset($_GET['sd'])){	 //après avoir cliqué sur un domaine, on est sur la page où les sous-domaines sont affichés 
 	
 
 			
-			$nomdom=$bdd->prepare('SELECT domaine FROM domaine WHERE id_domaine= :d');				
-            //récupère le nom du domaine courant 
+			$nomdom=$bdd->prepare('SELECT domaine FROM domaine WHERE id_domaine= :d');				//récupère le nom du domaine courant 
 			$nomdom->bindValue(':d',$_GET['d']);													
 			$nomdom->execute();
 			while($l=$nomdom->fetch(PDO::FETCH_ASSOC)){
-				echo '<div class="list title">'.$l['domaine'].': ';															//affichage du domaine dans lequel on est
+				echo '<div class="list title">'.$l['domaine'].': ';									//affichage du domaine dans lequel on est
 			}
             
             $moy=$bdd->prepare("SELECT round(avg(note_qcm)::numeric,2) as round FROM recap_repondeur natural join domaine WHERE id_repondeur = :repondeur and id_domaine=:d");
