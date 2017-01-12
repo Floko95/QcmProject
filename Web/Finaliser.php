@@ -10,8 +10,8 @@
 <?php
 session_start();
 require_once('Connexionbdd.php');
-if(isset($_POST['id']) and !(isset($_POST['oui'])) and !(isset($_POST['non']))){
- 	$req=$bdd->prepare("UPDATE qcm SET fini = true WHERE id_qcm=:id");
+if(isset($_POST['id']) and !(isset($_POST['oui'])) and !(isset($_POST['non']))){//si on vient de questions.php,avec l'id du qcm recu
+ 	$req=$bdd->prepare("UPDATE qcm SET fini = true WHERE id_qcm=:id");//on considere ce qcm fini
 	$req->bindValue(':id',$_POST['id']);
 	$req->execute();
     ?>
@@ -29,27 +29,27 @@ if(isset($_POST['id']) and !(isset($_POST['oui'])) and !(isset($_POST['non']))){
 	echo'<form action="Finaliser.php" method="post">
 	<input type="hidden" name="id" value="'.$_POST['id'].'"/>
 	<input type="submit" name="oui" class="conf-but green" value="Oui"/>
-	<input type="submit" name="non" class="conf-but" value="Non"/></form>';?>
+	<input type="submit" name="non" class="conf-but" value="Non"/></form>';//on laisse le choix de le rendre visible ou non?>
          </div>
 </div>
         <?php
 	
 }
-if(isset($_POST['oui']))
+if(isset($_POST['oui']))//si oui,on change la bdd pour le rendre visible
 {
 	$req=$bdd->prepare("UPDATE qcm SET visible = true WHERE id_qcm=:id");
 	$req->bindValue(':id',$_POST['id']);
 	$req->execute();
 	header("Location: AccueilQ.php");
 }
-if(isset($_POST['non']))
+if(isset($_POST['non']))//si non, inversement 
 {
 	$req=$bdd->prepare("UPDATE qcm SET visible = false WHERE id_qcm=:id");
 	$req->bindValue(':id',$_POST['id']);
 	$req->execute();
 	header("Location: AccueilQ.php");
 }
-
+//dans les deux cas on renvoie à l'acceuil
       
         
 ?>

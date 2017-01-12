@@ -35,21 +35,21 @@
 <?php
 require_once("Connexionbdd.php");
 
-	if (!isset($_POST['n']))
+	if (!isset($_POST['n'])) //si le nombre de réponses n'est pas spécifié on affiche ce formulaire
 	{
 		echo '
 			<form action="CreationQuestions.php" method=post>
 			<input type="hidden" name="idqcm" value="'.$_POST['idqcm'].'"/>
 			Combien de réponses voulez-vous pour votre question ?
-			<input type="text" name="n" size=1/><br/>
+			<input type="text" name="n" size=1/><br/> 
 			<input type="submit" value="Ajouter les réponses"/>
 			</form>
 		';
 	}
 
-	elseif (isset($_POST['n']))
+	elseif (isset($_POST['n'])) // si le nombre de réponses est spécifié
 	{
-		if ($_POST['n'] < 2)
+		if ($_POST['n'] < 2)// si le nombre de réponses est inférieur à 2 on affiche à nouveau le formulaire précédent
 		{
 			echo '
 				<form action="CreationQuestions.php" method=post>
@@ -60,24 +60,24 @@ require_once("Connexionbdd.php");
 				</form>
 			';
 		}
-		else
+		else // sinon on affiche le nouveau formulaire pour entrer les informations de la question
 		{
 			echo "<form action='Questions.php' method=post>";
 			if(isset($_POST['id']))
                         {
-                                if(isset($_POST['dom']))
+                                if(isset($_POST['dom'])) // si le domaine est spécifié
                                 {
-                                        echo 'Domaine du qcm : '.$_POST['dom'];
+                                        echo 'Domaine du qcm : '.$_POST['dom']; // on affiche le domaine
                                 }
-                                if (isset($_POST['sdom']))
+                                if (isset($_POST['sdom'])) // si le sous domaine est spécifié
                                 {
-                                        echo ' Sous_domaine du qcm : '.$_POST['sdom'];
-                                }
-                                echo ' id du qcm : '.$_POST['id'];
+                                        echo ' Sous_domaine du qcm : '.$_POST['sdom']; // on affiche le sous domaine
+				}
+                                echo ' id du qcm : '.$_POST['id']; // on affiche l'Id du QCM
                         }
 
 			echo "Intitulé de la question : <input type='text' name='q'/><br/><br/>";
-			for ($i=1;$i<=$_POST['n'];$i++)
+			for ($i=1;$i<=$_POST['n'];$i++) // boucle qui permet d'afficher les champs de réponses avec leur liste en fonction du nombre entré dans le tout premier formulaire
 			{
 				echo "Réponse $i <input type='text' name='Rep[]'/><select name='select[]'>
 										<option value='Vrai'>Réponse Correcte</option>
