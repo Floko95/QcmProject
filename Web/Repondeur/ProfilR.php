@@ -60,7 +60,7 @@ require_once('../Autres/Connexionbdd.php');
  <?php 
 
 		$repondeur=0;															//contiendra l'id du repondeur
-		$trouveid=$bdd->prepare('select * from repondeur where nom_repondeur=:n');	//trouve  l'id du repondeur avec son nom
+		$trouveid=$bdd->prepare('select id_repondeur from repondeur where nom_repondeur=:n');	//trouve  l'id du repondeur avec son nom
 		$trouveid->bindValue(':n',$_SESSION['user']);								
 		$trouveid->execute();
 		while($l=$trouveid->fetch(PDO::FETCH_ASSOC)){								
@@ -164,6 +164,7 @@ require_once('../Autres/Connexionbdd.php');
 				$moyenne = $ligne['round'];																//contient la moyenne du domaine dans lequel on est
 			}
 			
+			$moyenne=round($moyenne,2);
 			
 			$insertm =$bdd->prepare ('UPDATE repondeur SET moyenne = :m WHERE id_repondeur = :id');		//enregistre la moyenne dans la table du repondeur
 			$insertm->bindValue(':id',$repondeur);
