@@ -3,14 +3,14 @@
 /* Script d'insertion des données dans la BDD, à n'utiliser qu'une seule fois après init */
 
 INSERT INTO questionneur (nom_questionneur, mdp_questionneur ) values
-('quest','quest'), 	-- questionneur test
-
-('Bernard', 'System16');
+('Gayral','Projetqcm16'),
+('Santini','System16'),
+('Noel','Culture16'),
+('Hebert','Math16');
 
 INSERT INTO repondeur (nom_repondeur, mdp_repondeur) values
-('rep','rep'), 		-- répondeur test
-
-('Charlie', 'Didier');
+('Charlie','Didier'),
+('Lucie','Godefert');
 
 INSERT INTO domaine (domaine) values
 ('Informatique'),('Mathématiques'),('Culture Générale'),('Médecine'),('Langues'),('Physique Chimie');
@@ -62,15 +62,15 @@ INSERT INTO reponse (id_question, reponse, correct) values
 (27,'Les Indestructibles', DEFAULT),(27,'1001 pattes', DEFAULT),(27,'Toy Story', TRUE),(27,'Monstres et cie', DEFAULT);
 
 INSERT INTO qcm (auteur,domaine,sous_domaine,note_total,visible,fini) values 
-('Bernard','Informatique','BDD',3,true,true),
-('quest','Informatique','PHP',3,true,true),
-('quest','Informatique','JAVA',3,true,true),
-('quest','Informatique','C',3,true,true),
-('quest','Informatique','HTML',3,true,true),
-('quest','Mathématiques','Algèbre',3,true,true),
-('quest','Mathématiques','Géometrie',3,true,true),
-('Bernard','Culture Générale','Histoire',3,true,true),
-('Bernard','Culture Générale','Cinéma',3,true,true);
+('Santini','Informatique','BDD',3,true,true),
+('Gayral','Informatique','PHP',3,true,true),
+('Gayral','Informatique','JAVA',3,true,true),
+('Santini','Informatique','C',3,true,true),
+('Gayral','Informatique','HTML',3,true,true),
+('Hebert','Mathématiques','Algèbre',3,true,true),
+('Hebert','Mathématiques','Géometrie',3,true,true),
+('Noel','Culture Générale','Histoire',3,true,true),
+('Noel','Culture Générale','Cinéma',3,true,true);
 
 INSERT INTO qcm_question values 
 (1,1),(1,2),(1,3),
