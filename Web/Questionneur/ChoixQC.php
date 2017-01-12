@@ -54,6 +54,15 @@ if(isset($_GET['d']) and trim($_GET['d']!='')and !(isset($_GET['sd'])))//2-domai
 					<h4><input type="submit" value="Général"/><h4></form></p>';
 				echo "</div></div>";
 				
+				
+				echo "<div class=\"box\"><div class=\"floded\">";					//créer un nouveau sous-domaine
+				echo '<p><form action="CreerDomaine.php"  method="post">
+				<input type="hidden" name="domaine" value="'.$_GET['d'].'"/>
+				<input type="submit" name="sbouton" value="Créer Sous-domaine"/></form></p>';
+				echo "</div></div>";
+			
+			
+				
 	while($ligne=$req->fetch(PDO::FETCH_ASSOC))
 	{   
         echo "<div class=\"box\"><div class=\"floded\">"; 
@@ -93,6 +102,14 @@ else if (isset($_GET['sd']) and trim($_GET['sd']!='') and isset($_GET['d']) and 
 }//redirection vers ChoixQQ.php avec le domaine,l'id du qcm  et le sous domaine du qcm en $_post.si domaine général le sous domaine n'est pas transmis
 else//1-entrée de la création du qcm,affichage des domaines de la bdd
 {
+
+				echo "<div class=\"box\"><div class=\"floded\">";						//créer un nouveau domaine
+				echo '<p><form action="CreerDomaine.php"  method="post">
+					<input type="submit" name="bouton" value="Créer Domaine"/></form></p>';
+				echo "</div></div>";
+				
+				
+				
 	$req=$bdd->prepare("SELECT * from domaine");
 	$req->execute();
 	while($ligne=$req->fetch(PDO::FETCH_ASSOC))
@@ -100,7 +117,6 @@ else//1-entrée de la création du qcm,affichage des domaines de la bdd
        
         echo "<div class=\"box\"><div class=\"floded\">";
         echo '<p><form action="ChoixQC.php?d='.$ligne['domaine'].'" method="post">
-		
 				<h4><input type="submit" value="'.$ligne['domaine'].'"/><h4></form></p>';
         echo "</div></div>";
 	}
