@@ -2,12 +2,11 @@
 <html>
     <head>
         <meta charset="utf-8" />
-		 <link rel="stylesheet" href="test.css" />
+		 <link rel="stylesheet" href="cq.css" />
         <title></title>
     </head>
     <body>
 		
-
 <div id="desk-nav">
   <nav>
     <ul>
@@ -21,92 +20,124 @@
 
 <!-- END NAVIGATION -->
 
-   
-
-<!-- About  -->
-
-<div id="about-me">
-
-
-<h2>Creation de questions</h2>
+ 
   
-
-
 <?php
 require_once("../Autres/Connexionbdd.php");
 
 	if (!isset($_POST['n'])) //si le nombre de réponses n'est pas spécifié on affiche ce formulaire
 	{
-		echo '
-			<form action="CreationQuestions.php" method=post>
-			<input type="hidden" name="idqcm" value="'.$_POST['idqcm'].'"/>
-			Combien de réponses voulez-vous pour votre question ?
-			<input type="text" name="n" size=1/><br/> 
-			<input type="submit" value="Ajouter les réponses"/>
-			</form>
-		';
+			?>
+		
+  <div class="container">
+    <div class="wrap">
+      <ul class="steps">
+        <li class="is-active"><a href='ChoixQC.php'></a></li>
+      </ul>
+		
+		
+			<form class="form-wrapper" action="CreationQuestions.php" method="post">
+			<fieldset class="section is-active">
+		<?php	
+		echo'	<input type="hidden" name="idqcm" value="'.$_POST['idqcm'].'"/>';
+		 ?>
+		
+			<h3>Nombres de question : </h3>
+			<input type="text" name="n"/> 
+			<input type="submit" class="button" value="Ajouter les réponses"/>
+			</fieldset>
+		</form>
+    </div>
+  </div>
+		<?php
 	}
 
 	elseif (isset($_POST['n'])) // si le nombre de réponses est spécifié
 	{
 		if ($_POST['n'] < 2)// si le nombre de réponses est inférieur à 2 on affiche à nouveau le formulaire précédent
 		{
-			echo '
-				<form action="CreationQuestions.php" method=post>
-				<input type="hidden" name="idqcm" value="'.$_POST['idqcm'].'"/>
-				Il doit y avoir au moins deux réponses à votre question
-				<input type="text" name="n" size=1/><br/>
-				<input type="submit" value="Ajouter les réponses"/>
-				</form>
-			';
+				?>
+		
+  <div class="container">
+    <div class="wrap">
+      <ul class="steps">
+        <li class="is-active"><a href='ChoixQC.php'></a></li>
+      </ul>
+		
+		
+			<form class="form-wrapper" action="CreationQuestions.php" method=post>
+			<input type="hidden" name="idqcm" value=$_POST['idqcm']/>
+			<fieldset class="section is-active">
+			<h3>Minimum 2 ! : </h3>
+			<input type="text" name="n"/> 
+			<input type="submit" class="button" value="Ajouter les réponses"/>
+			</fieldset>
+		</form>
+    </div>
+  </div>
+		<?php
+			
 		}
 		else // sinon on affiche le nouveau formulaire pour entrer les informations de la question
 		{
-			echo "<form action='Questions.php' method=post>";
+			echo '<form action="Questions.php" method=post>
+			
+			<div class="contain">
+  			<header>
+    		<h1>Créer votre question !</h1>';
+			
 			if(isset($_POST['id']))
                         {
                                 if(isset($_POST['dom'])) // si le domaine est spécifié
                                 {
-                                        echo 'Domaine du qcm : '.$_POST['dom']; // on affiche le domaine
+                                        echo '<h2>Domaine du qcm : '.$_POST['dom'].'</h2>'; // on affiche le domaine
                                 }
                                 if (isset($_POST['sdom'])) // si le sous domaine est spécifié
                                 {
-                                        echo ' Sous_domaine du qcm : '.$_POST['sdom']; // on affiche le sous domaine
+                                        echo ' </br><h2>Sous_domaine du qcm : '.$_POST['sdom'].'</h2></br>'; 
+										// on affiche le sous domaine
 				}
-                                echo ' id du qcm : '.$_POST['id']; // on affiche l'Id du QCM
+                                echo ' <h2>id du qcm : '.$_POST['id'].'</h2>'; // on affiche l'Id du QCM
                         }
 
-			echo "Intitulé de la question : <input type='text' name='q'/><br/><br/>";
+			echo '</header><div class="contact">
+			<input class="ques" placeholder="Intitulé de la question" type="text" name="q"/>
+			<input class="last" placeholder="Temps" type="text" name="tps"/>
+			<input class="last" placeholder="Point(s)" type="text" name="points"/></div>';
+				
 			for ($i=1;$i<=$_POST['n'];$i++) // boucle qui permet d'afficher les champs de réponses avec leur liste en fonction du nombre entré dans le tout premier formulaire
 			{
-				echo "Réponse $i <input type='text' name='Rep[]'/><select name='select[]'>
-										<option value='Vrai'>Réponse Correcte</option>
-										<option value='Faux' selected>Réponse incorrecte</option>
-									</select><br/>";
+				
+				
+			?>
+				<div class='name'>
+					<?php
+				
+				echo '<input placeholder="Réponse" class="first" type="text" name="Rep[]"/>
+					<select name="select[]">
+										<option class="green" value="Vrai">Correct</option>
+										<option class="red" value="Faux" selected>Incorrect</option>
+									</select><br/></div>';
+				
 			}
 						
 			echo'<input type="hidden" name="id" value="'.$_POST['idqcm'].'"/>';
-			echo "Temps de Réponse <input type='text' name='tps'/><br/>";
-			echo "Informations sur la question<br/>";
-			echo "<textarea name='exp' rows='10' cols='50' name='infos'></textarea><br/>";
-			echo "Points <input type='text' name='points'/><br /><br />";
-			echo  "<input type='hidden' name='creaquestion' value='creaquestion'/>";
-			echo"<input type='submit' value='Sauvegarder et envoyer les réponses'/>";
+			echo "<div class='message'>
+    		<textarea placeholder='Rajouter un petit commentaire ici. Cela sera affiché sous votre question. '></textarea>
+  			</div>";
+			echo  '<input type="hidden" name="creaquestion" value="creaquestion"/>';
+			
+			echo '<footer><button><input type="submit" value="Sauvegarder et envoyer les réponses"/></button></footer>';
 
-			echo "</form>";
+			echo '</div></form>';
 		}
 	}
 
 
 ?>
-</div>
 
-<!-- END ABOUT  -->
-
-
-
-
-<!-- END FOOTER  -->
 	
-	</body>
-	</html>
+	
+		
+</body>
+</html>
