@@ -21,7 +21,7 @@
 
       <div class="card transition">
   <h2 class="transition">Créer votre question</h2>
-  <p>Aenean lacinia bibendum nulla sed consectetur. Donec ullamcorper nulla non metus auctor fringilla.</p>
+  <p>Accéder à notre créateur de question pour ensuite l'ajouter à votre QCM.</p>
   
  <?php
         
@@ -39,7 +39,7 @@
       
         <div class="card transition">
   <h2 class="transition">Importer une question</h2>
-  <p>Aenean lacinia bibendum nulla sed consectetur. Donec ullamcorper nulla non metus auctor fringilla.</p>
+  <p>Importer des questions déjà existantes créées par d'autres utilisateurs.</p>
   
             
        <?php     
