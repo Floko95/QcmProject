@@ -159,6 +159,7 @@ if(isset($_POST['qcm'])and trim($_POST['qcm'])){ //si on arrive de la page execu
 					$score=($score*20)/$lu['note_total'];
 				}
 
+				$score=round($score,2);
 				echo ' Score : '.$score.'</br></br>';
 			}
 		
