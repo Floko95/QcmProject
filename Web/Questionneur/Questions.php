@@ -44,10 +44,10 @@
 	if(isset($_POST['id'])){				//si le questionneur vient de choixQC, donc du choix domaine/sous domaine
 		
 		if(isset($_POST['dom'])){			//si le domaine est renseigné
-			echo 'Domaine du qcm: '.$_POST['dom'].'</br>'; //affichage du domaine
+			echo '<h2>Domaine du qcm: '.$_POST['dom'].'</h2></br>'; //affichage du domaine
 		}
 		if (isset($_POST['sdom'])){			//si le sous domaine est renseigné
-			echo 'Sous_domaine du qcm:'.$_POST['sdom'].'</br>'; //affichage du domaine
+			echo '<h2>Sous_domaine du qcm:'.$_POST['sdom'].'</h2></br>'; //affichage du domaine
 		}
 		
 	}
@@ -161,7 +161,8 @@
 	
 		echo ' </br>';
 		
-		if(isset($monidqcm)){	
+		
+	}	if(isset($monidqcm)){	
 		
 			$req=$bdd->prepare("SELECT * FROM qcm natural join qcm_question natural join question where id_qcm=:idqcm");	//affichage de la question
 			$req->bindValue(':idqcm',$monidqcm);
@@ -196,12 +197,10 @@
 			}	
 
 		}
-		
-	}
             
 	echo '<form action="Finaliser.php" method="post">
 		<input type="hidden" name="id" value="'.$_POST['id'].'"/>
-        <div class="button-container"><button type="submit" class="button"><span>Valider QCM</span></button></form>';
+        <button type="submit" class="button"><span>Valider QCM</span></button></form>';
         
 		
     echo' <form action="CreationQuestions.php" method="post">
@@ -213,7 +212,7 @@
 	echo' <form action="Importer.php" method="post">
 		<input type="hidden" name="idd" value="'.$_POST['id'].'"/>
 		<input type="hidden" name="idqcm" value="'.$monidqcm.'"/>
-		<button type="submit" class="button"><span>Importer Question</span></button></div></form>';
+		<button type="submit" class="button"><span>Importer Question</span></button></form>';
 			 
   ?>
         
