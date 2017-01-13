@@ -39,6 +39,7 @@
 		$req->bindValue(':id',$_POST['id']);
 		$req->execute();
 		echo 'Reprise de la création du QCM numéro '.$_POST['id'];
+		$_SESSION['sup']=1;
 	}
 	
 	if(isset($_POST['id'])){				//si le questionneur vient de choixQC, donc du choix domaine/sous domaine
@@ -162,7 +163,7 @@
 		echo ' </br>';
 		
 		
-	}	if(isset($monidqcm)){	
+	}	if(isset($monidqcm) and !isset($_SESSION['sup'])){	
 		
 			$req=$bdd->prepare("SELECT * FROM qcm natural join qcm_question natural join question where id_qcm=:idqcm");	//affichage de la question
 			$req->bindValue(':idqcm',$monidqcm);
@@ -194,6 +195,49 @@
 				}
 
 				echo'</br>';
+			}	
+
+		}
+		if($_SESSION['sup']==1){	
+		
+			$req=$bdd->prepare("SELECT * FROM qcm natural join qcm_question natural join question where id_qcm=:idqcm");	//affichage de la question
+			$req->bindValue(':idqcm',$monidqcm);
+			$req->execute();
+			while($ligne=$req->fetch(PDO::FETCH_ASSOC)){
+				
+				
+				echo "<div class=\"form-group\"><label class=\"control-label\" for=\"select\">";
+				echo  htmlspecialchars($ligne['question'],ENT_QUOTES).'</br>';
+				echo  'Points : '.htmlspecialchars($ligne['valeur'],ENT_QUOTES).'  Temps : '.htmlspecialchars($ligne['temps'],ENT_QUOTES).' sec.';
+				
+				if($ligne['explication']!=null){
+					echo  '  Explication : '.htmlspecialchars($ligne['explication'],ENT_QUOTES).'</br></br>';
+				}
+				
+				echo "</label><i class=\"bar\"></i></div> ";
+	
+	
+				$req2=$bdd->prepare("SELECT * FROM reponse natural join question natural join qcm_question natural join qcm where id_qcm=:idqcm and id_question=:numeroquest"); //affichage des réponses 
+				$req2->bindValue(':idqcm',$monidqcm);
+				$req2->bindValue(':numeroquest',$ligne['id_question']);
+				$req2->execute();
+				echo'</br></br>';
+				while($l=$req2->fetch(PDO::FETCH_ASSOC)){
+					if($l['correct']){																//affichage en vert si la réponse est juste
+						echo '<i class="helper"><div class="green"> '.htmlspecialchars($l['reponse'],ENT_QUOTES).' </i></div>';
+					}else{																			//affichage en rouge si la réponse est fausse
+						echo '<i class="helper"><div class="red">'.htmlspecialchars($l['reponse'],ENT_QUOTES).' </i></div>';
+					}  
+				}
+
+				echo'</br>';
+				
+				echo '<form action="SupprimerQuestion.php" method="post">
+		<input type="hidden" name="idqcm" value="'.$_POST['id'].'"/>
+		<input type="hidden" name="qsup" value="'.$ligne['question'].'"/>
+        <input type="submit" name="sup" value="Supprimer"/></form>';
+        
+				
 			}	
 
 		}
