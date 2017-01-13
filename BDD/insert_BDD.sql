@@ -9,6 +9,7 @@ INSERT INTO questionneur (nom_questionneur, mdp_questionneur ) values
 ('Hebert','Math16');
 
 INSERT INTO repondeur (nom_repondeur, mdp_repondeur) values
+('Françoise','Gayral'),
 ('Charlie','Didier'),
 ('Lucie','Godefert');
 
