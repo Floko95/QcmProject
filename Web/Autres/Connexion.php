@@ -80,7 +80,7 @@ session_start();
 						                    <input type="password" name="mdp" id="mdp" class="inpt" 
                                                    placeholder="Your password">
                 						    <label>Password</label>
-						                    <input type="checkbox" id="remember" class="checkbox" checked>
+						                   
 						                    <div class="submit-wrap">
 							                        <input type="submit" value="Sign in" class="submit">
 
