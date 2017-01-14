@@ -19,7 +19,6 @@ if (isset($_POST['executer']) and $_POST['executer']==1){		//si on arrive de la 
 try{
  echo'<h1>Bonne chance</h1><p>';
   
-        
         if(isset($_POST['nd'])){
             echo 'Domaine : '.$_POST['nd'];
                                }
@@ -99,16 +98,13 @@ try{
 $_POST['executer']=0;
 }else{
 
-	 echo '<h3>Vous ne pouvez pas revenir sur un QCM.</h3>';
+	 echo '<p>Vous ne pouvez pas revenir sur un QCM.</p>';
 	 echo '<div class="button-container">
     <a href="AccueilR.php"><button class="button" type="submit"><span>Accueil</span></button></a></div>';
     
 
 }
 ?>
-</div>
-
-
-	
+</div>	
 	</body>
 	</html>
