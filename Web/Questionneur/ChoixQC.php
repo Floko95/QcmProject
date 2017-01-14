@@ -139,7 +139,12 @@ else//1-entrée de la création du qcm,affichage des domaines de la bdd
 		 echo '<a href="ChoixQC.php?d='.$_GET['d'].'">Retour</a>';	
 			?>
        
-		 <?php }else{
+		 <?php }
+		 else if (!(isset($_GET['d'])))
+		 {
+			 echo '<a href="" onClick="javascript:window.history.go(-1)">Retour</a>';
+		 }
+		 else{
 			  ?><a href='ChoixQC.php'>Retour</a><?php
 		 }?>
       </div>
