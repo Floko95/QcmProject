@@ -112,11 +112,7 @@ require_once('../Autres/Connexionbdd.php');
   
 </footer>
 
-<!-- END FOOTER  -->
-        
-        
-        
-        
+<!-- END FOOTER  -->     
         	<?php 
 	
 		if ($_SESSION['connecte']){
@@ -134,5 +130,3 @@ require_once('../Autres/Connexionbdd.php');
 	
 	</body>
 	</html>
-		
-		
