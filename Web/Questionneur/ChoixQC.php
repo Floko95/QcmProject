@@ -37,7 +37,7 @@ if(isset($_GET['d']) and trim($_GET['d']!='')and !(isset($_GET['sd'])))//2-domai
                 <div class="inner-container top-text-container">
                 <h2 class="rela-block top-main-text">Choisir Sous Domaine</h2>';
                // echo '<p>Bienvenue. Installe-toi, choisis un domaine, les QCM t\'attendent !</p>';
-    		if(isset($_GET['d'])){echo 'Domaine : '.$_GET['d'];}
+    		echo '<p>Domaine : '.$_GET['d'].'</p>';
                 //créer un nouveau sous-domaine
 				echo '<form action="CreerDomaine.php"  method="post">
 				<input type="hidden" name="domaine" value="'.$_GET['d'].'"/>
@@ -82,8 +82,10 @@ else if (isset($_GET['sd']) and trim($_GET['sd']!='') and isset($_GET['d']) and 
      echo '<div class="rela-block top-container">
                 <div class="rela-block top-center-container">
                 <div class="inner-container top-text-container">
-                <h2 class="rela-block top-main-text">Choisir Domaine</h2>
-                <p>Bienvenue. Installe-toi, choisis un domaine, les QCM t\'attendent !</p>';
+                <h2 class="rela-block top-main-text">Choisir Domaine</h2>';
+                //<p>Bienvenue. Installe-toi, choisis un domaine, les QCM t\'attendent !
+		echo '<p>Domaine : '.$_GET['d'].'</p>';
+		echo '<p>Sous-Domaine : '.$_GET['sd'].'</p>';
                 echo '</div></div></div>';
                 echo '<div class="rela-block image-grid-container">';
 	while($ligne=$req->fetch(PDO::FETCH_ASSOC)){
