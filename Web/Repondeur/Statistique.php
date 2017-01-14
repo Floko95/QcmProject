@@ -208,17 +208,14 @@ if(isset($_POST['qcm'])and trim($_POST['qcm'])){ //si on arrive de la page execu
     echo "</form>";
 
 }else{
-	echo '<h3>Tous vos résultats se trouvent sur votre profil.</h3>';
+	echo '<p>Tous vos résultats se trouvent sur votre profil.<p>';
 	echo '<div class="button-container">
 		<a href="ProfilR.php"><button class="button" type="submit"><span>Profil</span></button></a></div>';
 }
-
 
 ?>
   
 </div>
 </body>
 </html>
-            
-            
             
