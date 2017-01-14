@@ -133,7 +133,7 @@ if(isset($_POST['qcm'])and trim($_POST['qcm'])){ //si on arrive de la page execu
 				echo'</br></br></br>';
 				$time=0;					
 				
-				$tempsdepasse=$bdd->prepare('Select temps FROM public.qcm_question natural join public.question where id_qcm=:idqcm');
+				$tempsdepasse=$bdd->prepare('Select temps FROM qcm_question natural join question where id_qcm=:idqcm');	//récupération du temps du qcm
 				$tempsdepasse->bindValue(':idqcm',$_POST['qcm']);
 				$tempsdepasse->execute();
 				$t=0;
@@ -141,43 +141,43 @@ if(isset($_POST['qcm'])and trim($_POST['qcm'])){ //si on arrive de la page execu
 					$t+=$l['temps'];
 				}
 				
-				if($tempspasse>$t){
-					$score-=5;
-					echo 'Vous avez dépassé le temps (score - 5) : '.$tempspasse.' secondes. </br>';
+				if($tempspasse>$t){			//si le temps passé est plus grand que le temps du qcm
+					$score-=5;				//malus de 5 points
+					echo 'Vous avez dépassé le temps (score - 5) : '.$tempspasse.' secondes. </br>';	//message de prévention
 				}else{
-					echo 'Temps passé : '.$tempspasse.' secondes.</br>';
+					echo 'Temps passé : '.$tempspasse.' secondes.</br>';				
 				}
 				
-				if($score<0){
+				if($score<0){		//si le score est inférieur à 0
 					$score=0;
 				}
 				
-				$tems=$bdd->prepare('select note_total from qcm where id_qcm=:s');
+				$tems=$bdd->prepare('select note_total from qcm where id_qcm=:s');	//met la note sur 20
 				$tems->bindValue(':s',$_POST['qcm']);
 				$tems->execute();
 				while($lu=$tems->fetch(PDO::FETCH_ASSOC)){
 					$score=($score*20)/$lu['note_total'];
 				}
 
-				$score=round($score,2);
-				echo ' Score : '.$score.'</br></br>';
+				$score=round($score,2);			//arrondit la note au centième
+				echo ' Score : '.$score.'</br></br>';		//affichage du score
 			}
 		
 		}else{
-			echo "Votre refus de répondre au QCM entraine l'ajout d'un 0 à votre moyenne et le mépris du correcteur.";
+			echo "Votre refus de répondre au QCM entraine l'ajout d'un 0 à votre moyenne et l'indignation du correcteur.";	//si aucune réponse n'a été donneé
 		}
-		$tim=0;
+		$repondeur=0;
 		
-		$ins=$bdd->prepare('select id_repondeur from repondeur where nom_repondeur=:n');
+		$ins=$bdd->prepare('select id_repondeur from repondeur where nom_repondeur=:n');		//récupère l'id de l'utilisateur courant 
 		$ins->bindValue(':n',$_SESSION['user']);
 		$ins->execute();
 		while($lu=$ins->fetch(PDO::FETCH_ASSOC)){
-			$tim=$lu['id_repondeur'];
+			$repondeur=$lu['id_repondeur'];
 		}
 		
 		$dom=0;$s_dom=0;
 		
-		$d_sd=$bdd->prepare('SELECT distinct domaine,sous_domaine FROM qcm WHERE id_qcm = :id_qcm');
+		$d_sd=$bdd->prepare('SELECT distinct domaine,sous_domaine FROM qcm WHERE id_qcm = :id_qcm');	//récupère les domaine et sous-domaine courants
 		$d_sd->bindValue(':id_qcm',$_POST['qcm']);
 		$d_sd->execute();
 		while($l=$d_sd->fetch(PDO::FETCH_ASSOC)){
@@ -187,8 +187,8 @@ if(isset($_POST['qcm'])and trim($_POST['qcm'])){ //si on arrive de la page execu
 
 		$d='seconds';
 		
-		$inserer=$bdd->prepare('insert into public.recap_repondeur (id_repondeur,id_qcm,domaine,sous_domaine,date_qcm_fait,note_qcm,temps_qcm) values(:id_rep,:id_qcm,:dom,:s_dom,date_trunc(:mot,now()),:note,:tempspasse)');
-		$inserer->bindValue(':id_rep',$tim);
+		$inserer=$bdd->prepare('insert into public.recap_repondeur (id_repondeur,id_qcm,domaine,sous_domaine,date_qcm_fait,note_qcm,temps_qcm) values(:id_rep,:id_qcm,:dom,:s_dom,date_trunc(:mot,now()),:note,:tempspasse)');	//insère les résultats du qcm dans la base
+		$inserer->bindValue(':id_rep',$repondeur);
 		$inserer->bindValue(':id_qcm',$_POST['qcm']);
 		$inserer->bindValue(':dom',$dom);
 		$inserer->bindValue(':s_dom',$s_dom);
@@ -201,9 +201,9 @@ if(isset($_POST['qcm'])and trim($_POST['qcm'])){ //si on arrive de la page execu
 	}catch(PDOException $e){
 		die('<p>Votre requête est erronée.</p>'.$e);
 	}
-	
+													//deux choix: retourner au profil ou refaire un qcm 
 	echo '<div class="button-container">
-		<a href="ProfilR.php"><button class="button" type="submit"><span>Profil</span></button></a>
+		<a href="ProfilR.php"><button class="button" type="submit"><span>Profil</span></button></a>		
 		<a href="ChoixRD.php"><button class="button" type="submit"><span>Refaire un QCM</span></button></a></div>';
     echo "</form>";
 
