@@ -131,9 +131,21 @@ else//1-entrée de la création du qcm,affichage des domaines de la bdd
 	}
     echo "</div>";
 }
-?>            
-      
-      <div class="rela-block button black-text load-button"><a href="" onClick="javascript:window.history.go(-1)">Retour</a></div>
+//?d='.$_GET['d'].'&sd='.$_GET['sd']
+        ?>
+		
+		  <div class="rela-block button black-text load-button">
+		<?php  if (isset($_GET['sd'])){
+			echo "<div class=\"box\"><div class=\"floded\">";
+			echo $_GET['d'];
+			echo "</div></div>";
+			
+			?>
+        <a href='ChoixQC.php?d='.$_GET['d'].'>Retour</a>
+		 <?php }else{
+			  ?><a href='ChoixQC.php'>Retour</a><?php
+		 }?>
+      </div>
      
         
 </body>
