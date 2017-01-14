@@ -136,9 +136,6 @@ else//1-entrée de la création du qcm,affichage des domaines de la bdd
 		
 		  <div class="rela-block button black-text load-button">
 		<?php  if (isset($_GET['sd'])){
-			echo "<div class=\"box\"><div class=\"floded\">";
-			echo $_GET['d'];
-			echo "</div></div>";
 		 echo '<a href="ChoixQC.php?d='.$_GET['d'].'">Retour</a>';	
 			?>
        
