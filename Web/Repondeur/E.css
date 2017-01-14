@@ -21,7 +21,6 @@ body *::before {
 
 body {
   background-image: -webkit-linear-gradient(top, #f2f2f2, #e6e6e6);
-  background-image: linear-gradient(top, #f2f2f2, #e6e6e6);
 }
 
 h1 {
@@ -43,7 +42,7 @@ p {
 .container {
   position: relative;
   max-width: 50rem;
-  margin: 5rem auto;
+  margin: 3rem auto;
   background: #fff;
   width: 100%;
     height: 100%;
@@ -130,6 +129,7 @@ p {
   padding-left: 1.125rem;
   z-index: 1;
   color: #b3b3b3;
+  font-family: 'Georgia';
   font-size: 1rem;
   font-weight: normal;
   -webkit-transition: all 0.28s ease;
@@ -222,6 +222,7 @@ p {
   padding-left: 2rem;
   text-align: left;
   color: #333;
+  font-size: 0.8rem;
   display: block;
 }
 .checkbox input,

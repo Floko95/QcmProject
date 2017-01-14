@@ -285,25 +285,20 @@ body{
 /*----------------End Image Profil et Retour-----------------*/
 
 .bloc .tabs{
-	margin-top:5px;
+	margin-top:-10px;
     margin-left: 0%;
 	padding-top:10px;
-    padding-bottom: 50px;
+    padding-bottom: 40px;
+   
 }
-.bloc .tabs a{
+.bloc .tabs p{
 	width:100%;
 	float:left;
 	font-size:14px;
+    padding-right: 10px;
 	text-align:center;
 }
-.bloc .tabs a:nth-child(1){
-	text-align: center;
-	
-}
-.bloc .tabs a:nth-child(3){
-	text-align: center;
-	
-}
+
   
 /*----------------------------LISTE-----------------------------*/
 
