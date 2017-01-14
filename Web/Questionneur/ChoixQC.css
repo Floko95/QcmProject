@@ -14,13 +14,8 @@ height: 100%;
   letter-spacing: 2px;
   font-weight: 400;
   line-height: 24px;
- 
-	background: rgb(244,226,156);
-background: -moz-linear-gradient(-45deg, rgba(244,226,156,0) 0%, rgba(59,41,58,1) 100%), -moz-linear-gradient(left, rgba(244,226,156,1) 0%, rgba(130,96,87,1) 100%);
-background: -webkit-linear-gradient(-45deg, rgba(244,226,156,0) 0%,rgba(59,41,58,1) 100%), -webkit-linear-gradient(left, rgba(244,226,156,1) 0%,rgba(130,96,87,1) 100%);
-background: -o-linear-gradient(-45deg, rgba(244,226,156,0) 0%,rgba(59,41,58,1) 100%), -o-linear-gradient(left, rgba(244,226,156,1) 0%,rgba(130,96,87,1) 100%);
-background: -ms-linear-gradient(-45deg, rgba(244,226,156,0) 0%,rgba(59,41,58,1) 100%), -ms-linear-gradient(left, rgba(244,226,156,1) 0%,rgba(130,96,87,1) 100%);
-background: linear-gradient(135deg, rgba(244,226,156,0) 0%,rgba(59,41,58,1) 100%), linear-gradient(to right, rgba(244,226,156,1) 0%,rgba(130,96,87,1) 100%);
+  background-color: #2471A3  ;
+
 
 }
 
@@ -123,15 +118,7 @@ background: linear-gradient(135deg, rgba(244,226,156,0) 0%,rgba(59,41,58,1) 100%
   right: ;
   bottom: ;
 }
-.rela-inline {
-  display: inline-block;
-  position: relative;
-  margin: auto;
-  top: ;
-  left: ;
-  right: ;
-  bottom: ;
-}
+
 /*-------------------------END AJUSTEMENT---------------------------*/
 
   
@@ -151,7 +138,7 @@ background: linear-gradient(135deg, rgba(244,226,156,0) 0%,rgba(59,41,58,1) 100%
 .top-container p {
   color: #777;
   font-size: 13px;
-  margin: 0 auto 23px;
+  margin: 0 auto px;
 }
 .top-container h2 {
   color: #2b2b2b;
@@ -262,7 +249,7 @@ a{
   color: #fff;
   font-size: 13px;
   margin: 0 auto 23px;
-     text-align: center;
+  text-align: center;
 }
 
 input {
@@ -280,24 +267,11 @@ input {
     text-align: center;
 }
 
-.start {
-    background-image: linear-gradient(#8b9da9, #fff6e4);
- box-shadow: inset 0 0 100px hsla(0,0%,0%,.3);
-    width: 180px;
-    height: 30px;
-    border: 0 solid rgba(0,0,0,0.2);
-    color: #fff;
-    font-size: 14px;
-    position: relative;   
-    cursor: pointer;
-    font-family: 'PT Sans Narrow', sans-serif;
-    font-size: 16px;
-    left: auto;
-}
+
 
     .start1 {
     background-image: linear-gradient(#8b9da9, #fff6e4);
- box-shadow: inset 0 0 100px hsla(0,0%,0%,.3);
+    box-shadow: inset 0 0 100px hsla(0,0%,0%,.3);
     width: 180px;
     height: 30px;
     border: 0 solid rgba(0,0,0,0.2);
@@ -312,32 +286,32 @@ input {
     
 }
 
-/*-------------------------END GRILLE---------------------------*/
+/*------------------------- END GRILLE ---------------------------*/
 
   
-/*-----------------------BOUTON RETOUR--------------------------*/
+/*----------------------- BOUTON -----------------------------*/
 
-.button {
+#input, .button {
   font-family: "Open Sans";
   font-size: 15px;
   letter-spacing: 0px;
   font-weight: 400;
   line-height: 30px;
-  margin: -7px auto ;
+  height: 40px;
   width: 170px;
   padding: 4px;
-    background-color: #fff;
+  background-color: #fff;
   border: 1px solid #2b2b2b;
   cursor: pointer;
   text-align: center;
-    text-decoration: none;
+  text-decoration: none;
 }
-    
-.button.white-text {
+    #input .white-text {
   color: #fff;
   background-color: #2b2b2b;
+  
 }
-.button.white-text:hover {
+#input .white-text:hover {
   color: #2b2b2b;
   background-color: #fff;
     text-decoration: none;
