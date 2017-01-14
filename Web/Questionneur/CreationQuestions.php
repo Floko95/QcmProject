@@ -35,7 +35,7 @@ require_once("../Autres/Connexionbdd.php");
 		echo'	<input type="hidden" name="idqcm" value="'.$_POST['idqcm'].'"/>';
 		 ?>
 		
-			<h3>Nombres de question : </h3>
+			<h3>Nombre de réponses : </h3>
 			<input type="text" name="n"/> 
 			<input type="submit" class="button" value="Ajouter les réponses"/>
               <form class="form-wrapper" action="ChoixQQ.php" method='post'>
