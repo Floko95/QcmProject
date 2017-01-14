@@ -136,9 +136,9 @@ require_once('../Autres/Connexionbdd.php');
                 
                     
 				<div class="name">';
-				echo 'Note '.$l['note_qcm'].'/20';
-                echo'</div><div class="name">';
-                echo 'Temps '.$l['temps_qcm'].' sec.';
+				echo 'Note '.$l['note_qcm'].'/20    ';
+                
+                echo '     Temps '.$l['temps_qcm'].' sec.';
         
                 echo'</div></div></div>';
             }
@@ -210,9 +210,9 @@ require_once('../Autres/Connexionbdd.php');
                     <div class="action pull-right">
 				    <div class="name">';
 
-				echo 'Note '.$l['note_qcm'].'/20';
-                echo'</div><div class="time">';
-                echo 'Temps '.$l['temps_qcm'].' sec.';
+				echo 'Note '.$l['note_qcm'].'/20      ';
+                
+                echo '     Temps '.$l['temps_qcm'].' sec.';
         
                 echo'</div></div></div>';
             
@@ -248,7 +248,6 @@ require_once('../Autres/Connexionbdd.php');
 	</div>
 </div>
 
-    
     
     </body>
 	</html>
