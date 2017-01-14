@@ -1,10 +1,28 @@
+
 html, body{
   width: 100%;
   height: 100%;
-  margin-bottom: 10%;
+  margin: 0;
   padding: 0;
   font-family: 'Open Sans', sans-serif;
-  background-color: #3498db;
+   background-color: #6d6875;
+  background-image:
+    linear-gradient(
+      135deg,
+      rgba(109,104,117, .2) 0%,
+      rgba(255,180,162, .1) 25%,
+      rgba(109,104,117, .2) 50%,
+      rgba(255,180,162, .1) 75%,
+      rgba(109,104,117, .2) 100%
+    ),
+    linear-gradient(
+      90deg,
+      #6d6875,
+      #b5838d,
+      #e5989b,
+      #ffb4a2,
+      #ffcdb2
+    );
 }
 
 /*----------------------------BARRE NAV-----------------------------*/
@@ -18,7 +36,6 @@ html, body{
     height: 50px;
     background: #181818;
 	  color: #FFF;
-      margin-top: -2.5%;
     position: fixed;
     z-index: 99;
     -webkit-box-pack: center;
@@ -106,7 +123,7 @@ p, li, a{
 }
 
 fieldset{
-  margin: 0%;
+  margin: 0;
   padding: 0;
   border: none;
 }
@@ -114,18 +131,39 @@ fieldset{
 .container{
   width: 100%;
   max-width: 700px;
-  max-height: 200px;
-  margin: 30% auto;
+  max-height: 100px;
+  margin: 0 auto;
   position: relative;
 }
 
 .wrap{
-  width: 100%;
-  margin: 30px 0;
-  height: 200px;
+  width: 80%;
+  margin: 10% 10%;
+  height: 80px;
+}
+
+/* STEPS */
+
+.steps{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+  text-align: center;
 }
 
 
+.steps li{
+  display: inline-block;
+  margin: 20px;
+  color: #ccc;
+  padding-bottom: 5px;
+}
+
+.steps li.is-active{
+  border-bottom: 1px solid #3498db;
+  color: #3498db;
+}
 
 /* FORM */
 
@@ -138,8 +176,8 @@ fieldset{
   opacity: 0;
   text-align: center;
   position: absolute;
-  width: 100%;
-  min-height: 300px
+  width: 80%;
+  min-height: 200px 
 }
 
 .form-wrapper .section h3{
@@ -159,8 +197,8 @@ fieldset{
   font-size: 14px !important;
   font-family: 'Open Sans', sans-serif !important;
   position: absolute;
-  right: 60%;
-  bottom: 150px;
+  right:32%;
+  bottom: 30px;
 }
 
 .form-wrapper .submit{
@@ -176,7 +214,7 @@ fieldset{
 
 .form-wrapper input[type="text"] {
   display: block;
-  padding: 10px ;
+  padding: 10px;
   margin: 10px auto;
   background-color: #f1f1f1;
   border: none;
@@ -197,6 +235,7 @@ fieldset{
   overflow: hidden;
   background: white;
   border-radius: 5px;
+  font-size: 12px;
 }
 
 .message, .contact, .name, .footer, header, footer, textarea {
@@ -296,9 +335,9 @@ footer {
 footer button {
   height: 32px;
   background: #e74c3c;
-  border-radius: 1px;
+  border-radius: 5px;
   border: 0;
-  margin: 7px 10%;
+  margin: 7px ;
   color: white;
   float: right;
   padding: 0 20px 0 20px;
@@ -309,6 +348,22 @@ footer button:hover {
   background: #c0392b;
 }
 footer button:focus {
+  outline: none;
+}
+
+footer input {
+    background: #e74c3c;
+    border: none;
+    color: white;
+    font-size: 13px;
+    float: right;
+  padding: 0 20px 0 20px;
+}
+
+footer input:hover {
+  background: #c0392b;
+}
+footer input:focus {
   outline: none;
 }
 
