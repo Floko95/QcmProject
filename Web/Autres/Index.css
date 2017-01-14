@@ -103,8 +103,8 @@ body {
   margin: 0;
   display: block;
   width: 100%;
-  min-height: 60%;
-  height: 60vh;
+  min-height: 55%;
+  height: 50vh;
   -o-object-fit: cover;
      object-fit: cover;
 }
@@ -115,7 +115,7 @@ body {
 /*-------------------------INFORMATION--------------------------*/
 
 #information {
-  background: #edeeef;
+  background: #fff;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -301,14 +301,6 @@ body {
   
 /*----------------------------CONTACT-----------------------------*/
 
-form {
-  padding-top: 2.5%;
-  float: right;
-  width: 55%;
-  background: #fff;
-  display: inline-block;
-}  
-
 #contact {
   width: 100%;
   background: #fff;
@@ -320,143 +312,49 @@ form {
 
 #contact h3 {
   text-transform: uppercase;
-  text-align: left;
-  padding-left: 7%;
+  text-align: center;
   color: #2d2d2d;
   font-size: 1em;
-  padding-top: 27px;
+  padding-top: 0px;
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: 300;
-  padding: 20px 0 0 10%;
+  padding: 20px 0% 0% 12%;
   letter-spacing: 2px;
 }
 
 p.contactIn {
   padding-top: 0;
   padding-bottom: 0;
-  padding-left: 12%;
-  text-align: left;
+
+  text-align: center;
   margin: 0 auto;
   font-size: .9em;
 }
 
 #contact p {
-  text-align: left;
-  padding: 0 12% 0 12%;
+  text-align: center;
+  padding: 0 0% 0 12%;
   font-size: .9em;
-  margin-right: 10%;
-  
 }
 
 #contact h1 {
-  padding: 15% 0 2% 6%;
-  text-align: left;
+  padding: 0% 0 0% 12%;
+  text-align: center;
   display: block;
   color: #2d2d2d;
   font-size: 1.67em;
   font-family: 'Source Sans Pro', sans-serif;
-  padding-left: 10%;
   font-weight: 300;
-}
-
-#contact input {
-  border-radius: 0px;
-  border: 1px solid #ccc;
-  border-radius: 2px;
-  background: #fafafa;
-}
-
-#contact label {
-  padding-left: 0%;
-  padding-bottom: 2%;
-  display: block;
-  text-align: left;
-  color: rgba(5, 5, 5, 0.6);
-  font-size: .9em;
-}
-
-#name {
-  padding-top: 10%;
-  padding-left: 8%;
-  width: 90%;
-  display: block;
-  padding-bottom: 5%;
-}
-
-#email {
-  padding-bottom: 5%;
-  padding-left: 8%;
-  display: block;
-}
-
-#name input {
-  width: 60%;
-}
-  
-#email input {
-  width: 60%;
-}
-
-#message label {
-  padding-left: 8%;
-  display: block;
-}
-
-textarea {
-  box-shadow: 0 0 0 0;
-  border-radius: 0px;
-  margin-left: 8%;
-  width: 70%;
-  display: inline-block;
-  border: 1px solid #ccc;
-  background: #fafafa;
-  height: 100px;
-}
-
-#submit input[type=submit] {
-  display: block;
-  margin: auto;
-  color: #fff;
-  background: #2d2d2d;
-  border: 0px;
-  height: 30px;
-  width: 90px;
-  letter-spacing: 0.1em;
-  -webkit-transition: all .2s ease-out;
-  transition: all .2s ease-out;
-  border: .5px solid #2d2d2d;
-  font-family: Trebuchet MS;
-  font-size: 14px;
-  padding: 5% 25%;
-  margin: auto;
-  text-align: center;
-}
-
-#submit input[type=submit]:hover {
-  background: #fff;
-  color: #2d2d2d;
-  border: .5px solid #2d2d2d;
-}
-
-#submit {
-  padding-bottom: 10%;
-  margin-top: 10%;
-  font-size: 1em;
-    float: left;
-    margin: 4% 8%;
-    font-size: .9em;
 }
 
 div#contact {
   clear: both;
-  display: inline-block;
   background: #fff;
 }
 
 #con-left {
-  display: inline-block;
-  float: left;
-  width: 45%;
+ text-align: center;
+  width: 90%;
   background: #fff;
 }
 
