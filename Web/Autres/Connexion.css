@@ -158,21 +158,7 @@ body .container .content input.submit:hover {
 body .container .content input:focus {
   outline: none;
 }
-body .container .content .checkbox {
-  margin-top: 4px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  width: 0;
-  height: 0;
-  margin: 17px -1px;
-  padding: 0;
-  border: 0;
-}
-body .container .content .checkbox + label {
-  vertical-align: middle;
-  display: inline-block;
-  width: 50%;
-}
+
 body .container .content .checkbox + label:before {
   content: "\A";
   color: #999999;
@@ -193,9 +179,7 @@ body .container .content .checkbox + label:before {
   height: 11px;
   margin: -2px 8px 0 0;
 }
-body .container .content .checkbox:checked + label:before {
-  content: "✓";
-}
+
 body .container .content .submit-wrap {
   position: absolute;
   bottom: 0;
@@ -206,5 +190,4 @@ body .container .content .submit-wrap {
   text-align: center;
   text-decoration: none;
   color: #999999;    
-
 }
