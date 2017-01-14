@@ -1,10 +1,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-   
       <link rel="stylesheet" href="ChoixQQ.css" />
-
-
+      <title>Créer/Importer</title>
   </head>
   <body>
         	  <div id="desk-nav">

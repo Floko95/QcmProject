@@ -3,20 +3,15 @@
     <head>
         <meta charset="utf-8" />
 		 <link rel="stylesheet" href="cq.css" />
-        <title></title>
+        <link rel="stylesheet" href="cd.css" />
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+        <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
+        <title>Créer Question</title>
     </head>
     <body>
 		
-<div id="desk-nav">
-  <nav>
-    <ul>
-      <li><a href="AccueilQ.php">Home</a></li>
-      <li><a href="Profil.php">Profil</a></li>
-      <li><a href="ChoixQC.php">QCM</a></li>
-      <li><a href="../Autres/Index.php">Déconnexion</a></li>
-    </ul>
-  </nav>
-</div>
+
 
 <!-- END NAVIGATION -->
 
@@ -31,9 +26,7 @@ require_once("../Autres/Connexionbdd.php");
 		
   <div class="container">
     <div class="wrap">
-      <ul class="steps">
-        <li class="is-active"><a href='ChoixQC.php'></a></li>
-      </ul>
+      
 		
 		
 			<form class="form-wrapper" action="CreationQuestions.php" method="post">
@@ -45,6 +38,8 @@ require_once("../Autres/Connexionbdd.php");
 			<h3>Nombres de question : </h3>
 			<input type="text" name="n"/> 
 			<input type="submit" class="button" value="Ajouter les réponses"/>
+              <form class="form-wrapper" action="ChoixQQ.php" method='post'>
+                <input type="submit" class="button" value="Retour"/></form>
 			</fieldset>
 		</form>
     </div>
@@ -71,6 +66,8 @@ require_once("../Autres/Connexionbdd.php");
 			<h3>Minimum 2 ! : </h3>
 			<input type="text" name="n"/> 
 			<input type="submit" class="button" value="Ajouter les réponses"/>
+            <form class="form-wrapper" action="ChoixQQ.php" method=post>
+                <input type="submit" class="button" value="Retour"/></form>
 			</fieldset>
 		</form>
     </div>
@@ -127,7 +124,7 @@ require_once("../Autres/Connexionbdd.php");
   			</div>";
 			echo  '<input type="hidden" name="creaquestion" value="creaquestion"/>';
 			
-			echo '<footer><button><input type="submit" value="Sauvegarder et envoyer les réponses"/></button></footer>';
+			echo '<footer><button type="submit">Sauvegarder et envoyer les réponses </button></footer>';
 
 			echo '</div></form>';
 		}

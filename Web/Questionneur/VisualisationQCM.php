@@ -3,7 +3,10 @@
     <head>
         <meta charset="utf-8" />
 		 <link rel="stylesheet" href="VisualisationQCM.css" />
-        <title></title>
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
+        <title>Visualisation QCM</title>
     </head>
     <body>
 		
@@ -43,7 +46,7 @@ if (isset($_POST['id']) and trim($_POST['id']!=''))//qcm sélectionné à partir
 		$req2->bindValue(':idq',$ligne['id_question']);
 		$req2->execute();
 		
-		echo'</br></br>';
+		echo'</br>';
 		while($ligne2=$req2->fetch(PDO::FETCH_ASSOC))//on parocurt toutes les reponses
 		{
 			if($ligne2['correct']){//on distingue les réponses bonnes des fausses avant de les afficher
@@ -56,17 +59,25 @@ if (isset($_POST['id']) and trim($_POST['id']!=''))//qcm sélectionné à partir
 			echo '</div> ';
 			
 		}
+            
 		}
+        echo'</br>';
 	}
 	
 
-	
-	
-	
-	echo '<form action="SupprimerQCM.php" method="post"><input type="submit" name="supp" value="Supprimer"/><input type="hidden" name="id" value="'.$_POST['id'].'"/></form>';
-	echo '<form action="VisibiliteQCM.php"  method="post"><input type="submit" name="vis" value="Modifier la Visibilité"/><input type="hidden" name="id" value="'.$_POST['id'].'"/></form>';
+	echo '<form action="SupprimerQCM.php" method="post">
+    <input type="submit" name="supp" class="button" value="Supprimer"/>
+    <input type="hidden" name="id" value="'.$_POST['id'].'"/></form>';
+    
+	echo '<form action="VisibiliteQCM.php"  method="post">
+    <input type="submit" name="vis" class="button" value="Visibilité"/>
+    <input type="hidden" name="id" value="'.$_POST['id'].'"/></form>';
+    
 	echo '<form action="Questions.php" method="post">
-	<input type="hidden" name="id" value="'.$_POST['id'].'"/><input type="submit" name="modif" value="Modifier "/></form>';//les 3 boutons sont affichés sous forme de formulaire pour passer des informations telles que //l'id du qcm sélectionné
+	<input type="hidden" name="id" value="'.$_POST['id'].'"/>
+    <input type="submit" name="modif" class="button" value="Modifier "/></form>';
+    //les 3 boutons sont affichés sous forme de formulaire pour passer des informations telles que //l'id du qcm sélectionné
+	
 	
 }
 ?>

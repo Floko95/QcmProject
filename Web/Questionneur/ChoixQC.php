@@ -6,7 +6,7 @@
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
         <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
-        <title></title>
+        <title>Choix QCM</title>
     </head>
     <body>
 
@@ -22,23 +22,7 @@
   </nav>
 </div>
 
-
-
-
-<div class="rela-block top-container">
-    <div class="rela-block top-center-container">
-        <div class="inner-container top-text-container">
-            <h2 class="rela-block top-main-text">Choisir Domaine</h2>
-            <p>Bienvenue. Installe-toi, choisis un domaine, les QCM t'attendent !</p>
-        </div>
-    </div>
-</div>
-
-        
-        
-        <div class="rela-block image-grid-container">
-        
-        
+    
 <?php
 session_start();
 require_once('../Autres/Connexionbdd.php');
@@ -47,29 +31,36 @@ if(isset($_GET['d']) and trim($_GET['d']!='')and !(isset($_GET['sd'])))//2-domai
 	$req=$bdd->prepare("SELECT * from sous_domaine natural join domaine where domaine=:d");
 	$req->bindValue(':d',$_GET['d']);
 	$req->execute();
-	
-    echo "<div class=\"box\"><div class=\"floded\">"; 
-				echo '<p><form action="ChoixQC.php?d='.$_GET['d'].'&sd=general" " method="post">
-				
-					<h4><input type="submit" value="Général"/><h4></form></p>';
-				echo "</div></div>";
-				
-				
-				echo "<div class=\"box\"><div class=\"floded\">";					//créer un nouveau sous-domaine
-				echo '<p><form action="CreerDomaine.php"  method="post">
+    
+                echo '<div class="rela-block top-container">
+                <div class="rela-block top-center-container">
+                <div class="inner-container top-text-container">
+                <h2 class="rela-block top-main-text">Choisir Sous Domaine</h2>
+                <p>Bienvenue. Installe-toi, choisis un domaine, les QCM t\'attendent !</p>';
+    
+                //créer un nouveau sous-domaine
+				echo '<form action="CreerDomaine.php"  method="post">
 				<input type="hidden" name="domaine" value="'.$_GET['d'].'"/>
-				<input type="submit" name="sbouton" value="Créer Sous-domaine"/></form></p>';
-				echo "</div></div>";
+				<input type="submit" name="sbouton" value="Créer Sous-domaine"/></form>';
+				echo '</div></div></div>';
 			
+                echo '<div class="rela-block image-grid-container">';
 			
 				
 	while($ligne=$req->fetch(PDO::FETCH_ASSOC))
 	{   
         echo "<div class=\"box\"><div class=\"floded\">"; 
-				echo '<p><form action="ChoixQC.php?d='.$ligne['domaine'].'&sd='.$ligne['sous_domaine'].'" method="post">
-					<h4><input type="submit" value="'.$ligne['sous_domaine'].'"	/><h4></form></p>';
-				echo "</div></div>";		
+        echo '<p><form action="ChoixQC.php?d='.$ligne['domaine'].'&sd='.$ligne['sous_domaine'].'" method="post">
+        <h4><input type="submit" value="'.$ligne['sous_domaine'].'"	/><h4></form></p>';
+        echo "</div></div>";		
 	}
+        echo "<div class=\"box\"><div class=\"floded\">"; 
+        echo '<p><form action="ChoixQC.php?d='.$_GET['d'].'&sd=general" " method="post">
+        <h4><input type="submit" value="Général"/><h4></form></p>';
+        echo "</div></div></div>";
+    
+    
+    
 }
 else if (isset($_GET['sd']) and trim($_GET['sd']!='') and isset($_GET['d']) and trim($_GET['d']!=''))//3-sous domaine sélectionné,création du qcm avec valeurs par defaut et id attribué.
 {
@@ -87,27 +78,45 @@ else if (isset($_GET['sd']) and trim($_GET['sd']!='') and isset($_GET['d']) and 
 	}
 	$req=$bdd->prepare("SELECT * from qcm");
 	$req->execute();
+    
+     echo '<div class="rela-block top-container">
+                <div class="rela-block top-center-container">
+                <div class="inner-container top-text-container">
+                <h2 class="rela-block top-main-text">Choisir Domaine</h2>
+                <p>Bienvenue. Installe-toi, choisis un domaine, les QCM t\'attendent !</p>';
+                echo '</div></div></div>';
+                echo '<div class="rela-block image-grid-container">';
 	while($ligne=$req->fetch(PDO::FETCH_ASSOC)){
 		$id=$ligne['id_qcm'];
 	}	
+
 	
 	echo '<p>Vous allez maintenant pouvoir créer votre qcm</p>';
 	if($_GET['sd']=='general')
 	{     
-		echo '<form action="ChoixQQ.php" method="post"><input type="hidden" name="id" value="'.$id.'"/><input type="hidden" name="dom" value="'.$_GET['d'].'"/><button type="submit"class="start"/>Commencer le QCM</button></form>';   }
+		echo '<form action="ChoixQQ.php" method="post"><input type="hidden" name="id" value="'.$id.'"/><input type="hidden" name="dom" value="'.$_GET['d'].'"/><button type="submit"class="start1"/>Commencer le QCM</button></form>';   }
 	else
 	{
-		echo '<form action="ChoixQQ.php" method="post"><input type="hidden" name="id" value="'.$id.'"/><input type="hidden" name="dom" value="'.$_GET['d'].'"/><input type="hidden" name="sdom" value="'.$_GET['sd'].'"/><button type="submit"class="start"/>Commencer le QCM</button></form>';
+		echo '<form action="ChoixQQ.php" method="post"><input type="hidden" name="id" value="'.$id.'"/><input type="hidden" name="dom" value="'.$_GET['d'].'"/><input type="hidden" name="sdom" value="'.$_GET['sd'].'"/><button type="submit"class="start1"/>Commencer le QCM</button></form>';
 	}
+    
+    echo "</div>";
 }//redirection vers ChoixQQ.php avec le domaine,l'id du qcm  et le sous domaine du qcm en $_post.si domaine général le sous domaine n'est pas transmis
 else//1-entrée de la création du qcm,affichage des domaines de la bdd
 {
 
-				echo "<div class=\"box\"><div class=\"floded\">";						//créer un nouveau domaine
-				echo '<p><form action="CreerDomaine.php"  method="post">
-					<input type="submit" name="bouton" value="Créer Domaine"/></form></p>';
-				echo "</div></div>";
-				
+                echo '<div class="rela-block top-container">
+                <div class="rela-block top-center-container">
+                <div class="inner-container top-text-container">
+                <h2 class="rela-block top-main-text">Choisir Domaine</h2>
+                <p>Bienvenue. Installe-toi, choisis un domaine, les QCM t\'attendent !</p>';
+    
+				//créer un nouveau domaine
+				echo '<form action="CreerDomaine.php"  method="post">
+				<input type="submit" name="bouton" class="rela-inline button white-text" value="Créer Domaine"/></form>';
+                echo "</div></div></div>";
+    
+    echo '<div class="rela-block image-grid-container">';
 				
 				
 	$req=$bdd->prepare("SELECT * from domaine");
@@ -117,13 +126,15 @@ else//1-entrée de la création du qcm,affichage des domaines de la bdd
        
         echo "<div class=\"box\"><div class=\"floded\">";
         echo '<p><form action="ChoixQC.php?d='.$ligne['domaine'].'" method="post">
-				<h4><input type="submit" value="'.$ligne['domaine'].'"/><h4></form></p>';
+        <h4><input type="submit" value="'.$ligne['domaine'].'"/><h4></form></p>';
         echo "</div></div>";
 	}
+    echo "</div>";
 }
 ?>            
-      </div>
+      
       <div class="rela-block button black-text load-button"><a href="" onClick="javascript:window.history.go(-1)">Retour</a></div>
-       
+     
+        
 </body>
 </html>

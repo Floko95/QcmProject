@@ -3,14 +3,26 @@
 
 <html>
 	<head>
-	<title>Créer_Domaine</title>
+	<title>Créer Domaine</title>
 		  <link rel="stylesheet" href="cd.css" />
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+        <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
 	  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
 	</head>
 	
 	
 <body> 
-
+   	  <div id="desk-nav">
+  <nav>
+    <ul>
+      <li><a href="AccueilQ.php">Home</a></li>
+      <li><a href="Profil.php">Profil</a></li>
+      <li><a href="ChoixQC.php">QCM</a></li>
+      <li><a href="../Autres/Index.php">Déconnexion</a></li>
+    </ul>
+  </nav>
+</div>
 
 <?php 
 require_once('../Autres/Connexionbdd.php');
@@ -19,19 +31,19 @@ require_once('../Autres/Connexionbdd.php');
 																				//formulaire qui conduit sur la même page et prend en parmètre le nom de domaine entré
 		?>
 		
-  <div class="container">
-    <div class="wrap">
+  <div class="contain">
+    <div class="bloc">
       <ul class="steps">
         <li class="is-active"><a href='ChoixQC.php'></a></li>
       </ul>
 	  
-	  <form class="form-wrapper" action='CreerDomaine.php' method='post'>
+	  <form class="form-bloc" action='CreerDomaine.php' method='post'>
 		<fieldset class="section is-active">
 	  <?php
 			
        	echo    "<h3>Nom du domaine à créer : </h3>
           <input type='text' name='domainec' id='name' placeholder='Name'>
-          <input type='submit' class='button' value='Créer domaine'/>";
+          <input type='submit' class='continuer' value='Créer domaine'/>";
         
 		?>
 		
@@ -46,20 +58,18 @@ require_once('../Autres/Connexionbdd.php');
 																				//formulaire qui conduit sur la même page et prend en parmètre le nom de sous-domaine entré
   
 ?>	
-  <div class="container">
-    <div class="wrap">
-      <ul class="steps">
-        <li class="is-active"><a href='ChoixQC.php'></a></li>
-      </ul>
+  <div class="contain">
+    <div class="bloc">
+      
 		
-		<form class="form-wrapper" action='CreerDomaine.php' method='post'>
+		<form class="form-bloc" action='CreerDomaine.php' method='post'>
 		<fieldset class="section is-active">
 			<?php
 			
-			echo "<h3>Nom du sous-domaine à créer dans le domaine ".$_POST['domaine']."</h3>
+			echo "<h3>Nom du sous-domaine dans ".$_POST['domaine']."</h3>
 			<input type='text' name='sdomainec'/>
 			<input type='hidden' name='do' value='".$_POST['domaine']."'/>
-			<input type='submit' class='button' value='Créer domaine'/>";
+			<input type='submit' class='continuer' value='Créer domaine'/>";
 			?>
 			
         </fieldset>
@@ -84,7 +94,7 @@ require_once('../Autres/Connexionbdd.php');
 						<div class="icon"><span class="glyphicon glyphicon-ok"></span></div>
 						<h1>Success!</h1>
                         <?php 
-                        echo'<p>Le domaine '. $_POST['domainec'].' a bien été créé.</p>'; 
+                        echo'<p>Le sous-domaine '. $_POST['domainec'].' a bien été créé.</p>'; 
                         echo '<a href="ChoixQC.php"><button type="button" class="redo btn"> Retour au profil</button></a>';  //on retourne au profil s'il a été supprimé
 					   ?>
 				</div>

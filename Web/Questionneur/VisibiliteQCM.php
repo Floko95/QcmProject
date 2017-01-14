@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
 		 <link rel="stylesheet" href="VisibiliteQCM.css" />
         <link href="https://fonts.googleapis.com/css?family=Roboto:400,500;700" rel="stylesheet">
-        <title></title>
+        <title>Visibilité QCM</title>
     </head>
     <body>
 		
@@ -46,7 +46,7 @@ if(isset($_POST['vis']) and trim($_POST['vis']!=''))
 		}
 	}	
 	else
-			echo '<p>Ce QCM n\'est pas terminé,Impossible de le rendre visible</p><a href="Profil.php">Retour au profil</a>';//si le qcm n'est pas fini on retourne au profil
+			echo '<p>Ce QCM n\'est pas terminé, Impossible de le rendre visible</p><a href="Profil.php">Retour au profil</a>';//si le qcm n'est pas fini on retourne au profil
 		echo '</div>';
 }
 if(isset($_POST['visf']) and trim($_POST['visf']))//si on a choisi de le rendre invisible on chnage la bdd
@@ -54,14 +54,20 @@ if(isset($_POST['visf']) and trim($_POST['visf']))//si on a choisi de le rendre 
 	$req=$bdd->prepare("UPDATE qcm SET visible = false WHERE id_qcm=:id");
 	$req->bindValue(':id',$_POST['idqcm']);
 	$req->execute();
-	echo '<p>le qcm a été rendu invisible</p><form action="VisualisationQCM.php" method="post"><input type="hidden" name="id" value="'.$_POST['idqcm'].'"/><input type="submit" value="Retour au qcm"/></form>';
+	echo '<p>le qcm a été rendu invisible</p>
+    <form action="VisualisationQCM.php" method="post">
+    <input type="hidden" name="id" value="'.$_POST['idqcm'].'"/>
+    <a href="Profil.php">Retour au profil</a>';
 }
 if(isset($_POST['vist']) and trim($_POST['vist']))// pareil pour le rendre  visible
 {
 	$req=$bdd->prepare("UPDATE qcm SET visible = true WHERE id_qcm=:id");
 	$req->bindValue(':id',$_POST['idqcm']);
 	$req->execute();
-	echo '<p>le qcm a été rendu visible</p><form action="VisualisationQCM.php" method="post"><input type="hidden" name="id" value="'.$_POST['idqcm'].'"/><input type="submit" value="Retour au qcm"/></form>';
+	echo '<p>Le qcm a été rendu visible</p>
+    <form action="VisualisationQCM.php" method="post">
+    <input type="hidden" name="id" value="'.$_POST['idqcm'].'"/>
+    <a href="Profil.php">Retour au profil</a></form>';
 }//dans les deux cas on retourne a la visualisation du qcm
 ?>
 
