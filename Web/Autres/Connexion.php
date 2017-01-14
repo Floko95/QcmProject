@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
 		 <link rel="stylesheet" href="Connexion.css" />
-        <title></title>
+        <title>Connexion</title>
     </head>
     <body>
 
@@ -37,7 +37,7 @@ session_start();
 					header('Location: ../Repondeur/AccueilR.php');
 					break;
 				case 0 : 	
-					echo('<p> Nom de repondeur ou mot de passe incorrect </p>');
+					
 					break;
 				default :
 					die('<p> Erreur : Le nom et le mdp correspondent à plus d\'un repondeur </p>');
@@ -62,7 +62,7 @@ session_start();
 					header('Location: ../Questionneur/AccueilQ.php');
 					break;
 				case 0 : 	
-					echo('<p> Nom de questionneur ou mot de passe incorrect </p>');
+					echo('<p> Pseudo ou mot de passe incorrect </p>');
 					break;
 				default :
 					die('<p> Erreur : Le nom et le mdp correspondent à plus d\'un questionneur </p>');
@@ -73,10 +73,7 @@ session_start();
 			die('<p> Probleme avec authentification questionneur ['.$e->getCode().'] '.$e->getMessage().'</p>');
 		}
 }
-
-?>
-          
-                                
+?>                                    
 					                <form action="Connexion.php" method="post" >
 						                    <input type="text" name="nom" id="nom" class="inpt"  placeholder="Pseudo">
 						                    <label>Pseudo</label>
@@ -84,7 +81,6 @@ session_start();
                                                    placeholder="Your password">
                 						    <label>Password</label>
 						                    <input type="checkbox" id="remember" class="checkbox" checked>
-						                    <label for="remember">Remember me</label>
 						                    <div class="submit-wrap">
 							                        <input type="submit" value="Sign in" class="submit">
 
