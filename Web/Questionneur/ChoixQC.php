@@ -41,7 +41,7 @@ if(isset($_GET['d']) and trim($_GET['d']!='')and !(isset($_GET['sd'])))//2-domai
                 //créer un nouveau sous-domaine
 				echo '<form action="CreerDomaine.php"  method="post">
 				<input type="hidden" name="domaine" value="'.$_GET['d'].'"/>
-				<input type="submit" name="sbouton" value="Créer Sous-domaine"/></form>';
+				<input class="creer" type="submit" name="sbouton" value="Créer Sous-domaine"/></form>';
 				echo '</div></div></div>';
 			
                 echo '<div class="rela-block image-grid-container">';
@@ -82,8 +82,8 @@ else if (isset($_GET['sd']) and trim($_GET['sd']!='') and isset($_GET['d']) and 
      echo '<div class="rela-block top-container">
                 <div class="rela-block top-center-container">
                 <div class="inner-container top-text-container">
-                <h2 class="rela-block top-main-text">Choisir Domaine</h2>';
-                //<p>Bienvenue. Installe-toi, choisis un domaine, les QCM t\'attendent !
+                <h2 class="rela-block top-main-text">Vous avez choisi:</h2>';
+                
 		echo '<p>Domaine : '.$_GET['d'].'</p>';
 		echo '<p>Sous-Domaine : '.$_GET['sd'].'</p>';
                 echo '</div></div></div>';
@@ -91,7 +91,6 @@ else if (isset($_GET['sd']) and trim($_GET['sd']!='') and isset($_GET['d']) and 
 	while($ligne=$req->fetch(PDO::FETCH_ASSOC)){
 		$id=$ligne['id_qcm'];
 	}	
-
 	
 	echo '<p>Vous allez maintenant pouvoir créer votre qcm</p>';
 	if($_GET['sd']=='general')
@@ -106,7 +105,6 @@ else if (isset($_GET['sd']) and trim($_GET['sd']!='') and isset($_GET['d']) and 
 }//redirection vers ChoixQQ.php avec le domaine,l'id du qcm  et le sous domaine du qcm en $_post.si domaine général le sous domaine n'est pas transmis
 else//1-entrée de la création du qcm,affichage des domaines de la bdd
 {
-
                 echo '<div class="rela-block top-container">
                 <div class="rela-block top-center-container">
                 <div class="inner-container top-text-container">
@@ -115,7 +113,7 @@ else//1-entrée de la création du qcm,affichage des domaines de la bdd
     
 				//créer un nouveau domaine
 				echo '<form action="CreerDomaine.php"  method="post">
-				<input type="submit" name="bouton" class="rela-inline button white-text" value="Créer Domaine"/></form>';
+				<input class="creer" type="submit" name="bouton" class="rela-inline button white-text" value="Créer Domaine"/></form>';
                 echo "</div></div></div>";
     
     echo '<div class="rela-block image-grid-container">';
