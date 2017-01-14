@@ -4,7 +4,7 @@
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
-    <title> QCM | Choix QCM</title>
+    <title>Choix QCM</title>
  <head>
   <body>
 
@@ -70,7 +70,7 @@
 			}
   
 			if ($tour==0){														//si tour n'a pas été incrémenté, il n'y a pas de qcm dans le sous-domaine
-				echo "<p>Ce sous-domaine ne contient pas de QCM</p>";
+				echo "<h3>Ce sous-domaine ne contient pas de QCM</h3>";
 			}
 		}
 		

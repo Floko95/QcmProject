@@ -6,7 +6,7 @@
          <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300" rel="stylesheet">
          <link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet">
          <link href="https://fonts.googleapis.com/css?family=Redressed" rel="stylesheet">
-        <title></title>
+        <title>Accueil</title>
     </head>
     <body>
 

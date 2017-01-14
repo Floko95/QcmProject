@@ -8,7 +8,7 @@
            <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
          <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
         
-        <title></title>
+        <title>Résultat</title>
     </head>
     <body> 
 

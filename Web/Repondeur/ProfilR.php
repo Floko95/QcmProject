@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
 		 <link rel="stylesheet" href="ProfilR.css" />
         <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
-        <title></title>
+        <title>Profil</title>
     </head>
     <body>
     
@@ -102,11 +102,11 @@ require_once('../Autres/Connexionbdd.php');
 		$statrep->execute();
 		while($l=$statrep->fetch(PDO::FETCH_ASSOC)){
     
-            echo '<div class="tabs clearfix"> <a href="#">';
-            echo 'Temps Total: '.$l['temps_total'];    
-            echo '</a><a href="#">';
-            echo 'Nombre QCM:'.$l['nb_qcm_fait'];
-            echo '</a></div>';
+            echo '<div class="tabs clearfix"> <p>';
+            echo 'Temps Total: '.$l['temps_total'].'       ';    
+            
+            echo '     Nombre QCM:'.$l['nb_qcm_fait'];
+            echo '</p></div>';
         }
 ?>
         
@@ -116,15 +116,15 @@ require_once('../Autres/Connexionbdd.php');
 	
     if(isset($_GET['d'])and trim ($_GET['d']!='') and isset($_GET['sd']) and trim ($_GET['sd']!='') ){	//après avoir cliqué sur un sous-domaine, on est sur la page où les qcm sont affichés 
 	       
-            echo '<div class="list title"> '.$_GET['d'].'</br>'.$_GET['sd'].'</div>';
+            echo '<div class="list title"> '.$_GET['d'].' / '.$_GET['sd'].'</div>';
             $statqcm=$bdd->prepare('SELECT * FROM recap_repondeur WHERE id_repondeur = :id_rep and sous_domaine=:sd');	//affiche les differents qcm et leurs statistiques
 			$statqcm->bindValue(':id_rep',$repondeur);
 			$statqcm->bindValue(':sd',$_GET['sd']);
 			$statqcm->execute();
 			while($l=$statqcm->fetch(PDO::FETCH_ASSOC)){ 											//affichage des stats des qcm du domaine/sdomaine courants 
 	
-				echo'<div class="list">	
-                <div class="info pull-left">
+				echo'<div class="list">	';	
+                echo ' <div class="info pull-left">
                 <div class="time">';		
               
                 echo 'QCM n° '.$l['id_qcm'].' ';
@@ -135,14 +135,14 @@ require_once('../Autres/Connexionbdd.php');
                 echo' </div>
                 
                     
-				    <div class="name">';
-
+				<div class="name">';
 				echo 'Note '.$l['note_qcm'].'/20';
                 echo'</div><div class="name">';
                 echo 'Temps '.$l['temps_qcm'].' sec.';
         
-                echo'</div></div>';
+                echo'</div></div></div>';
             }
+            
 
                       
     }else if(isset($_GET['d'])and trim ($_GET['d']!='') and !isset($_GET['sd'])){	 //après avoir cliqué sur un domaine, on est sur la page où les sous-domaines sont affichés 
@@ -196,8 +196,8 @@ require_once('../Autres/Connexionbdd.php');
 		$qcmnull->execute();
 		while($l=$qcmnull->fetch(PDO::FETCH_ASSOC)){
             
-            echo'<div class="list">	
-            <div class="info pull-left">
+            echo'<div class="list">	';
+            echo'<div class="info pull-left">
             <div class="name">';		
               
                 echo 'QCM n° '.$l['id_qcm'].' ';
@@ -218,6 +218,7 @@ require_once('../Autres/Connexionbdd.php');
             
             
         }
+        echo'</div>';
             
             }else{	//première page
 															 

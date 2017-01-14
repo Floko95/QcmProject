@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
 		 <link rel="stylesheet" href="E.css" />
-        <title></title>
+        <title>Executer QCM</title>
 		 
     </head>
     <body>
@@ -76,12 +76,12 @@ try{
 	while($l=$req2->fetch(PDO::FETCH_ASSOC)){      //les réponses sont sont forme de cases pouvant être cochées
 			
             echo'<div class="checkbox"><label>';
-			echo'<input type="checkbox" name="reponse[]" value="'.$l['id_reponse'].'"/><i class="helper"></i>'.htmlspecialchars($l['reponse'],ENT_QUOTES).'</br>';
+			echo'<input type="checkbox" name="reponse[]" value="'.$l['id_reponse'].'"/><i class="helper"></i>'.htmlspecialchars($l['reponse'],ENT_QUOTES);
 			echo '</div></label>';
 			
 		}
 		
-		echo'</br>';
+		
 		}
 		
 		
