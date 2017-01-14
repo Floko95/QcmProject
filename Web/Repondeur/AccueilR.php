@@ -72,33 +72,10 @@ require_once('../Autres/Connexionbdd.php');
         <p>Feel free to reach out to me if you have any questions or comments about the services I offer.</p>
 
         <h3>Contact Information</h3>
-        <p class="contactIn">Attn: IUT PARIS 13, Villetaneuse</p>
-        <p class="contactIn">paris13.com</p>
-        <p class="contactIn">blablabla.gmail.com</p>
+        <p class="contactIn">Addresse: IUT de PARIS 13, Villetaneuse</p>
+        <p class="contactIn">Site: paris13.com</p>
+          <p class="contactIn">Email: projets3@gmail.com</p></br></br>
       </div>
-
-
-      <form action="//blablabla@gmail.com" method="POST">
-
-        <div id="name">
-          <label for="name">*Name</label>
-          <input type="text" name="name" placeholder="">
-        </div>
-
-        <div id="email">
-          <label for="_replyto">*Email Address</label>
-          <input type="email" name="_replyto" placeholder="">
-        </div>
-
-        <div id="message">
-          <label for="message">*Your Message</label>
-          <textarea name="message" id="" cols="30" rows="10"></textarea>
-        </div>
-
-        <div id="submit">
-          <input type="submit" value="Send">
-		  </div>
-      </form>
     </div>
 
 <!-- END CONTACT INFORMATION  -->
@@ -113,10 +90,7 @@ require_once('../Autres/Connexionbdd.php');
 </footer>
 
 <!-- END FOOTER  -->
-        
-        
-        
-        
+
         	<?php 
 	
 		if ($_SESSION['connecte']){
