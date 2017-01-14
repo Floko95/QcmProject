@@ -156,7 +156,16 @@ h2 {
 
 
 
-
+.supp {
+    background-color: transparent;
+    background-image: url('http://img11.hostingpics.net/pics/229674delete24.png');
+    background-repeat: no-repeat;
+    cursor: pointer;
+    color: transparent;
+    border: none;
+    height: 24px;
+    width: 24px;
+}
 
 
 .button {
@@ -298,13 +307,6 @@ li {
   
 
 
-
-
-
-
-
-
-
 .green {
     color: green;
 }
@@ -312,4 +314,3 @@ li {
 .red {
     color: red;
 }
-
