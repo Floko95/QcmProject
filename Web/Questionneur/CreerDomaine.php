@@ -31,26 +31,24 @@ require_once('../Autres/Connexionbdd.php');
 																				//formulaire qui conduit sur la même page et prend en parmètre le nom de domaine entré
 		?>
 		
-  <div class="contain">
-    <div class="bloc">
-      <ul class="steps">
+  <div class="container">
+    <div class="wrap">
+     <ul class="steps">
         <li class="is-active"><a href='ChoixQC.php'></a></li>
       </ul>
-	  
-	  <form class="form-bloc" action='CreerDomaine.php' method='post'>
-		<fieldset class="section is-active">
-	  <?php
-			
-       	echo    "<h3>Nom du domaine à créer : </h3>
-          <input type='text' name='domainec' id='name' placeholder='Name'>
-          <input type='submit' class='continuer' value='Créer domaine'/>";
-        
-		?>
 		
-		</fieldset>
+		
+			<form class="form-wrapper" action="CreerDomaine.php" method="post">
+			<fieldset class="section is-active">
+	 
+			<h4>Nom du domaine à créer: </h4>
+			<input type="text" name='domainec'/> 
+			<input type="submit" class="button" value="Créer domaine"/>
+			</fieldset>
 		</form>
     </div>
   </div>
+                
 	<?php		
 		
 	
@@ -58,24 +56,25 @@ require_once('../Autres/Connexionbdd.php');
 																				//formulaire qui conduit sur la même page et prend en parmètre le nom de sous-domaine entré
   
 ?>	
-  <div class="contain">
-    <div class="bloc">
-      
+   <div class="container">
+    <div class="wrap">
+     <ul class="steps">
+        <li class="is-active"><a href='ChoixQC.php'></a></li>
+      </ul>
 		
-		<form class="form-bloc" action='CreerDomaine.php' method='post'>
-		<fieldset class="section is-active">
-			<?php
-			
-			echo "<h3>Nom du sous-domaine dans ".$_POST['domaine']."</h3>
-			<input type='text' name='sdomainec'/>
-			<input type='hidden' name='do' value='".$_POST['domaine']."'/>
-			<input type='submit' class='continuer' value='Créer domaine'/>";
-			?>
-			
-        </fieldset>
+		
+			<form class="form-wrapper" action="CreerDomaine.php" method="post">
+			<fieldset class="section is-active">
+            <?php  echo '<h4>Nom du sous-domaine dans '.$_POST['domaine'].'</h4>'; ?>
+			<input type="text" name='sdomainec'/> 
+            <?php echo '<input type="hidden" name="do" value="'.$_POST['domaine'].'"/>'; ?>
+			<input type="submit" class="button" value="Créer sous-domaine"/>
+			</fieldset>
 		</form>
-	</div>
+    </div>
   </div>
+			
+
 		<?php
 	}
 
@@ -86,21 +85,27 @@ require_once('../Autres/Connexionbdd.php');
 		$req->execute();
 		?>
 		
-		<div class="background"></div>
-    <div class="centre">
-    <div class="container">
-		<div class="row">
-				<div class="modalbox success col-sm-8 col-md-6 col-lg-5 center animate">
-						<div class="icon"><span class="glyphicon glyphicon-ok"></span></div>
-						<h1>Success!</h1>
+		 <div class="container">
+    <div class="wrap">
+     <ul class="steps">
+        <li class="is-active"><a href='ChoixQC.php'></a></li>
+      </ul>
+		
+		
+			<form class="form-wrapper" action="ChoixQC.php" method="post">
+			<fieldset class="section is-active">
                         <?php 
-                        echo'<p>Le sous-domaine '. $_POST['domainec'].' a bien été créé.</p>'; 
-                        echo '<a href="ChoixQC.php"><button type="button" class="redo btn"> Retour au profil</button></a>';  //on retourne au profil s'il a été supprimé
+                        echo'<h4>Le domaine '. $_POST['domainec'].' a bien été créé.</h4>';   
+        
+                        //on retourne au profil s'il a été supprimé
 					   ?>
-				</div>
-        </div>
+                
+                <input type="submit" class="button" value="Retour"/>
+			</fieldset>
+		</form>
     </div>
-    </div>
+  </div>
+				
 		
 		<?php
 	}
@@ -119,21 +124,24 @@ require_once('../Autres/Connexionbdd.php');
 		
 		?>
 		
-		<div class="background"></div>
-    <div class="centre">
-    <div class="container">
-		<div class="row">
-				<div class="modalbox success col-sm-8 col-md-6 col-lg-5 center animate">
-						<div class="icon"><span class="glyphicon glyphicon-ok"></span></div>
-						<h1>Success!</h1>
+		 <div class="container">
+    <div class="wrap">
+     <ul class="steps">
+        <li class="is-active"><a href='ChoixQC.php'></a></li>
+      </ul>
+		
+		
+			<form class="form-wrapper" action="ChoixQC.php" method="post">
+			<fieldset class="section is-active">
                         <?php 
-                        echo'<p>Le sous-domaine '. $_POST['sdomainec'].' a bien été créé dans le domaine '.$_POST['do'].'.</p>'; 
-                        echo '<a href="ChoixQC.php"><button type="button" class="redo btn"> Retour au profil</button></a>';//on reoturne au profil s'il a été supprimé
+                        echo '<p>Le sous-domaine '. $_POST['sdomainec'].' a bien été créé dans le domaine '.$_POST['do'].'</p>'; 
+                        //on reoturne au profil s'il a été supprimé
 					   ?>
-				</div>
-        </div>
+				<input type="submit" class="button" value="Retour"/>
+			</fieldset>
+		</form>
     </div>
-    </div>
+  </div>
 		
 		<?php
 	
