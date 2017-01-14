@@ -235,7 +235,7 @@
 				echo '<form action="SupprimerQuestion.php" method="post">
 		<input type="hidden" name="idqcm" value="'.$_POST['id'].'"/>
 		<input type="hidden" name="qsup" value="'.$ligne['question'].'"/>
-        <input type="submit" name="sup" value="Supprimer"/></form>';
+        <input type="submit" name="sup" class="supp" value="Supprimer"/></form>';
         
 				
 			}	
@@ -264,6 +264,3 @@
 
 </body>
 </html>
-
-
-
