@@ -127,6 +127,11 @@ h3 {
     font-weight: 300;
 }
 
+p { 
+    text-align: center;
+    margin-bottom: -30px;
+}
+
 .container {
   position: relative;
   max-width: 50rem;
@@ -444,15 +449,7 @@ h3 {
   color: #337ab7;
   box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.2);
 }
-.button:active::before, .button:focus::before {
-  -webkit-transition: opacity 0.28s ease 0.364s, -webkit-transform 1.12s ease;
-  transition: opacity 0.28s ease 0.364s, -webkit-transform 1.12s ease;
-  transition: transform 1.12s ease, opacity 0.28s ease 0.364s;
-  transition: transform 1.12s ease, opacity 0.28s ease 0.364s, -webkit-transform 1.12s ease;
-  -webkit-transform: translate(-50%, -50%) scale(1);
-          transform: translate(-50%, -50%) scale(1);
-  opacity: 0;
-}
+
 .button:focus {
   outline: none;
 }
