@@ -33,12 +33,31 @@
         <div class="main">
         <span class='fa fa-trash'><img src="http://img11.hostingpics.net/pics/229674delete24.png"></span>
         <strong>SUPPRIMER</strong>
-        <?php echo ' <p>Suppression de la question numéro '.$id_quest.'?</p>'; //on propose la suppression du qcm?>
+        <?php 
+			$solitaire='';
+		$req2=$bdd->prepare("select count (id_question) as nbequest from qcm_question WHERE id_question=:id");//on le supprime de la table si on a choisi oui
+	       $req2->bindValue(':id',$id_quest);
+	       $req2->execute();
+		   while($l=$req2->fetch(PDO::FETCH_ASSOC)){
+			$nombrequest=$l['nbequest'];
+			}
+		
+		   if($nombrequest==1){	
+		  $solitaire='Une fois supprimée, vous ne pourrez plus utiliser votre question.';
+		   }
+		    
+		   
+		  // }
+		   
+		   echo '<p> Suppression de la question numéro '.$id_quest.'? '.$solitaire.'</p>'; //on propose la suppression du qcm
+		
+		?>
         </div>
     
         <?php echo ' <form action="SupprimerQuestion.php" method="post">
 		<input type="hidden" name="idqcm" value="'.$_POST['idqcm'].'" />
-				<input type="hidden" name="qsup" value="'.$id_quest.'"/>'
+				<input type="hidden" name="qsup" value="'.$id_quest.'"/>
+				<input type="hidden" name="solitaire" value="'.$solitaire.'"/>';
 								?>
             <div class="inner-square left">
                 <button type="submit" name="suppc" class ="green"><img src="http://img11.hostingpics.net/pics/124460checkmark24.png"></button></div>
@@ -55,6 +74,17 @@
 	       $req->bindValue(':id',$_POST['idqcm']);
 		   $req->bindValue(':idquest',$_POST['qsup']);
 	       $req->execute();
+		   
+		   if($_POST['solitaire']!=''){
+			   
+		   $req1=$bdd->prepare("DELETE FROM reponse WHERE id_question=:idquest");//on le supprime de la table si on a choisi oui
+		   $req1->bindValue(':idquest',$_POST['qsup']);
+	       $req1->execute();
+		   
+		   $req=$bdd->prepare("DELETE FROM question WHERE id_question=:idquest");//on le supprime de la table si on a choisi oui
+		   $req->bindValue(':idquest',$_POST['qsup']);
+	       $req->execute();
+		   }
 		   
         ?>
         
