@@ -7,7 +7,7 @@
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Redressed" rel="stylesheet">
-        <title></title>
+        <title>Index</title>
     </head>
     <body>
 		
@@ -64,33 +64,11 @@
         <p>N'hésitez pas à poser vos questions pour d'avantage de renseignement.</p>
 
         <h3>Contact Information</h3>
-        <p class="contactIn">Addresse: IUT PARIS 13, Villetaneuse</p>
+        <p class="contactIn">Addresse: IUT de PARIS 13, Villetaneuse</p>
         <p class="contactIn">Site: paris13.com</p>
-        <p class="contactIn">Email: blablabla.gmail.com</p>
+          <p class="contactIn">Email: projets3.gmail.com</p></br></br>
       </div>
 
-
-      <form action="//blablabla@gmail.com" method="POST">
-
-        <div id="name">
-          <label for="name">*Nom</label>
-          <input type="text" name="name" placeholder="">
-        </div>
-
-        <div id="email">
-          <label for="_replyto">*Adresse Email</label>
-          <input type="email" name="_replyto" placeholder="">
-        </div>
-
-        <div id="message">
-          <label for="message">*Votre Message</label>
-          <textarea name="message" id="" cols="30" rows="10"></textarea>
-        </div>
-
-        <div id="submit">
-          <input type="submit" value="Send">
-		  </div>
-      </form>
     </div>
 
 <!-- END CONTACT INFORMATION  -->
