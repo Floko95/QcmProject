@@ -35,9 +35,9 @@ if(isset($_GET['d']) and trim($_GET['d']!='')and !(isset($_GET['sd'])))//2-domai
                 echo '<div class="rela-block top-container">
                 <div class="rela-block top-center-container">
                 <div class="inner-container top-text-container">
-                <h2 class="rela-block top-main-text">Choisir Sous Domaine</h2>
-                <p>Bienvenue. Installe-toi, choisis un domaine, les QCM t\'attendent !</p>';
-    
+                <h2 class="rela-block top-main-text">Choisir Sous Domaine</h2>';
+               // echo '<p>Bienvenue. Installe-toi, choisis un domaine, les QCM t\'attendent !</p>';
+    		if(isset($_GET['d'])){echo 'Domaine : '.$_GET['d'];}
                 //créer un nouveau sous-domaine
 				echo '<form action="CreerDomaine.php"  method="post">
 				<input type="hidden" name="domaine" value="'.$_GET['d'].'"/>
