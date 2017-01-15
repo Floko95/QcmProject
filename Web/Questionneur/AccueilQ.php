@@ -74,7 +74,7 @@ require_once('../Autres/Connexionbdd.php');
         <h3>Contact Information</h3>
         <p class="contactIn">Attn: IUT PARIS 13, Villetaneuse</p>
         <p class="contactIn">paris13.com</p>
-        <p class="contactIn">blablabla.gmail.com</p>
+          <p class="contactIn">blablabla.gmail.com</p></br></br>
       </div>
     </div>
 

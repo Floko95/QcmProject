@@ -38,7 +38,7 @@
 		$req=$bdd->prepare("UPDATE qcm SET fini = false WHERE id_qcm=:id");
 		$req->bindValue(':id',$_POST['id']);
 		$req->execute();
-		echo 'Reprise de la création du QCM numéro '.$_POST['id'];
+		echo '<h2>Reprise de la création du QCM numéro '.$_POST['id'].'</h2>';
 		$_SESSION['sup']=1;
 	}
 	

@@ -4,7 +4,7 @@
 <html>
 	<head>
 	<title>Créer Domaine</title>
-		  <link rel="stylesheet" href="cd.css" />
+        <link rel="stylesheet" href="CreerDomaine.css" />
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
         <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
@@ -41,7 +41,7 @@ require_once('../Autres/Connexionbdd.php');
 			<form class="form-wrapper" action="CreerDomaine.php" method="post">
 			<fieldset class="section is-active">
 	 
-			<h4>Nom du domaine à créer: </h4>
+			<p>Nom du domaine à créer: </p>
 			<input type="text" name='domainec'/> 
 			<input type="submit" class="button" value="Créer domaine"/>
 			</fieldset>
@@ -65,7 +65,7 @@ require_once('../Autres/Connexionbdd.php');
 		
 			<form class="form-wrapper" action="CreerDomaine.php" method="post">
 			<fieldset class="section is-active">
-            <?php  echo '<h4>Nom du sous-domaine dans '.$_POST['domaine'].'</h4>'; ?>
+            <?php  echo '<p>Nom du sous-domaine dans '.$_POST['domaine'].'</p>'; ?>
 			<input type="text" name='sdomainec'/> 
             <?php echo '<input type="hidden" name="do" value="'.$_POST['domaine'].'"/>'; ?>
 			<input type="submit" class="button" value="Créer sous-domaine"/>
@@ -95,7 +95,7 @@ require_once('../Autres/Connexionbdd.php');
 			<form class="form-wrapper" action="ChoixQC.php" method="post">
 			<fieldset class="section is-active">
                         <?php 
-                        echo'<h4>Le domaine '. $_POST['domainec'].' a bien été créé.</h4>';   
+                        echo'<p>Le domaine '. $_POST['domainec'].' a bien été créé.</p>';   
         
                         //on retourne au profil s'il a été supprimé
 					   ?>

@@ -2,10 +2,11 @@
 <html>
     <head>
         <meta charset="utf-8" />
-		 <link rel="stylesheet" href="P.css" />
+		 <link rel="stylesheet" href="ProfilQ.css" />
          <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600' rel='stylesheet' type='text/css'>
          <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
          <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Lato:100,300" rel="stylesheet">
         <title>Profil</title>
     </head>
     <body>
@@ -30,21 +31,19 @@
 require_once('../Autres/Connexionbdd.php'); ?>
         
         
-<div class="fond">
-<div class="bloc">
-	
-    <div class="top-bar"><span class="title">Profil</span></div>
-    
-	<div class="profil">
-		<div class="cover">
-			<span class="vec vec_a"></span>
-			<span class="vec vec_b"></span>
-			<span class="vec vec_c"></span>
-			<span class="vec vec_d"></span>
-			<span class="vec vec_e"></span>
-		</div>
+        <div class="fond">
+            <div class="bloc">
+	           <div class="top-bar"><span class="title">Profil</span></div>
+                <div class="profil">
+		          <div class="cover">
+			         <span class="vec vec_a"></span>
+			         <span class="vec vec_b"></span>
+			         <span class="vec vec_c"></span>
+			         <span class="vec vec_d"></span>
+			         <span class="vec vec_e"></span>
+		          </div>
         
-    <div class="photo"><img src="http://icons.iconarchive.com/icons/webalys/kameleon.pics/512/Alien-icon.png"></div>
+    <div class="photo"><img src="https://thumbs.dreamstime.com/t/age-brain-collection_flat-cartoon-vector-illustration-old-wearing-round-glasses-long-white-beard-holding-stick-part-72812212.jpg"></div>
 		<div class="info"><?php echo '<div class="name">'.$_SESSION['user'].'</div>';?></div>
 		
         <label for="retour" class="retour"><a href="" onClick="javascript:window.history.go(-1)"><img src="http://img15.hostingpics.net/pics/571733arrow8724.png"></a></label>

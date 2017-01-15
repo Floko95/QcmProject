@@ -2,7 +2,11 @@
 <html>
     <head>
         <meta charset="utf-8" />
-		 <link rel="stylesheet" href="cq.css" />
+		 <link rel="stylesheet" href="CreationQuestions.css" />
+        <link rel="stylesheet" href="CreerDomaine.css" />
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+        <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
         <title>Créer Question</title>
     </head>
     <body>
@@ -20,18 +24,14 @@ require_once("../Autres/Connexionbdd.php");
 		
   <div class="container">
     <div class="wrap">
-      <ul class="steps">
-        <li class="is-active"><a href='ChoixQC.php'></a></li>
-      </ul>
-		
-		
+      
 			<form class="form-wrapper" action="CreationQuestions.php" method="post">
 			<fieldset class="section is-active">
 		<?php	
 		echo'	<input type="hidden" name="idqcm" value="'.$_POST['idqcm'].'"/>';
 		 ?>
 		
-			<h3>Nombre de réponses : </h3>
+			<p>Nombre de réponses : </p>
 			<input type="text" name="n"/> 
 			<input type="submit" class="button" value="Ajouter les réponses"/>
 			</fieldset>
@@ -49,15 +49,11 @@ require_once("../Autres/Connexionbdd.php");
 		
   <div class="container">
     <div class="wrap">
-      <ul class="steps">
-        <li class="is-active"><a href='ChoixQC.php'></a></li>
-      </ul>
-		
 		
 			<form class="form-wrapper" action="CreationQuestions.php" method=post>
 			<input type="hidden" name="idqcm" value=$_POST['idqcm']/>
 			<fieldset class="section is-active">
-			<h3>Minimum 2 !  </h3>
+			<p>Minimum 2 !  </p>
 			<input type="text" name="n"/> 
 			<input type="submit" class="button" value="Ajouter les réponses"/>
 			</fieldset>

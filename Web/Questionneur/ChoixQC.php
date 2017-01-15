@@ -6,6 +6,7 @@
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
         <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Lato:100,300" rel="stylesheet">
         <title>Choix QCM</title>
     </head>
     <body>
@@ -136,14 +137,10 @@ else//1-entrée de la création du qcm,affichage des domaines de la bdd
 		
 		  <div class="rela-block button black-text load-button">
 		<?php  if (isset($_GET['sd'])){
-			
 		 echo '<a href="ChoixQC.php?d='.$_GET['d'].'">Retour</a>';	
-		
-		}else if (!isset($_GET['d']) and !isset($_GET['sd'])){
-		?>
-		<a href='AccueilQ.php'>Retour</a>
-		<?php
-		 }else{
+			?>
+       
+		 <?php }else{
 			  ?><a href='ChoixQC.php'>Retour</a><?php
 		 }?>
       </div>

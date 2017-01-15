@@ -2,19 +2,13 @@
   <head>
     <meta charset="utf-8">
       <link rel="stylesheet" href="ChoixCI.css" />
+      <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600' rel='stylesheet' type='text/css'>
+         <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+         <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Lato:100,300" rel="stylesheet">
       <title>Créer/Importer</title>
   </head>
   <body>
-        	  <div id="desk-nav">
-  <nav>
-    <ul>
-      <li><a href="AccueilQ.php">Home</a></li>
-      <li><a href="Profil.php">Profil</a></li>
-      <li><a href="ChoixQC.php">QCM</a></li>
-      <li><a href="../Index.php">Déconnexion</a></li>
-    </ul>
-  </nav>
-</div>
       
 
       <div class="card transition">
