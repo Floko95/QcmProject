@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8" />
-		 <link rel="stylesheet" href="../Autres/Index.css" />
+		 <link rel="stylesheet" href="../Index.css" />
          <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300" rel="stylesheet">
          <link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet">
          <link href="https://fonts.googleapis.com/css?family=Redressed" rel="stylesheet">
@@ -18,7 +18,7 @@ require_once('../Autres/Connexionbdd.php');
 <div id="desk-nav">
   <h1><?php echo 'Utilisateur : '.htmlspecialchars($_SESSION['user'],ENT_QUOTES); ?></h1>
     <nav><ul>
-      <li><a href="../Autres/Index.php">Deconnexion</a></li>
+      <li><a href="../Index.php">Deconnexion</a></li>
       <li><a href="#information">Information</a></li>
       <li><a href="ChoixRD.php">QCM</a></li>
       <li><a href="ProfilR.php">Profil</a></li>

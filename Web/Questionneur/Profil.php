@@ -18,7 +18,7 @@
       <li><a href="AccueilQ.php">Home</a></li>
       <li><a href="Profil.php">Profil</a></li>
       <li><a href="ChoixQC.php">QCM</a></li>
-      <li><a href="../Autres/Index.php">Déconnexion</a></li>
+      <li><a href="../Index.php">Déconnexion</a></li>
     </ul>
   </nav>
 </div>

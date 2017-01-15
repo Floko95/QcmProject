@@ -59,11 +59,11 @@ if(isset($_POST['q']) and trim($_POST['q']!=''))//on recoit l'id de la question 
 		{
 			if($ligne2['correct']){
             echo'<div class="rep"><div class="green">';
-			echo $ligne2['reponse'];
+			echo htmlspecialchars($ligne2['reponse'],ENT_QUOTES);
 			echo '</div></div> ';
 			}else{
             echo'<div class="rep"><div class="red">';
-			echo $ligne2['reponse'];
+			echo htmlspecialchars($ligne2['reponse'],ENT_QUOTES);
                 echo '</div></div> ';
 			}
 		}//on envoie ensuite la question importée à questions.php

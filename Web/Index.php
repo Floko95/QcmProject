@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8" />
-		 <link rel="stylesheet" href="Index.css" />
+		 <link rel="stylesheet" href="Autres/Index.css" />
         <link href="https://fonts.googleapis.com/css?family=Lato:100,300" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet">
@@ -17,7 +17,7 @@
 <div id="desk-nav">
     <h1>PROJET QCM</h1>
     <nav><ul>
-      <li><a href="Connexion.php">Connexion</a></li>
+      <li><a href="Autres/Connexion.php">Connexion</a></li>
       <li><a href="#information">Information</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul></nav>

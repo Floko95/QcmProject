@@ -17,7 +17,7 @@
       <li><a href="AccueilQ.php">Home</a></li>
       <li><a href="Profil.php">Profil</a></li>
       <li><a href="ChoixQC.php">QCM</a></li>
-      <li><a href="../Autres/Index.php">Déconnexion</a></li>
+      <li><a href="../Index.php">Déconnexion</a></li>
     </ul>
   </nav>
 </div>
@@ -95,14 +95,14 @@ else if (isset($_GET['sd']) and trim($_GET['sd']!='') and isset($_GET['d']) and 
 	echo '<p>Vous allez maintenant pouvoir créer votre qcm</p>';
 	if($_GET['sd']=='general')
 	{     
-		echo '<form action="ChoixQQ.php" method="post"><input type="hidden" name="id" value="'.$id.'"/><input type="hidden" name="dom" value="'.$_GET['d'].'"/><button type="submit"class="start1"/>Commencer le QCM</button></form>';   }
+		echo '<form action="ChoixCI.php" method="post"><input type="hidden" name="id" value="'.$id.'"/><input type="hidden" name="dom" value="'.$_GET['d'].'"/><button type="submit"class="start1"/>Commencer le QCM</button></form>';   }
 	else
 	{
-		echo '<form action="ChoixQQ.php" method="post"><input type="hidden" name="id" value="'.$id.'"/><input type="hidden" name="dom" value="'.$_GET['d'].'"/><input type="hidden" name="sdom" value="'.$_GET['sd'].'"/><button type="submit"class="start1"/>Commencer le QCM</button></form>';
+		echo '<form action="ChoixCI.php" method="post"><input type="hidden" name="id" value="'.$id.'"/><input type="hidden" name="dom" value="'.$_GET['d'].'"/><input type="hidden" name="sdom" value="'.$_GET['sd'].'"/><button type="submit"class="start1"/>Commencer le QCM</button></form>';
 	}
     
     echo "</div>";
-}//redirection vers ChoixQQ.php avec le domaine,l'id du qcm  et le sous domaine du qcm en $_post.si domaine général le sous domaine n'est pas transmis
+}//redirection vers ChoixCI.php avec le domaine,l'id du qcm  et le sous domaine du qcm en $_post.si domaine général le sous domaine n'est pas transmis
 else//1-entrée de la création du qcm,affichage des domaines de la bdd
 {
                 echo '<div class="rela-block top-container">
@@ -131,7 +131,7 @@ else//1-entrée de la création du qcm,affichage des domaines de la bdd
 	}
     echo "</div>";
 }
-//?d='.$_GET['d'].'&sd='.$_GET['sd']
+
         ?>
 		
 		  <div class="rela-block button black-text load-button">
