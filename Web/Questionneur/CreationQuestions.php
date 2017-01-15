@@ -31,7 +31,7 @@ require_once("../Autres/Connexionbdd.php");
 		echo'	<input type="hidden" name="idqcm" value="'.$_POST['idqcm'].'"/>';
 		 ?>
 		
-			<h3>Nombres de question : </h3>
+			<h3>Nombre de réponses : </h3>
 			<input type="text" name="n"/> 
 			<input type="submit" class="button" value="Ajouter les réponses"/>
 			</fieldset>
@@ -73,7 +73,7 @@ require_once("../Autres/Connexionbdd.php");
 			
 			<div class="contain">
   			<header>
-    		<h1>Créer votre question !</h1>';
+    		<h1>Créez votre question !</h1>';
 			
 			if(isset($_POST['id']))
                         {
