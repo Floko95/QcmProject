@@ -79,7 +79,7 @@ if (isset($_POST['idd']) and trim($_POST['idd']!=''))//id du qcm en cours de mod
 	
 	
 	
-				<li></i><input type="submit" value="'.$ligne['question'].'"/></li></ul>';
+				<li></i><input type="submit" value="'.htmlspecialchars($ligne['question'],ENT_QUOTES).'"/></li></ul>';
 				echo '</form>';//la question devient un bouton,envoyant sur visualisation.php
 			}
 			
