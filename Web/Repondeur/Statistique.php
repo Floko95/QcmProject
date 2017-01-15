@@ -2,18 +2,16 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8" />
-		 <link rel="stylesheet" href="Resultat.css" />
-        <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
-           <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
-         <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
-        
-        <title>Résultat</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="Resultat.css" />
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300" rel="stylesheet">
+    <title>Résultat</title>
     </head>
-    <body> 
-
-
-        
+<body> 
+    
 	<div id="desk-nav">
 		<nav>
 			<ul>
@@ -24,29 +22,26 @@
 			</ul>
 		</nav>
 	</div>
-        
-        
-        
+            
         
         
 <?php require_once('../Autres/Connexionbdd.php'); ?>
 
-<div class="container">
-    <h1>Résultat</h1>
+    <div class="container">
+        <h1>Résultat</h1>
     
-<?php 
-include('EviteMessageFormulaire.php');
+<?php  include('EviteMessageFormulaire.php');
 
-if(isset($_POST['qcm'])and trim($_POST['qcm'])){ //si on arrive de la page executer
-	try{										 
-
-		require_once('../Autres/Connexionbdd.php');		
-		$date=time().'</br>';					//date actuelle (correspond a la fin du QCM)
-		$tempspasse=$date-$_POST['temps'];		//calcul du temps passe sur le QCM
-		$score=0;$faux=0;$vrai=0;				//initialise score, +variables utiles par la suite
+        if(isset($_POST['qcm'])and trim($_POST['qcm'])){ //si on arrive de la page executer
+        try{										 
+            require_once('../Autres/Connexionbdd.php');		
+            $date=time().'</br>';					//date actuelle (correspond a la fin du QCM)
+            $tempspasse=$date-$_POST['temps'];		//calcul du temps passe sur le QCM
+            $score=0;$faux=0;$vrai=0;				//initialise score, +variables utiles par la suite
 		
-		if(isset($_POST['reponse'])and trim($_POST['reponse']!=' ')){				//si des réponses ont été cochées lors du QCM
-			if(isset($_POST['checkboxes'])and trim($_POST['checkboxes']!=' ')){		
+		
+            if(isset($_POST['reponse'])and trim($_POST['reponse']!=' ')){				//si des réponses ont été cochées lors du QCM
+			 if(isset($_POST['checkboxes'])and trim($_POST['checkboxes']!=' ')){		
 				echo '<h2>Vos réponses au QCM n° '.$_POST['qcm'].' : </h2> ';		//récupère l'id QCM
 				
 				$question=$bdd->prepare('Select * from qcm natural join qcm_question natural join question where id_qcm=:idqcm');  //pour chaque question du QCM effectué
@@ -55,10 +50,10 @@ if(isset($_POST['qcm'])and trim($_POST['qcm'])){ //si on arrive de la page execu
 				while($quest=$question->fetch(PDO :: FETCH_ASSOC)){					//pour chaque question du qcm 
 					
 					echo "<div class=\"form-group\"><label class=\"control-label\" for=\"select\">";
-					echo 'Question : '.$quest['question'];							//affichage question
+					echo 'Question : '.$quest['question'];				//affichage question
 					echo "</label><i class=\"bar\"></i></div> ";
-					$idquestionn=$quest['id_question'];								//recupère l'id de la question pour les requetes à venir
-					$reponsetrue=0;													//pour connaitre le nombre de réponses vraies de la question
+					$idquestionn=$quest['id_question'];					//recupère l'id de la question pour les requetes à venir
+					$reponsetrue=0;										//pour connaitre le nombre de réponses vraies de la question
 					
 					$reponse=$bdd->prepare('Select * from reponse INNER JOIN qcm_question ON reponse.id_question = qcm_question.id_question 
 					WHERE qcm_question.id_question=:idquestion and qcm_question.id_qcm=:idqcm;');//pour chaque réponse de la question
@@ -207,15 +202,14 @@ if(isset($_POST['qcm'])and trim($_POST['qcm'])){ //si on arrive de la page execu
 		<a href="ChoixRD.php"><button class="button" type="submit"><span>Refaire un QCM</span></button></a></div>';
     echo "</form>";
 
-}else{
-	echo '<p>Tous vos résultats se trouvent sur votre profil.<p>';
-	echo '<div class="button-container">
-		<a href="ProfilR.php"><button class="button" type="submit"><span>Profil</span></button></a></div>';
-}
-
+        }else{
+	       echo '<p>Tous vos résultats se trouvent sur votre profil.<p>';
+	       echo '<div class="button-container">
+		  <a href="ProfilR.php"><button class="button" type="submit"><span>Profil</span></button></a></div>';
+        }
 ?>
   
-</div>
+    </div>
 </body>
 </html>
             

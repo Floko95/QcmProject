@@ -4,6 +4,7 @@
         <meta charset="utf-8" />
 		 <link rel="stylesheet" href="ProfilR.css" />
         <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Lato:100,300" rel="stylesheet">
         <title>Profil</title>
     </head>
     <body>
@@ -104,7 +105,7 @@ require_once('../Autres/Connexionbdd.php');
     
             echo '<div class="tabs clearfix"> <p>';
             echo 'Temps Total: '.$l['temps_total'].'       ';    
-            
+            echo '   |   ';
             echo '     Nombre QCM:'.$l['nb_qcm_fait'];
             echo '</p></div>';
         }
@@ -132,13 +133,10 @@ require_once('../Autres/Connexionbdd.php');
                 
 				<div class="name">';
                 echo $l['date_qcm_fait'];
-                echo' </div>
+               
+				echo '  |     Note: '.$l['note_qcm'].'/20    ';
                 
-                    
-				<div class="name">';
-				echo 'Note '.$l['note_qcm'].'/20    ';
-                
-                echo '     Temps '.$l['temps_qcm'].' sec.';
+                echo '|     Temps: '.$l['temps_qcm'].' sec';
         
                 echo'</div></div></div>';
             }

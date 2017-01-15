@@ -1,11 +1,13 @@
 <html>
+    <head>
 	<meta charset="utf-8" />
     <link rel="stylesheet" href="ChoixRQI.css" />
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300" rel="stylesheet">
     <title>Choix QCM</title>
- <head>
+    </head>
   <body>
 
 	
@@ -20,28 +22,25 @@
   </nav>
 </div>
       
-      
 
-
-
-<div class="rela-block top-container">
-    <div class="rela-block top-center-container">
-        <div class="inner-container top-text-container">
+      <div class="rela-block top-container">
+        <div class="rela-block top-center-container">
+            <div class="inner-container top-text-container">
             <h2 class="rela-block top-main-text">Choisir QCM</h2>
-            <p><?php 	
-			include('EviteMessageFormulaire.php');							//évite le message d'erreur de remplissage du formulaire 
-			if(isset($_POST['nd'])){echo 'Domaine : '.$_POST['nd'];}		//affichage du domaine
-			echo '</br>';
+            <p><?php 	include('EviteMessageFormulaire.php');				//évite le message d'erreur de remplissage du formulaire 
+			if(isset($_POST['nd'])){
+                echo 'Domaine : '.$_POST['nd'];                             //affichage du domaine
+            }		
+            echo '</br>';
 			if(isset($_POST['idsd'])){
 				echo 'Sous-domaine : '.$_POST['idsd'];						//affichage du sous domaine 
-				}
+            }
 			?></p>
+            </div>
         </div>
-    </div>
-</div>
+      </div>
 	  
-
-<div class="rela-block image-grid-container">
+      <div class="rela-block image-grid-container">
     
     
 <?php 
@@ -69,7 +68,7 @@
 			
 			}
   
-			if ($tour==0){														//si tour n'a pas été incrémenté, il n'y a pas de qcm dans le sous-domaine
+			if ($tour==0){	//si tour n'a pas été incrémenté, il n'y a pas de qcm dans le sous-domaine
 				echo "<h3>Ce sous-domaine ne contient pas de QCM</h3>";
 			}
 		}
@@ -77,12 +76,10 @@
 	}catch(PDOException $e){
 		die('<p>Votre requête est erronée.</p>');
 	}
-
 ?>
     
-</div>
-
+      </div>
       <div class="rela-block button black-text load-button"><a href="" onClick="javascript:window.history.go(-1)">Retour</a></div>
 
-	 </body>
-	</head>
+</body>
+</html>

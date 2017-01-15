@@ -53,10 +53,10 @@ body{
     text-decoration: none;
     letter-spacing: 1.2px;
     padding: 5px 17px;
-    
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
     margin: 5px 13px;
-    font-family: 'PT Sans Narrow', sans-serif;
-	  font-size: 16px;
+
   }
   
 /*  Nav Item Hover Effects  */
@@ -358,6 +358,10 @@ body{
 
 .bloc .tabs-content .liste .info .name{
 	font-size:12px;
+	font-weight:400;
+}
+.bloc .tabs-content .liste .info .time{
+	font-size:14px;
 	font-weight:400;
 }
 

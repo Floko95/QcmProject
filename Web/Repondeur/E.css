@@ -1,12 +1,9 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto);
-body,
-input,
-select,
-textarea,
-body * {
+body, input, select , textarea, body * {
   font-family: 'Roboto', sans-serif;
   box-sizing: border-box;
 }
+
 body::after, body::before,
 input::after,
 input::before,
@@ -34,6 +31,14 @@ h2 {
   margin: 0 0 2em;
 }
 
+h3 {
+   text-align: center;
+  margin: 6% 0 1em; 
+  margin-bottom: 5%;
+    font-family: "Fjalla One", sans-serif;
+    font-weight: 300;
+}
+
 p {
     text-align: center;
     font-style: italic;
@@ -49,6 +54,14 @@ p {
   padding: 1rem 5rem 0;
   border-radius: 1px;
 }
+
+/*-------------------------END ELEMENTS---------------------------*/
+
+  
+/*----------------------------BLOC QCM-----------------------------*/
+
+
+
 .container::before {
   content: '';
   position: absolute;
@@ -70,11 +83,10 @@ p {
           transform: scale(1);
 }
 
-.button-container {
-  text-align: center;
-}
+/*-------------------------END BLOC QCM---------------------------*/
 
-
+  
+/*----------------------------FORMULAIRE-----------------------------*/
 
 
 .form-group {
@@ -207,6 +219,12 @@ p {
   left: 0;
 }
 
+
+
+  
+/*----------------------------CHECKBOX-----------------------------*/
+
+
 .checkbox label {
   position: relative;
   cursor: pointer;
@@ -307,6 +325,11 @@ p {
   width: 100%;
 }
 
+/*-------------------------END FORMULAIRE---------------------------*/
+
+  
+/*----------------------------BOUTON-----------------------------*/
+
 .button {
   position: relative;
   background: currentColor;
@@ -350,10 +373,9 @@ p {
   outline: none;
 }
 
-h3 {
-   text-align: center;
-  margin: 6% 0 1em; 
-  margin-bottom: 5%;
-    font-family: "Fjalla One", sans-serif;
-    font-weight: 300;
+.button-container {
+  text-align: center;
 }
+
+/*-------------------------END BOUTON--------------------------*/
+

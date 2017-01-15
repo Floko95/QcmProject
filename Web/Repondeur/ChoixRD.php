@@ -1,11 +1,13 @@
 <html>
+    <head>
 	<meta charset="utf-8" />
     <link rel="stylesheet" href="ChoixRD.css" />
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300" rel="stylesheet">
     <title>Choix Domaine</title>
- <head>
+    </head>
   <body>
 
 <!-- NAVIGATION -->
@@ -65,4 +67,4 @@
     
 </div>
 </body>
-</head>
+</html>
