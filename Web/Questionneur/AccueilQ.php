@@ -76,29 +76,6 @@ require_once('../Autres/Connexionbdd.php');
         <p class="contactIn">paris13.com</p>
         <p class="contactIn">blablabla.gmail.com</p>
       </div>
-
-
-      <form action="//blablabla@gmail.com" method="POST">
-
-        <div id="name">
-          <label for="name">*Name</label>
-          <input type="text" name="name" placeholder="">
-        </div>
-
-        <div id="email">
-          <label for="_replyto">*Email Address</label>
-          <input type="email" name="_replyto" placeholder="">
-        </div>
-
-        <div id="message">
-          <label for="message">*Your Message</label>
-          <textarea name="message" id="" cols="30" rows="10"></textarea>
-        </div>
-
-        <div id="submit">
-          <input type="submit" value="Send">
-		  </div>
-      </form>
     </div>
 
 <!-- END CONTACT INFORMATION  -->
