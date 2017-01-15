@@ -198,7 +198,7 @@
 			}	
 
 		}
-		if($_SESSION['sup']==1){	
+		if( isset($_SESSION['sup']) and $_SESSION['sup']==1){	
 		
 			$req=$bdd->prepare("SELECT * FROM qcm natural join qcm_question natural join question where id_qcm=:idqcm");	//affichage de la question
 			$req->bindValue(':idqcm',$monidqcm);
