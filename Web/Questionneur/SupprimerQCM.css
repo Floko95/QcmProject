@@ -21,8 +21,8 @@ html,body{
 
 .square{
   z-index:2;
-  height:250px;
-  width:250px;
+  height:300px;
+  width:300px;
   background:#373737;
   border-radius:100%;
   position:absolute;
@@ -64,8 +64,8 @@ html,body{
 }
 
 .inner-square{
-  height:125px;
-  width:125px;
+  height:155px;
+  width:155px;
   position:absolute;
   bottom:0;
   cursor:pointer;
