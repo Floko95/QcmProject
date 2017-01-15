@@ -112,7 +112,7 @@ body{
 		linear-gradient(135deg, hsla(53, 94%, 49%, 1) 10%, hsla(53, 94%, 49%, 0) 80%),
 		linear-gradient(225deg, hsla(203, 97%, 45%, 1) 10%, hsla(203, 97%, 45%, 0) 80%),
 		linear-gradient(315deg, hsla(216, 93%, 47%, 1) 100%, hsla(216, 93%, 47%, 0) 70%);
-    filter: blur(5px);
+   
 }
 
 /*-------------------------END COULEUR DE FOND---------------------------*/
