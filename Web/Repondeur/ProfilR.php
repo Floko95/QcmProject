@@ -196,23 +196,19 @@ require_once('../Autres/Connexionbdd.php');
             
             echo'<div class="list">	';
             echo'<div class="info pull-left">
-            <div class="name">';		
+            <div class="time">';		
               
                 echo 'QCM n° '.$l['id_qcm'].' ';
                 echo'</div>
-                
-				<div class="time">';
+		
+		<div class="name">';
+			
                 echo $l['date_qcm_fait'];
-                echo' </div></div>
-                
-                    <div class="action pull-right">
-				    <div class="name">';
-
-				echo 'Note '.$l['note_qcm'].'/20      ';
+		echo '     |    Note '.$l['note_qcm'].'/20    |  ';
                 
                 echo '     Temps '.$l['temps_qcm'].' sec.';
         
-                echo'</div></div></div>';
+                echo'</div></div>';
             
             
         }
