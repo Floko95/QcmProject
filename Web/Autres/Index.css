@@ -104,7 +104,7 @@ body {
   display: block;
   width: 100%;
   min-height: 55%;
-  height: 50vh;
+  max-height: 50%;
   -o-object-fit: cover;
      object-fit: cover;
 }
