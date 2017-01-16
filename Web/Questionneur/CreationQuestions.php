@@ -51,7 +51,7 @@ require_once("../Autres/Connexionbdd.php");
     <div class="wrap">
 		
 			<form class="form-wrapper" action="CreationQuestions.php" method=post>
-			<input type="hidden" name="idqcm" value=$_POST['idqcm']/>
+			<?php echo '<input type="hidden" name="idqcm" value="'.$_POST['idqcm'].'"/>';?>
 			<fieldset class="section is-active">
 			<p>Minimum 2 !  </p>
 			<input type="text" name="n"/> 
