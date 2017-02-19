@@ -65,7 +65,7 @@ require_once('../Autres/Connexionbdd.php');
 		$trouveid->bindValue(':n',$_SESSION['user']);								
 		$trouveid->execute();
 		while($l=$trouveid->fetch(PDO::FETCH_ASSOC)){								
-			$repondeur=$l['id_repondeur'];										//$repondeur contient maintenant l'id rep
+			$repondeur=$l['id_utilisateur'];										//$repondeur contient maintenant l'id rep
 		}
 		
 

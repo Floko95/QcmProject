@@ -170,7 +170,7 @@
 		$ins->bindValue(':n',$_SESSION['user']);
 		$ins->execute();
 		while($lu=$ins->fetch(PDO::FETCH_ASSOC)){
-			$repondeur=$lu['id_repondeur'];
+			$repondeur=$lu['id_utilisateur'];
 		}
 		
 		$dom=0;$s_dom=0;

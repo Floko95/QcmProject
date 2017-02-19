@@ -27,7 +27,7 @@ sous_domaine varchar UNIQUE
 -- La relation Utilisateur liste les personnes pouvant utiliser le site en tant que Questionneur ou Repondeur
 CREATE TABLE IF NOT EXISTS Utilisateur(
 id_utilisateur integer PRIMARY KEY DEFAULT nextval('ID_UTILISATEUR'),
-login varchar NOT NULL,
+login varchar NOT NULL UNIQUE,
 password text NOT NULL,
 role varchar NOT NULL DEFAULT 'repondeur',
 nb_qcm_fait integer DEFAULT 0,

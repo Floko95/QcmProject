@@ -28,49 +28,23 @@ session_start();
 			$req->bindValue(':user', $_POST['nom']);
 			$req->bindValue(':mdp', $_POST['mdp']);
 			$req->execute();
-			$countRep = $req->rowCount();
-			switch ($countRep){
-				case 1 :	
+			while($l=$req->fetch(PDO::FETCH_ASSOC)){														
+			if($l['role']=='repondeur'){
 					$_SESSION['user'] = $_POST['nom'];
 					$_SESSION['role'] = 'repondeur';
 					$_SESSION['connecte']= true;	
 					header('Location: ../Repondeur/AccueilR.php');
-					break;
-				case 0 : 	
-					
-					break;
-				default :
-					die('<p> Erreur : Le nom et le mdp correspondent à plus d\'un repondeur </p>');
-					break;
-			}
-		}
-		catch (PDOException $e) {
-			die('<p> Probleme avec authentification repondeur ['.$e->getCode().'] '.$e->getMessage().'</p>');
-		}
-		
-		try {
-			$req = $bdd->prepare("SELECT * FROM public.questionneur WHERE nom_questionneur = :nom AND mdp_questionneur = :mdp");
-			$req->bindValue(':nom', $_POST['nom']);
-			$req->bindValue(':mdp', $_POST['mdp']);
-			$req->execute();
-			$countRep = $req->rowCount();
-			switch ($countRep){
-				case 1 :
+			}else if($l['role']=='questionneur'){ 	
 					$_SESSION['user'] = $_POST['nom'];
 					$_SESSION['role'] = 'questionneur';
 					$_SESSION['connecte']= true;
 					header('Location: ../Questionneur/AccueilQ.php');
-					break;
-				case 0 : 	
-					echo('<p> Pseudo ou mot de passe incorrect </p>');
-					break;
-				default :
-					die('<p> Erreur : Le nom et le mdp correspondent à plus d\'un questionneur </p>');
-					break;
+			}else{
+				echo('<p> Pseudo ou mot de passe incorrect </p>');
 			}
-		}
-		catch (PDOException $e) {
-			die('<p> Probleme avec authentification questionneur ['.$e->getCode().'] '.$e->getMessage().'</p>');
+			}
+		}catch (PDOException $e){
+			die('<p> Probleme avec authentification ['.$e->getCode().'] '.$e->getMessage().'</p>');
 		}
 }
 ?>                                    
