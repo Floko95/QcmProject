@@ -2,25 +2,26 @@
 
 /* Script d'insertion des données dans la BDD, à n'utiliser qu'une seule fois après init */
 
-INSERT INTO questionneur (nom_questionneur, mdp_questionneur ) values
-('Gayral','Projetqcm16'),
-('Santini','System16'),
-('Avril','Java16'),
-('Charroux','Method16'),
-('Buscaldi','System16'),
-('Hebert','Math16'),
-('Noel','Culture16'),
-('Martinez','Anglais16'),
-('Desigual','Espagnol16'),
-('Daloz','Latin16'),
-('Ayme','Francais16'),
-('Mayeur','Nature16'),
-('Dubois','Chimie16');
+/* ATTENTION LES MDP ONT ETE CRYPTES DANS LA BDD */
 
-INSERT INTO repondeur (nom_repondeur, mdp_repondeur) values
-('Françoise','Gayral'),
-('Charlie','Didier'),
-('Lucie','Godefert');
+INSERT INTO utilisateur (login, password) values
+('Gayral',crypt('Projetqcm16',gen_salt('bf',8))),
+('Santini',crypt('System16',gen_salt('bf',8))),
+('Avril',crypt('Java16',gen_salt('bf',8))),
+('Charroux',crypt('Method16',gen_salt('bf',8))),
+('Buscaldi',crypt('Linux16',gen_salt('bf',8))),
+('Hebert',crypt('Math16',gen_salt('bf',8))),
+('Noel',crypt('Culture16',gen_salt('bf',8))),
+('Martinez',crypt('Anglais16',gen_salt('bf',8))),
+('Desigual',crypt('Espagnol16',gen_salt('bf',8))),
+('Daloz',crypt('Latin16',gen_salt('bf',8))),
+('Ayme',crypt('Francais16',gen_salt('bf',8))),
+('Mayeur',crypt('Nature16',gen_salt('bf',8))),
+('Dubois',crypt('Chimie16',gen_salt('bf',8))),
+
+('Françoise',crypt('Gayral',gen_salt('bf',8))),
+('Charlie',crypt('Didier',gen_salt('bf',8))),
+('Lucie',crypt('Godefert',gen_salt('bf',8)));
 
 INSERT INTO domaine (domaine) values
 ('Informatique'),('Mathématiques'),('Culture Générale'),('Langues'),('Français'),('Sciences');
@@ -288,81 +289,81 @@ INSERT INTO reponse (id_question, reponse, correct) values
 (134,'A', DEFAULT),(134,'Z', DEFAULT),(134,'D', DEFAULT),(134,'T', DEFAULT),(134,'N', TRUE),
 (135,'Solution Basique', TRUE),(135,'Solution Neutre', DEFAULT),(135,'Solution Acide', DEFAULT),(135,'Solution tempérée', DEFAULT);
 
-INSERT INTO qcm (auteur,domaine,sous_domaine,note_total,visible,fini) values 
-('Santini','Informatique','BDD',4,true,true),
-('Santini','Informatique','BDD',4,true,true),
+INSERT INTO qcm (id_utilisateur,id_domaine,id_sous_domaine,note_total,visible,fini) values 
+(2,1,1,4,true,true),
+(2,1,1,4,true,true),
 
-('Gayral','Informatique','PHP',6,true,true),
-('Gayral','Informatique','PHP',4,true,true),
+(1,1,2,6,true,true),
+(1,1,2,4,true,true),
 
-('Avril','Informatique','JAVA',5,true,true),
-('Avril','Informatique','JAVA',3,true,true),
+(3,1,3,5,true,true),
+(3,1,3,3,true,true),
 
-('Santini','Informatique','C',4,true,true),
-('Santini','Informatique','C',3,true,true),
+(2,1,4,4,true,true),
+(2,1,4,3,true,true),
 
-('Gayral','Informatique','HTML',3,true,true),
-('Gayral','Informatique','HTML',5,true,true),
+(1,1,5,3,true,true),
+(1,1,5,5,true,true),
 
-('Charroux','Informatique','UML',3,true,true),
-('Charroux','Informatique','UML',4,true,true),
+(4,1,6,3,true,true),
+(4,1,6,4,true,true),
 
-('Buscaldi','Informatique','Linux',3,true,true),
-('Buscaldi','Informatique','Linux',4,true,true),
+(5,1,7,3,true,true),
+(5,1,7,4,true,true),
 
-('Avril','Informatique','Python',5,true,true),
-('Avril','Informatique','Python',3,true,true),
+(3,1,8,5,true,true),
+(3,1,8,3,true,true),
 
-('Hebert','Mathématiques','Algèbre',4,true,true),
-('Hebert','Mathématiques','Algèbre',4,true,true),
+(6,2,9,4,true,true),
+(6,2,9,4,true,true),
 
-('Hebert','Mathématiques','Géometrie',4,true,true),
-('Hebert','Mathématiques','Géometrie',3,true,true),
+(6,2,10,4,true,true),
+(6,2,10,3,true,true),
 
-('Hebert','Mathématiques','Cryptanalyse',4,true,true),
-('Hebert','Mathématiques','Cryptanalyse',3,true,true),
+(6,2,11,4,true,true),
+(6,2,11,3,true,true),
 
-('Hebert','Mathématiques','Graphes et langages',4,true,true),
-('Hebert','Mathématiques','Graphes et langages',3,true,true),
+(6,2,12,4,true,true),
+(6,2,12,3,true,true),
 
-('Noel','Culture Générale','Histoire',4,true,true),
-('Noel','Culture Générale','Histoire',3,true,true),
+(7,3,13,4,true,true),
+(7,3,13,3,true,true),
 
-('Noel','Culture Générale','Géographie',5,true,true),
-('Noel','Culture Générale','Géographie',4,true,true),
+(7,3,14,5,true,true),
+(7,3,14,4,true,true),
 
-('Noel','Culture Générale','Musique',5,true,true),
-('Noel','Culture Générale','Musique',4,true,true),
+(7,3,15,5,true,true),
+(7,3,15,4,true,true),
 
-('Noel','Culture Générale','Cinéma',3,true,true),
+(7,3,16,3,true,true),
 
-('Martinez','Langues','Anglais',5,true,true),
-('Martinez','Langues','Anglais',4,true,true),
+(8,4,17,5,true,true),
+(8,4,17,4,true,true),
 
-('Desigual','Langues','Espagnol',3,true,true),
+(9,4,18,3,true,true),
 
-('Daloz','Langues','Latin',5,true,true),
-('Daloz','Langues','Latin',4,true,true),
+(10,4,19,5,true,true),
+(10,4,19,4,true,true),
 
-('Ayme','Français','Conjugaison',5,true,true),
-('Ayme','Français','Conjugaison',3,true,true),
+(11,5,20,5,true,true),
+(11,5,20,3,true,true),
 
-('Ayme','Français','Grammaire',5,true,true),
-('Ayme','Français','Grammaire',3,true,true),
+(11,5,21,5,true,true),
+(11,5,21,3,true,true),
 
-('Ayme','Français','Orthographe',5,true,true),
-('Ayme','Français','Orthographe',4,true,true),
+(11,5,22,5,true,true),
+(11,5,22,4,true,true),
 
-('Mayeur','Sciences','SVT',5,true,true),
-('Mayeur','Sciences','SVT',4,true,true),
+(12,6,23,5,true,true),
+(12,6,23,4,true,true),
 
-('Dubois','Sciences','Physique Chimie',4,true,true),
-('Dubois','Sciences','Physique Chimie',4,true,true),
+(13,6,24,4,true,true),
+(13,6,24,4,true,true),
 
-('Gayral','Informatique',DEFAULT,10,true,true),
-('Gayral','Informatique',DEFAULT,10,true,true),
-('Noel','Culture Générale',DEFAULT,5,true,true),
-('Ayme','Français',DEFAULT,3,true,true);
+(1,1,DEFAULT,10,true,true),
+(1,1,DEFAULT,10,true,true),
+(7,3,DEFAULT,5,true,true),
+(11,5,DEFAULT,3,true,true);
 
 INSERT INTO qcm_question values 
 --BDD

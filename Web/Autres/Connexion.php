@@ -24,8 +24,8 @@ session_start();
 		{
 		require_once('Connexionbdd.php');
 		try {
-			$req = $bdd->prepare("SELECT * FROM public.repondeur WHERE nom_repondeur = :nom AND mdp_repondeur = :mdp");
-			$req->bindValue(':nom', $_POST['nom']);
+			$req = $bdd->prepare("SELECT * FROM utilisateur WHERE login=:user AND password=crypt(:mdp,password)");
+			$req->bindValue(':user', $_POST['nom']);
 			$req->bindValue(':mdp', $_POST['mdp']);
 			$req->execute();
 			$countRep = $req->rowCount();

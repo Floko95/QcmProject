@@ -38,10 +38,10 @@
        <?php }
         elseif(isset($_POST['suppc'])){
 	
-	       $req=$bdd->prepare("DELETE  FROM public.qcm_question WHERE id_qcm=:id");//on le supprime de la table si on a choisi oui
+	       $req=$bdd->prepare("DELETE  FROM qcm_question WHERE id_qcm=:id");//on le supprime de la table si on a choisi oui
 	       $req->bindValue(':id',$_POST['id']);
 	       $req->execute();
-	       $req=$bdd->prepare("DELETE  FROM public.qcm WHERE public.qcm.id_qcm=:id");
+	       $req=$bdd->prepare("DELETE  FROM qcm WHERE qcm.id_qcm=:id");
 	       $req->bindValue(':id',$_POST['id']);
 	       $req->execute();
         ?>

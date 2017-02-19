@@ -79,7 +79,7 @@
 									echo 'La réponse juste était :' ;				
 									
 									$repjuste=$bdd->prepare('Select reponse from reponse INNER JOIN question ON reponse.id_question = question.id_question 
-									INNER JOIN public.qcm_question ON question.id_question = qcm_question.id_question 
+									INNER JOIN qcm_question ON question.id_question = qcm_question.id_question 
 									WHERE qcm_question.id_question = :mq and qcm_question.id_qcm = :idqcm and reponse.correct=TRUE');//trouve la réponse juste
 									$repjuste->bindValue(':mq',$idquestionn);
 									$repjuste->bindValue(':idqcm',$_POST['qcm']);
@@ -108,7 +108,10 @@
 						echo'<i class="helper"><div class="red">...mais incomplète</i></div> </br>'; //affichage de l'état incomplet de la réponse
 						echo 'La réponse juste était :' ;											 //correction
 						
-						$repjuste=$bdd->prepare('Select reponse from reponse INNER JOIN question ON reponse.id_question = question.id_question INNER JOIN public.qcm_question ON question.id_question = qcm_question.id_question WHERE qcm_question.id_question = :mq and qcm_question.id_qcm = :idqcm and reponse.correct=TRUE');//trouve la réponse juste
+						$repjuste=$bdd->prepare('Select reponse from reponse 
+						INNER JOIN question ON reponse.id_question = question.id_question 
+						INNER JOIN qcm_question ON question.id_question = qcm_question.id_question 
+						WHERE qcm_question.id_question = :mq and qcm_question.id_qcm = :idqcm and reponse.correct=TRUE');//trouve la réponse juste
 						$repjuste->bindValue(':mq',$idquestionn);
                         $repjuste->bindValue(':idqcm',$_POST['qcm']);
 						$repjuste->execute();
@@ -163,7 +166,7 @@
 		}
 		$repondeur=0;
 		
-		$ins=$bdd->prepare('select id_repondeur from repondeur where nom_repondeur=:n');		//récupère l'id de l'utilisateur courant 
+		$ins=$bdd->prepare('select id_utilisateur from utilisateur where login=:n');		//récupère l'id de l'utilisateur courant 
 		$ins->bindValue(':n',$_SESSION['user']);
 		$ins->execute();
 		while($lu=$ins->fetch(PDO::FETCH_ASSOC)){
@@ -182,7 +185,7 @@
 
 		$d='seconds';
 		
-		$inserer=$bdd->prepare('insert into public.recap_repondeur (id_repondeur,id_qcm,domaine,sous_domaine,date_qcm_fait,note_qcm,temps_qcm) values(:id_rep,:id_qcm,:dom,:s_dom,date_trunc(:mot,now()),:note,:tempspasse)');	//insère les résultats du qcm dans la base
+		$inserer=$bdd->prepare('insert into recap_repondeur (id_utilisateur,id_qcm,domaine,sous_domaine,date_qcm_fait,note_qcm,temps_qcm) values(:id_rep,:id_qcm,:dom,:s_dom,date_trunc(:mot,now()),:note,:tempspasse)');	//insère les résultats du qcm dans la base
 		$inserer->bindValue(':id_rep',$repondeur);
 		$inserer->bindValue(':id_qcm',$_POST['qcm']);
 		$inserer->bindValue(':dom',$dom);

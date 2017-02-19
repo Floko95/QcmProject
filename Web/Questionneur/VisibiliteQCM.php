@@ -25,7 +25,7 @@ session_start();
 require_once('../Autres/Connexionbdd.php');
 if(isset($_POST['vis']) and trim($_POST['vis']!=''))
 {
-	$req=$bdd->prepare("SELECT * FROM public.qcm where id_qcm=:id");//on sélectionne le qcm avec l'id recu
+	$req=$bdd->prepare("SELECT * FROM qcm where id_qcm=:id");//on sélectionne le qcm avec l'id recu
 	$req->bindValue(':id',$_POST['id']);
 	$req->execute();
 	$ligne=$req->fetch(PDO::FETCH_ASSOC);

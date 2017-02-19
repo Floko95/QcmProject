@@ -33,7 +33,7 @@ session_start();
 require_once("../Autres/Connexionbdd.php");
 if (isset($_POST['id']) and trim($_POST['id']!=''))//qcm sélectionné à partir de Profil.php,affichage des questions/réponses de ce qcm.3 boutons sont alors disponibles: un pour supprimer,un pour modifier et le dernier pour modifier la visibilité du qcm.
 {
-	$req=$bdd->prepare("SELECT * FROM public.qcm_question natural join public.question where public.qcm_question.id_qcm=:id"); // on selectionne les questions de la table reliées au qcm sélectionné
+	$req=$bdd->prepare("SELECT * FROM qcm_question natural join question where qcm_question.id_qcm=:id"); // on selectionne les questions de la table reliées au qcm sélectionné
 	$req->bindValue(':id',$_POST['id']);
 	$req->execute();
 	
@@ -42,7 +42,7 @@ if (isset($_POST['id']) and trim($_POST['id']!=''))//qcm sélectionné à partir
 	echo "<div class=\"form-group\"><label class=\"control-label\" for=\"select\">";
 		echo 'Question: '.htmlspecialchars($ligne['question'],ENT_QUOTES).'<br/>';//on affiche la question 
 		echo "</label><i class=\"bar\"></i></div> ";
-		$req2=$bdd->prepare("SELECT distinct id_question,correct,reponse FROM public.qcm_question natural join public.reponse where id_question=:idq");//on sélectionne les réponses reliées à cette question,et ce une //seule fois (car l'id de la question parcourue est présent à chaque fois que cette question est reliée à //un qcm)
+		$req2=$bdd->prepare("SELECT distinct id_question,correct,reponse FROM qcm_question natural join reponse where id_question=:idq");//on sélectionne les réponses reliées à cette question,et ce une //seule fois (car l'id de la question parcourue est présent à chaque fois que cette question est reliée à //un qcm)
 		$req2->bindValue(':idq',$ligne['id_question']);
 		$req2->execute();
 		

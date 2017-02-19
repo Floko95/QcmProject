@@ -61,7 +61,7 @@ require_once('../Autres/Connexionbdd.php');
  <?php 
 
 		$repondeur=0;															//contiendra l'id du repondeur
-		$trouveid=$bdd->prepare('select id_repondeur from repondeur where nom_repondeur=:n');	//trouve  l'id du repondeur avec son nom
+		$trouveid=$bdd->prepare('select id_utilisateur from utilisateur where login=:n');	//trouve  l'id du repondeur avec son nom
 		$trouveid->bindValue(':n',$_SESSION['user']);								
 		$trouveid->execute();
 		while($l=$trouveid->fetch(PDO::FETCH_ASSOC)){								
@@ -69,7 +69,7 @@ require_once('../Autres/Connexionbdd.php');
 		}
 		
 
-		$nbqcm=$bdd->prepare("SELECT count(id_qcm) as somme FROM recap_repondeur WHERE id_repondeur = :repondeur");  //compte le nombre de qcm faits
+		$nbqcm=$bdd->prepare("SELECT count(id_qcm) as somme FROM recap_repondeur WHERE id_utilisateur = :repondeur");  //compte le nombre de qcm faits
 		$nbqcm->bindValue(':repondeur', $repondeur);
 		$nbqcm->execute();
 			while($ligne=$nbqcm->fetch(PDO::FETCH_ASSOC)){
@@ -77,7 +77,7 @@ require_once('../Autres/Connexionbdd.php');
 			}
 		
 
-		$tpsqcm=$bdd->prepare("SELECT sum(temps_qcm) as sum FROM recap_repondeur WHERE id_repondeur = :repondeur");  //compte le temps total des qcm faits
+		$tpsqcm=$bdd->prepare("SELECT sum(temps_qcm) as sum FROM recap_repondeur WHERE id_utilisateur = :repondeur");  //compte le temps total des qcm faits
 		$tpsqcm->bindValue(':repondeur', $repondeur);
 		$tpsqcm->execute();
 			while($ligne=$tpsqcm->fetch(PDO::FETCH_ASSOC)){
@@ -87,18 +87,18 @@ require_once('../Autres/Connexionbdd.php');
 		
 	
 		
-		$up1 =$bdd->prepare ('UPDATE repondeur SET nb_qcm_fait = :o WHERE id_repondeur = :id');						//enregistre le nouveau nbe de qcm faits dans la base 
+		$up1 =$bdd->prepare ('UPDATE utilisateur SET nb_qcm_fait = :o WHERE id_utilisateur = :id');						//enregistre le nouveau nbe de qcm faits dans la base 
 		$up1->bindValue(':id',$repondeur);
 		$up1->bindValue(':o',$nombreqcm);
 		$up1->execute();
 
-		$up3 =$bdd->prepare ('UPDATE repondeur SET temps_total = :th WHERE id_repondeur = :id');				 	//enregistre le nouveau  temps total dans la base
+		$up3 =$bdd->prepare ('UPDATE utilisateur SET temps_total = :th WHERE id_utilisateur = :id');				 	//enregistre le nouveau  temps total dans la base
 		$up3->bindValue(':id',$repondeur);
 		$up3->bindValue(':th',$tempsqcm);
 		$up3->execute();
 
 		
-		$statrep =$bdd->prepare ('Select nb_qcm_fait,temps_total from repondeur WHERE id_repondeur = :id');			//affichage des temps total et nbe de qcm faits
+		$statrep =$bdd->prepare ('Select nb_qcm_fait,temps_total from utilisateur WHERE id_utilisateur = :id');			//affichage des temps total et nbe de qcm faits
 		$statrep->bindValue(':id',$repondeur);
 		$statrep->execute();
 		while($l=$statrep->fetch(PDO::FETCH_ASSOC)){
@@ -118,7 +118,7 @@ require_once('../Autres/Connexionbdd.php');
     if(isset($_GET['d'])and trim ($_GET['d']!='') and isset($_GET['sd']) and trim ($_GET['sd']!='') ){	//après avoir cliqué sur un sous-domaine, on est sur la page où les qcm sont affichés 
 	       
             echo '<div class="list title"> '.$_GET['d'].' / '.$_GET['sd'].'</div>';
-            $statqcm=$bdd->prepare('SELECT * FROM recap_repondeur WHERE id_repondeur = :id_rep and sous_domaine=:sd');	//affiche les differents qcm et leurs statistiques
+            $statqcm=$bdd->prepare('SELECT * FROM recap_repondeur WHERE id_utilisateur = :id_rep and sous_domaine=:sd');	//affiche les differents qcm et leurs statistiques
 			$statqcm->bindValue(':id_rep',$repondeur);
 			$statqcm->bindValue(':sd',$_GET['sd']);
 			$statqcm->execute();
@@ -154,7 +154,7 @@ require_once('../Autres/Connexionbdd.php');
 				echo '<div class="list title">'.$l['domaine'].': ';									//affichage du domaine dans lequel on est
 			}
             
-            $moy=$bdd->prepare("SELECT round(avg(note_qcm)::numeric,2) as round FROM recap_repondeur natural join domaine WHERE id_repondeur = :repondeur and id_domaine=:d");
+            $moy=$bdd->prepare("SELECT round(avg(note_qcm)::numeric,2) as round FROM recap_repondeur natural join domaine WHERE id_utilisateur = :repondeur and id_domaine=:d");
 			$moy->bindValue(':d',$_GET['d']);
 			$moy->bindValue(':repondeur', $repondeur);
 			$moy->execute();
@@ -164,7 +164,7 @@ require_once('../Autres/Connexionbdd.php');
 			
 			$moyenne=round($moyenne,2);
 			
-			$insertm =$bdd->prepare ('UPDATE repondeur SET moyenne = :m WHERE id_repondeur = :id');		//enregistre la moyenne dans la table du repondeur
+			$insertm =$bdd->prepare ('UPDATE utilisateur SET moyenne = :m WHERE id_utilisateur = :id');		//enregistre la moyenne dans la table du repondeur
 			$insertm->bindValue(':id',$repondeur);
 			$insertm->bindValue(':m',$moyenne);
 			$insertm->execute();
@@ -174,7 +174,7 @@ require_once('../Autres/Connexionbdd.php');
 			echo'</div>';
             
             
-        $ssdom=$bdd->prepare("SELECT distinct domaine,sous_domaine FROM recap_repondeur natural join sous_domaine natural join domaine where id_domaine=:d and id_repondeur=:id_rep"); //affichage des sous-doamines du domaine courant
+        $ssdom=$bdd->prepare("SELECT distinct domaine,sous_domaine FROM recap_repondeur natural join sous_domaine natural join domaine where id_domaine=:d and id_utilisateur=:id_rep"); //affichage des sous-doamines du domaine courant
 		$ssdom->bindValue(':d',$_GET['d']);
 		$ssdom->bindValue(':id_rep',$repondeur);
 		$ssdom->execute();
@@ -188,7 +188,7 @@ require_once('../Autres/Connexionbdd.php');
         }
 	
         
-    $qcmnull=$bdd->prepare("SELECT * FROM recap_repondeur natural join domaine WHERE id_repondeur=:id_rep and id_domaine=:d and sous_domaine is null");		//affichage des qcm sans sous-domaine et de leurs stats
+    $qcmnull=$bdd->prepare("SELECT * FROM recap_repondeur natural join domaine WHERE id_utilisateur=:id_rep and id_domaine=:d and sous_domaine is null");		//affichage des qcm sans sous-domaine et de leurs stats
 		$qcmnull->bindValue(':d',$_GET['d']);
 		$qcmnull->bindValue(':id_rep',$repondeur);
 		$qcmnull->execute();
@@ -219,7 +219,7 @@ require_once('../Autres/Connexionbdd.php');
 		echo '<div class="list title">Récapitulatif</div>';            //si on est sur la premiere page, affichage de 'domaines'
 	
 	
-		$dom=$bdd->prepare('SELECT distinct id_domaine,domaine FROM domaine natural join recap_repondeur where id_repondeur = :id_rep ');   //si on n'a pas encore cliqué sur un domaine, affichage des domaines où le répondeur a effectué des qcm
+		$dom=$bdd->prepare('SELECT distinct id_domaine,domaine FROM domaine natural join recap_repondeur where id_utilisateur = :id_rep ');   //si on n'a pas encore cliqué sur un domaine, affichage des domaines où le répondeur a effectué des qcm
 		$dom->bindValue(':id_rep',$repondeur);
 		$dom->execute();
 		while($li=$dom->fetch(PDO::FETCH_ASSOC)){
