@@ -15,7 +15,7 @@
 				<li><a href="AccueilQ.php">Home</a></li>
 				<li><a href="Profil.php">Profil</a></li>
 				<li><a href="ChoixQC.php">QCM</a></li>
-				<li><a href="../Autres/Index.php">Déconnexion</a></li>
+				<li><a href="../Index.php">Déconnexion</a></li>
 			</ul>
 		</nav>
 	</div>
@@ -38,7 +38,7 @@
 		$req=$bdd->prepare("UPDATE qcm SET fini = false WHERE id_qcm=:id");
 		$req->bindValue(':id',$_POST['id']);
 		$req->execute();
-		echo 'Reprise de la création du QCM numéro '.$_POST['id'];
+		echo '<h2>Reprise de la création du QCM numéro '.$_POST['id'].'</h2>';
 		$_SESSION['sup']=1;
 	}
 	
@@ -198,7 +198,7 @@
 			}	
 
 		}
-		if($_SESSION['sup']==1){	
+		if( isset($_SESSION['sup']) and $_SESSION['sup']==1){	
 		
 			$req=$bdd->prepare("SELECT * FROM qcm natural join qcm_question natural join question where id_qcm=:idqcm");	//affichage de la question
 			$req->bindValue(':idqcm',$monidqcm);
@@ -235,7 +235,7 @@
 				echo '<form action="SupprimerQuestion.php" method="post">
 		<input type="hidden" name="idqcm" value="'.$_POST['id'].'"/>
 		<input type="hidden" name="qsup" value="'.$ligne['question'].'"/>
-        <input type="submit" name="sup" value="Supprimer"/></form>';
+        <input type="submit" name="sup" class="supp" value="Supprimer"/></form>';
         
 				
 			}	
@@ -259,11 +259,8 @@
 		<button type="submit" class="button"><span>Importer Question</span></button></form>';
 			 
   ?>
-        <textarea rows="5" cols="65" maxlength="150"></textarea>
+        
         </div>
 
 </body>
 </html>
-
-
-
