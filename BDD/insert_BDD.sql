@@ -289,81 +289,81 @@ INSERT INTO reponse (id_question, reponse, correct) values
 (134,'A', DEFAULT),(134,'Z', DEFAULT),(134,'D', DEFAULT),(134,'T', DEFAULT),(134,'N', TRUE),
 (135,'Solution Basique', TRUE),(135,'Solution Neutre', DEFAULT),(135,'Solution Acide', DEFAULT),(135,'Solution tempérée', DEFAULT);
 
-INSERT INTO qcm (auteur,domaine,sous_domaine,note_total,visible,fini) values 
-('Santini','Informatique','BDD',4,true,true),
-('Santini','Informatique','BDD',4,true,true),
+INSERT INTO qcm (auteur,domaine,sous_domaine,note_total,visible,fini,description) values 
+('Santini','Informatique','BDD',4,true,true,DEFAULT),
+('Santini','Informatique','BDD',4,true,true,DEFAULT),
 
-('Gayral','Informatique','PHP',6,true,true),
-('Gayral','Informatique','PHP',4,true,true),
+('Gayral','Informatique','PHP',6,true,true,'Qcm complet en php'),
+('Gayral','Informatique','PHP',4,true,true,'QCM de révision pour php'),
 
-('Avril','Informatique','JAVA',5,true,true),
-('Avril','Informatique','JAVA',3,true,true),
+('Avril','Informatique','JAVA',5,true,true,DEFAULT),
+('Avril','Informatique','JAVA',3,true,true,DEFAULT),
 
-('Santini','Informatique','C',4,true,true),
-('Santini','Informatique','C',3,true,true),
+('Santini','Informatique','C',4,true,true,DEFAULT),
+('Santini','Informatique','C',3,true,true,DEFAULT),
 
-('Gayral','Informatique','HTML',3,true,true),
-('Gayral','Informatique','HTML',5,true,true),
+('Gayral','Informatique','HTML',3,true,true,'QCM d introduction à l HTML'),
+('Gayral','Informatique','HTML',5,true,true,'QCM complémentaire pour l HTML'),
 
-('Charroux','Informatique','UML',3,true,true),
-('Charroux','Informatique','UML',4,true,true),
+('Charroux','Informatique','UML',3,true,true,DEFAULT),
+('Charroux','Informatique','UML',4,true,true,DEFAULT),
 
-('Buscaldi','Informatique','Linux',3,true,true),
-('Buscaldi','Informatique','Linux',4,true,true),
+('Buscaldi','Informatique','Linux',3,true,true,DEFAULT),
+('Buscaldi','Informatique','Linux',4,true,true,DEFAULT),
 
-('Avril','Informatique','Python',5,true,true),
-('Avril','Informatique','Python',3,true,true),
+('Avril','Informatique','Python',5,true,true,DEFAULT),
+('Avril','Informatique','Python',3,true,true,DEFAULT),
 
-('Hebert','Mathématiques','Algèbre',4,true,true),
-('Hebert','Mathématiques','Algèbre',4,true,true),
+('Hebert','Mathématiques','Algèbre',4,true,true,DEFAULT),
+('Hebert','Mathématiques','Algèbre',4,true,true,DEFAULT),
 
-('Hebert','Mathématiques','Géometrie',4,true,true),
-('Hebert','Mathématiques','Géometrie',3,true,true),
+('Hebert','Mathématiques','Géometrie',4,true,true,DEFAULT),
+('Hebert','Mathématiques','Géometrie',3,true,true,DEFAULT),
 
-('Hebert','Mathématiques','Cryptanalyse',4,true,true),
-('Hebert','Mathématiques','Cryptanalyse',3,true,true),
+('Hebert','Mathématiques','Cryptanalyse',4,true,true,DEFAULT),
+('Hebert','Mathématiques','Cryptanalyse',3,true,true,DEFAULT),
 
-('Hebert','Mathématiques','Graphes et langages',4,true,true),
-('Hebert','Mathématiques','Graphes et langages',3,true,true),
+('Hebert','Mathématiques','Graphes et langages',4,true,true,DEFAULT),
+('Hebert','Mathématiques','Graphes et langages',3,true,true,DEFAULT),
 
-('Noel','Culture Générale','Histoire',4,true,true),
-('Noel','Culture Générale','Histoire',3,true,true),
+('Noel','Culture Générale','Histoire',4,true,true,DEFAULT),
+('Noel','Culture Générale','Histoire',3,true,true,DEFAULT),
 
-('Noel','Culture Générale','Géographie',5,true,true),
-('Noel','Culture Générale','Géographie',4,true,true),
+('Noel','Culture Générale','Géographie',5,true,true,DEFAULT),
+('Noel','Culture Générale','Géographie',4,true,true,DEFAULT),
 
-('Noel','Culture Générale','Musique',5,true,true),
-('Noel','Culture Générale','Musique',4,true,true),
+('Noel','Culture Générale','Musique',5,true,true,DEFAULT),
+('Noel','Culture Générale','Musique',4,true,true,DEFAULT),
 
-('Noel','Culture Générale','Cinéma',3,true,true),
+('Noel','Culture Générale','Cinéma',3,true,true,DEFAULT),
 
-('Martinez','Langues','Anglais',5,true,true),
-('Martinez','Langues','Anglais',4,true,true),
+('Martinez','Langues','Anglais',5,true,true,DEFAULT),
+('Martinez','Langues','Anglais',4,true,true,DEFAULT),
 
-('Desigual','Langues','Espagnol',3,true,true),
+('Desigual','Langues','Espagnol',3,true,true,DEFAULT),
 
-('Daloz','Langues','Latin',5,true,true),
-('Daloz','Langues','Latin',4,true,true),
+('Daloz','Langues','Latin',5,true,true,DEFAULT),
+('Daloz','Langues','Latin',4,true,true,DEFAULT),
 
-('Ayme','Français','Conjugaison',5,true,true),
-('Ayme','Français','Conjugaison',3,true,true),
+('Ayme','Français','Conjugaison',5,true,true,DEFAULT),
+('Ayme','Français','Conjugaison',3,true,true,DEFAULT),
 
-('Ayme','Français','Grammaire',5,true,true),
-('Ayme','Français','Grammaire',3,true,true),
+('Ayme','Français','Grammaire',5,true,true,DEFAULT),
+('Ayme','Français','Grammaire',3,true,true,DEFAULT),
 
-('Ayme','Français','Orthographe',5,true,true),
-('Ayme','Français','Orthographe',4,true,true),
+('Ayme','Français','Orthographe',5,true,true,DEFAULT),
+('Ayme','Français','Orthographe',4,true,true,DEFAULT),
 
-('Mayeur','Sciences','SVT',5,true,true),
-('Mayeur','Sciences','SVT',4,true,true),
+('Mayeur','Sciences','SVT',5,true,true,DEFAULT),
+('Mayeur','Sciences','SVT',4,true,true,DEFAULT),
 
-('Dubois','Sciences','Physique Chimie',4,true,true),
-('Dubois','Sciences','Physique Chimie',4,true,true),
+('Dubois','Sciences','Physique Chimie',4,true,true,DEFAULT),
+('Dubois','Sciences','Physique Chimie',4,true,true,DEFAULT),
 
-('Gayral','Informatique',DEFAULT,10,true,true),
-('Gayral','Informatique',DEFAULT,10,true,true),
-('Noel','Culture Générale',DEFAULT,5,true,true),
-('Ayme','Français',DEFAULT,3,true,true);
+('Gayral','Informatique',DEFAULT,10,true,true,'QCM global d informatique,parceque c est fun'),
+('Gayral','Informatique',DEFAULT,10,true,true,DEFAULT),
+('Noel','Culture Générale',DEFAULT,5,true,true,DEFAULT),
+('Ayme','Français',DEFAULT,3,true,true,DEFAULT);
 
 INSERT INTO qcm_question values 
 --BDD

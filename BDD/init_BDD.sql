@@ -64,7 +64,8 @@ niveau varchar DEFAULT 'Normal',
 temps_total integer DEFAULT 0,		-- à calculer par la somme de chaque question.temps
 note_total float DEFAULT 0.0,		-- à calculer par la somme de chaque question.valeur
 visible boolean DEFAULT FALSE,		-- indique si le qcm peut etre vu par un repondeur ou non
-fini boolean DEFAULT FALSE			-- indique si le qcm est complet ou non
+fini boolean DEFAULT FALSE,			-- indique si le qcm est complet ou non
+description varchar DEFAULT 'Aucune description pour ce qcm'
 );
 
 -- La relation Qcm_Question existe uniquement pour lier plusieurs fois une unique question à plusieurs qcm
