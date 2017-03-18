@@ -65,7 +65,7 @@
 				echo "</br></h3>Ce domaine ne contient pas de sous-domaine</h3></br>";	//affichage d'un message d'information
 			}
     
-			$req=$bdd->prepare("SELECT distinct id_qcm,auteur FROM qcm natural join qcm_question where qcm.domaine=:nd and qcm.sous_domaine is null and qcm.id_qcm=qcm_question.id_qcm and visible=true");
+			$req=$bdd->prepare("SELECT distinct id_qcm,auteur,description FROM qcm natural join qcm_question where qcm.domaine=:nd and qcm.sous_domaine is null and qcm.id_qcm=qcm_question.id_qcm and visible=true");
 			$req->bindValue(':nd',$_POST['nd']);
 			$req->execute();
 			while($l=$req->fetch(PDO::FETCH_ASSOC)){		
@@ -79,7 +79,13 @@
 					<input type="hidden" name="idsd" value="Aucun"/>
 					<input type="hidden" name="executer" value="'.$executer.'"/>
 					<h4><input type="submit" value="QCM N°'.$l['id_qcm'].' créé par '.$l['auteur'].'"/><h4></form></p>';
-				    echo "</div></div>";
+				    echo "</div>";
+				//-----------------------------------------------
+				echo"<div>";
+				echo '<FONT size="1pt"><p>'.$l['description'].'</p></FONT>';
+				echo "</div>";
+				//-----------------------------------------
+				echo "</div>";
 			}
    
         }catch(PDOException $e){

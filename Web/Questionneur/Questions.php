@@ -259,7 +259,8 @@
 		<button type="submit" class="button"><span>Importer Question</span></button></form>';
 			 
   ?>
-        
+  <p>Entre une description de votre QCM (facultatif)</p>
+        <textarea rows="5" cols="65" maxlength="150"></textarea>
         </div>
 
 </body>
