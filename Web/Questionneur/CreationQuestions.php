@@ -40,7 +40,7 @@
 				<input class="last" placeholder="Point(s)" type="text" name="points"/>
 			</div>
 			<div class="réponse">
-				<ul id="liste">
+				<span id="liste">
 					<li id="ligne">
 						<input value="Réponse" onClick="$(this).val('')" class="first" type="text" name="Rep[]" />
 						<select name="select[]">
@@ -52,7 +52,7 @@
 							</option>
 						</select>	
 					</li>
-				</ul>
+				</span>
 			</div>
 			<div class="ajouter">
 				<input type="button" id="ajouterChamp" value="Ajouter une réponse"/>
