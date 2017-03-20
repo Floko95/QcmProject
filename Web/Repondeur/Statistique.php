@@ -33,15 +33,14 @@
 <?php  include('EviteMessageFormulaire.php');
 
         if(isset($_POST['qcm'])and trim($_POST['qcm'])){ //si on arrive de la page executer
-        try{										 
+        try{			
             require_once('../Autres/Connexionbdd.php');		
             $date=time().'</br>';					//date actuelle (correspond a la fin du QCM)
             $tempspasse=$date-$_POST['temps'];		//calcul du temps passe sur le QCM
             $score=0;$faux=0;$vrai=0;				//initialise score, +variables utiles par la suite
 		
 		
-            if(isset($_POST['reponse'])and trim($_POST['reponse']!=' ')){				//si des réponses ont été cochées lors du QCM
-			 if(isset($_POST['checkboxes'])and trim($_POST['checkboxes']!=' ')){		
+            if(isset($_SESSION['reponse'])and trim($_SESSION['reponse']!=' ')){				//si des réponses ont été cochées lors du QCM		
 				echo '<h2>Vos réponses au QCM n° '.$_POST['qcm'].' : </h2> ';		//récupère l'id QCM
 				
 				$question=$bdd->prepare('Select * from qcm natural join qcm_question natural join question where id_qcm=:idqcm');  //pour chaque question du QCM effectué
@@ -66,8 +65,8 @@
 							$reponsetrue+=1;
 						}
 						
-						foreach($_POST['reponse'] as $c=>$v){ 						//pour chaque reponse cochee par le répondeur
-							
+						foreach($_SESSION['reponse'] as $c=>$v){ 						//pour chaque reponse cochee par le répondeur
+							//echo 'reponse : : '.$v;
 							if($rep['id_reponse']==$v){ 							//si l'id de la reponse cochée correspond a l'id de la reponse de la requete
 								echo'<i class="helper"></i><i class="helper"></i></br> Votre réponse: '.htmlspecialchars($rep['reponse'],ENT_QUOTES); //affichage de la réponse 
 								
@@ -159,8 +158,7 @@
 
 				$score=round($score,2);			//arrondit la note au centième
 				echo ' Score : '.$score.'</br></br>';		//affichage du score
-			}
-		
+			
 		}else{
 			echo "Votre refus de répondre au QCM entraine l'ajout d'un 0 à votre moyenne et l'indignation du correcteur.";	//si aucune réponse n'a été donneé
 		}
@@ -210,6 +208,10 @@
 	       echo '<div class="button-container">
 		  <a href="ProfilR.php"><button class="button" type="submit"><span>Profil</span></button></a></div>';
         }
+		
+		if(isset($_SESSION['reponse'])){
+			unset($_SESSION['reponse']);
+		}
 ?>
   
     </div>
