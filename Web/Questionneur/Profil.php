@@ -1,8 +1,12 @@
+
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8" />
 		 <link rel="stylesheet" href="ProfilQ.css" />
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="Profil.js"></script>
          <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600' rel='stylesheet' type='text/css'>
          <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
          <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
@@ -101,7 +105,12 @@ else if (isset($_GET['sd']) and trim($_GET['sd']!='') and isset($_GET['d']) and 
         echo'<div class="list">	
         <div class="info pull-left">
         <div class="name">';
-        echo '<form action="VisualisationQCM.php" method="post"><button type="submit" name="qcmb"> QCM numéro '.$ligne['id_qcm'].' </button><input type="hidden" name="id" value="'.$ligne['id_qcm'].'" /></form>';
+        echo '<form action="VisualisationQCM.php" method="post"><button type="submit" name="qcmb"> QCM numéro '.$ligne['id_qcm'].' </button>
+        
+        <i class="reg">(plus d\'informations)</i>
+        
+        
+<input type="hidden" name="id" value="'.$ligne['id_qcm'].'" /></form>';
         echo'</div></div></div>';
 	}
 }
@@ -122,13 +131,17 @@ else//1-entrée du profil,affichage des domaines dans lesquels le questionneur a
 	}
 }
 ?>
+           
                 
                 
 </div>
 </div>
+</div>           
 </div>
-</div>
-
-	
+        
+        <div class="pop"><span>✖</span>
+        <p>Statistique</p>
+        </div>
+	 
 	</body>
 	</html>
