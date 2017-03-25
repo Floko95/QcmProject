@@ -62,6 +62,7 @@
 					<input type="hidden" name="iq" value="'.$l['id_qcm'].'"/>
 					<input type="hidden" name="nd" value="'.$_POST['nd'].'"/>
 					<input type="hidden" name="idsd" value="'.$_POST['idsd'].'"/>
+					<input type="hidden" name="val" value="1"/>
 					<input type="hidden" name="executer" value="'.$executer.'"/>
 					<h4><input type="submit" value="QCM N°'.$l['id_qcm'].' créé par '.$l['auteur'].'"/><h4></form></p>';
 				echo "</div>";

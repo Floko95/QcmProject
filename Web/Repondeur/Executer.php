@@ -43,8 +43,14 @@ include('EviteMessageFormulaire.php');
 		
         echo '</p>'; 
         echo' <p>Attention: Il peut y avoir plusieurs réponses possibles.</p>';
-
-		$date=time();		//enregistre la date de début du qcm pour le calcul ultérieur du temps
+		//echo '<p>'.$_POST['time'];
+		if(isset($_POST['val'])){
+			$date=time();		//enregistre la date de début du qcm pour le calcul ultérieur du temps
+		}if(isset($_POST['temps'])){
+			$date=$_POST['temps'];
+		}
+		
+		
 		if(isset($_POST['iq'])and trim($_POST['iq']!=' ')){	
            $temps=$bdd->prepare("SELECT temps FROM qcm_question natural join question where id_qcm=:idqcm");	
            //calcule le temps total du qcm
@@ -54,39 +60,22 @@ include('EviteMessageFormulaire.php');
 	       while($ligne=$temps->fetch(PDO::FETCH_ASSOC)){
 		      $t+=$ligne['temps'];
 	       }
-	       echo'<h2>Temps total : <div id="temps_total">'.$t.'</div> secondes.</h2>';
-//////////////?>
-<script>
-        var settimmer=0;
-        $(function(){
-                window.setInterval(function() {
-                    var timeCounter = $('#temps_total').html();
-					console.log(timeCounter);
-                    var updateTime = eval(timeCounter)- eval(1);
-                    $("#temps_total").html(updateTime);
-
-                    if(updateTime == 0){
-						$("#formS").submit(function (e){//form désigne l'ensemble des formulaires
-						console.log("entrer dans la fonction");
-						//var cible=e.target;
-						console.log("here");
-					$.ajax({
-					url: 'Statistique.php', // Le nom du fichier indiqué dans le formulaire
-                datatype: 'POST', // La méthode indiquée dans le formulaire (get ou post)
-                data: $("#formS").serialize(), // Je sérialise les données (j'envoie toutes les valeurs présentes dans le formulaire)
-				success: function(result){
-                //console.log("ajax !");
-             }
-		});
-			console.log("here2");
-	});
-                    }
-                }, 1000);
-
-        });
-    </script>
-
-<?php
+		   
+		   $n=0;
+		    $nb_quest =$bdd->prepare("SELECT id_question FROM qcm_question where id_qcm=:idqcm");
+			$nb_quest->bindValue(':idqcm',$_POST['iq']);
+			$nb_quest->execute();
+			while($li=$nb_quest->fetch(PDO::FETCH_ASSOC)){
+		      $n+=1;
+	       }
+		   
+		   if(isset($_POST['tq'])){
+			   $tq=$_POST['tq']+1;
+		}else{
+			$tq=1;
+		}
+		   
+			 echo'<h2 div="n">Question <div id="nb_questions">'.$tq.'</div>/'.$n.'</h2>';
 
 			if(isset($_POST['reponse'])){
 				$_SESSION['cpt']++;
@@ -104,8 +93,9 @@ include('EviteMessageFormulaire.php');
 			$req->execute();
 			$compteur=0;
 			while($ligne=$req->fetch(PDO::FETCH_ASSOC)){
-				$compteur++;
-				if($compteur==$_SESSION['cpt']){
+				 $time=$ligne['temps'];
+				$compteur++;//compte le nombre de questions
+				if($compteur==$_SESSION['cpt']){//si on a répondu a la question précédente 
 					echo "<div class=\"form-group\"><label class=\"control-label\" for=\"select\">";
 					echo ''.htmlspecialchars($ligne['question'],ENT_QUOTES).'</br>';
 					if($ligne['explication']!=null){                 //si il y a une explication, elle s'affiche
@@ -122,28 +112,130 @@ include('EviteMessageFormulaire.php');
 					echo '<form id="formulaire" action="Executer.php" method="post">';              //enregistre les données du qcm pour Statisiques 
 					echo '<input type="hidden" name="iq" value="'.$ligne['id_qcm'].'"/>';
 					echo '<input type="hidden" name="temps" value="'.$date.'"/>';
+					echo '<input type="hidden" name="tq" value="'.$tq.'"/>';
+					
 					while($l=$req2->fetch(PDO::FETCH_ASSOC)){      //les réponses sont sous forme de cases pouvant être cochées
 						echo'<div class="checkbox"><label>';
 						echo'<input type="checkbox" name="reponse[]" value="'.$l['id_reponse'].'"/><i class="helper"></i>'.htmlspecialchars($l['reponse'],ENT_QUOTES);
 						echo '</div></label>';
 					}
-				
 					echo '<div class="button-container">
-						<button class="button" type="submit" name="checkboxes"><span>Valider question</span></button>
+						<button class="button" id="bute" type="submit" name="checkboxes"><span>Valider question</span></button>
 						</div>';
 					echo'</form>';
 				}
 		   }
-		   if($_SESSION['cpt']>$compteur){//enregistre les données du qcm pour Statisiques
+		   
+		   		  echo'<h2 id="t">Temps total : <div id="temps_total">'.$time.'</div> secondes.</h2>';
+
+				  
+				  
+				   if($_SESSION['cpt']>$compteur){//si on a répondu a toutes les questions
+		   
+					
+					?>
+					<script>
+					$("#t").css("display","none");
+					$("#n").remove();
+					</script>
+					<?php
 				echo'<form action="Statistique.php" id="formS" method="post">              
 				<div class="button-container">
 				<input type="hidden" name="qcm" id="formSqcm" value="'.$_POST['iq'].'"/>
 				<input type="hidden" name="temps" id="formStemps" value="'.$date.'"/>
-				<button class="button" type="submit" name="checkboxes"><span>Submit</span></button>
+				<button class="button" id="buts" type="submit" name="checkboxes"><span>Submit</span></button>
 				</div>
 				</form>';
 			}
-			$compteur=0;
+		   	  $sub="<div id='sub'>0</div>";
+		echo'<div id="monpost">'.$_POST['iq'].'</div>';
+		echo'<div id="madate">'.$date.'</div>';
+		   ?>
+		  
+<script>
+        $(function(){
+			
+			
+                window.setInterval(function() {
+                    var timeCounter = $('#temps_total').html();
+					console.log(timeCounter);
+                    var updateTime = eval(timeCounter)- eval(1);
+                    $("#temps_total").text(updateTime);
+					
+					
+                    if(updateTime === 0){
+						//$("#formS").submit(function (e){//form désigne l'ensemble des formulaires
+						console.log("entrer dans la fonction");
+						//var cible=e.target;
+						console.log("here");
+						//document.getElementById('#formS').submit();
+					/*$.ajax({
+					url: 'Statistique.php', // Le nom du fichier indiqué dans le formulaire
+                datatype: 'POST', // La méthode indiquée dans le formulaire (get ou post)
+                data: $("#formS").serialize(), // Je sérialise les données (j'envoie toutes les valeurs présentes dans le formulaire)
+				success: function(result){
+                //console.log("ajax !");
+             }
+		});*/
+	/*var redirect = function(url, method, parametres) {
+		
+    var form = document.createElement('form');
+    form.method = method;
+    form.action = url;
+	for(var cle in parametres) {
+		if(parametres.hasOwnProperty(cle)) {
+			var champCache = document.createElement(input);
+				champCache.setAttribute(type, hidden);
+				champCache.setAttribute(name, cle);
+				champCache.setAttribute(value, parametres[cle]);
+				form.appendChild(champCache);
+		}
+	}*//////////
+	var monform=$('#monpost').text();
+		var madate=$('#madate').text();
+		console.log(monform,madate);
+	var myRedirect = function(redirectUrl) {
+		
+var form = $('<form action="' + redirectUrl + '" method="post">' +
+"<input type='hidden' name='qcm' value="+monform+" />" +
+"<input type='hidden' name='temps' value="+madate+" />" +
+'</form>');
+$('body').append(form);
+$(form).submit();
+};
+	////////////
+	/*document.body.appendChild(form);
+    form.submit();
+	};*/
+myRedirect('Statistique.php');
+//redirect('Statistique.php', 'post', $('#post'));
+		//////
+		
+		//////
+		
+			console.log("here2");
+	//});
+                    }
+                }, 1000);
+			
+        });
+    </script>
+
+	<?php
+	/*echo $sub;
+	if ($sub==1){
+	
+	echo'<form action="Statistique.php" id="formS" method="post">              
+				<div class="button-container">
+				<input type="hidden" name="qcm" id="formSqcm" value="'.$_POST['iq'].'"/>
+				<input type="hidden" name="temps" id="formStemps" value="'.$date.'"/>
+				<button class="button" id="buts" type="submit" name="checkboxes"><span>Submit</span></button>
+				</div>
+				</form>';
+
+	}
+		 */
+			//$compteur=0;
 		
 		
         }		

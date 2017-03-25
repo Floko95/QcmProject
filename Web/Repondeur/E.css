@@ -380,3 +380,14 @@ p {
 
 /*-------------------------END BOUTON--------------------------*/
 
+#nb_questions{
+display:inline;
+}
+#t{
+background-color:red;
+bottom:500px;
+}
+#sub{
+display:none;
+}
+
