@@ -355,5 +355,39 @@ body{
 }
 
 /*-------------------------END LIST---------------------------*/
-  
+  .pop {
+  display: none;
+  position: fixed;
+  top: 15.3%;
+  left: 15.3%;
+  width: 70%;
+  height: 70%;
+  background: #ffffff;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  border-radius: 6px;
+  outline: 10px solid rgba(0, 0, 0, 0.1);
+}
+
+.pop > p {
+  padding-left: 30px;
+  font-size: 100%;
+  color: #777;
+}
+.pop > span {
+  cursor: pointer;
+  position: absolute;
+  top: 4%;
+  right: 4%;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  border-radius: 100px;
+  background: #cccccc;
+  color: #ffffff;
+  padding: 6px 0px 0px 9px;
+  width: 25px;
+  height: 25px;
+}
 /*-------------------------END BLOC---------------------------*/
