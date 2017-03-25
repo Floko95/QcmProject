@@ -84,6 +84,13 @@
 				$("document").ready(function()
 				{
 					$("#save").hide();
+					$(document).keydown(function(e)
+					{
+						if(e.keyCode == 13)
+						{
+							e.preventDefault();
+						}	
+					});	
 					$("#formulaire").keyup(function()
 					{
 						var quest = $("#quest").val();
