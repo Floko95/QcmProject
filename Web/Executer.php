@@ -66,8 +66,10 @@ include('EviteMessageFormulaire.php');
 				$tq=1;				//sinon, on est a la premiere question
 			}
 		   
-			 echo'<h2 div="n">Question <div id="nb_questions">'.$tq.'</div>/'.$n.'</h2>';//affichage du numéro de la question courante
-
+			if($tq<=$n){
+			echo'<h2 div="n">Question <div id="nb_questions">'.$tq.'</div>/'.$n.'</h2>';//affichage du numéro de la question courante
+			}
+			
 			if(isset($_POST['reponse'])){
 				$_SESSION['cpt']++;
 				foreach($_POST['reponse'] as $c=>$v){
