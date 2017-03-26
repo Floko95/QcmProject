@@ -26,8 +26,8 @@
         
     <div class="container">
     <h1>Liste Question</h1>
-		
-
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="Questions.js"></script>
 <?php
 	session_start();					//pour utiliser les $_session
 	require_once('../Autres/Connexionbdd.php');
@@ -257,11 +257,16 @@
 		<input type="hidden" name="idd" value="'.$_POST['id'].'"/>
 		<input type="hidden" name="idqcm" value="'.$monidqcm.'"/>
 		<button type="submit" class="button"><span>Importer Question</span></button></form>';
-			 
+		
+	$req2=$bdd->prepare("SELECT description from qcm where id_qcm = :id"); //affichage des réponses 
+	$req2->bindValue(':id',$monidqcm);
+	$req2->execute();
+	$l=$req2->fetch(PDO::FETCH_ASSOC);
+ echo '<p>Entre une description de votre QCM (facultatif)</p>
+        <textarea rows="5" cols="65" maxlength="150" id="desc">'.$l['description'].'</textarea>
+        </div>';
   ?>
-  <p>Entre une description de votre QCM (facultatif)</p>
-        <textarea rows="5" cols="65" maxlength="150"></textarea>
-        </div>
+ 
 
 </body>
 </html>

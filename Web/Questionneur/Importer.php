@@ -28,8 +28,13 @@
 
 
 require_once('../Autres/Connexionbdd.php');
-
-
+if (isset($_POST['idd']) and trim($_POST['idd']!='') and isset($_POST['desc']) and trim($_POST['desc'])!='')
+{
+	$req=$bdd->prepare("UPDATE qcm set description=:d where id_qcm = :id");
+	$req->bindValue(':id',$_POST['idd']);
+	$req->bindValue(':d',$_POST['desc']);
+	$req->execute();
+}
 
 if (isset($_POST['idd']) and trim($_POST['idd']!=''))//id du qcm en cours de modification reçu
 {

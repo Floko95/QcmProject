@@ -10,6 +10,13 @@
 <?php
 session_start();
 require_once('../Autres/Connexionbdd.php');
+if (isset($_POST['id']) and trim($_POST['id']!='') and isset($_POST['desc']) and trim($_POST['desc'])!='')
+{
+	$req=$bdd->prepare("UPDATE qcm set description=:d where id_qcm = :id");
+	$req->bindValue(':id',$_POST['id']);
+	$req->bindValue(':d',$_POST['desc']);
+	$req->execute();
+}
 if(isset($_POST['id']) and !(isset($_POST['oui'])) and !(isset($_POST['non']))){//si on vient de questions.php,avec l'id du qcm recu
  	$req=$bdd->prepare("UPDATE qcm SET fini = true WHERE id_qcm=:id");//on considere ce qcm fini
 	$req->bindValue(':id',$_POST['id']);
