@@ -87,9 +87,14 @@ include('EviteMessageFormulaire.php');
 			$compteur=0;
 			while($ligne=$req->fetch(PDO::FETCH_ASSOC)){	//tant qu'il y a des questions 
 				$time=$ligne['temps'];
+				echo '<div id="seconde" style="display:none">'.$time.'</div>';
 				$compteur++;	//compte le nombre de questions
 				if($compteur==$_SESSION['cpt']){										//si on a répondu a la question précédente 
 					echo'<h2 id="t">Temps : <div id="temps_total">'.$time.'</div> secondes.</h2>';
+					//////////
+				echo'<div id="bar"><div id="bar_inside"></div></div>';
+
+					//////
 					echo "<div class=\"form-group\"><label class=\"control-label\" for=\"select\">";
 					echo ''.htmlspecialchars($ligne['question'],ENT_QUOTES).'</br>';	//affichage question
 					if($ligne['explication']!=null){             						//si il y a une explication, elle s'affiche
@@ -135,6 +140,8 @@ include('EviteMessageFormulaire.php');
 		  
 	<script>
         $(function(){	//se lance a chaque question
+			$('#bar').css('width',$('#seconde').text()*10);
+			wi=0;
 			window.setInterval(function(){ 
 				var timeCounter = $('#temps_total').html();	//récupère le temps de la question
                 var updateTime = eval(timeCounter)- eval(1);	//temps-1
@@ -152,6 +159,19 @@ include('EviteMessageFormulaire.php');
 					};	
 					redirect('Statistique.php');//appel de fonction de redirection
 				}
+				////////
+				
+				jQuery(function($){
+					var timeCounter = parseInt($('#temps_total').text());	//récupère le temps de la question
+				//	var $('#bar_inside').css('width',$('#seconde').text());
+				//$('#bar').width()/parseInt($('#seconde').text())
+					console.log($('#bar').width());
+					var wi=$('#bar').width()
+					$('#bar_inside').animate({
+						width: wi
+					},$('#bar').width()*100-1000, 'linear');
+				});
+				////////
 			}, 1000);
 		});
 	</script>
