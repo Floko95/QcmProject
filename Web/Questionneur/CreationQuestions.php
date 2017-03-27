@@ -41,17 +41,15 @@
 			</div>
 			<div class="réponse">
 				<span id="liste">
-					<li id="ligne">
-						<input placeholder="Réponse" onClick="$(this).val('')" class="first" type="text" name="Rep[]" />
-						<select name="select[]">
-							<option class="green" value="Vrai">
-								Correct
-							</option>
-							<option class="red" value="Faux" selected>
-								Incorrect
-							</option>
-						</select>
-					</li>
+					<input placeholder="Réponse" onClick="$(this).val('')" class="first" type="text" name="Rep[]" />
+					<select name="select[]">
+						<option class="green" value="Vrai">
+							Correct
+						</option>
+						<option class="red" value="Faux" selected>
+							Incorrect
+						</option>
+					</select>
 				</span>
 			</div>
 			<div class="ajouter">
@@ -63,7 +61,7 @@
 					$('#ajouterChamp').click(function()
 					{
 						console.log("Clic sur le bouton");
-						$('#liste').append($("#ligne").clone());
+						$('.réponse').append($("#liste").clone());
 						console.log("Ajout de l'élement");
 					});
 				});
@@ -91,13 +89,38 @@
 							e.preventDefault();
 						}	
 					});	
-					$("#formulaire").keyup(function()
+					$("#formulaire").change(function()
 					{
 						var quest = $("#quest").val();
 						var temps = $("#temps").val();
 						var score = $("#score").val();
 						var nombre = new RegExp('^\\d+$');
-						if(quest.length > 0 && temps.length > 0 && score.length > 0 && nombre.test(temps) && nombre.test(score))
+						//$("#save").show();
+						if(quest.length == 0)
+						{
+							$("#quest").css('border-color','#FF0000')
+						}
+						else
+						{
+							$("#quest").css('border-color','#00FF00')
+						}
+						if(score.length == 0 || !(nombre.test(score)))
+						{
+							$("#score").css('border-color','#FF0000')
+						}
+						else
+						{
+							$("#score").css('border-color','#00FF00')
+						}
+						if(temps.length == 0 || !(nombre.test(temps)))
+						{
+							$("#temps").css('border-color','#FF0000')
+						}
+						else
+						{
+							$("#temps").css('border-color','#00FF00')
+						}
+						if(quest.length > 0 && score.length > 0 && temps.length > 0 && nombre.test(score) && nombre.test(temps))
 						{
 							$("#save").show();
 						}
@@ -105,6 +128,7 @@
 						{
 							$("#save").hide();
 						}
+				
 					});
 				});
 				</script>
