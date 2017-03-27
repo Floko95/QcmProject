@@ -75,6 +75,7 @@
 			</div>
 			<input type="hidden" name="creaquestion" value="creaquestion"/>
 			<footer>
+				<span class="attention">Tous les champs doivent être remplis. Les champs de temps et de score ne doivent contenir que des nombres</span>
 				<button id="save">
 					<input type="submit" value="Sauvegarder" class="save"/>
 				</button>
@@ -98,35 +99,37 @@
 						//$("#save").show();
 						if(quest.length == 0)
 						{
-							$("#quest").css('border-color','#FF0000')
+							$("#quest").css('border-color','#FF0000');
 						}
 						else
 						{
-							$("#quest").css('border-color','#00FF00')
+							$("#quest").css('border-color','#00FF00');
 						}
 						if(score.length == 0 || !(nombre.test(score)))
 						{
-							$("#score").css('border-color','#FF0000')
+							$("#score").css('border-color','#FF0000');
 						}
 						else
 						{
-							$("#score").css('border-color','#00FF00')
+							$("#score").css('border-color','#00FF00');
 						}
 						if(temps.length == 0 || !(nombre.test(temps)))
 						{
-							$("#temps").css('border-color','#FF0000')
+							$("#temps").css('border-color','#FF0000');
 						}
 						else
 						{
-							$("#temps").css('border-color','#00FF00')
+							$("#temps").css('border-color','#00FF00');
 						}
 						if(quest.length > 0 && score.length > 0 && temps.length > 0 && nombre.test(score) && nombre.test(temps))
 						{
 							$("#save").show();
+							$(".attention").hide();
 						}
 						else
 						{
 							$("#save").hide();
+							$(".attention").show();
 						}
 				
 					});
