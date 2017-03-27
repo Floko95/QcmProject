@@ -390,4 +390,40 @@ body{
   width: 25px;
   height: 25px;
 }
+
+.jauge
+{
+	background-color: #696969;
+	width: 400px;
+  height: 30px;
+  position:fixed;
+  left: 50%;
+  top:50%;
+ margin-left:-200px;
+ border-radius:10px;
+  
+}
+.jaugeverte
+{
+	background-color: #7CFC00;
+	width: 0px;
+  height: 30px;
+  position:fixed;
+  left: 50%;
+  top:50%;
+ margin-left:-200px;
+ border-radius:10px;
+  
+}
+#note
+{
+	 position:fixed;
+  left: 20%;
+  top:60%;
+  color:black;
+  padding-left: 0px;
+  text-align:center;
+}
+
+
 /*-------------------------END BLOC---------------------------*/

@@ -86,7 +86,9 @@ if(isset($_GET['d']) and trim($_GET['d']!='') and !(isset($_GET['sd'])))//2-doma
         echo'<div class="list">	
 		<div class="info pull-left">
         <div class="name">';
-        echo '<form action="VisualisationQCM.php" method="post"><button type="submit" name="qcmb"> QCM Général n° '.$ligne['id_qcm'].' <nutton><input type="hidden" name="id" value="'.$ligne['id_qcm'].'" /></form>';
+        echo '<form action="VisualisationQCM.php" method="post"><button type="submit" name="qcmb" id="'.$ligne['id_qcm'].'"> QCM Général n° '.$ligne['id_qcm'].' </button>
+		 <i class="reg">(plus d\'informations)</i>
+		<input type="hidden" name="id" value="'.$ligne['id_qcm'].'" /></form>';
         echo'</div></div></div>';//et en propose la visualisation
 	}
 }
@@ -105,7 +107,7 @@ else if (isset($_GET['sd']) and trim($_GET['sd']!='') and isset($_GET['d']) and 
         echo'<div class="list">	
         <div class="info pull-left">
         <div class="name">';
-        echo '<form action="VisualisationQCM.php" method="post"><button type="submit" name="qcmb"> QCM numéro '.$ligne['id_qcm'].' </button>
+        echo '<form action="VisualisationQCM.php" method="post"><button type="submit" name="qcmb" id="'.$ligne['id_qcm'].'"> QCM numéro '.$ligne['id_qcm'].' </button>
         
         <i class="reg">(plus d\'informations)</i>
         
@@ -140,7 +142,11 @@ else//1-entrée du profil,affichage des domaines dans lesquels le questionneur a
 </div>
         
         <div class="pop"><span>✖</span>
-        <p>Statistique</p>
+        <p id="stats">Statistiques</p>
+		<p id="qcm">Note moyenne du Qcm numero</p>
+		<div class="jauge"></div>
+		<div class="jaugeverte"></div>
+		<p id="note"></p>
         </div>
 	 
 	</body>
