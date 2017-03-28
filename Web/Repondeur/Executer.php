@@ -70,15 +70,18 @@ include('EviteMessageFormulaire.php');
 			 echo'<h2 div="n">Question <div id="nb_questions">'.$tq.'</div>/'.$n.'</h2>';//affichage du numéro de la question courante
 			}
 			
+			
 			if(isset($_POST['reponse'])){
 				$_SESSION['cpt']++;
-				foreach($_POST['reponse'] as $c=>$v){
+			if (is_array($_POST['reponse'])){
+				foreach($_POST['reponse'] as $c=>$v){	
 					if(isset($_SESSION['reponse'])){
 						array_push($_SESSION['reponse'],$v);
 					}else{
 						$_SESSION['reponse'][]=$v;
 					}
 				}
+			}
 			}
 			
 			$req=$bdd->prepare("SELECT * FROM qcm_question natural join question where id_qcm=:idqcm");//affichage de la question et de l'explication qui va avec
@@ -91,10 +94,9 @@ include('EviteMessageFormulaire.php');
 				$compteur++;	//compte le nombre de questions
 				if($compteur==$_SESSION['cpt']){										//si on a répondu a la question précédente 
 					echo'<h2 id="t">Temps : <div id="temps_total">'.$time.'</div> secondes.</h2>';
-					//////////
-				echo'<div id="bar"><div id="bar_inside"></div></div>';
-
-					//////
+					
+					echo'<div id="bar"><div id="bar_inside"></div></div>';
+					
 					echo "<div class=\"form-group\"><label class=\"control-label\" for=\"select\">";
 					echo ''.htmlspecialchars($ligne['question'],ENT_QUOTES).'</br>';	//affichage question
 					if($ligne['explication']!=null){             						//si il y a une explication, elle s'affiche
@@ -133,9 +135,12 @@ include('EviteMessageFormulaire.php');
 						</div>
 						</form>';
 				}
+				
+				$resp=array(0=>array(0=>0));
 				echo'<div id="monpost" style="display: none">'.$_POST['iq'].'</div>';//obligatoire pour la redirection 
 				echo'<div id="madate" style="display: none">'.$date.'</div>';//obligatoire pour la redirection
-			
+				echo'<div id="mareponse" style="display: none">'.$resp[0][0].'</div>';//obligatoire pour la redirection
+
 		   ?>
 		  
 	<script>
@@ -149,29 +154,29 @@ include('EviteMessageFormulaire.php');
 				if(updateTime === 0){		//si le temps est à 0
 					var monform=$('#monpost').text();	//on récupère l'id du qcm
 					var madate=$('#madate').text();		//on récupère le temps total du qcm
+					var montq=$('#nb_questions').text();		//on récupère le nombre de questions du qcm
+					var mareponse=$('#mareponse').text();
 					var redirect = function(redirectUrl) {	//puis on redirige automatiquement vers Statistique (fonction)
 						var form = $('<form action="' + redirectUrl + '" method="post">' +	
-									"<input type='hidden' name='qcm' value="+monform+" />" +
+									"<input type='hidden' name='iq' value="+monform+" />" +
 									"<input type='hidden' name='temps' value="+madate+" />" +
+									"<input type='hidden' name='tq' value="+montq+" />" +
+									"<input type='hidden' name='reponse' value="+mareponse+"/>" +
 									'</form>');
 						$('body').append(form);// on ajoute le formulaire créé à la page
 						$(form).submit();	//puis on le soumet directement
 					};	
-					redirect('Statistique.php');//appel de fonction de redirection
+					redirect('Executer.php');//appel de fonction de redirection
 				}
-				////////
-				
+		
 				jQuery(function($){
 					var timeCounter = parseInt($('#temps_total').text());	//récupère le temps de la question
-				//	var $('#bar_inside').css('width',$('#seconde').text());
-				//$('#bar').width()/parseInt($('#seconde').text())
 					console.log($('#bar').width());
 					var wi=$('#bar').width()
 					$('#bar_inside').animate({
 						width: wi
 					},$('#bar').width()*100-1000, 'linear');
 				});
-				////////
 			}, 1000);
 		});
 	</script>
