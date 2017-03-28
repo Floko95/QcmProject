@@ -398,7 +398,7 @@ body{
   height: 30px;
   position:fixed;
   left: 50%;
-  top:50%;
+  top:45%;
  margin-left:-200px;
  border-radius:10px;
   
@@ -410,16 +410,17 @@ body{
   height: 30px;
   position:fixed;
   left: 50%;
-  top:50%;
+  top: 45%;
  margin-left:-200px;
  border-radius:10px;
   
 }
 #note
 {
-	 position:fixed;
-  left: 20%;
-  top:60%;
+  font-size: 14px;
+  position:fixed;
+  left: 50%;
+  top:50%;
   color:black;
   padding-left: 0px;
   text-align:center;

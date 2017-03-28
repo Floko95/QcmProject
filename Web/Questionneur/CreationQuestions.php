@@ -60,7 +60,8 @@ if (isset($_POST['idd']) and trim($_POST['idd']!='') and isset($_POST['desc']) a
 				</span>
 			</div>
 			<div class="ajouter">
-				<input type="button" id="ajouterChamp" value="Ajouter une réponse"/>
+                
+				<input type="button" id="ajouterChamp" value="Ajouter une réponse" />
 			</div>
 			<script>
 				$(document).ready(function()
@@ -74,12 +75,9 @@ if (isset($_POST['idd']) and trim($_POST['idd']!='') and isset($_POST['desc']) a
 				});
 			</script>
 <?php
-			echo '<input type="hidden" name="id" value="'.$_POST['idqcm'].'"/>';
+			echo '<input type="hidden" name="id"  value="'.$_POST['idqcm'].'" />';
 ?>
-			<div class="message">
-				<textarea placeholder="Rajouter un petit commentaire ici. Cela sera affiché sous votre question. ">
-				</textarea>
-			</div>
+			
 			<input type="hidden" name="creaquestion" value="creaquestion"/>
 			<footer>
 				<span class="attention">Tous les champs doivent être remplis. Les champs de temps et de score ne doivent contenir que des nombres</span>
