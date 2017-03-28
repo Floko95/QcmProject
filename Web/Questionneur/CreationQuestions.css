@@ -170,7 +170,7 @@ fieldset{
   font-size: 14px !important;
   font-family: 'PT Sans Narrow', sans-serif;
   position: absolute;
-  right:30%;
+  right:35%;
   width: 40%;
   bottom: 30px;
   border: none;
@@ -209,26 +209,10 @@ fieldset{
     color: slategrey;
 }
 
-#ajouterChamp{
-    
-    text-align: center;
-     background: -webkit-radial-gradient(closest-corner, rgba(16, 47, 70, 0) 60%, rgba(16, 47, 70, 0.2)), 
-  -webkit-linear-gradient(108deg, #e5e9bf 10%, #00396f 90%);
-  display: inline-block;
-  padding: 8px 30px;
-  color: #fff;
-  font-family: 
-  cursor: pointer;
-  font-size: 14px !important;
-  font-family: 'PT Sans Narrow', sans-serif;
-  position: absolute;
-  right:30%;
-  width: 40%;
-  text-decoration: none;
-    box-decoration-break: ;
+.ajouter  {
+	margin-left: 35%;
+
 }
-
-
 
 
 
