@@ -2,6 +2,8 @@
     <head>
 	<meta charset="utf-8" />
     <link rel="stylesheet" href="ChoixRQI.css" />
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="ChoixRQI.js"></script>
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
@@ -66,11 +68,13 @@
 					<input type="hidden" name="executer" value="'.$executer.'"/>
 					<h4><input type="submit" value="QCM N°'.$l['id_qcm'].' créé par '.$l['auteur'].'"/><h4></form></p>';
 				echo "</div>";
+                
 				//-----------------------------------------------
-				echo"<div>";
-				echo '<FONT size="1pt"><p>'.$l['description'].'</p></FONT>';
-				echo "</div>";
+				echo"<div><h2 class='title'>";
+				echo $l['description'];
+				echo "</h2></div>";
 				//-----------------------------------------
+                
 				echo "</div>";
 			
 			}
