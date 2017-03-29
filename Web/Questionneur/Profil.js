@@ -4,6 +4,7 @@
      $("i").click(function () {
          console.log("blabla");
 		 console.log($(this).parent().find('button').attr('id'));
+		 $('#qcm').text( $('#qcm').text()+$(this).parent().find('button').attr('id'))
 		 $.get("getMoyenne.php",{id:$(this).parent().find('button').attr('id')},function(reponse){
 			 if(reponse==-1)
 			 {console.log("erreur");
@@ -16,7 +17,7 @@
 			else
 			{ console.log(reponse);
 			 $('.jaugeverte').css('width',reponse.moy*20+'px');
-			$('#note').text(reponse.nb+'/20');
+			$('#note').text(reponse.moy+'/20');
 			$('.tranche1').text('Nombre de notes entre 0 et 5: '+reponse.t1);
 			$('.tranche2').text('Nombre de notes entre 5 et 10: '+reponse.t2);
 			$('.tranche3').text('Nombre de notes entre 10 et 15: '+reponse.t3);
