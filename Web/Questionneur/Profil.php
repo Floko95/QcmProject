@@ -149,7 +149,6 @@ else//1-entrée du profil,affichage des domaines dans lesquels le questionneur a
 		<p class="tranche2"></p>
 		<p class="tranche3"></p>
 		<p class="tranche4"></p>
-		<p id="last"></p>
 		<p id="note"></p>
         </div>
 	 
