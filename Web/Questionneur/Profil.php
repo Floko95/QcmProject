@@ -16,7 +16,6 @@
     <body>
 		
         <!-- NAVIGATION -->
-
 <div id="desk-nav">
   <nav>
     <ul>
@@ -47,7 +46,7 @@ require_once('../Autres/Connexionbdd.php'); ?>
 			         <span class="vec vec_e"></span>
 		          </div>
         
-    <div class="photo"><img src="https://thumbs.dreamstime.com/t/age-brain-collection_flat-cartoon-vector-illustration-old-wearing-round-glasses-long-white-beard-holding-stick-part-72812212.jpg"></div>
+   <div class="photo"><img src="https://thumbs.dreamstime.com/t/age-brain-collection_flat-cartoon-vector-illustration-old-wearing-round-glasses-long-white-beard-holding-stick-part-72812212.jpg"></div>
 		<div class="info"><?php echo '<div class="name">'.$_SESSION['user'].'</div>';?></div>
 		
         <label for="retour" class="retour"><a href="" onClick="javascript:window.history.go(-1)"><img src="http://img15.hostingpics.net/pics/571733arrow8724.png"></a></label>
@@ -146,6 +145,10 @@ else//1-entrée du profil,affichage des domaines dans lesquels le questionneur a
 		<p id="qcm">Note moyenne du Qcm numero</p>
 		<div class="jauge"></div>
 		<div class="jaugeverte"></div>
+		<p class="tranche1"></p>
+		<p class="tranche2"></p>
+		<p class="tranche3"></p>
+		<p class="tranche4"></p>
 		<p id="note"></p>
         </div>
 	 
