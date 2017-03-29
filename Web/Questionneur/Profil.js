@@ -21,7 +21,13 @@
 			$('.tranche1').text('Nombre de notes entre 0 et 5: '+reponse.t1);
 			$('.tranche2').text('Nombre de notes entre 5 et 10: '+reponse.t2);
 			$('.tranche3').text('Nombre de notes entre 10 et 15: '+reponse.t3);
-	 $('.tranche4').text('Nombre de notes entre 15 et 20: '+reponse.t4);}
+	 $('.tranche4').text('Nombre de notes entre 15 et 20: '+reponse.t4);
+	 $('#last').text("Dernieres personnes à avoir fait le qcm: ");
+	 for(int i=0;i<reponse.last.length;i++;)
+	 {
+		$('#last').text( $('#last').text()+" "+reponse.last[i]);
+	 }
+	 }
 		 });
          $(".pop").fadeIn(300);
          
