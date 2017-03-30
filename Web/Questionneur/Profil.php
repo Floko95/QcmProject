@@ -141,14 +141,13 @@ else//1-entrée du profil,affichage des domaines dans lesquels le questionneur a
 </div>
         
         <div class="pop"><span>✖</span>
-        <p id="stats">Statistiques</p>
-		<p id="qcm">Note moyenne du Qcm numero</p>
+        <h1 id="stats">Statistiques</h1>
+        <table><tr><td class="tranche1"></td>   <td class="tranche2"></td></tr>
+		<tr><td class="tranche3"></td>  <td class="tranche4"></td></tr></table>
+		<h2 id="qcm">Note moyenne du Qcm numero  </h2>
 		<div class="jauge"></div>
 		<div class="jaugeverte"></div>
-		<p class="tranche1"></p>
-		<p class="tranche2"></p>
-		<p class="tranche3"></p>
-		<p class="tranche4"></p>
+		
 		<p id="note"></p>
         </div>
 	 

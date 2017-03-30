@@ -56,7 +56,13 @@
 		$monidqcm=$_POST['id'];
 		
 	
-	
+	$req2=$bdd->prepare("SELECT description from qcm where id_qcm = :id"); //affichage des réponses 
+	$req2->bindValue(':id',$monidqcm);
+	$req2->execute();
+	$l=$req2->fetch(PDO::FETCH_ASSOC);
+ echo '<h2>Entre une description de votre QCM (facultatif)</h2>
+        <textarea rows="5" cols="73" maxlength="150" id="desc"  placeholder=" Ajouter description pour ce qcm.">'.$l['description'].'</textarea>';
+
 	
 
 
@@ -258,15 +264,9 @@
 		<input type="hidden" name="idqcm" value="'.$monidqcm.'"/>
 		<button type="submit" class="button"><span>Importer Question</span></button></form>';
 		
-	$req2=$bdd->prepare("SELECT description from qcm where id_qcm = :id"); //affichage des réponses 
-	$req2->bindValue(':id',$monidqcm);
-	$req2->execute();
-	$l=$req2->fetch(PDO::FETCH_ASSOC);
- echo '<p>Entre une description de votre QCM (facultatif)</p>
-        <textarea rows="5" cols="65" maxlength="150" id="desc">'.$l['description'].'</textarea>
-        </div>';
+	
   ?>
- 
+ </div>
 
 </body>
 </html>

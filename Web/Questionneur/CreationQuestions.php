@@ -64,11 +64,13 @@ if (isset($_POST['idd']) and trim($_POST['idd']!='') and isset($_POST['desc']) a
 			echo '<input type="hidden" name="id" value="'.$_POST['idqcm'].'"/>';
 ?>
 			<div class="message">
+                <div class="add-button">
+				<input type="button" id="ajouterChamp" value="+"/>
+			</div>
 				<textarea placeholder="Rajouter un petit commentaire ici. Cela sera affiché sous votre question. "></textarea>
+                .
 			</div>
-			<div class="ajouter">
-				<input type="button" id="ajouterChamp" value="Ajouter une réponse"/>
-			</div>
+			
 			<script>
 				$(document).ready(function()
 				{
