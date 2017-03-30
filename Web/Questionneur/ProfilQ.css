@@ -398,7 +398,7 @@ body{
   height: 30px;
   position:fixed;
   left: 50%;
-  top:50%;
+  top:65%;
  margin-left:-200px;
  border-radius:10px;
   
@@ -410,7 +410,7 @@ body{
   height: 30px;
   position:fixed;
   left: 50%;
-  top: 50%;
+  top: 65%;
  margin-left:-200px;
  border-radius:10px;
   
@@ -418,17 +418,16 @@ body{
 #note
 {
   font-size: 14px;
-  position:fixed;
-  left: 45%;
-  top:55%;
+ 
+  top:85%;
   color:black;
-  padding-left: 0px;
   text-align:center;
 }
 
 .pop h1 {
     font-size: 22px;
     text-align: center;
+    margin-bottom: 3%;
     color: cadetblue
 }
 
@@ -436,20 +435,13 @@ body{
      font-size: 18px;
     text-align: center;
     color: deepskyblue;
+    margin-top: 7%;
 }
 
-table {
-    left: 50%;
-}
-
-tr {
+.pop p {
     font-size: 12px;
     color: black;
-    margin: auto;
-}
-
-td {
-    
+    text-align: center;
 }
 
 
