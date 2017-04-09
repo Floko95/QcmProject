@@ -2,26 +2,25 @@
 
 /* Script d'insertion des données dans la BDD, à n'utiliser qu'une seule fois après init */
 
-/* ATTENTION LES MDP ONT ETE CRYPTES DANS LA BDD */
+INSERT INTO questionneur (nom_questionneur, mdp_questionneur ) values
+('Gayral','Projetqcm16'),
+('Santini','System16'),
+('Avril','Java16'),
+('Charroux','Method16'),
+('Buscaldi','System16'),
+('Hebert','Math16'),
+('Noel','Culture16'),
+('Martinez','Anglais16'),
+('Desigual','Espagnol16'),
+('Daloz','Latin16'),
+('Ayme','Francais16'),
+('Mayeur','Nature16'),
+('Dubois','Chimie16');
 
-INSERT INTO utilisateur (login, password,role) values
-('Gayral',crypt('Projetqcm16',gen_salt('bf',8)),'questionneur'),
-('Santini',crypt('System16',gen_salt('bf',8)),'questionneur'),
-('Avril',crypt('Java16',gen_salt('bf',8)),'questionneur'),
-('Charroux',crypt('Method16',gen_salt('bf',8)),'questionneur'),
-('Buscaldi',crypt('Linux16',gen_salt('bf',8)),'questionneur'),
-('Hebert',crypt('Math16',gen_salt('bf',8)),'questionneur'),
-('Noel',crypt('Culture16',gen_salt('bf',8)),'questionneur'),
-('Martinez',crypt('Anglais16',gen_salt('bf',8)),'questionneur'),
-('Desigual',crypt('Espagnol16',gen_salt('bf',8)),'questionneur'),
-('Daloz',crypt('Latin16',gen_salt('bf',8)),'questionneur'),
-('Ayme',crypt('Francais16',gen_salt('bf',8)),'questionneur'),
-('Mayeur',crypt('Nature16',gen_salt('bf',8)),'questionneur'),
-('Dubois',crypt('Chimie16',gen_salt('bf',8)),'questionneur'),
-
-('Françoise',crypt('Gayral',gen_salt('bf',8)),DEFAULT),
-('Charlie',crypt('Didier',gen_salt('bf',8)),DEFAULT),
-('Lucie',crypt('Godefert',gen_salt('bf',8)),DEFAULT);
+INSERT INTO repondeur (nom_repondeur, mdp_repondeur) values
+('Françoise','Gayral'),
+('Charlie','Didier'),
+('Lucie','Godefert');
 
 INSERT INTO domaine (domaine) values
 ('Informatique'),('Mathématiques'),('Culture Générale'),('Langues'),('Français'),('Sciences');

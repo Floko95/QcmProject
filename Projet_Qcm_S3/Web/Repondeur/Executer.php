@@ -19,7 +19,7 @@ include('EviteMessageFormulaire.php');
 
     if (isset($_POST['executer']) and $_POST['executer']==1){		//si on arrive de la page CHoixRQI et pas de la page Statistique
     try{
-       
+        
         echo'<h1>Bonne chance</h1><p>';
   
         if(isset($_POST['nd'])){
