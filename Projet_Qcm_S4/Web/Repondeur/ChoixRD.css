@@ -1,0 +1,273 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+    height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: "Open Sans";
+  font-size: 18px;
+  letter-spacing: 2px;
+  font-weight: 400;
+  line-height: 24px;
+  background-color: rgb(105,155,200);
+
+		
+}
+
+/*----------------------------BARRE NAV-----------------------------*/
+  
+  #desk-nav {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    height: 55px;
+      margin-top: -8%;
+    background: #181818;
+	  color: #FFF;
+    position: fixed;
+    z-index: 99;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  
+  #desk-nav ul {
+    list-style-type: none;
+    padding: 0;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  
+  #desk-nav ul li {
+    display: -webkit-inline-box;
+    display: -webkit-inline-flex;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+  }
+   
+  #desk-nav a {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    position: relative;
+    color: #FFF;
+    text-decoration: none;
+    letter-spacing: 1.2px;
+    padding: 5px 17px;
+    
+    margin: 5px 13px;
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+  }
+  
+/*  Nav Item Hover Effects  */
+  
+#desk-nav a:before {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	width: 0;
+	border-bottom: 1px solid #FFF;
+}
+
+#desk-nav a:before {
+	left: 0;
+}
+
+#desk-nav a:hover {
+	color: #fb544e;
+  opacity: 1;
+}
+
+#desk-nav a:hover:before {
+	width: 100%;
+}
+
+#desk-nav a:before {
+	-webkit-transition: width .2s cubic-bezier(0.14, 0.59, 1, 1.01);
+	transition: width .2s cubic-bezier(0.14, 0.59, 1, 1.01);
+}
+  
+/*-------------------------END BARRE NAV---------------------------*/
+
+  
+/*----------------------------AJUSTEMENT CENTRE-----------------------------*/
+
+
+.rela-block {
+  display: block;
+  position: relative;
+  margin: auto;
+  top: ;
+  left: ;
+  right: ;
+  bottom: ;
+}
+.rela-inline {
+  display: inline-block;
+  position: relative;
+  margin: auto;
+  top: ;
+  left: ;
+  right: ;
+  bottom: ;
+}
+/*-------------------------END AJUSTEMENT---------------------------*/
+
+  
+/*----------------------------PETIT MENU-----------------------------*/
+
+.top-container {
+  z-index: 10;
+  height: 125px;
+  width: 75%;
+  max-width: 1200px;
+  padding-top: 25px;
+  margin: 100px auto 50px;
+  background-color: #fff;
+  text-align: center;
+  box-shadow: 0px 3px 12px 0px rgba(0,0,0,0.2);
+}
+.top-container p {
+  color: #777;
+  font-size: 13px;
+  margin: 0 auto 23px;
+}
+.top-container h2 {
+  color: #2b2b2b;
+  margin: 0 auto 8px;
+    font-size: 18px;
+}
+.top-center-container {
+  height: 120px;
+  width: 70%;
+  overflow-x: hidden;
+}
+
+/*-------------------------END PETIT MENU---------------------------*/
+
+  
+/*----------------------------GRILLE-----------------------------*/
+
+.image-grid-container {
+  margin-bottom: 40px;
+  height: auto;
+  width: 80%;
+  max-width: 1200px;
+  overflow: hidden;
+}
+.image-column {
+	display: inline;
+  position: inline-flex;
+  width: 33.3333333%;
+  text-align: center;
+}
+.image-column.rows {
+  width: 100%;
+}
+.image-column.rows .image {
+  padding-top: 50%;
+  margin-bottom: 60px;
+}
+
+
+.box {
+    background: #fff;
+    box-shadow: 0 0 6px rgba(0,0,0,0.25);
+    float: left;
+    height: 110px;
+    margin: 30px 0 0 58px;
+    position: center;
+    text-align: center;
+    width: 180px;
+}
+
+a{
+    text-decoration: none;
+}
+
+.floated {
+  display: inline;
+  position: relative;
+  margin: false;
+  top: ;
+  left: ;
+  right: ;
+  bottom: ;
+  float: left;
+}
+
+.folded:before, .folded:after {
+    bottom: 26px;
+    box-shadow: 0 28px 8px rgba(0,0,0,0.5);
+    content: "";
+    height: 28px;
+    position: absolute;
+    width: 48%;
+    z-index: -1;
+}
+
+.folded:before {
+    left: 2%;
+    transform: rotate(-3deg);
+}
+
+.folded:after {
+    right: 2%;
+    transform: rotate(3deg);
+    -webkit-transform: scale(1.05);
+}
+
+.folded h4 {
+    border-width: 1px 1px 2px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+    margin: 0;
+    padding: 4px 40px;
+    position: absolute;
+    right: -14px;
+    top: 12px;
+    font-size: 12px;
+}
+.folded h4:after {
+    border-width: 7px;
+    border-style: solid;
+    border-color: #fff transparent transparent #134;
+    bottom: -15px;
+    content: "";
+    position: absolute;
+    right: -1px;
+}
+
+input {
+    background: #092756;
+ background: -moz-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%),-moz-linear-gradient(top, rgba(57,173,219,.25) 0%, rgba(42,60,87,.4) 100%), -moz-linear-gradient(-45deg, #670d10 0%, #092756 100%);
+ background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -webkit-linear-gradient(top, rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -webkit-linear-gradient(-45deg, #670d10 0%,#092756 100%);
+ background: -o-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -o-linear-gradient(top, rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -o-linear-gradient(-45deg, #670d10 0%,#092756 100%);
+ background: -ms-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -ms-linear-gradient(top, rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -ms-linear-gradient(-45deg, #670d10 0%,#092756 100%);
+ background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), linear-gradient(to bottom, rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), linear-gradient(135deg, #670d10 0%,#092756 100%);
+    width: 180px;
+    height: 30px;
+    border: 0 solid rgba(0,0,0,0.2);
+    color: #fff;
+    font-size: 14px;
+    position: relative;   
+    cursor: pointer;
+    font-family: 'PT Sans Narrow', sans-serif;
+    font-size: 16px;
+}
+
+
+/*-------------------------END GRILLE---------------------------*/
